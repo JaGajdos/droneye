@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="sk" data-theme="royal-blue">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontakt - DroneEye</title>
+    <meta name="description" content="Kontaktujte nás pre drone služby. Telefón, email a kontaktný formulár. Profesionálne riešenia pre vaše potreby.">
+    <meta name="keywords" content="kontakt, drone služby, telefón, email, formulár, Bratislava, Slovensko">
+    <meta name="author" content="DroneEye">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="sk">
+    <meta name="revisit-after" content="7 days">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://droneye.sk/contact.html">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://droneye.sk/contact.html">
+    <meta property="og:title" content="Kontakt - DroneEye">
+    <meta property="og:description" content="Kontaktujte nás pre drone služby. Telefón, email a kontaktný formulár. Profesionálne riešenia pre vaše potreby.">
+    <meta property="og:image" content="https://droneye.sk/assets/contact-og.jpg">
+    <meta property="og:site_name" content="DroneEye">
+    <meta property="og:locale" content="sk_SK">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://droneye.sk/contact.html">
+    <meta property="twitter:title" content="Kontakt - DroneEye">
+    <meta property="twitter:description" content="Kontaktujte nás pre drone služby. Telefón, email a kontaktný formulár. Profesionálne riešenia pre vaše potreby.">
+    <meta property="twitter:image" content="https://droneye.sk/assets/contact-twitter.jpg">
+    
+    <!-- Additional SEO -->
+    <meta name="geo.region" content="SK">
+    <meta name="geo.placename" content="Bratislava">
+    <meta name="geo.position" content="48.1486;17.1077">
+    <meta name="ICBM" content="48.1486, 17.1077">
+    
+    <link rel="stylesheet" href="/src/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>DroneEye</h2>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link" data-i18n="nav.home">Domov</a>
+                </li>
+                <li class="nav-item">
+                    <a href="services.html" class="nav-link" data-i18n="nav.services">Naše služby</a>
+                </li>
+                <li class="nav-item">
+                    <a href="projects.html" class="nav-link" data-i18n="nav.projects">Naše projekty</a>
+                </li>
+                <li class="nav-item">
+                    <a href="team.html" class="nav-link" data-i18n="nav.team">Náš tím</a>
+                </li>
+                <li class="nav-item">
+                    <a href="pricing.html" class="nav-link" data-i18n="nav.pricing">Cenová ponuka</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link active" data-i18n="nav.contact">Kontakt</a>
+                </li>
+                <li class="nav-item language-switcher">
+                    <div class="language-dropdown">
+                        <button class="language-btn" data-i18n="language">Jazyk</button>
+                        <div class="language-options">
+                            <button class="language-option" data-lang="sk">🇸🇰 SK</button>
+                            <button class="language-option" data-lang="en">🇬🇧 EN</button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Three.js Canvas Background -->
+    <div id="canvas-container">
+        <canvas id="three-canvas"></canvas>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Contact Page -->
+        <section class="page active">
+            <div class="container">
+                <h2 data-i18n="contact.title">Kontakt</h2>
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <h3 data-i18n="contact.info.title">Kontaktné údaje</h3>
+                        <p data-i18n="contact.info.email">📧 info@droneye.sk</p>
+                        <p data-i18n="contact.info.phone">📞 +421 123 456 789</p>
+                        <p data-i18n="contact.info.address">📍 Bratislava, Slovensko</p>
+                    </div>
+                    <form class="contact-form">
+                        <input type="text" placeholder="Meno" data-i18n-placeholder="contact.form.name" required>
+                        <input type="email" placeholder="Email" data-i18n-placeholder="contact.form.email" required>
+                        <textarea placeholder="Správa" data-i18n-placeholder="contact.form.message" rows="5" required></textarea>
+                        <button type="submit" data-i18n="contact.form.submit">Odoslať</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loader">
+            <div class="loader-circle"></div>
+            <p data-i18n="loading">Načítavam...</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 DroneEye. Všetky práva vyhradené.</p>
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
+</body>
+</html>

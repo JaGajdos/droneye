@@ -1,0 +1,106 @@
+{
+  "nav": {
+    "home": "Domov",
+    "services": "Naše služby",
+    "projects": "Naše projekty",
+    "team": "Náš tím",
+    "pricing": "Cenová ponuka",
+    "contact": "Kontakt"
+  },
+  "hero": {
+    "title": "Vitajte v DroneEye",
+    "subtitle": "Moderná webová aplikácia s 3D animáciami",
+    "cta": "Začať",
+    "starting": "Spúšťam animáciu...",
+    "navigating": "Prechádzam na služby..."
+  },
+  "projects": {
+    "title": "Naše projekty",
+    "subtitle": "Pozrite si naše najnovšie úspešné projekty",
+    "project1": {
+      "title": "Letecké mapovanie Bratislavy",
+      "description": "Komplexné 3D mapovanie mesta pomocou dronov"
+    },
+    "project2": {
+      "title": "Monitoring poľnohospodárskych plôch",
+      "description": "Analýza zdravia plodín pomocou multispektrálnych senzorov"
+    },
+    "project3": {
+      "title": "Inspekcia energetických vedení",
+      "description": "Bezpečná kontrola vysokonapäťových vedení"
+    }
+  },
+  "team": {
+    "title": "Náš tím",
+    "subtitle": "Poznajte našich odborníkov",
+    "member1": {
+      "name": "Ing. Peter Novák",
+      "position": "Hlavný pilot a technický riaditeľ",
+      "description": "10+ rokov skúseností v leteckom priemysle"
+    },
+    "member2": {
+      "name": "Mgr. Anna Kováčová",
+      "position": "Špecialistka na analýzu dát",
+      "description": "Expertka na GIS a dálkový prieskum"
+    },
+    "member3": {
+      "name": "Ing. Martin Svoboda",
+      "position": "Vedúci vývoja softvéru",
+      "description": "Špecialista na AI a automatizáciu"
+    }
+  },
+  "pricing": {
+    "title": "Cenová ponuka",
+    "subtitle": "Flexibilné riešenia pre každý rozpočet",
+    "basic": {
+      "title": "Základný balík",
+      "price": "od 500€",
+      "description": "Základné letecké snímkovanie a jednoduchá analýza"
+    },
+    "professional": {
+      "title": "Profesionálny balík",
+      "price": "od 1200€",
+      "description": "Pokročilé mapovanie, 3D modely a detailná analýza"
+    },
+    "enterprise": {
+      "title": "Enterprise riešenie",
+      "price": "Na vyžiadanie",
+      "description": "Komplexné riešenia pre veľké projekty"
+    }
+  },
+  "services": {
+    "title": "Naše služby",
+    "drone": {
+      "title": "Drone služby",
+      "text": "Profesionálne letecké snímkovanie a mapovanie"
+    },
+    "analytics": {
+      "title": "Analýza dát",
+      "text": "Spracovanie a analýza získaných údajov"
+    },
+    "solutions": {
+      "title": "Špecializované riešenia",
+      "text": "Vlastné riešenia pre špecifické potreby"
+    }
+  },
+  "contact": {
+    "title": "Kontakt",
+    "info": {
+      "title": "Kontaktné údaje",
+      "email": "📧 info@droneye.sk",
+      "phone": "📞 +421 123 456 789",
+      "address": "📍 Bratislava, Slovensko"
+    },
+    "form": {
+      "name": "Meno",
+      "email": "Email",
+      "message": "Správa",
+      "submit": "Odoslať",
+      "sending": "Odosielam...",
+      "success": "Ďakujeme za vašu správu! Čoskoro vás budeme kontaktovať.",
+      "error": "Prosím vyplňte všetky polia."
+    }
+  },
+  "loading": "Načítavam...",
+  "language": "Jazyk"
+}

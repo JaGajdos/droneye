@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="sk" data-theme="royal-blue">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naše projekty - DroneEye</title>
+    <meta name="description" content="Pozrite si naše najnovšie úspešné projekty - letecké mapovanie, monitoring poľnohospodárskych plôch a inspekcia energetických vedení.">
+    <meta name="keywords" content="drone projekty, letecké mapovanie, monitoring, inspekcia vedení, 3D mapovanie, Bratislava">
+    <meta name="author" content="DroneEye">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="sk">
+    <meta name="revisit-after" content="7 days">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://droneye.sk/projects.html">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://droneye.sk/projects.html">
+    <meta property="og:title" content="Naše projekty - DroneEye">
+    <meta property="og:description" content="Pozrite si naše najnovšie úspešné projekty - letecké mapovanie, monitoring poľnohospodárskych plôch a inspekcia energetických vedení.">
+    <meta property="og:image" content="https://droneye.sk/assets/projects-og.jpg">
+    <meta property="og:site_name" content="DroneEye">
+    <meta property="og:locale" content="sk_SK">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://droneye.sk/projects.html">
+    <meta property="twitter:title" content="Naše projekty - DroneEye">
+    <meta property="twitter:description" content="Pozrite si naše najnovšie úspešné projekty - letecké mapovanie, monitoring poľnohospodárskych plôch a inspekcia energetických vedení.">
+    <meta property="twitter:image" content="https://droneye.sk/assets/projects-twitter.jpg">
+    
+    <!-- Additional SEO -->
+    <meta name="geo.region" content="SK">
+    <meta name="geo.placename" content="Bratislava">
+    <meta name="geo.position" content="48.1486;17.1077">
+    <meta name="ICBM" content="48.1486, 17.1077">
+    
+    <link rel="stylesheet" href="/src/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>DroneEye</h2>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link" data-i18n="nav.home">Domov</a>
+                </li>
+                <li class="nav-item">
+                    <a href="services.html" class="nav-link" data-i18n="nav.services">Naše služby</a>
+                </li>
+                <li class="nav-item">
+                    <a href="projects.html" class="nav-link active" data-i18n="nav.projects">Naše projekty</a>
+                </li>
+                <li class="nav-item">
+                    <a href="team.html" class="nav-link" data-i18n="nav.team">Náš tím</a>
+                </li>
+                <li class="nav-item">
+                    <a href="pricing.html" class="nav-link" data-i18n="nav.pricing">Cenová ponuka</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link" data-i18n="nav.contact">Kontakt</a>
+                </li>
+                <li class="nav-item language-switcher">
+                    <div class="language-dropdown">
+                        <button class="language-btn" data-i18n="language">Jazyk</button>
+                        <div class="language-options">
+                            <button class="language-option" data-lang="sk">🇸🇰 SK</button>
+                            <button class="language-option" data-lang="en">🇬🇧 EN</button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Three.js Canvas Background -->
+    <div id="canvas-container">
+        <canvas id="three-canvas"></canvas>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Projects Page -->
+        <section class="page active">
+            <div class="container">
+                <h2 data-i18n="projects.title">Naše projekty</h2>
+                <p class="section-subtitle" data-i18n="projects.subtitle">Pozrite si naše najnovšie úspešné projekty</p>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-image">🚁</div>
+                        <h3 data-i18n="projects.project1.title">Letecké mapovanie Bratislavy</h3>
+                        <p data-i18n="projects.project1.description">Komplexné 3D mapovanie mesta pomocou dronov</p>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-image">🌾</div>
+                        <h3 data-i18n="projects.project2.title">Monitoring poľnohospodárskych plôch</h3>
+                        <p data-i18n="projects.project2.description">Analýza zdravia plodín pomocou multispektrálnych senzorov</p>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-image">⚡</div>
+                        <h3 data-i18n="projects.project3.title">Inspekcia energetických vedení</h3>
+                        <p data-i18n="projects.project3.description">Bezpečná kontrola vysokonapäťových vedení</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loader">
+            <div class="loader-circle"></div>
+            <p data-i18n="loading">Načítavam...</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 DroneEye. Všetky práva vyhradené.</p>
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="sk" data-theme="royal-blue">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cenová ponuka - DroneEye</title>
+    <meta name="description" content="Flexibilné cenové balíky pre drone služby - základný, profesionálny a enterprise riešenia pre každý rozpočet.">
+    <meta name="keywords" content="drone ceny, cenová ponuka, základný balík, profesionálny balík, enterprise, Bratislava">
+    <meta name="author" content="DroneEye">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="sk">
+    <meta name="revisit-after" content="7 days">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://droneye.sk/pricing.html">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://droneye.sk/pricing.html">
+    <meta property="og:title" content="Cenová ponuka - DroneEye">
+    <meta property="og:description" content="Flexibilné cenové balíky pre drone služby - základný, profesionálny a enterprise riešenia pre každý rozpočet.">
+    <meta property="og:image" content="https://droneye.sk/assets/pricing-og.jpg">
+    <meta property="og:site_name" content="DroneEye">
+    <meta property="og:locale" content="sk_SK">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://droneye.sk/pricing.html">
+    <meta property="twitter:title" content="Cenová ponuka - DroneEye">
+    <meta property="twitter:description" content="Flexibilné cenové balíky pre drone služby - základný, profesionálny a enterprise riešenia pre každý rozpočet.">
+    <meta property="twitter:image" content="https://droneye.sk/assets/pricing-twitter.jpg">
+    
+    <!-- Additional SEO -->
+    <meta name="geo.region" content="SK">
+    <meta name="geo.placename" content="Bratislava">
+    <meta name="geo.position" content="48.1486;17.1077">
+    <meta name="ICBM" content="48.1486, 17.1077">
+    
+    <link rel="stylesheet" href="/src/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>DroneEye</h2>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link" data-i18n="nav.home">Domov</a>
+                </li>
+                <li class="nav-item">
+                    <a href="services.html" class="nav-link" data-i18n="nav.services">Naše služby</a>
+                </li>
+                <li class="nav-item">
+                    <a href="projects.html" class="nav-link" data-i18n="nav.projects">Naše projekty</a>
+                </li>
+                <li class="nav-item">
+                    <a href="team.html" class="nav-link" data-i18n="nav.team">Náš tím</a>
+                </li>
+                <li class="nav-item">
+                    <a href="pricing.html" class="nav-link active" data-i18n="nav.pricing">Cenová ponuka</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link" data-i18n="nav.contact">Kontakt</a>
+                </li>
+                <li class="nav-item language-switcher">
+                    <div class="language-dropdown">
+                        <button class="language-btn" data-i18n="language">Jazyk</button>
+                        <div class="language-options">
+                            <button class="language-option" data-lang="sk">🇸🇰 SK</button>
+                            <button class="language-option" data-lang="en">🇬🇧 EN</button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Three.js Canvas Background -->
+    <div id="canvas-container">
+        <canvas id="three-canvas"></canvas>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Pricing Page -->
+        <section class="page active">
+            <div class="container">
+                <h2 data-i18n="pricing.title">Cenová ponuka</h2>
+                <p class="section-subtitle" data-i18n="pricing.subtitle">Flexibilné riešenia pre každý rozpočet</p>
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <h3 data-i18n="pricing.basic.title">Základný balík</h3>
+                        <div class="pricing-price" data-i18n="pricing.basic.price">od 500€</div>
+                        <p data-i18n="pricing.basic.description">Základné letecké snímkovanie a jednoduchá analýza</p>
+                        <button class="pricing-btn">Vybrať</button>
+                    </div>
+                    <div class="pricing-card featured">
+                        <h3 data-i18n="pricing.professional.title">Profesionálny balík</h3>
+                        <div class="pricing-price" data-i18n="pricing.professional.price">od 1200€</div>
+                        <p data-i18n="pricing.professional.description">Pokročilé mapovanie, 3D modely a detailná analýza</p>
+                        <button class="pricing-btn">Vybrať</button>
+                    </div>
+                    <div class="pricing-card">
+                        <h3 data-i18n="pricing.enterprise.title">Enterprise riešenie</h3>
+                        <div class="pricing-price" data-i18n="pricing.enterprise.price">Na vyžiadanie</div>
+                        <p data-i18n="pricing.enterprise.description">Komplexné riešenia pre veľké projekty</p>
+                        <button class="pricing-btn">Kontaktovať</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loader">
+            <div class="loader-circle"></div>
+            <p data-i18n="loading">Načítavam...</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 DroneEye. Všetky práva vyhradené.</p>
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
+</body>
+</html>

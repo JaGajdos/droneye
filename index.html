@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="sk" data-theme="royal-blue">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DroneEye - Moderné drone služby a 3D mapovanie</title>
+    <meta name="description" content="Profesionálne drone služby, letecké snímkovanie, 3D mapovanie a analýza dát. Moderné riešenia pre vaše potreby.">
+    <meta name="keywords" content="drone služby, letecké snímkovanie, 3D mapovanie, analýza dát, Bratislava, Slovensko">
+    <meta name="author" content="DroneEye">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="sk">
+    <meta name="revisit-after" content="7 days">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://droneye.sk/">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://droneye.sk/">
+    <meta property="og:title" content="DroneEye - Moderné drone služby a 3D mapovanie">
+    <meta property="og:description" content="Profesionálne drone služby, letecké snímkovanie, 3D mapovanie a analýza dát. Moderné riešenia pre vaše potreby.">
+    <meta property="og:image" content="https://droneye.sk/assets/og-image.jpg">
+    <meta property="og:site_name" content="DroneEye">
+    <meta property="og:locale" content="sk_SK">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://droneye.sk/">
+    <meta property="twitter:title" content="DroneEye - Moderné drone služby a 3D mapovanie">
+    <meta property="twitter:description" content="Profesionálne drone služby, letecké snímkovanie, 3D mapovanie a analýza dát. Moderné riešenia pre vaše potreby.">
+    <meta property="twitter:image" content="https://droneye.sk/assets/twitter-image.jpg">
+    
+    <!-- Additional SEO -->
+    <meta name="geo.region" content="SK">
+    <meta name="geo.placename" content="Bratislava">
+    <meta name="geo.position" content="48.1486;17.1077">
+    <meta name="ICBM" content="48.1486, 17.1077">
+    
+    <link rel="stylesheet" href="/src/style.css">
+</head>
+<body class="homepage">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link active" data-i18n="nav.home">Domov</a>
+                </li>
+                <li class="nav-item">
+                    <a href="services.html" class="nav-link" data-i18n="nav.services">Naše služby</a>
+                </li>
+                <li class="nav-item">
+                    <a href="projects.html" class="nav-link" data-i18n="nav.projects">Naše projekty</a>
+                </li>
+                <li class="nav-item">
+                    <a href="team.html" class="nav-link" data-i18n="nav.team">Náš tím</a>
+                </li>
+                <li class="nav-item">
+                    <a href="pricing.html" class="nav-link" data-i18n="nav.pricing">Cenová ponuka</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link" data-i18n="nav.contact">Kontakt</a>
+                </li>
+                <li class="nav-item language-switcher">
+                    <div class="language-dropdown">
+                        <button class="language-btn" data-i18n="language">Jazyk</button>
+                        <div class="language-options">
+                            <button class="language-option" data-lang="sk">🇸🇰 SK</button>
+                            <button class="language-option" data-lang="en">🇬🇧 EN</button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Three.js Canvas Background -->
+    <div id="canvas-container">
+        <canvas id="three-canvas"></canvas>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Home Page -->
+        <section class="page active">
+            <div class="hero">
+                <h1 class="hero-title" data-i18n="hero.title">Vitajte v DroneEye</h1>
+                <p class="hero-subtitle" data-i18n="hero.subtitle">Moderná webová aplikácia s 3D animáciami</p>
+                <div class="hero-buttons">
+                    <button class="cta-button" data-i18n="hero.cta" id="start-animation-btn">Začať</button>
+                    <a href="projects.html" class="hero-button-secondary" data-i18n="nav.projects">Naše projekty</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loader">
+            <div class="loader-circle"></div>
+            <p data-i18n="loading">Načítavam...</p>
+        </div>
+    </div>
+
+
+    <script type="module" src="/src/main.js"></script>
+</body>
+</html>
