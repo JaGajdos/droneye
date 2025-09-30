@@ -97,8 +97,17 @@
     <main class="main-content">
         <!-- Projects Page -->
         <section class="page active">
-            <div class="container">
-                <h2 data-i18n="projects.title">Naše projekty</h2>
+            <!-- Subpage Hero -->
+            <div class="subpage-hero">
+                <div class="subpage-hero-content">
+                    <h1 data-i18n="projects.title">Naše projekty</h1>
+                    <p data-i18n="projects.subtitle">Realizované projekty a úspešné prípadové štúdie</p>
+                </div>
+            </div>
+            
+            <!-- Subpage Content -->
+            <div class="subpage-content">
+                <div class="container">
                 <p class="section-subtitle" data-i18n="projects.subtitle">Pozrite si naše najnovšie úspešné projekty</p>
                 <div class="projects-grid">
                     <div class="project-card">
@@ -117,6 +126,7 @@
                         <p data-i18n="projects.project3.description">Bezpečná kontrola vysokonapäťových vedení</p>
                     </div>
                 </div>
+                </div>
             </div>
         </section>
     </main>
@@ -129,8 +139,58 @@
         </div>
     </div>
 
-    <footer>
-        <p>&copy; 2024 DroneEye. Všetky práva vyhradené.</p>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>DroneEye</h3>
+                <ul class="footer-links">
+                    <li><a href="/">Domov</a></li>
+                    <li><a href="/sluzby">Služby</a></li>
+                    <li><a href="/projekty">Projekty</a></li>
+                    <li><a href="/tim">Tím</a></li>
+                    <li><a href="/cenova-ponuka">Cenová ponuka</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Kontakt</h3>
+                <ul class="footer-links">
+                    <li><a href="mailto:info@droneye.sk">📧 info@droneye.sk</a></li>
+                    <li><a href="tel:+421950614303">📞 +421 950 614 303</a></li>
+                    <li>
+                        <div class="social-links">
+                            <a href="https://www.instagram.com/dron_eyesky" target="_blank" rel="nofollow" class="social-link">
+                                <img src="assets/instagram.webp" alt="Instagram Droneye" loading="lazy" />
+                            </a>
+                            <a href="https://www.facebook.com/profile.php?id=100066345406669" target="_blank" rel="nofollow" class="social-link">
+                                <img src="assets/facebook.webp" alt="Facebook Droneye" loading="lazy" />
+                            </a>
+                            <a href="https://www.youtube.com/@dron_eyesky" target="_blank" rel="nofollow" class="social-link">
+                                <img src="assets/youtube.webp" alt="YouTube Droneye" loading="lazy" />
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="footer-section footer-form">
+                <h3>Rýchly kontakt</h3>
+                <form class="footer-contact-form">
+                    <input type="text" placeholder="Vaše meno" required>
+                    <input type="email" placeholder="Email" required>
+                    <textarea placeholder="Správa" rows="3" required></textarea>
+                    <button type="submit">Odoslať</button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2024 DroneEye. Všetky práva vyhradené.</p>
+            <div class="footer-legal">
+                <a href="#">Ochrana údajov</a>
+                <a href="#">Podmienky</a>
+            </div>
+        </div>
     </footer>
 
     <script type="module" src="/src/main.js"></script>
