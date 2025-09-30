@@ -1,0 +1,20 @@
+RewriteEngine On
+
+# Slovak URL mappings
+RewriteRule ^sluzby/?$ sluzby.html [L]
+RewriteRule ^projekty/?$ projekty.html [L]
+RewriteRule ^tim/?$ tim.html [L]
+RewriteRule ^cenova-ponuka/?$ cenova-ponuka.html [L]
+RewriteRule ^kontakt/?$ kontakt.html [L]
+
+# Remove .html extension from URLs
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^\.]+)$ $1.html [NC,L]
+
+# Redirect .html URLs to clean URLs
+RewriteCond %{THE_REQUEST} /([^.]+)\.html [NC]
+RewriteRule ^ /%1 [NC,L,R=301]
+
+# Homepage redirect
+RewriteRule ^$ index.html [L]

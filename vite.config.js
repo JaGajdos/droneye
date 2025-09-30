@@ -3,7 +3,8 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   server: {
     port: 5173,
-    open: true
+    open: true,
+    historyApiFallback: true
   },
   build: {
     outDir: 'dist',
@@ -12,11 +13,11 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: 'index.html',
-        services: 'services.html',
-        projects: 'projects.html',
-        team: 'team.html',
-        pricing: 'pricing.html',
-        contact: 'contact.html'
+        sluzby: 'sluzby.html',
+        projekty: 'projekty.html',
+        tim: 'tim.html',
+        'cenova-ponuka': 'cenova-ponuka.html',
+        kontakt: 'kontakt.html'
       },
       output: {
         manualChunks: {
