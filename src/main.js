@@ -332,8 +332,15 @@ document.querySelector('.contact-form')?.addEventListener('submit', function(e) 
     }, 2000);
 });
 
-// CTA Button handler
+// CTA Button handler - only on homepage
 document.getElementById('start-animation-btn')?.addEventListener('click', function() {
+    // Check if we're on homepage
+    const isHomepage = window.location.pathname === '/' || window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/');
+    
+    if (!isHomepage) {
+        return; // Don't initialize Three.js on subpages
+    }
+    
     // Start Three.js animation
     if (!scene) {
         initThreeJS();
