@@ -15,11 +15,8 @@
   </defs>
   
   <!-- Text shadow for depth -->
-  <text x="2" y="32" font-family="Montserrat, Arial, sans-serif" font-size="24" font-weight="800" fill="url(#shadowGradient)">DroneEye</text>
+  <text x="2" y="32" font-family="Montserrat, Arial, sans-serif" font-size="24" font-weight="800" fill="url(#shadowGradient)">Droneye</text>
   
   <!-- Main text -->
-  <text x="0" y="30" font-family="Montserrat, Arial, sans-serif" font-size="24" font-weight="800" fill="url(#textGradient)">DroneEye</text>
-  
-  <!-- Decorative underline -->
-  <rect x="0" y="35" width="120" height="2" fill="url(#textGradient)" rx="1"/>
+  <text x="0" y="30" font-family="Montserrat, Arial, sans-serif" font-size="24" font-weight="800" fill="url(#textGradient)">Droneye</text>
 </svg>

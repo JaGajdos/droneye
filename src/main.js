@@ -119,8 +119,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const isHomepage = window.location.pathname === '/' || window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/');
     if (isHomepage) {
         hideLoadingScreen();
+        // Initialize Three.js immediately on homepage
+        initThreeJS();
     }
-    // Three.js will be initialized when CTA button is clicked
 });
 
 // Fast loading screen hide function removed - no longer needed
@@ -338,23 +339,17 @@ document.getElementById('start-animation-btn')?.addEventListener('click', functi
     const isHomepage = window.location.pathname === '/' || window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/');
     
     if (!isHomepage) {
-        return; // Don't initialize Three.js on subpages
+        return; // Don't work on subpages
     }
     
-    // Start Three.js animation
-    if (!scene) {
-        initThreeJS();
-        this.textContent = 'Animácia beží!';
-        this.disabled = true;
-        
-        // Hide hero section after animation starts
-        setTimeout(() => {
-            const hero = document.querySelector('.hero');
-            if (hero) {
-                hero.classList.add('hidden');
-            }
-        }, 1000); // Wait 1 second after animation starts
+    // Hide hero section immediately
+    const hero = document.querySelector('.hero');
+    if (hero) {
+        hero.classList.add('hidden');
     }
+    
+    // Keep button text as "Explore" and disable it
+    this.disabled = true;
 });
 
 // Theme switching functionality

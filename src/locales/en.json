@@ -8,9 +8,9 @@
     "contact": "Contact"
   },
   "hero": {
-    "title": "Welcome to DroneEye",
-    "subtitle": "Modern web application with 3D animations",
-    "cta": "Get Started",
+    "title": "Welcome to Droneye",
+    "subtitle": "We see what you want to see",
+    "cta": "Explore",
     "starting": "Starting animation...",
     "navigating": "Navigating to services..."
   },
