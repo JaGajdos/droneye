@@ -5,6 +5,12 @@ let scene, camera, renderer, particles, animationId;
 let mouseX = 0, mouseY = 0;
 let windowHalfX = window.innerWidth / 2;
 let windowHalfY = window.innerHeight / 2;
+let scrollY = 0;
+let centerObject;
+let targetY = 0; // Target position for smooth movement
+let animationStarted = false;
+let touchStartY = 0;
+let lastTouchY = 0;
 
 // Internationalization
 let currentLanguage = 'sk';
@@ -151,12 +157,28 @@ function initThreeJS() {
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(window.devicePixelRatio);
     
-    // Create particle system
+    // Add lighting
+    const ambientLight = new THREE.AmbientLight(0x404040, 0.6);
+    scene.add(ambientLight);
+    
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+    directionalLight.position.set(1, 1, 1);
+    scene.add(directionalLight);
+    
+    // Create object system
     createParticleSystem();
     
     // Add event listeners
     document.addEventListener('mousemove', onMouseMove, false);
     window.addEventListener('resize', onWindowResize, false);
+    window.addEventListener('scroll', onScroll, false);
+    
+    // Add wheel event listener for canvas scrolling
+    document.addEventListener('wheel', onWheel, false);
+    
+    // Add touch event listeners for mobile scrolling
+    document.addEventListener('touchstart', onTouchStart, false);
+    document.addEventListener('touchmove', onTouchMove, false);
     
     // Start animation
     animate();
@@ -164,42 +186,89 @@ function initThreeJS() {
     console.log('Three.js animation started!');
 }
 
-// Create animated particle system
+// Create 3-layer object system based on viewport
 function createParticleSystem() {
-    const particleCount = 2000;
-    const geometry = new THREE.BufferGeometry();
-    const positions = new Float32Array(particleCount * 3);
-    const colors = new Float32Array(particleCount * 3);
+    // Top third - one gray cube
+    const topGeometry = new THREE.BoxGeometry(100, 100, 100);
+    const topMaterial = new THREE.MeshLambertMaterial({ 
+        color: new THREE.Color().setHSL(0, 0, 0.5) 
+    });
+    const topCube = new THREE.Mesh(topGeometry, topMaterial);
+    topCube.position.set(0, 1000, 0); // Upper third
+    topCube.userData = { layer: 'top', speed: 0.5 };
+    scene.add(topCube);
     
-    for (let i = 0; i < particleCount; i++) {
-        const i3 = i * 3;
-        
-        // Random positions
-        positions[i3] = (Math.random() - 0.5) * 2000;
-        positions[i3 + 1] = (Math.random() - 0.5) * 2000;
-        positions[i3 + 2] = (Math.random() - 0.5) * 2000;
-        
-        // Random colors (blue to purple gradient)
-        const color = new THREE.Color();
-        color.setHSL(0.6 + Math.random() * 0.2, 0.7, 0.5 + Math.random() * 0.3);
-        colors[i3] = color.r;
-        colors[i3 + 1] = color.g;
-        colors[i3 + 2] = color.b;
-    }
+    // Middle third - one red sphere
+    const middleGeometry = new THREE.SphereGeometry(80, 16, 16);
+    const middleMaterial = new THREE.MeshLambertMaterial({ 
+        color: new THREE.Color().setHSL(0, 0.8, 0.6) 
+    });
+    const middleSphere = new THREE.Mesh(middleGeometry, middleMaterial);
+    middleSphere.position.set(0, 0, 0); // Middle third
+    middleSphere.userData = { layer: 'middle', speed: 1.0 };
+    scene.add(middleSphere);
     
-    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+    // Bottom third - one yellow cylinder
+    const bottomGeometry = new THREE.CylinderGeometry(50, 50, 120, 16);
+    const bottomMaterial = new THREE.MeshLambertMaterial({ 
+        color: new THREE.Color().setHSL(0.15, 0.8, 0.6) 
+    });
+    const bottomCylinder = new THREE.Mesh(bottomGeometry, bottomMaterial);
+    bottomCylinder.position.set(0, -1000, 0); // Lower third
+    bottomCylinder.userData = { layer: 'bottom', speed: 1.5 };
+    scene.add(bottomCylinder);
+}
+
+// Create center object
+function createCenterObject() {
+    // Create a drone-like object in the center
+    const droneGroup = new THREE.Group();
     
-    const material = new THREE.PointsMaterial({
-        size: 2,
-        vertexColors: true,
-        transparent: true,
-        opacity: 0.8,
-        blending: THREE.AdditiveBlending
+    // Main body
+    const bodyGeometry = new THREE.BoxGeometry(20, 8, 12);
+    const bodyMaterial = new THREE.MeshLambertMaterial({ color: 0x333333 });
+    const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
+    droneGroup.add(body);
+    
+    // Propellers
+    const propGeometry = new THREE.CylinderGeometry(1, 1, 0.5, 8);
+    const propMaterial = new THREE.MeshLambertMaterial({ color: 0x666666 });
+    
+    const propPositions = [
+        { x: -15, y: 5, z: -8 },
+        { x: 15, y: 5, z: -8 },
+        { x: -15, y: 5, z: 8 },
+        { x: 15, y: 5, z: 8 }
+    ];
+    
+    propPositions.forEach(pos => {
+        const propeller = new THREE.Mesh(propGeometry, propMaterial);
+        propeller.position.set(pos.x, pos.y, pos.z);
+        propeller.rotation.x = Math.PI / 2;
+        droneGroup.add(propeller);
     });
     
-    particles = new THREE.Points(geometry, material);
-    scene.add(particles);
+    // Landing gear
+    const gearGeometry = new THREE.CylinderGeometry(0.5, 0.5, 8, 6);
+    const gearMaterial = new THREE.MeshLambertMaterial({ color: 0x444444 });
+    
+    const gearPositions = [
+        { x: -12, y: -4, z: -6 },
+        { x: 12, y: -4, z: -6 },
+        { x: -12, y: -4, z: 6 },
+        { x: 12, y: -4, z: 6 }
+    ];
+    
+    gearPositions.forEach(pos => {
+        const gear = new THREE.Mesh(gearGeometry, gearMaterial);
+        gear.position.set(pos.x, pos.y, pos.z);
+        droneGroup.add(gear);
+    });
+    
+    // Position in center
+    droneGroup.position.set(0, 0, 0);
+    centerObject = droneGroup;
+    scene.add(centerObject);
 }
 
 // Animation loop
@@ -208,20 +277,53 @@ function animate() {
     
     const time = Date.now() * 0.001;
     
-    // Rotate particles
-    if (particles) {
-        particles.rotation.x = time * 0.05;
-        particles.rotation.y = time * 0.075;
+    // Animate objects by layers
+    scene.children.forEach((child) => {
+        if (child.userData && child.userData.layer) {
+            const speed = child.userData.speed;
+            
+            // Rotate objects
+            child.rotation.x += time * speed * 0.01;
+            child.rotation.y += time * speed * 0.015;
+            child.rotation.z += time * speed * 0.005;
+            
+            // Float objects
+            child.position.y += Math.sin(time * speed + child.position.x * 0.01) * 0.5;
+            child.position.x += Math.cos(time * speed + child.position.z * 0.01) * 0.3;
+        }
+    });
+    
+    // Move center object based on scroll with smooth interpolation (only if animation started)
+    if (centerObject && animationStarted) {
+        // Smooth movement to target position
+        centerObject.position.y += (targetY - centerObject.position.y) * 0.1;
         
-        // Move particles based on mouse position
-        particles.rotation.x += mouseY * 0.0001;
-        particles.rotation.y += mouseX * 0.0001;
+        // Animate propellers
+        centerObject.children.forEach((child, index) => {
+            if (index > 0 && index <= 4) { // Skip body (index 0) and landing gear (last 4)
+                child.rotation.z += 0.3; // Rotate propellers
+            }
+        });
+        
+        // Gentle floating motion
+        centerObject.position.y += Math.sin(time * 2) * 0.5;
     }
     
-    // Camera movement
-    camera.position.x += (mouseX - camera.position.x) * 0.05;
-    camera.position.y += (-mouseY - camera.position.y) * 0.05;
-    camera.lookAt(scene.position);
+    // Camera follows center object (only if animation started)
+    if (centerObject && animationStarted) {
+        camera.position.x = centerObject.position.x + mouseX * 0.1;
+        camera.position.y = centerObject.position.y + 100 - mouseY * 0.1;
+        camera.position.z = centerObject.position.z + 200;
+        
+        // Camera looks at center object
+        camera.lookAt(centerObject.position);
+    } else {
+        // Default camera position when animation not started
+        camera.position.x += (mouseX - camera.position.x) * 0.05;
+        camera.position.y += (-mouseY - camera.position.y) * 0.05;
+        camera.position.z = 500;
+        camera.lookAt(scene.position);
+    }
     
     renderer.render(scene, camera);
 }
@@ -230,6 +332,50 @@ function animate() {
 function onMouseMove(event) {
     mouseX = event.clientX - windowHalfX;
     mouseY = event.clientY - windowHalfY;
+}
+
+// Scroll handler
+function onScroll(event) {
+    scrollY = window.scrollY;
+    targetY = -scrollY * 0.5; // Set target position
+}
+
+// Wheel handler for canvas scrolling
+function onWheel(event) {
+    event.preventDefault();
+    
+    // Update scrollY based on wheel delta
+    scrollY += event.deltaY * 0.5;
+    targetY = -scrollY * 0.5; // Set target position
+    
+    // Also scroll the page
+    window.scrollBy(0, event.deltaY * 0.5);
+}
+
+// Touch event handlers for mobile scrolling
+function onTouchStart(event) {
+    if (event.touches.length === 1) {
+        touchStartY = event.touches[0].clientY;
+        lastTouchY = touchStartY;
+    }
+}
+
+function onTouchMove(event) {
+    if (event.touches.length === 1) {
+        event.preventDefault();
+        
+        const touchY = event.touches[0].clientY;
+        const deltaY = lastTouchY - touchY;
+        
+        // Update scrollY based on touch movement
+        scrollY += deltaY * 0.5;
+        targetY = -scrollY * 0.5; // Set target position
+        
+        // Also scroll the page
+        window.scrollBy(0, deltaY * 0.5);
+        
+        lastTouchY = touchY;
+    }
 }
 
 // Window resize handler
@@ -346,6 +492,13 @@ document.getElementById('start-animation-btn')?.addEventListener('click', functi
     const hero = document.querySelector('.hero');
     if (hero) {
         hero.classList.add('hidden');
+    }
+    
+    // Start animation and create drone
+    if (!animationStarted) {
+        animationStarted = true;
+        createCenterObject();
+        console.log('Drone created and animation started!');
     }
     
     // Keep button text as "Explore" and disable it
