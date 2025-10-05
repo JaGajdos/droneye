@@ -1,16 +1,20 @@
 import * as THREE from 'three';
+import { Water } from 'three/addons/objects/Water.js';
+import { Sky } from 'three/addons/objects/Sky.js';
 
 // Global variables
-let scene, camera, renderer, particles, animationId;
+let scene, camera, renderer, animationId;
 let mouseX = 0, mouseY = 0;
 let windowHalfX = window.innerWidth / 2;
 let windowHalfY = window.innerHeight / 2;
+let water, sky, sun;
 let scrollY = 0;
-let centerObject;
-let targetY = 0; // Target position for smooth movement
-let animationStarted = false;
-let touchStartY = 0;
-let lastTouchY = 0;
+let targetZ = 100;
+
+// Performance monitoring
+let frameCount = 0;
+let lastTime = performance.now();
+let fps = 60;
 
 // Internationalization
 let currentLanguage = 'sk';
@@ -145,8 +149,8 @@ function initThreeJS() {
     scene = new THREE.Scene();
     
     // Camera
-    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000);
-    camera.position.z = 500;
+    camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 1, 20000);
+    camera.position.set(30, 200, 1000);
     
     // Renderer
     renderer = new THREE.WebGLRenderer({ 
@@ -156,6 +160,8 @@ function initThreeJS() {
     });
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 0.5;
     
     // Add lighting
     const ambientLight = new THREE.AmbientLight(0x404040, 0.6);
@@ -172,13 +178,7 @@ function initThreeJS() {
     document.addEventListener('mousemove', onMouseMove, false);
     window.addEventListener('resize', onWindowResize, false);
     window.addEventListener('scroll', onScroll, false);
-    
-    // Add wheel event listener for canvas scrolling
     document.addEventListener('wheel', onWheel, false);
-    
-    // Add touch event listeners for mobile scrolling
-    document.addEventListener('touchstart', onTouchStart, false);
-    document.addEventListener('touchmove', onTouchMove, false);
     
     // Start animation
     animate();
@@ -186,142 +186,126 @@ function initThreeJS() {
     console.log('Three.js animation started!');
 }
 
-// Create 3-layer object system based on viewport
+// Create ocean scene only
 function createParticleSystem() {
-    // Top third - one gray cube
-    const topGeometry = new THREE.BoxGeometry(100, 100, 100);
-    const topMaterial = new THREE.MeshLambertMaterial({ 
-        color: new THREE.Color().setHSL(0, 0, 0.5) 
-    });
-    const topCube = new THREE.Mesh(topGeometry, topMaterial);
-    topCube.position.set(0, 1000, 0); // Upper third
-    topCube.userData = { layer: 'top', speed: 0.5 };
-    scene.add(topCube);
-    
-    // Middle third - one red sphere
-    const middleGeometry = new THREE.SphereGeometry(80, 16, 16);
-    const middleMaterial = new THREE.MeshLambertMaterial({ 
-        color: new THREE.Color().setHSL(0, 0.8, 0.6) 
-    });
-    const middleSphere = new THREE.Mesh(middleGeometry, middleMaterial);
-    middleSphere.position.set(0, 0, 0); // Middle third
-    middleSphere.userData = { layer: 'middle', speed: 1.0 };
-    scene.add(middleSphere);
-    
-    // Bottom third - one yellow cylinder
-    const bottomGeometry = new THREE.CylinderGeometry(50, 50, 120, 16);
-    const bottomMaterial = new THREE.MeshLambertMaterial({ 
-        color: new THREE.Color().setHSL(0.15, 0.8, 0.6) 
-    });
-    const bottomCylinder = new THREE.Mesh(bottomGeometry, bottomMaterial);
-    bottomCylinder.position.set(0, -1000, 0); // Lower third
-    bottomCylinder.userData = { layer: 'bottom', speed: 1.5 };
-    scene.add(bottomCylinder);
+    // Create ocean scene
+    createOcean();
 }
 
-// Create center object
-function createCenterObject() {
-    // Create a drone-like object in the center
-    const droneGroup = new THREE.Group();
+// Create ocean effect for bottom third
+function createOcean() {
+    // Create sun
+    sun = new THREE.Vector3();
     
-    // Main body
-    const bodyGeometry = new THREE.BoxGeometry(20, 8, 12);
-    const bodyMaterial = new THREE.MeshLambertMaterial({ color: 0x333333 });
-    const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
-    droneGroup.add(body);
+    // Water geometry
+    const waterGeometry = new THREE.PlaneGeometry(10000, 10000);
     
-    // Propellers
-    const propGeometry = new THREE.CylinderGeometry(1, 1, 0.5, 8);
-    const propMaterial = new THREE.MeshLambertMaterial({ color: 0x666666 });
-    
-    const propPositions = [
-        { x: -15, y: 5, z: -8 },
-        { x: 15, y: 5, z: -8 },
-        { x: -15, y: 5, z: 8 },
-        { x: 15, y: 5, z: 8 }
-    ];
-    
-    propPositions.forEach(pos => {
-        const propeller = new THREE.Mesh(propGeometry, propMaterial);
-        propeller.position.set(pos.x, pos.y, pos.z);
-        propeller.rotation.x = Math.PI / 2;
-        droneGroup.add(propeller);
+    // Water material with ocean shader (optimized for performance)
+    water = new Water(waterGeometry, {
+        textureWidth: 256, // Reduced from 512 for better performance
+        textureHeight: 256, // Reduced from 512 for better performance
+        waterNormals: new THREE.TextureLoader().load('https://threejs.org/examples/textures/waternormals.jpg', function (texture) {
+            texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+        }),
+        sunDirection: new THREE.Vector3(),
+        sunColor: 0xffffff,
+        waterColor: 0x001e0f,
+        distortionScale: 2.0, // Reduced from 3.7 for better performance
+        fog: scene.fog !== undefined
     });
     
-    // Landing gear
-    const gearGeometry = new THREE.CylinderGeometry(0.5, 0.5, 8, 6);
-    const gearMaterial = new THREE.MeshLambertMaterial({ color: 0x444444 });
+    // Position water in center of scene
+    water.rotation.x = -Math.PI / 2;
+    water.position.y = 0; // Center of scene
+    water.userData = { layer: 'ocean', speed: 1.0 };
+    scene.add(water);
     
-    const gearPositions = [
-        { x: -12, y: -4, z: -6 },
-        { x: 12, y: -4, z: -6 },
-        { x: -12, y: -4, z: 6 },
-        { x: 12, y: -4, z: 6 }
-    ];
+    // Create sky for better ocean effect
+    sky = new Sky();
+    sky.scale.setScalar(10000);
+    scene.add(sky);
     
-    gearPositions.forEach(pos => {
-        const gear = new THREE.Mesh(gearGeometry, gearMaterial);
-        gear.position.set(pos.x, pos.y, pos.z);
-        droneGroup.add(gear);
-    });
+    // Configure sky
+    const skyUniforms = sky.material.uniforms;
+    skyUniforms['turbidity'].value = 10;
+    skyUniforms['rayleigh'].value = 2;
+    skyUniforms['mieCoefficient'].value = 0.005;
+    skyUniforms['mieDirectionalG'].value = 0.8;
     
-    // Position in center
-    droneGroup.position.set(0, 0, 0);
-    centerObject = droneGroup;
-    scene.add(centerObject);
+    // Configure sun position
+    const parameters = {
+        elevation: 2,
+        azimuth: 180
+    };
+    
+    const pmremGenerator = new THREE.PMREMGenerator(renderer);
+    const sceneEnv = new THREE.Scene();
+    let renderTarget;
+    
+    function updateSun() {
+        const phi = THREE.MathUtils.degToRad(90 - parameters.elevation);
+        const theta = THREE.MathUtils.degToRad(parameters.azimuth);
+        
+        sun.setFromSphericalCoords(1, phi, theta);
+        
+        sky.material.uniforms['sunPosition'].value.copy(sun);
+        water.material.uniforms['sunDirection'].value.copy(sun).normalize();
+        
+        if (renderTarget !== undefined) renderTarget.dispose();
+        
+        sceneEnv.add(sky);
+        renderTarget = pmremGenerator.fromScene(sceneEnv);
+        scene.add(sky);
+        
+        scene.environment = renderTarget.texture;
+    }
+    
+    updateSun();
 }
+
 
 // Animation loop
 function animate() {
     animationId = requestAnimationFrame(animate);
     
     const time = Date.now() * 0.001;
+    const currentTime = performance.now();
     
-    // Animate objects by layers
-    scene.children.forEach((child) => {
-        if (child.userData && child.userData.layer) {
-            const speed = child.userData.speed;
-            
-            // Rotate objects
-            child.rotation.x += time * speed * 0.01;
-            child.rotation.y += time * speed * 0.015;
-            child.rotation.z += time * speed * 0.005;
-            
-            // Float objects
-            child.position.y += Math.sin(time * speed + child.position.x * 0.01) * 0.5;
-            child.position.x += Math.cos(time * speed + child.position.z * 0.01) * 0.3;
+    // Performance monitoring
+    frameCount++;
+    if (currentTime - lastTime >= 1000) {
+        fps = frameCount;
+        frameCount = 0;
+        lastTime = currentTime;
+        
+        // Adaptive quality based on FPS
+        if (fps < 30 && water) {
+            // Reduce quality for better performance
+            water.material.uniforms['distortionScale'].value = Math.max(1.0, water.material.uniforms['distortionScale'].value - 0.1);
+        } else if (fps > 50 && water) {
+            // Increase quality if performance is good
+            water.material.uniforms['distortionScale'].value = Math.min(3.0, water.material.uniforms['distortionScale'].value + 0.05);
         }
-    });
-    
-    // Move center object based on scroll with smooth interpolation (only if animation started)
-    if (centerObject && animationStarted) {
-        // Smooth movement to target position
-        centerObject.position.y += (targetY - centerObject.position.y) * 0.1;
-        
-        // Animate propellers
-        centerObject.children.forEach((child, index) => {
-            if (index > 0 && index <= 4) { // Skip body (index 0) and landing gear (last 4)
-                child.rotation.z += 0.3; // Rotate propellers
-            }
-        });
-        
-        // Gentle floating motion
-        centerObject.position.y += Math.sin(time * 2) * 0.5;
     }
     
-    // Camera follows center object (only if animation started)
-    if (centerObject && animationStarted) {
-        camera.position.x = centerObject.position.x + mouseX * 0.1;
-        camera.position.y = centerObject.position.y + 100 - mouseY * 0.1;
-        camera.position.z = centerObject.position.z + 200;
-        
-        // Camera looks at center object
-        camera.lookAt(centerObject.position);
+    // Animate ocean water
+    if (water) {
+        water.material.uniforms['time'].value += 1.0 / 60.0;
+    }
+    
+    // Camera follows mouse for ocean scene
+    //camera.position.x += (mouseX - camera.position.x) * 0.05;
+    //camera.position.y += (-mouseY - camera.position.y) * 0.05;
+    
+    // Smooth camera movement forward/backward based on scroll
+    camera.position.z += (targetZ - camera.position.z) * 0.1;
+    
+    // Look at sun position for better ocean view
+    if (sun) {
+        // Create a point in the distance where sun is
+        const sunPosition = new THREE.Vector3(sun.x * 1000, sun.y * 1000, sun.z * 1000);
+        camera.lookAt(sunPosition);
     } else {
-        // Default camera position when animation not started
-        camera.position.x += (mouseX - camera.position.x) * 0.05;
-        camera.position.y += (-mouseY - camera.position.y) * 0.05;
-        camera.position.z = 500;
         camera.lookAt(scene.position);
     }
     
@@ -337,7 +321,7 @@ function onMouseMove(event) {
 // Scroll handler
 function onScroll(event) {
     scrollY = window.scrollY;
-    targetY = -scrollY * 0.5; // Set target position
+    targetZ = 100 + scrollY * 0.5; // Move camera forward/backward based on scroll
 }
 
 // Wheel handler for canvas scrolling
@@ -346,37 +330,12 @@ function onWheel(event) {
     
     // Update scrollY based on wheel delta
     scrollY += event.deltaY * 0.5;
-    targetY = -scrollY * 0.5; // Set target position
+    targetZ = 100 + scrollY * 0.5;
     
     // Also scroll the page
     window.scrollBy(0, event.deltaY * 0.5);
 }
 
-// Touch event handlers for mobile scrolling
-function onTouchStart(event) {
-    if (event.touches.length === 1) {
-        touchStartY = event.touches[0].clientY;
-        lastTouchY = touchStartY;
-    }
-}
-
-function onTouchMove(event) {
-    if (event.touches.length === 1) {
-        event.preventDefault();
-        
-        const touchY = event.touches[0].clientY;
-        const deltaY = lastTouchY - touchY;
-        
-        // Update scrollY based on touch movement
-        scrollY += deltaY * 0.5;
-        targetY = -scrollY * 0.5; // Set target position
-        
-        // Also scroll the page
-        window.scrollBy(0, deltaY * 0.5);
-        
-        lastTouchY = touchY;
-    }
-}
 
 // Window resize handler
 function onWindowResize() {
@@ -494,13 +453,6 @@ document.getElementById('start-animation-btn')?.addEventListener('click', functi
         hero.classList.add('hidden');
     }
     
-    // Start animation and create drone
-    if (!animationStarted) {
-        animationStarted = true;
-        createCenterObject();
-        console.log('Drone created and animation started!');
-    }
-    
     // Keep button text as "Explore" and disable it
     this.disabled = true;
 });
@@ -607,18 +559,6 @@ document.querySelectorAll('.content-card, .service-card, .project-card, .team-ca
     observer.observe(card);
 });
 
-// Performance optimization
-let lastTime = 0;
-const targetFPS = 60;
-const frameInterval = 1000 / targetFPS;
-
-function optimizedAnimate(currentTime) {
-    if (currentTime - lastTime >= frameInterval) {
-        // Animation logic here
-        lastTime = currentTime;
-    }
-    requestAnimationFrame(optimizedAnimate);
-}
 
 // Cleanup on page unload
 window.addEventListener('beforeunload', function() {
