@@ -52,6 +52,45 @@
   "pricing": {
     "title": "Pricing",
     "subtitle": "Flexible solutions for every budget",
+    "diagram": {
+      "lietanie": {
+        "title": "Flying",
+        "items": [
+          "Flight preparation",
+          "Weather analysis",
+          "Flying"
+        ]
+      },
+      "povolenia": {
+        "title": "Permissions",
+        "items": [
+          "Operating permit",
+          "Specific",
+          "Pre-flight permit",
+          "Drone legal services and CAMO obligations"
+        ]
+      },
+      "bezpecnost": {
+        "title": "Safety",
+        "items": [
+          "Parachute and propeller protection",
+          "Drone insurance",
+          "Backup drones",
+          "FTS System"
+        ]
+      },
+      "spolupraca": {
+        "title": "Cooperation",
+        "items": [
+          "10 years Know How",
+          "Client consultation",
+          "Inspections",
+          "Price offer",
+          "Material delivery via cloud",
+          "Material archiving"
+        ]
+      }
+    },
     "basic": {
       "title": "Basic Package",
       "price": "from €500",

@@ -88,7 +88,7 @@ body.homepage #canvas-container {
 
 .nav-container {
     max-width: 1200px;
-    margin: 0;
+  margin: 0;
     padding: 0 20px;
     display: grid;
     grid-template-columns: 1fr auto 1fr;
@@ -99,7 +99,7 @@ body.homepage #canvas-container {
 }
 
 .nav-logo {
-    display: flex;
+  display: flex;
     align-items: center;
     grid-column: 1;
     justify-self: start;
@@ -412,7 +412,7 @@ body.homepage .main-content {
 
 .footer-content {
     max-width: 1200px;
-    margin: 0 auto;
+  margin: 0 auto;
     padding: 0 2rem;
     display: grid;
     grid-template-columns: 1fr 1fr 1.5fr;
@@ -604,7 +604,7 @@ body.homepage .main-content {
     height: calc(100vh - 70px);
     text-align: center;
     color: white;
-    padding: 2rem;
+  padding: 2rem;
     background: transparent;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     transition: opacity 0.5s ease, transform 0.5s ease;
@@ -656,7 +656,7 @@ body.homepage .main-content {
     display: inline-block;
     backdrop-filter: blur(10px);
     min-width: 150px;
-    text-align: center;
+  text-align: center;
     font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     box-sizing: border-box;
@@ -950,8 +950,8 @@ h2 {
     color: white;
     border: none;
     padding: 12px 30px;
-    border-radius: 8px;
-    cursor: pointer;
+  border-radius: 8px;
+  cursor: pointer;
     font-size: 1rem;
     font-weight: 600;
     transition: all 0.3s ease;
@@ -961,6 +961,176 @@ h2 {
 .pricing-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 15px rgba(0, 35, 102, 0.4);
+}
+
+/* Pricing Diagram */
+.pricing-diagram-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 3rem 0;
+    padding: 2rem;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 35, 102, 0.1);
+}
+
+
+/* Donut Chart CSS */
+.donut-chart-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    background: conic-gradient(
+        from -90deg,
+        rgba(0, 61, 153, 0.3) 0deg 90deg,
+        rgba(179, 217, 255, 0.3) 90deg 180deg,
+        rgba(102, 153, 255, 0.3) 180deg 270deg,
+        rgba(0, 26, 77, 0.3) 270deg 360deg
+    );
+    border-radius: 20px;
+}
+
+.donut-chart {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    margin: 0 auto;
+    border-radius: 50%;
+    background: conic-gradient(
+        from -90deg,
+        rgba(0, 61, 153, 1) 0deg 90deg,
+        rgba(179, 217, 255, 1) 90deg 180deg,
+        rgba(102, 153, 255, 1) 180deg 270deg,
+        rgba(0, 26, 77, 1) 270deg 360deg
+    );
+    box-shadow: 0 4px 15px rgba(0, 35, 102, 0.1);
+}
+
+
+.donut-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    background: white;
+    border-radius: 50%;
+    z-index: 1;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Segment labels inside donut chart - centered on each segment */
+.donut-segment-label {
+    position: absolute;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    z-index: 2;
+    pointer-events: none;
+    text-shadow: 0 1px 3px rgba(255, 255, 255, 0.8);
+    white-space: nowrap;
+    top: 50%;
+    left: 50%;
+    transform-origin: center;
+}
+
+/* Segment 1: Lietanie - center at -58.235° (stred segmentu 0° až 63.53°) */
+.segment-label-1 {
+    color: white;
+    top: 24%;
+    left: 12%;
+}
+
+/* Segment 2: Povolenia - center at 15.885° (stred segmentu 63.53° až 148.24°) */
+.segment-label-2 {
+    color: #002366;
+    top: 24%;
+    left: 60%;
+}
+
+/* Segment 3: Bezpečnosť - center at 100.595° (stred segmentu 148.24° až 232.95°) */
+.segment-label-3 {
+    color: #002366;
+    top: 70%;
+    left: 60%;
+}
+
+/* Segment 4: Spolupráca - center at 206.475° (stred segmentu 232.95° až 360°) */
+.segment-label-4 {
+    color: white;
+    top: 70%;
+    left: 12%;
+}
+
+
+/* Donut Labels (text lists around chart) - positioned next to segments */
+.donut-labels {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.label-group {
+    position: absolute;
+    width: 12rem;
+}
+
+.label-group h4 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #002366;
+    margin-bottom: 0.75rem;
+}
+
+.label-group ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.label-group li {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    color: #002366;
+    margin-bottom: 0.5rem;
+    padding-left: 1rem;
+    position: relative;
+    line-height: 1.5;
+    list-style: none;
+}
+
+
+/* Position label groups next to their segments - same height as donut */
+/* Segment 1: Lietanie - top (0° to 90°) */
+.label-group-1 {
+    top: 10%;
+    left: 3%;
+}
+
+/* Segment 2: Povolenia - right (90° to 180°) */
+.label-group-2 {
+    top: 10%;
+    right: 1%;
+}
+
+/* Segment 3: Bezpečnosť - bottom (180° to 270°) */
+.label-group-3 {
+    top: 60%;
+    right: 1%;
+}
+
+/* Segment 4: Spolupráca - left (270° to 360°) */
+.label-group-4 {
+    top: 60%;
+    left: 3%;
 }
 
 /* Services Grid */
@@ -1132,7 +1302,78 @@ body:not(.homepage) #loading-screen {
 }
 
 /* Responsive Design */
+@media (max-width: 1024px) {
+    .donut-chart {
+        width: 95%;
+        max-width: 300px;
+        height: 300px;
+    }
+
+    .donut-chart-wrapper {
+        padding: 10% 0;
+    }
+    
+    .donut-center {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .donut-segment-label {
+        font-size: 14px;
+    }
+    
+    .donut-labels {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .label-group {
+        padding: 0.75rem 1rem;
+    }
+    
+    .label-group h4 {
+        font-size: 14px;
+        margin-bottom: 0.5rem;
+    }
+    
+    .label-group li {
+        font-size: 11px;
+        margin-bottom: 0.4rem;
+    }
+    
+    .label-group-2,
+    .label-group-3 {
+        text-align: left;
+    }
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
+    /* Tablet label group positions - copy from desktop */
+    .label-group-1 {
+        top: 2%;
+        left: 2%;
+    }
+    
+    .label-group-2 {
+        top: 2%;
+        right: 2%;
+    }
+    
+    .label-group-3 {
+        top: 52%;
+        right: 2%;
+    }
+    
+    .label-group-4 {
+        top: 52%;
+        left: 2%;
+    }
+
+    .donut-chart-wrapper {
+        padding: 20% 0;
+    }
+
     .nav-container {
         grid-template-columns: 1fr auto;
         gap: 1rem;
@@ -1296,9 +1537,7 @@ body:not(.homepage) #loading-screen {
     .pricing-grid {
         grid-template-columns: 1fr;
     }
-}
 
-@media (max-width: 480px) {
     .hero-title {
         font-size: 2rem;
     }
@@ -1315,6 +1554,100 @@ body:not(.homepage) #loading-screen {
     .contact-info,
     .contact-form {
         padding: 1.5rem;
+    }
+    
+    .pricing-diagram-container {
+        padding: 1rem;
+        margin: 2rem 0;
+    }
+
+    .label-group-3 {
+        bottom: 2%;
+        right: 2%;
+        top: auto;
+    }
+    
+    .label-group-4 {
+        bottom: 2%;
+        left: 2%;
+        top: auto;
+    }
+}
+
+@media (max-width: 600px) {
+    /* Tablet label group positions - copy from desktop */
+    .label-group-1 {
+        top: 2%;
+        left: 2%;
+    }
+    
+    .label-group-2 {
+        top: 2%;
+        right: 2%;
+    }
+
+    .donut-chart-wrapper {
+        padding: 30% 0;
+    }
+}
+
+@media (max-width: 560px) {
+    .donut-chart-wrapper {
+        padding: 40% 0;
+    }
+    
+}
+
+@media (max-width: 480px) {
+    .donut-chart-wrapper {
+        padding: 50% 0;
+    }
+    
+}
+
+@media (max-width: 420px) {
+    .donut-chart-wrapper {
+        padding: 70% 0;
+    }
+    .label-group {
+        width: 50%;
+    }
+}
+
+@media (max-width: 390px) {
+    .donut-chart-wrapper {
+        padding: 80% 0;
+    }
+    .donut-chart {
+        width: 95%;
+        max-width: 250px;
+        height: 250px;
+    }
+    
+    .donut-center {
+        width: 80px;
+        height: 80px;
+    }
+    .donut-segment-label {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 370px) {
+    .donut-chart-wrapper {
+        padding: 90% 0;
+    }
+}
+
+@media (max-width: 350px) {
+    .donut-chart-wrapper {
+        padding: 100% 0;
+    }
+}
+
+@media (max-width: 335px) {
+    .donut-chart-wrapper {
+        padding: 115% 0;
     }
 }
 
@@ -1368,7 +1701,7 @@ body:not(.homepage) #loading-screen {
     --footer-text: white;
     --canvas-bg: linear-gradient(135deg, #d2691e 0%, #ff8c00 50%, #b8860b 100%);
     --loading-bg: linear-gradient(135deg, #d2691e 0%, #ff8c00 50%, #b8860b 100%);
-}
+  }
 
 /* Deep Purple Theme */
 [data-theme="deep-purple"] {
@@ -1400,7 +1733,7 @@ body:not(.homepage) #loading-screen {
     --footer-text: white;
     --canvas-bg: linear-gradient(135deg, #006994 0%, #0080b3 50%, #004d73 100%);
     --loading-bg: linear-gradient(135deg, #006994 0%, #0080b3 50%, #004d73 100%);
-}
+  }
 
 /* Dark Theme */
 [data-theme="dark"] {

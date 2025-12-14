@@ -9,12 +9,16 @@ let windowHalfX = window.innerWidth / 2;
 let windowHalfY = window.innerHeight / 2;
 let water, sky, sun;
 let scrollY = 0;
-let targetZ = 100;
+let targetY = 200; // Start at ocean level
+let animationStarted = false;
+let space, spaceGeometry, spaceMaterial;
 
 // Performance monitoring
 let frameCount = 0;
 let lastTime = performance.now();
 let fps = 60;
+let frameRateLimit = 60; // Target FPS
+let lastFrameTime = 0;
 
 // Internationalization
 let currentLanguage = 'sk';
@@ -75,7 +79,14 @@ function applyTranslations() {
 // Get nested translation value
 function getNestedTranslation(obj, path) {
     return path.split('.').reduce((current, key) => {
-        return current && current[key] !== undefined ? current[key] : null;
+        if (current && current[key] !== undefined) {
+            return current[key];
+        }
+        // Handle array indices (e.g., "items.0")
+        if (current && Array.isArray(current) && !isNaN(key)) {
+            return current[parseInt(key)];
+        }
+        return null;
     }, obj);
 }
 
@@ -150,7 +161,7 @@ function initThreeJS() {
     
     // Camera
     camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 1, 20000);
-    camera.position.set(30, 200, 1000);
+    camera.position.set(30, 200, 1000); // Start at ocean level
     
     // Renderer
     renderer = new THREE.WebGLRenderer({ 
@@ -159,9 +170,13 @@ function initThreeJS() {
         antialias: true 
     });
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Limit pixel ratio for performance
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 0.5;
+    
+    // Performance optimizations
+    renderer.shadowMap.enabled = false; // Disable shadows for better performance
+    renderer.antialias = false; // Disable antialiasing for better performance
     
     // Add lighting
     const ambientLight = new THREE.AmbientLight(0x404040, 0.6);
@@ -197,32 +212,35 @@ function createOcean() {
     // Create sun
     sun = new THREE.Vector3();
     
-    // Water geometry
-    const waterGeometry = new THREE.PlaneGeometry(10000, 10000);
+    // Water geometry (infinite ocean effect)
+    const waterGeometry = new THREE.PlaneGeometry(50000, 50000, 32, 32); // Massive ocean for infinite effect
     
-    // Water material with ocean shader (optimized for performance)
+    // Water material with ocean shader (heavily optimized for performance)
     water = new Water(waterGeometry, {
-        textureWidth: 256, // Reduced from 512 for better performance
-        textureHeight: 256, // Reduced from 512 for better performance
+        textureWidth: 128, // Further reduced for better performance
+        textureHeight: 128, // Further reduced for better performance
         waterNormals: new THREE.TextureLoader().load('https://threejs.org/examples/textures/waternormals.jpg', function (texture) {
             texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
         }),
         sunDirection: new THREE.Vector3(),
         sunColor: 0xffffff,
-        waterColor: 0x001e0f,
-        distortionScale: 2.0, // Reduced from 3.7 for better performance
+        waterColor: 0x000000, // Pure black ocean to prevent blue tint
+        distortionScale: 0.3, // Much smaller waves for less rounded ocean
+        size: 0.5, // Smaller wave size for less rounded ocean
         fog: scene.fog !== undefined
     });
     
-    // Position water in center of scene
+    // Position water for infinite ocean effect (extended left)
     water.rotation.x = -Math.PI / 2;
     water.position.y = 0; // Center of scene
+    water.position.x = -5000; // Extended left for better coverage
+    water.position.z = 0; // Center depth
     water.userData = { layer: 'ocean', speed: 1.0 };
     scene.add(water);
     
-    // Create sky for better ocean effect
+    // Create sky for infinite ocean effect
     sky = new Sky();
-    sky.scale.setScalar(10000);
+    sky.scale.setScalar(50000); // Much larger sky to match ocean
     scene.add(sky);
     
     // Configure sky
@@ -261,6 +279,93 @@ function createOcean() {
     }
     
     updateSun();
+    
+    // Create space effect above ocean
+    createSpace();
+}
+
+// Create space effect above ocean
+function createSpace() {
+    // Create space geometry (much larger sphere for flat horizon)
+    spaceGeometry = new THREE.SphereGeometry(100000, 32, 32);
+    
+    // Create space material with stars
+    spaceMaterial = new THREE.ShaderMaterial({
+        uniforms: {
+            time: { value: 0.0 },
+            resolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) }
+        },
+        vertexShader: `
+            varying vec2 vUv;
+            void main() {
+                vUv = uv;
+                gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+            }
+        `,
+        fragmentShader: `
+            uniform float time;
+            uniform vec2 resolution;
+            varying vec2 vUv;
+            
+            // Simple random function
+            float random(vec2 st) {
+                return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123);
+            }
+            
+            // Create small star dots
+            float star(vec2 uv, float size) {
+                float star = random(uv);
+                if (star > 0.999) { // Much much fewer stars
+                    return 1.0;
+                }
+                return 0.0;
+            }
+            
+            void main() {
+                vec2 uv = vUv;
+                
+                // Calculate height factor (0.0 = bottom, 1.0 = top)
+                float heightFactor = uv.y;
+                
+                // Create gradient from sun (bottom) to space (top)
+                vec3 sunColor = vec3(1.0, 0.8, 0.4); // Warm sun color
+                vec3 spaceColor = vec3(0.0, 0.0, 0.0); // Black space
+                
+                // Smooth transition between sun and space
+                vec3 baseColor = mix(sunColor, spaceColor, smoothstep(0.3, 0.8, heightFactor));
+                
+                // Add stars only in upper part (space area) and only distant ones
+                float starField = 0.0;
+                if (heightFactor > 0.7) { // Only in top 30% of space
+                    // Only distant stars, no close ones
+                    starField += star(uv * 30.0, 0.1) * 0.4; // Very few distant stars
+                    
+                    // Add subtle twinkling effect
+                    float twinkle = sin(time * 1.5 + uv.x * 5.0 + uv.y * 4.0) * 0.1 + 0.9;
+                    starField *= twinkle;
+                }
+                
+                // Remove atmospheric glow to prevent blue tint on ocean
+                float atmosphere = 0.0;
+                
+                // Combine all effects
+                vec3 color = baseColor;
+                color += vec3(starField); // White stars
+                // No atmospheric glow to prevent blue tint
+                
+                gl_FragColor = vec4(color, 1.0);
+            }
+        `,
+        side: THREE.BackSide // Render inside of sphere
+    });
+    
+    // Create space mesh (positioned above ocean to prevent blue tint)
+    space = new THREE.Mesh(spaceGeometry, spaceMaterial);
+    space.position.y = 1000; // Position above ocean
+    space.position.x = 0; // Center horizontally
+    space.position.z = 0; // Center depth
+    space.userData = { layer: 'space', speed: 1.0 };
+    scene.add(space);
 }
 
 
@@ -268,8 +373,16 @@ function createOcean() {
 function animate() {
     animationId = requestAnimationFrame(animate);
     
-    const time = Date.now() * 0.001;
     const currentTime = performance.now();
+    const deltaTime = currentTime - lastFrameTime;
+    
+    // Frame rate limiting for better performance
+    if (deltaTime < 1000 / frameRateLimit) {
+        return;
+    }
+    
+    lastFrameTime = currentTime;
+    const time = currentTime * 0.001;
     
     // Performance monitoring
     frameCount++;
@@ -281,10 +394,12 @@ function animate() {
         // Adaptive quality based on FPS
         if (fps < 30 && water) {
             // Reduce quality for better performance
-            water.material.uniforms['distortionScale'].value = Math.max(1.0, water.material.uniforms['distortionScale'].value - 0.1);
+            water.material.uniforms['distortionScale'].value = Math.max(0.5, water.material.uniforms['distortionScale'].value - 0.1);
+            water.material.uniforms['size'].value = Math.max(0.5, water.material.uniforms['size'].value - 0.1);
         } else if (fps > 50 && water) {
             // Increase quality if performance is good
-            water.material.uniforms['distortionScale'].value = Math.min(3.0, water.material.uniforms['distortionScale'].value + 0.05);
+            water.material.uniforms['distortionScale'].value = Math.min(2.0, water.material.uniforms['distortionScale'].value + 0.05);
+            water.material.uniforms['size'].value = Math.min(2.0, water.material.uniforms['size'].value + 0.05);
         }
     }
     
@@ -293,21 +408,21 @@ function animate() {
         water.material.uniforms['time'].value += 1.0 / 60.0;
     }
     
+    // Animate space
+    if (space && spaceMaterial) {
+        spaceMaterial.uniforms['time'].value = time;
+    }
+    
     // Camera follows mouse for ocean scene
     //camera.position.x += (mouseX - camera.position.x) * 0.05;
     //camera.position.y += (-mouseY - camera.position.y) * 0.05;
     
-    // Smooth camera movement forward/backward based on scroll
-    camera.position.z += (targetZ - camera.position.z) * 0.1;
+    // Smooth camera movement up to space (like an elevator)
+    camera.position.y += (targetY - camera.position.y) * 0.1;
     
-    // Look at sun position for better ocean view
-    if (sun) {
-        // Create a point in the distance where sun is
-        const sunPosition = new THREE.Vector3(sun.x * 1000, sun.y * 1000, sun.z * 1000);
-        camera.lookAt(sunPosition);
-    } else {
-        camera.lookAt(scene.position);
-    }
+    // Look forward (not at sun) for elevator-like movement
+    const lookAtPoint = new THREE.Vector3(0, camera.position.y, camera.position.z - 100);
+    camera.lookAt(lookAtPoint);
     
     renderer.render(scene, camera);
 }
@@ -320,17 +435,21 @@ function onMouseMove(event) {
 
 // Scroll handler
 function onScroll(event) {
+    if (!animationStarted) return;
+    
     scrollY = window.scrollY;
-    targetZ = 100 + scrollY * 0.5; // Move camera forward/backward based on scroll
+    targetY = Math.max(200, 200 + scrollY * 2); // Move camera up to space, but not below ocean level
 }
 
 // Wheel handler for canvas scrolling
 function onWheel(event) {
+    if (!animationStarted) return;
+    
     event.preventDefault();
     
     // Update scrollY based on wheel delta
     scrollY += event.deltaY * 0.5;
-    targetZ = 100 + scrollY * 0.5;
+    targetY = Math.max(200, 200 + scrollY * 2); // Move camera up to space, but not below ocean level
     
     // Also scroll the page
     window.scrollBy(0, event.deltaY * 0.5);
@@ -451,6 +570,12 @@ document.getElementById('start-animation-btn')?.addEventListener('click', functi
     const hero = document.querySelector('.hero');
     if (hero) {
         hero.classList.add('hidden');
+    }
+    
+    // Start animation and enable scroll
+    if (!animationStarted) {
+        animationStarted = true;
+        console.log('Animation started and scroll enabled!');
     }
     
     // Keep button text as "Explore" and disable it

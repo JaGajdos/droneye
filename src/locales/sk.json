@@ -52,6 +52,45 @@
   "pricing": {
     "title": "Cenová ponuka",
     "subtitle": "Flexibilné riešenia pre každý rozpočet",
+    "diagram": {
+      "lietanie": {
+        "title": "Lietanie",
+        "items": [
+          "Predpríprava letu",
+          "Analýza počasia",
+          "Lietanie"
+        ]
+      },
+      "povolenia": {
+        "title": "Povolenia",
+        "items": [
+          "Prevádzkové povolenie",
+          "Specific",
+          "Predletové povolenie",
+          "Dronové právne služby a CAMO povinnosti"
+        ]
+      },
+      "bezpecnost": {
+        "title": "Bezpečnosť",
+        "items": [
+          "Padák a ochrana vrtúľ",
+          "Poistenie dronu",
+          "Náhradné drony",
+          "FTS Systém"
+        ]
+      },
+      "spolupraca": {
+        "title": "Spolupráca",
+        "items": [
+          "10r Know How",
+          "Konzultácia s klientom",
+          "Obhliadky",
+          "Cenová ponuka",
+          "Odovzdanie materiálov pomocou cloudu",
+          "Archivácia materiálu"
+        ]
+      }
+    },
     "basic": {
       "title": "Základný balík",
       "price": "od 500€",
