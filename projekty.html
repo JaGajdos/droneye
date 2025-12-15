@@ -42,6 +42,14 @@
     <meta name="ICBM" content="48.1486, 17.1077">
     
     <link rel="stylesheet" href="/src/style.css">
+    <script>
+        // Hide content until translations are loaded to prevent flash of wrong language
+        (function() {
+            const savedLang = localStorage.getItem('language') || 'sk';
+            document.documentElement.setAttribute('lang', savedLang);
+            document.documentElement.style.visibility = 'hidden';
+        })();
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>
@@ -102,7 +110,7 @@
             <div class="subpage-hero">
                 <div class="subpage-hero-content">
                     <h1 data-i18n="projects.title">Naše projekty</h1>
-                    <p data-i18n="projects.subtitle">Realizované projekty a úspešné prípadové štúdie</p>
+                    <p data-i18n="projects.subtitle">Pozrite si naše najnovšie úspešné projekty</p>
                 </div>
             </div>
             

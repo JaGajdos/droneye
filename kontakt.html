@@ -42,6 +42,14 @@
     <meta name="ICBM" content="48.1486, 17.1077">
     
     <link rel="stylesheet" href="/src/style.css">
+    <script>
+        // Hide content until translations are loaded to prevent flash of wrong language
+        (function() {
+            const savedLang = localStorage.getItem('language') || 'sk';
+            document.documentElement.setAttribute('lang', savedLang);
+            document.documentElement.style.visibility = 'hidden';
+        })();
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>

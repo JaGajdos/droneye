@@ -10,44 +10,15 @@
   "hero": {
     "title": "Welcome to Droneye",
     "subtitle": "We see what you want to see",
-    "cta": "Explore",
-    "starting": "Starting animation...",
-    "navigating": "Navigating to services..."
+    "cta": "Explore"
   },
   "projects": {
     "title": "Our Projects",
-    "subtitle": "Check out our latest successful projects",
-    "project1": {
-      "title": "Aerial Mapping of Bratislava",
-      "description": "Comprehensive 3D city mapping using drones"
-    },
-    "project2": {
-      "title": "Agricultural Field Monitoring",
-      "description": "Crop health analysis using multispectral sensors"
-    },
-    "project3": {
-      "title": "Power Line Inspection",
-      "description": "Safe inspection of high-voltage power lines"
-    }
+    "subtitle": "Check out our latest successful projects"
   },
   "team": {
     "title": "Our Team",
-    "subtitle": "Meet our experts",
-    "member1": {
-      "name": "Ing. Peter Novák",
-      "position": "Chief Pilot and Technical Director",
-      "description": "10+ years of experience in aviation industry"
-    },
-    "member2": {
-      "name": "Mgr. Anna Kováčová",
-      "position": "Data Analysis Specialist",
-      "description": "Expert in GIS and remote sensing"
-    },
-    "member3": {
-      "name": "Ing. Martin Svoboda",
-      "position": "Software Development Lead",
-      "description": "Specialist in AI and automation"
-    }
+    "subtitle": "Meet our experts"
   },
   "pricing": {
     "title": "Pricing",
@@ -90,40 +61,15 @@
           "Material archiving"
         ]
       }
-    },
-    "basic": {
-      "title": "Basic Package",
-      "price": "from €500",
-      "description": "Basic aerial photography and simple analysis"
-    },
-    "professional": {
-      "title": "Professional Package",
-      "price": "from €1200",
-      "description": "Advanced mapping, 3D models and detailed analysis"
-    },
-    "enterprise": {
-      "title": "Enterprise Solution",
-      "price": "On request",
-      "description": "Comprehensive solutions for large projects"
     }
   },
   "services": {
     "title": "Our Services",
-    "drone": {
-      "title": "Drone Services",
-      "text": "Professional aerial photography and mapping"
-    },
-    "analytics": {
-      "title": "Data Analytics",
-      "text": "Processing and analysis of collected data"
-    },
-    "solutions": {
-      "title": "Specialized Solutions",
-      "text": "Custom solutions for specific needs"
-    }
+    "subtitle": "Professional drone services for your needs"
   },
   "contact": {
     "title": "Contact",
+    "subtitle": "Get in touch with us for your needs",
     "info": {
       "title": "Contact Information",
       "email": "📧 info@droneye.sk",
@@ -134,12 +80,8 @@
       "name": "Name",
       "email": "Email",
       "message": "Message",
-      "submit": "Send",
-      "sending": "Sending...",
-      "success": "Thank you for your message! We will contact you soon.",
-      "error": "Please fill in all fields."
+      "submit": "Send"
     }
   },
-  "loading": "Loading...",
-  "language": "Language"
+  "loading": "Loading..."
 }

@@ -10,44 +10,15 @@
   "hero": {
     "title": "Vitajte v Droneye",
     "subtitle": "We see what you want to see",
-    "cta": "Explore",
-    "starting": "Spúšťam animáciu...",
-    "navigating": "Prechádzam na služby..."
+    "cta": "Explore"
   },
   "projects": {
     "title": "Naše projekty",
-    "subtitle": "Pozrite si naše najnovšie úspešné projekty",
-    "project1": {
-      "title": "Letecké mapovanie Bratislavy",
-      "description": "Komplexné 3D mapovanie mesta pomocou dronov"
-    },
-    "project2": {
-      "title": "Monitoring poľnohospodárskych plôch",
-      "description": "Analýza zdravia plodín pomocou multispektrálnych senzorov"
-    },
-    "project3": {
-      "title": "Inspekcia energetických vedení",
-      "description": "Bezpečná kontrola vysokonapäťových vedení"
-    }
+    "subtitle": "Pozrite si naše najnovšie úspešné projekty"
   },
   "team": {
     "title": "Náš tím",
-    "subtitle": "Poznajte našich odborníkov",
-    "member1": {
-      "name": "Ing. Peter Novák",
-      "position": "Hlavný pilot a technický riaditeľ",
-      "description": "10+ rokov skúseností v leteckom priemysle"
-    },
-    "member2": {
-      "name": "Mgr. Anna Kováčová",
-      "position": "Špecialistka na analýzu dát",
-      "description": "Expertka na GIS a dálkový prieskum"
-    },
-    "member3": {
-      "name": "Ing. Martin Svoboda",
-      "position": "Vedúci vývoja softvéru",
-      "description": "Špecialista na AI a automatizáciu"
-    }
+    "subtitle": "Poznajte našich odborníkov"
   },
   "pricing": {
     "title": "Cenová ponuka",
@@ -90,40 +61,15 @@
           "Archivácia materiálu"
         ]
       }
-    },
-    "basic": {
-      "title": "Základný balík",
-      "price": "od 500€",
-      "description": "Základné letecké snímkovanie a jednoduchá analýza"
-    },
-    "professional": {
-      "title": "Profesionálny balík",
-      "price": "od 1200€",
-      "description": "Pokročilé mapovanie, 3D modely a detailná analýza"
-    },
-    "enterprise": {
-      "title": "Enterprise riešenie",
-      "price": "Na vyžiadanie",
-      "description": "Komplexné riešenia pre veľké projekty"
     }
   },
   "services": {
     "title": "Naše služby",
-    "drone": {
-      "title": "Drone služby",
-      "text": "Profesionálne letecké snímkovanie a mapovanie"
-    },
-    "analytics": {
-      "title": "Analýza dát",
-      "text": "Spracovanie a analýza získaných údajov"
-    },
-    "solutions": {
-      "title": "Špecializované riešenia",
-      "text": "Vlastné riešenia pre špecifické potreby"
-    }
+    "subtitle": "Profesionálne drone služby pre vaše potreby"
   },
   "contact": {
     "title": "Kontakt",
+    "subtitle": "Spojte sa s nami pre vaše potreby",
     "info": {
       "title": "Kontaktné údaje",
       "email": "📧 info@droneye.sk",
@@ -134,12 +80,8 @@
       "name": "Meno",
       "email": "Email",
       "message": "Správa",
-      "submit": "Odoslať",
-      "sending": "Odosielam...",
-      "success": "Ďakujeme za vašu správu! Čoskoro vás budeme kontaktovať.",
-      "error": "Prosím vyplňte všetky polia."
+      "submit": "Odoslať"
     }
   },
-  "loading": "Načítavam...",
-  "language": "Jazyk"
+  "loading": "Načítavam..."
 }

@@ -38,6 +38,9 @@ async function initInternationalization() {
     // Apply translations
     applyTranslations();
     
+    // Show content after translations are applied
+    document.documentElement.style.visibility = 'visible';
+    
     // Initialize language switcher
     initLanguageSwitcher();
 }
