@@ -17,7 +17,8 @@ export default defineConfig({
         projekty: 'projekty.html',
         tim: 'tim.html',
         'cenova-ponuka': 'cenova-ponuka.html',
-        kontakt: 'kontakt.html'
+        kontakt: 'kontakt.html',
+        dronetext: 'dronetext.html'
       },
       output: {
         manualChunks: {
