@@ -472,6 +472,43 @@ function initNavigation() {
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
     
+    // Fix all navigation links to use base path
+    const basePath = import.meta.env.BASE_URL;
+    
+    // Fix all links starting with '/' to use base path
+    function fixLinkPath(link) {
+        const href = link.getAttribute('href');
+        if (href && href.startsWith('/') && !href.startsWith(basePath) && !href.startsWith('//')) {
+            // Remove leading slash and add base path
+            const newHref = basePath + href.substring(1);
+            link.setAttribute('href', newHref);
+        }
+    }
+    
+    // Fix navigation links
+    navLinks.forEach(fixLinkPath);
+    
+    // Fix logo link
+    const logoLink = document.querySelector('.logo-link');
+    if (logoLink) {
+        const href = logoLink.getAttribute('href');
+        if (href === '/' || href === '') {
+            logoLink.setAttribute('href', basePath);
+        } else {
+            fixLinkPath(logoLink);
+        }
+    }
+    
+    // Fix hero button links
+    const heroButton = document.querySelector('.hero-button-secondary');
+    if (heroButton) {
+        fixLinkPath(heroButton);
+    }
+    
+    // Fix footer links (if any)
+    const footerLinks = document.querySelectorAll('footer a[href^="/"]');
+    footerLinks.forEach(fixLinkPath);
+    
     // Navigation click handlers
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
