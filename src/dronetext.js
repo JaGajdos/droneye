@@ -117,23 +117,23 @@ function setCloudTexture(texturePathOrPaths) {
                     }
                     
                     // Create continuous cloud layer - 3D effect with multiple layers
-                    const cloudLayerHeight = 50; // Higher up - clouds are much higher
-                    const cloudPlaneWidth = 25; // Smaller size to match original texture
-                    const cloudPlaneDepth = 25;
-                    const coverageWidth = 200;
-                    const coverageDepth = 200;
-                    const spacing = 20; // Spacing between clouds
+                    const cloudLayerHeight = 30; // Lower - clouds below drone
+                    const cloudScaleX = 30; // Width scale for sprite
+                    const cloudScaleY = 20; // Height scale for sprite
+                    const coverageWidth = 250; // Larger area to cover
+                    const coverageDepth = 250;
+                    const spacing = 15; // Closer spacing for denser clouds
                     
-                    const xCount = Math.ceil(coverageWidth / spacing) + 4;
-                    const zCount = Math.ceil(coverageDepth / spacing) + 4;
+                    const xCount = Math.ceil(coverageWidth / spacing) + 6;
+                    const zCount = Math.ceil(coverageDepth / spacing) + 6;
                     
-                    // Create 3D effect with multiple layers at different heights
-                    const layerCount = 3; // Number of layers for 3D depth
-                    const layerSpacing = 2; // Vertical spacing between layers
+                    // Create 3D effect with multiple layers at different heights - more layers for denser clouds
+                    const layerCount = 5; // More layers for denser, bushier clouds
+                    const layerSpacing = 1.5; // Vertical spacing between layers
                     
                     for (let layer = 0; layer < layerCount; layer++) {
                         const layerY = cloudLayerHeight + layer * layerSpacing;
-                        const layerOpacity = 0.9 - layer * 0.15; // Slightly more transparent for deeper layers
+                        const layerOpacity = 0.5 - layer * 0.1; // More transparent for deeper layers (sprite opacity)
                         
                         for (let x = 0; x < xCount; x++) {
                             for (let z = 0; z < zCount; z++) {
@@ -141,9 +141,8 @@ function setCloudTexture(texturePathOrPaths) {
                                 const zPos = (z - zCount / 2) * spacing + (Math.random() - 0.5) * 5 + layer * 2;
                                 const selectedTexture = availableTextures[Math.floor(Math.random() * availableTextures.length)];
                                 
-                                const cloud = createCloudForScene(xPos, layerY, zPos, cloudPlaneWidth, cloudPlaneDepth, selectedTexture);
+                                const cloud = createCloudForScene(xPos, layerY, zPos, cloudScaleX, cloudScaleY, selectedTexture, layerOpacity);
                                 if (cloud) {
-                                    cloud.material.opacity = layerOpacity;
                                     cloudGroup.add(cloud);
                                 }
                             }
@@ -166,23 +165,23 @@ function setCloudTexture(texturePathOrPaths) {
                         const cloudGroup = skyScene.userData.cloudGroup;
                         cloudGroup.clear();
                         
-                        const cloudLayerHeight = 50; // Higher up - clouds are much higher
-                        const cloudPlaneWidth = 25; // Smaller size to match original texture
-                        const cloudPlaneDepth = 25;
-                        const coverageWidth = 200;
-                        const coverageDepth = 200;
-                        const spacing = 20; // Spacing between clouds
+                        const cloudLayerHeight = 30; // Lower - clouds below drone
+                        const cloudScaleX = 30; // Width scale for sprite
+                        const cloudScaleY = 20; // Height scale for sprite
+                        const coverageWidth = 250; // Larger area to cover
+                        const coverageDepth = 250;
+                        const spacing = 15; // Closer spacing for denser clouds
                         
-                        const xCount = Math.ceil(coverageWidth / spacing) + 4;
-                        const zCount = Math.ceil(coverageDepth / spacing) + 4;
+                        const xCount = Math.ceil(coverageWidth / spacing) + 6;
+                        const zCount = Math.ceil(coverageDepth / spacing) + 6;
                         
-                        // Create 3D effect with multiple layers at different heights
-                        const layerCount = 3; // Number of layers for 3D depth
-                        const layerSpacing = 2; // Vertical spacing between layers
+                        // Create 3D effect with multiple layers at different heights - more layers for denser clouds
+                        const layerCount = 5; // More layers for denser, bushier clouds
+                        const layerSpacing = 1.5; // Vertical spacing between layers
                         
                         for (let layer = 0; layer < layerCount; layer++) {
                             const layerY = cloudLayerHeight + layer * layerSpacing;
-                            const layerOpacity = 0.9 - layer * 0.15; // Slightly more transparent for deeper layers
+                            const layerOpacity = 0.5 - layer * 0.1; // More transparent for deeper layers (sprite opacity)
                             
                             for (let x = 0; x < xCount; x++) {
                                 for (let z = 0; z < zCount; z++) {
@@ -190,9 +189,8 @@ function setCloudTexture(texturePathOrPaths) {
                                     const zPos = (z - zCount / 2) * spacing + (Math.random() - 0.5) * 5 + layer * 2;
                                     const selectedTexture = availableTextures[Math.floor(Math.random() * availableTextures.length)];
                                     
-                                    const cloud = createCloudForScene(xPos, layerY, zPos, cloudPlaneWidth, cloudPlaneDepth, selectedTexture);
+                                    const cloud = createCloudForScene(xPos, layerY, zPos, cloudScaleX, cloudScaleY, selectedTexture, layerOpacity);
                                     if (cloud) {
-                                        cloud.material.opacity = layerOpacity;
                                         cloudGroup.add(cloud);
                                     }
                                 }
@@ -205,40 +203,26 @@ function setCloudTexture(texturePathOrPaths) {
     });
 }
 
-// Helper function to create cloud plane (extracted for reuse)
-function createCloudForScene(x, y, z, width, height, cloudTexture) {
+// Helper function to create cloud sprite (always faces camera)
+function createCloudForScene(x, y, z, scaleX, scaleY, cloudTexture, opacity = 0.5) {
     if (!cloudTexture) return null;
     
-    function createCloudMaterial(texture) {
-        if (!texture) return null;
-        
-        const material = new THREE.MeshStandardMaterial({
-            map: texture,
-            transparent: true,
-            opacity: 0.9,
-            side: THREE.DoubleSide,
-            depthWrite: false,
-            alphaTest: 0.1
-        });
-        
-        // Don't repeat texture - use original size
-        texture.wrapS = THREE.ClampToEdgeWrapping;
-        texture.wrapT = THREE.ClampToEdgeWrapping;
-        
-        return material;
-    }
+    // Create sprite material (always faces camera)
+    const cloudMaterial = new THREE.SpriteMaterial({
+        map: cloudTexture,
+        transparent: true,
+        opacity: opacity,
+        depthWrite: false,
+    });
     
-    const cloudMaterial = createCloudMaterial(cloudTexture);
-    if (!cloudMaterial) return null;
+    // Don't repeat texture - use original size
+    cloudTexture.wrapS = THREE.ClampToEdgeWrapping;
+    cloudTexture.wrapT = THREE.ClampToEdgeWrapping;
+    cloudTexture.flipY = false;
     
-    // Create a plane for the cloud
-    const cloudGeometry = new THREE.PlaneGeometry(width, height);
-    const cloud = new THREE.Mesh(cloudGeometry, cloudMaterial);
-    
-    // Rotate to be horizontal (lying flat)
-    cloud.rotation.x = -Math.PI / 2;
-    
-    // Position the cloud
+    // Create sprite
+    const cloud = new THREE.Sprite(cloudMaterial);
+    cloud.scale.set(scaleX, scaleY, 1);
     cloud.position.set(x, y, z);
     
     // Store original position for animation
@@ -423,21 +407,26 @@ function createScenes() {
         return material;
     }
     
-    // Function to create a cloud plane (flat cloud with texture)
-    function createCloudPlane(x, y, z, width, height, cloudTexture) {
+    // Function to create a cloud sprite (always faces camera)
+    function createCloudPlane(x, y, z, scaleX, scaleY, cloudTexture, opacity = 0.5) {
         if (!cloudTexture) return null;
         
-        const cloudMaterial = createCloudMaterial(cloudTexture);
-        if (!cloudMaterial) return null;
+        // Create sprite material (always faces camera)
+        const cloudMaterial = new THREE.SpriteMaterial({
+            map: cloudTexture,
+            transparent: true,
+            opacity: opacity,
+            depthWrite: false,
+        });
         
-        // Create a plane for the cloud
-        const cloudGeometry = new THREE.PlaneGeometry(width, height);
-        const cloud = new THREE.Mesh(cloudGeometry, cloudMaterial);
+        // Don't repeat texture - use original size
+        cloudTexture.wrapS = THREE.ClampToEdgeWrapping;
+        cloudTexture.wrapT = THREE.ClampToEdgeWrapping;
+        cloudTexture.flipY = false;
         
-        // Rotate to be horizontal (lying flat)
-        cloud.rotation.x = -Math.PI / 2;
-        
-        // Position the cloud
+        // Create sprite
+        const cloud = new THREE.Sprite(cloudMaterial);
+        cloud.scale.set(scaleX, scaleY, 1);
         cloud.position.set(x, y, z);
         
         // Store original position for animation
@@ -515,28 +504,28 @@ function createScenes() {
         }
         
         // Create a continuous cloud layer covering the entire bottom area - 3D effect with multiple layers
-        const cloudLayerHeight = 50; // Higher up - clouds are much higher
-        // Use original texture size - smaller planes, more of them
-        const cloudPlaneWidth = 25; // Smaller size to match original texture
-        const cloudPlaneDepth = 25; // Smaller size to match original texture
+        const cloudLayerHeight = 30; // Lower - clouds below drone
+        // Use sprite scaling - realistic cloud sizes
+        const cloudScaleX = 30; // Width scale for sprite
+        const cloudScaleY = 20; // Height scale for sprite
         
-        // Create many clouds to cover the entire area
-        const coverageWidth = 200; // Area to cover
-        const coverageDepth = 200;
-        const spacing = 20; // Spacing between clouds (slight overlap)
+        // Create many clouds to cover the entire area - denser coverage
+        const coverageWidth = 250; // Larger area to cover
+        const coverageDepth = 250;
+        const spacing = 15; // Closer spacing for denser clouds
         
-        const xCount = Math.ceil(coverageWidth / spacing) + 4; // Extra clouds for coverage
-        const zCount = Math.ceil(coverageDepth / spacing) + 4;
+        const xCount = Math.ceil(coverageWidth / spacing) + 6; // Extra clouds for coverage
+        const zCount = Math.ceil(coverageDepth / spacing) + 6;
         
-        // Create 3D effect with multiple layers at different heights
-        const layerCount = 3; // Number of layers for 3D depth
-        const layerSpacing = 2; // Vertical spacing between layers
+        // Create 3D effect with multiple layers at different heights - more layers for denser clouds
+        const layerCount = 5; // More layers for denser, bushier clouds
+        const layerSpacing = 1.5; // Vertical spacing between layers
         
         for (let layer = 0; layer < layerCount; layer++) {
             const layerY = cloudLayerHeight + layer * layerSpacing;
-            const layerOpacity = 0.9 - layer * 0.15; // Slightly more transparent for deeper layers
+            const layerOpacity = 0.5 - layer * 0.1; // More transparent for deeper layers (sprite opacity)
             
-            // Create grid of cloud planes for this layer
+            // Create grid of cloud sprites for this layer
             for (let x = 0; x < xCount; x++) {
                 for (let z = 0; z < zCount; z++) {
                     // Calculate position with slight random offset for each layer
@@ -546,11 +535,9 @@ function createScenes() {
                     // Randomly select a texture for variation
                     const selectedTexture = availableTextures[Math.floor(Math.random() * availableTextures.length)];
                     
-                    // Create cloud plane with original texture size (no repeat)
-                    const cloud = createCloudPlane(xPos, layerY, zPos, cloudPlaneWidth, cloudPlaneDepth, selectedTexture);
+                    // Create cloud sprite (always faces camera)
+                    const cloud = createCloudPlane(xPos, layerY, zPos, cloudScaleX, cloudScaleY, selectedTexture, layerOpacity);
                     if (cloud) {
-                        // Adjust opacity for depth effect
-                        cloud.material.opacity = layerOpacity;
                         cloudGroup.add(cloud);
                     }
                 }
@@ -1009,17 +996,17 @@ function animate() {
         droneTargetY = droneStartY - (scrollProgress * (droneStartY - droneEndY));
     }
     
-    // Automatic forward movement when not scrolling
+    // Automatic forward movement when not scrolling - DISABLED to keep drone in scene
     // Faster movement in space scene
-    if (!isScrolling) {
-        const speedMultiplier = currentSceneIndex === 0 ? 2.5 : 1.0; // Much faster in space
-        dronePositionZ -= autoMoveSpeed * dt * 30 * speedMultiplier; // Move forward faster (negative Z = away from camera)
-    }
+    // if (!isScrolling) {
+    //     const speedMultiplier = currentSceneIndex === 0 ? 2.5 : 1.0; // Much faster in space
+    //     dronePositionZ -= autoMoveSpeed * dt * 30 * speedMultiplier; // Move forward faster (negative Z = away from camera)
+    // }
     
-    // Smoothly move drone
+    // Smoothly move drone (only Y movement, no forward movement)
     if (droneRoot) {
         droneRoot.position.y += (droneTargetY - droneRoot.position.y) * 0.1;
-        droneRoot.position.z = dronePositionZ;
+        droneRoot.position.z = 0; // Keep drone at fixed Z position (no forward movement)
         
         // Spin rotors
         for (const r of rotors) {
@@ -1045,21 +1032,23 @@ function animate() {
         const cameraOffsetZ = 15; // Horizontal distance (side view) - slightly further from drone
         const cameraOffsetX = 1.5; // Slight side angle for better view
         
-        // Smooth camera movement - follow drone forward
+        // Smooth camera movement - keep camera fixed (drone doesn't move forward)
         camera.position.y += (targetY + cameraOffsetY - camera.position.y) * 0.05;
-        camera.position.z = targetZ + cameraOffsetZ; // Follow drone's Z position
+        camera.position.z = cameraOffsetZ; // Fixed camera position (drone stays at Z=0)
         camera.position.x = cameraOffsetX;
         
         // Look at drone with slight downward angle (not straight down)
         const lookAtY = targetY - 1; // Look slightly below drone center
-        camera.lookAt(cameraOffsetX * 0.5, lookAtY, targetZ);
+        camera.lookAt(cameraOffsetX * 0.5, lookAtY, 0); // Look at fixed Z position
         
         // Animate stars moving forward (infinite forward movement) - only in space scene
+        // Drone stays at fixed position (Z=0), stars move towards it
         if (currentSceneIndex === 0 && scene.userData.stars && droneRoot) {
             const stars = scene.userData.stars;
             const positions = stars.geometry.attributes.position;
             const starSpeed = 80; // Speed at which stars approach (units per second) - much faster in space
-            const droneZ = droneRoot.position.z;
+            const droneZ = 0; // Drone stays at fixed Z position
+            const resetDistance = 400; // Distance behind drone to reset stars
             
             // Move stars forward (towards drone) continuously
             for (let i = 0; i < positions.count; i++) {
@@ -1069,24 +1058,22 @@ function animate() {
                 const newZ = currentZ + starSpeed * dt;
                 
                 // If star passed the drone (went too far forward), reset it to the back
-                if (newZ > droneZ + 50) {
-                    // Reset star to random position in sphere around drone (not in flight path)
-                    // Generate stars in sphere around drone, avoiding direct flight path
+                // Also reset if star is too far behind (to ensure continuous generation)
+                if (newZ > droneZ + 50 || currentZ < droneZ - resetDistance - 200) {
+                    // Reset star to random position BEHIND drone
                     const theta = Math.random() * Math.PI * 2; // Azimuth angle (full circle)
                     const phi = Math.random() * Math.PI; // Polar angle (0 to π)
-                    const radius = 500 + Math.random() * 500; // Distance from center
+                    const radius = 100 + Math.random() * 400; // Distance from center
                     
                     // Calculate position in sphere
                     const x = radius * Math.sin(phi) * Math.cos(theta);
                     const y = radius * Math.sin(phi) * Math.sin(theta);
                     const z = radius * Math.cos(phi);
                     
-                    // Place star in sphere around drone, but ensure it's behind (negative Z relative to drone)
-                    // Avoid direct forward path by keeping Z component negative
+                    // Place star behind drone (negative Z direction) - ensure it's within visible range
                     positions.setX(i, x);
                     positions.setY(i, y);
-                    // Place star behind drone (negative Z direction)
-                    positions.setZ(i, droneZ - Math.abs(z) - 300);
+                    positions.setZ(i, droneZ - resetDistance - Math.random() * 200);
                 } else {
                     positions.setZ(i, newZ);
                 }
@@ -1094,24 +1081,25 @@ function animate() {
             
             positions.needsUpdate = true;
             
-            // Keep stars centered around drone's X and Y position
-            stars.position.x = droneRoot.position.x;
-            stars.position.y = droneRoot.position.y;
+            // Keep stars centered around drone's X and Y position (drone stays at origin)
+            stars.position.x = 0; // Drone stays at X=0
+            stars.position.y = droneRoot.position.y; // Follow drone's Y position
         }
         
         // Animate aurora layers - only in space scene
+        // Drone stays at fixed position (Z=0)
         if (currentSceneIndex === 0 && scene.userData.auroraRings && droneRoot) {
             const time = clock.getElapsedTime();
-            const droneZ = droneRoot.position.z;
+            const droneZ = 0; // Drone stays at fixed Z position
             scene.userData.auroraRings.forEach((layer, index) => {
                 if (layer.material.uniforms) {
                     layer.material.uniforms.time.value = time;
                 }
                 // Make aurora follow drone - create tunnel effect around drone
                 // Layers are centered around drone's position (X, Y) and spaced along Z
-                layer.position.x = droneRoot.position.x;
+                layer.position.x = 0; // Drone stays at X=0
                 layer.position.y = droneRoot.position.y;
-                layer.position.z = droneZ - 40 + index * 4; // Space layers along flight path
+                layer.position.z = droneZ - 40 + index * 4; // Space layers around fixed drone position
             });
         }
         
@@ -1259,5 +1247,9 @@ function initNavigation() {
 }
 
 // Initialize when DOM is ready
-document.addEventListener('DOMContentLoaded', init);
+document.addEventListener('DOMContentLoaded', () => {
+    init();
+    // Show content after initialization (was hidden by inline script)
+    document.documentElement.style.visibility = 'visible';
+});
 

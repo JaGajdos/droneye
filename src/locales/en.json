@@ -18,7 +18,23 @@
   },
   "team": {
     "title": "Our Team",
-    "subtitle": "Meet our experts"
+    "subtitle": "Meet our experts",
+    "description": "We are a team of professionals dedicated to drone services with passion and attention to detail. We specialize in videos, photography, aerial shots with drones, and other drone services. Each member of our team contributes their expertise to create exceptional results for our clients.",
+    "member1": {
+      "name": "Ján Novák",
+      "position": "Chief Pilot and Technical Director",
+      "description": "With over 10 years of experience in drone flying, Ján is our chief pilot. He specializes in technical flights, mapping, and security operations. He is a certified pilot with a license for commercial flights."
+    },
+    "member2": {
+      "name": "Mária Kováčová",
+      "position": "Videographer and Creative Director",
+      "description": "Mária is our creative soul who transforms raw footage into compelling stories. With extensive experience in production and post-production, she creates videos that capture the emotions and beauty of every project."
+    },
+    "member3": {
+      "name": "Peter Horváth",
+      "position": "Photographer and Post-Production Specialist",
+      "description": "Peter is an expert in photography and post-production. With a perfect sense of detail and composition, he creates images that capture the unique perspective from the sky. His work has been awarded at several international competitions."
+    }
   },
   "pricing": {
     "title": "Pricing",

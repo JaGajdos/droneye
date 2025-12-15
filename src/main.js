@@ -186,6 +186,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initInternationalization();
     initNavigation();
     initThemeSwitcher();
+    initTeamCards();
     
     // Only show loading screen on homepage (CSS handles hiding on subpages)
     const isHomepage = window.location.pathname === '/' || window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/');
@@ -771,6 +772,54 @@ document.querySelectorAll('.content-card, .service-card, .project-card, .team-ca
     card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     observer.observe(card);
 });
+
+// Team card mobile click handler
+function initTeamCards() {
+    const teamCards = document.querySelectorAll('.team-card');
+    
+    if (teamCards.length === 0) return;
+    
+    // Check if device is mobile/touch
+    const isMobile = window.matchMedia('(max-width: 1024px)').matches || 'ontouchstart' in window;
+    
+    if (isMobile) {
+        // Add click handler to each card
+        teamCards.forEach(card => {
+            card.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const wasActive = card.classList.contains('active');
+                
+                // Close all cards first
+                teamCards.forEach(otherCard => {
+                    otherCard.classList.remove('active');
+                });
+                
+                // Toggle current card if it wasn't active
+                if (!wasActive) {
+                    card.classList.add('active');
+                }
+            });
+        });
+        
+        // Close card when clicking outside (single listener for all cards)
+        document.addEventListener('click', (e) => {
+            let clickedInsideCard = false;
+            teamCards.forEach(card => {
+                if (card.contains(e.target)) {
+                    clickedInsideCard = true;
+                }
+            });
+            
+            if (!clickedInsideCard) {
+                teamCards.forEach(card => {
+                    card.classList.remove('active');
+                });
+            }
+        });
+    }
+}
 
 
 // Navbar scroll behavior

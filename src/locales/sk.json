@@ -18,7 +18,23 @@
   },
   "team": {
     "title": "Náš tím",
-    "subtitle": "Poznajte našich odborníkov"
+    "subtitle": "Poznajte našich odborníkov",
+    "description": "Sme tím profesionálov, ktorí sa venujú dronovým službám s vášňou a dôrazom na detail. Špecializujeme sa na videá, fotografie, letecké zábery s dronom a ďalšie dronové služby. Každý člen nášho tímu prispieva svojou odbornosťou k vytvoreniu výnimočných výsledkov pre našich klientov.",
+    "member1": {
+      "name": "Ján Novák",
+      "position": "Hlavný pilot a technický riaditeľ",
+      "description": "S viac ako 10-ročnou skúsenosťou v dronovom lietaní je Ján naším hlavným pilotom. Špecializuje sa na technické lety, mapovanie a bezpečnostné operácie. Je certifikovaný pilot s licenciou pre komerčné lety."
+    },
+    "member2": {
+      "name": "Mária Kováčová",
+      "position": "Videograf a kreatívny riaditeľ",
+      "description": "Mária je naša kreatívna duša, ktorá transformuje surové zábery do pútavých príbehov. S bohatými skúsenosťami v produkcii a post-produkcii vytvára videá, ktoré zachytávajú emócie a krásu každého projektu."
+    },
+    "member3": {
+      "name": "Peter Horváth",
+      "position": "Fotograf a post-produkčný špecialista",
+      "description": "Peter je expert na fotografiu a post-produkciu. S dokonalým zmyslom pre detail a kompozíciu vytvára snímky, ktoré zachytávajú jedinečnú perspektívu z neba. Jeho práca bola ocenená na viacerých medzinárodných súťažiach."
+    }
   },
   "pricing": {
     "title": "Cenová ponuka",
