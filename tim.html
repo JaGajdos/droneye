@@ -41,11 +41,19 @@
     <meta name="geo.position" content="48.1486;17.1077">
     <meta name="ICBM" content="48.1486, 17.1077">
     
+    <script>
+        // Hide content until translations are loaded to prevent flash of wrong language
+        (function() {
+            const savedLang = localStorage.getItem('language') || 'sk';
+            document.documentElement.setAttribute('lang', savedLang);
+            document.documentElement.style.visibility = 'hidden';
+        })();
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script type="module" crossorigin src="/droneye/assets/style-qp1TGXEe.js"></script>
+  <script type="module" crossorigin src="/droneye/assets/style-CrVTWEwn.js"></script>
   <script type="module" crossorigin src="/droneye/assets/three-BCRiq4VL.js"></script>
-  <script type="module" crossorigin src="/droneye/assets/main-BBfM9V5h.js"></script>
-  <link rel="stylesheet" crossorigin href="/droneye/assets/style-ByHU5ZVq.css">
+  <script type="module" crossorigin src="/droneye/assets/main-D58jH8mO.js"></script>
+  <link rel="stylesheet" crossorigin href="/droneye/assets/style-BOKydrvV.css">
 </head>
 <body>
     <!-- Navigation -->
@@ -77,14 +85,14 @@
                 </li>
                 <li class="nav-item mobile-language-switcher">
                     <div class="mobile-language-buttons">
-                        <button class="language-option" data-lang="sk">SK</button>
+                        <button class="language-option active" data-lang="sk">SK</button>
                         <button class="language-option" data-lang="en">EN</button>
                     </div>
                 </li>
             </ul>
             <div class="language-switcher">
                 <div class="language-buttons">
-                    <button class="language-option" data-lang="sk">SK</button>
+                    <button class="language-option active" data-lang="sk">SK</button>
                     <button class="language-option" data-lang="en">EN</button>
                 </div>
             </div>
@@ -105,34 +113,14 @@
             <div class="subpage-hero">
                 <div class="subpage-hero-content">
                     <h1 data-i18n="team.title">Náš tím</h1>
-                    <p data-i18n="team.subtitle">Profesionáli s dlhoročnými skúsenosťami</p>
+                    <p data-i18n="team.subtitle">Poznajte našich odborníkov</p>
                 </div>
             </div>
             
             <!-- Subpage Content -->
             <div class="subpage-content">
                 <div class="container">
-                <p class="section-subtitle" data-i18n="team.subtitle">Poznajte našich odborníkov</p>
-                <div class="team-grid">
-                    <div class="team-card">
-                        <div class="team-avatar">👨‍✈️</div>
-                        <h3 data-i18n="team.member1.name">Ing. Peter Novák</h3>
-                        <p class="team-position" data-i18n="team.member1.position">Hlavný pilot a technický riaditeľ</p>
-                        <p data-i18n="team.member1.description">10+ rokov skúseností v leteckom priemysle</p>
-                    </div>
-                    <div class="team-card">
-                        <div class="team-avatar">👩‍💻</div>
-                        <h3 data-i18n="team.member2.name">Mgr. Anna Kováčová</h3>
-                        <p class="team-position" data-i18n="team.member2.position">Špecialistka na analýzu dát</p>
-                        <p data-i18n="team.member2.description">Expertka na GIS a dálkový prieskum</p>
-                    </div>
-                    <div class="team-card">
-                        <div class="team-avatar">👨‍💻</div>
-                        <h3 data-i18n="team.member3.name">Ing. Martin Svoboda</h3>
-                        <p class="team-position" data-i18n="team.member3.position">Vedúci vývoja softvéru</p>
-                        <p data-i18n="team.member3.description">Špecialista na AI a automatizáciu</p>
-                    </div>
-                </div>
+                
                 </div>
             </div>
         </section>

@@ -41,11 +41,19 @@
     <meta name="geo.position" content="48.1486;17.1077">
     <meta name="ICBM" content="48.1486, 17.1077">
     
+    <script>
+        // Hide content until translations are loaded to prevent flash of wrong language
+        (function() {
+            const savedLang = localStorage.getItem('language') || 'sk';
+            document.documentElement.setAttribute('lang', savedLang);
+            document.documentElement.style.visibility = 'hidden';
+        })();
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script type="module" crossorigin src="/droneye/assets/style-qp1TGXEe.js"></script>
+  <script type="module" crossorigin src="/droneye/assets/style-CrVTWEwn.js"></script>
   <script type="module" crossorigin src="/droneye/assets/three-BCRiq4VL.js"></script>
-  <script type="module" crossorigin src="/droneye/assets/main-BBfM9V5h.js"></script>
-  <link rel="stylesheet" crossorigin href="/droneye/assets/style-ByHU5ZVq.css">
+  <script type="module" crossorigin src="/droneye/assets/main-D58jH8mO.js"></script>
+  <link rel="stylesheet" crossorigin href="/droneye/assets/style-BOKydrvV.css">
 </head>
 <body>
     <!-- Navigation -->
@@ -77,14 +85,14 @@
                 </li>
                 <li class="nav-item mobile-language-switcher">
                     <div class="mobile-language-buttons">
-                        <button class="language-option" data-lang="sk">SK</button>
+                        <button class="language-option active" data-lang="sk">SK</button>
                         <button class="language-option" data-lang="en">EN</button>
                     </div>
                 </li>
             </ul>
             <div class="language-switcher">
                 <div class="language-buttons">
-                    <button class="language-option" data-lang="sk">SK</button>
+                    <button class="language-option active" data-lang="sk">SK</button>
                     <button class="language-option" data-lang="en">EN</button>
                 </div>
             </div>
@@ -105,31 +113,14 @@
             <div class="subpage-hero">
                 <div class="subpage-hero-content">
                     <h1 data-i18n="projects.title">Naše projekty</h1>
-                    <p data-i18n="projects.subtitle">Realizované projekty a úspešné prípadové štúdie</p>
+                    <p data-i18n="projects.subtitle">Pozrite si naše najnovšie úspešné projekty</p>
                 </div>
             </div>
             
             <!-- Subpage Content -->
             <div class="subpage-content">
                 <div class="container">
-                <p class="section-subtitle" data-i18n="projects.subtitle">Pozrite si naše najnovšie úspešné projekty</p>
-                <div class="projects-grid">
-                    <div class="project-card">
-                        <div class="project-image">🚁</div>
-                        <h3 data-i18n="projects.project1.title">Letecké mapovanie Bratislavy</h3>
-                        <p data-i18n="projects.project1.description">Komplexné 3D mapovanie mesta pomocou dronov</p>
-                    </div>
-                    <div class="project-card">
-                        <div class="project-image">🌾</div>
-                        <h3 data-i18n="projects.project2.title">Monitoring poľnohospodárskych plôch</h3>
-                        <p data-i18n="projects.project2.description">Analýza zdravia plodín pomocou multispektrálnych senzorov</p>
-                    </div>
-                    <div class="project-card">
-                        <div class="project-image">⚡</div>
-                        <h3 data-i18n="projects.project3.title">Inspekcia energetických vedení</h3>
-                        <p data-i18n="projects.project3.description">Bezpečná kontrola vysokonapäťových vedení</p>
-                    </div>
-                </div>
+                
                 </div>
             </div>
         </section>

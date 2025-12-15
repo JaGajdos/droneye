@@ -41,11 +41,19 @@
     <meta name="geo.position" content="48.1486;17.1077">
     <meta name="ICBM" content="48.1486, 17.1077">
     
+    <script>
+        // Hide content until translations are loaded to prevent flash of wrong language
+        (function() {
+            const savedLang = localStorage.getItem('language') || 'sk';
+            document.documentElement.setAttribute('lang', savedLang);
+            document.documentElement.style.visibility = 'hidden';
+        })();
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script type="module" crossorigin src="/droneye/assets/style-qp1TGXEe.js"></script>
+  <script type="module" crossorigin src="/droneye/assets/style-CrVTWEwn.js"></script>
   <script type="module" crossorigin src="/droneye/assets/three-BCRiq4VL.js"></script>
-  <script type="module" crossorigin src="/droneye/assets/main-BBfM9V5h.js"></script>
-  <link rel="stylesheet" crossorigin href="/droneye/assets/style-ByHU5ZVq.css">
+  <script type="module" crossorigin src="/droneye/assets/main-D58jH8mO.js"></script>
+  <link rel="stylesheet" crossorigin href="/droneye/assets/style-BOKydrvV.css">
 </head>
 <body>
     <!-- Navigation -->
@@ -77,14 +85,14 @@
                 </li>
                 <li class="nav-item mobile-language-switcher">
                     <div class="mobile-language-buttons">
-                        <button class="language-option" data-lang="sk">SK</button>
+                        <button class="language-option active" data-lang="sk">SK</button>
                         <button class="language-option" data-lang="en">EN</button>
                     </div>
                 </li>
             </ul>
             <div class="language-switcher">
                 <div class="language-buttons">
-                    <button class="language-option" data-lang="sk">SK</button>
+                    <button class="language-option active" data-lang="sk">SK</button>
                     <button class="language-option" data-lang="en">EN</button>
                 </div>
             </div>
@@ -105,7 +113,7 @@
             <div class="subpage-hero">
                 <div class="subpage-hero-content">
                     <h1 data-i18n="pricing.title">Cenová ponuka</h1>
-                    <p data-i18n="pricing.subtitle">Transparentné ceny pre všetky naše služby</p>
+                    <p data-i18n="pricing.subtitle">Flexibilné riešenia pre každý rozpočet</p>
                 </div>
             </div>
             
@@ -166,26 +174,6 @@
                     </div>
                 </div>
                 
-                <div class="pricing-grid">
-                    <div class="pricing-card">
-                        <h3 data-i18n="pricing.basic.title">Základný balík</h3>
-                        <div class="pricing-price" data-i18n="pricing.basic.price">od 500€</div>
-                        <p data-i18n="pricing.basic.description">Základné letecké snímkovanie a jednoduchá analýza</p>
-                        <button class="pricing-btn">Vybrať</button>
-                    </div>
-                    <div class="pricing-card featured">
-                        <h3 data-i18n="pricing.professional.title">Profesionálny balík</h3>
-                        <div class="pricing-price" data-i18n="pricing.professional.price">od 1200€</div>
-                        <p data-i18n="pricing.professional.description">Pokročilé mapovanie, 3D modely a detailná analýza</p>
-                        <button class="pricing-btn">Vybrať</button>
-                    </div>
-                    <div class="pricing-card">
-                        <h3 data-i18n="pricing.enterprise.title">Enterprise riešenie</h3>
-                        <div class="pricing-price" data-i18n="pricing.enterprise.price">Na vyžiadanie</div>
-                        <p data-i18n="pricing.enterprise.description">Komplexné riešenia pre veľké projekty</p>
-                        <button class="pricing-btn">Kontaktovať</button>
-                    </div>
-                </div>
                 </div>
             </div>
         </section>
