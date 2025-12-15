@@ -323,7 +323,7 @@ function loadDroneModel() {
     const loader = new GLTFLoader();
     
     // In Vite, files in public/ are served from root
-    const MODEL_URL = '/Drone.glb';
+    const MODEL_URL = `${import.meta.env.BASE_URL}Drone.glb`;
     console.log('Attempting to load model from:', MODEL_URL);
     
     loader.load(
