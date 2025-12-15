@@ -18,7 +18,7 @@
     --border-color: #e9ecef;
     --shadow-color: rgba(0, 35, 102, 0.1);
     --shadow-hover: rgba(0, 35, 102, 0.2);
-    --navbar-bg: linear-gradient(135deg, #002366 0%, #003d99 100%);
+    --navbar-bg: transparent;
     --navbar-text: white;
     --hero-bg: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
     --hero-text: #002366;
@@ -77,13 +77,12 @@ body.homepage #canvas-container {
     left: 0;
     right: 0;
     width: 100vw;
-    background: var(--navbar-bg);
-    backdrop-filter: blur(10px);
+    background: transparent; /* Start transparent */
     z-index: 1000;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 20px var(--shadow-color);
+    transition: transform 0.3s ease, background 0.3s ease;
     display: flex;
     justify-content: center;
+    transform: translateY(0); /* Start visible */
 }
 
 .nav-container {
@@ -329,7 +328,7 @@ body.homepage #canvas-container {
     position: relative;
     z-index: 1;
   min-height: 100vh;
-    margin-top: 70px;
+    margin-top: 0; /* No margin - hero starts from top */
 }
 
 /* Homepage specific - no scroll, full height */
@@ -343,24 +342,28 @@ body.homepage .navbar {
     width: 100vw;
     left: 0;
     right: 0;
+    z-index: 1000;
 }
 
 body.homepage .main-content {
-    height: calc(100vh - 70px);
+    height: 100vh; /* Full height - hero starts from top */
+    margin-top: 0; /* No margin - starts from top */
     overflow: hidden;
 }
 
 /* White background only for subpages (not homepage) */
 .page {
     display: none;
-    min-height: calc(100vh - 70px);
+    min-height: 100vh; /* Full height - starts from top */
     padding: 0;
 }
 
 /* Subpage template with background image */
 .subpage-hero {
-    height: 300px;
-    background: url('/city1.webp');
+    height: 400px;
+    margin-top: 0; /* Start from top */
+    padding-top: 70px; /* Add padding for navbar */
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/city1.webp');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -537,8 +540,8 @@ body.homepage .main-content {
 
 .footer-contact-form button {
     padding: 0.75rem 1.5rem;
-    background: white;
-    color: var(--primary-color);
+    background: var(--primary-color);
+    color: white;
     border: none;
     border-radius: 8px;
     font-weight: 600;
@@ -547,8 +550,9 @@ body.homepage .main-content {
 }
 
 .footer-contact-form button:hover {
-    background: rgba(255, 255, 255, 0.9);
+    background: var(--secondary-color);
     transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(0, 35, 102, 0.4);
 }
 
 .footer-bottom {
@@ -601,10 +605,10 @@ body.homepage .main-content {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: calc(100vh - 70px);
+    height: 100vh; /* Full height - starts from top */
     text-align: center;
     color: white;
-  padding: 2rem;
+    padding: calc(70px + 2rem) 2rem 2rem 2rem; /* Navbar height + padding */
     background: transparent;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     transition: opacity 0.5s ease, transform 0.5s ease;
@@ -642,9 +646,9 @@ body.homepage .main-content {
 }
 
 .cta-button {
-    background: transparent;
+    background: var(--primary-color);
     color: white;
-    border: 2px solid white;
+    border: 2px solid var(--primary-color);
     padding: 13px 28px;
     font-size: 1.1rem;
     font-weight: 600;
@@ -654,7 +658,6 @@ body.homepage .main-content {
     animation: fadeInUp 1s ease-out 0.4s both;
     text-decoration: none;
     display: inline-block;
-    backdrop-filter: blur(10px);
     min-width: 150px;
   text-align: center;
     font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -665,16 +668,16 @@ body.homepage .main-content {
 }
 
 .cta-button:hover {
-    background: white;
-    color: var(--primary-color);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+    background: var(--secondary-color);
+    border-color: var(--secondary-color);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(0, 35, 102, 0.4);
 }
 
 .hero-button-secondary {
-    background: transparent;
+    background: var(--primary-color);
     color: white;
-    border: 2px solid white;
+    border: 2px solid var(--primary-color);
     padding: 13px 28px;
     font-size: 1.1rem;
     font-weight: 600;
@@ -684,7 +687,6 @@ body.homepage .main-content {
     text-decoration: none;
     display: inline-block;
     animation: fadeInUp 1s ease-out 0.5s both;
-    backdrop-filter: blur(10px);
     min-width: 150px;
     text-align: center;
     font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -695,10 +697,10 @@ body.homepage .main-content {
 }
 
 .hero-button-secondary:hover {
-    background: white;
-    color: var(--primary-color);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+    background: var(--secondary-color);
+    border-color: var(--secondary-color);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(0, 35, 102, 0.4);
 }
 
 /* Content Sections */
@@ -1185,13 +1187,13 @@ h2 {
 }
 
 .contact-info h3 {
-    color: white;
+    color: var(--primary-color);
     margin-bottom: 1.5rem;
     font-size: 1.3rem;
 }
 
 .contact-info p {
-    color: rgba(255, 255, 255, 0.8);
+    color: var(--text-color);
     margin-bottom: 1rem;
     font-size: 1.1rem;
 }
@@ -1205,21 +1207,29 @@ h2 {
     width: 100%;
     padding: 12px;
     margin-bottom: 1rem;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid var(--border-color);
     border-radius: 8px;
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
+    background: white;
+    color: var(--text-color);
     font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 35, 102, 0.1);
 }
 
 .contact-form input::placeholder,
 .contact-form textarea::placeholder {
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(0, 0, 0, 0.5);
 }
 
 .contact-form button {
-    background: white;
-    color: var(--primary-color);
+    background: var(--primary-color);
+    color: white;
     border: none;
     padding: 12px 30px;
   border-radius: 8px;
@@ -1230,8 +1240,9 @@ h2 {
 }
 
 .contact-form button:hover {
-    background: rgba(255, 255, 255, 0.9);
+    background: var(--secondary-color);
     transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(0, 35, 102, 0.4);
 }
 
 /* Footer */
@@ -1252,15 +1263,15 @@ footer p {
 /* Loading Screen */
 #loading-screen {
     position: fixed;
-    top: 70px; /* Start below header */
+    top: 0; /* Start from top - covers navbar area */
     left: 0;
     width: 100%;
-    height: calc(100vh - 70px); /* Full height minus header */
+    height: 100vh; /* Full height */
     background: var(--loading-bg);
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 9999;
+    z-index: 999;
     transition: opacity 0.5s ease;
 }
 
@@ -1481,7 +1492,8 @@ body:not(.homepage) #loading-screen {
 
     /* Subpage hero responsive */
     .subpage-hero {
-        height: 250px;
+        height: 300px;
+        padding-top: 70px; /* Add padding for navbar */
         background-attachment: scroll;
     }
 
@@ -1660,7 +1672,7 @@ body:not(.homepage) #loading-screen {
     --primary-color: #002366;
     --secondary-color: #003d99;
     --accent-color: #001a4d;
-    --navbar-bg: linear-gradient(135deg, #002366 0%, #003d99 100%);
+    --navbar-bg: transparent;
     --navbar-text: white;
     --hero-bg: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
     --hero-text: #002366;

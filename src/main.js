@@ -29,6 +29,9 @@ async function initInternationalization() {
     // Load saved language from localStorage or default to 'sk'
     currentLanguage = localStorage.getItem('language') || 'sk';
     
+    // Set HTML lang attribute to current language (default: 'sk')
+    document.documentElement.setAttribute('lang', currentLanguage);
+    
     // Load translations
     await loadTranslations();
     
@@ -42,27 +45,46 @@ async function initInternationalization() {
 // Load translation files
 async function loadTranslations() {
     try {
-        const response = await fetch(`/src/locales/${currentLanguage}.json`);
+        const baseUrl = import.meta.env.BASE_URL || '/';
+        const translationPath = `${baseUrl}src/locales/${currentLanguage}.json`;
+        console.log('Loading translations from:', translationPath);
+        const response = await fetch(translationPath);
+        
+        if (!response.ok) {
+            throw new Error(`Failed to load translations: ${response.status}`);
+        }
+        
         translations = await response.json();
+        console.log('Translations loaded successfully:', currentLanguage);
     } catch (error) {
         console.error('Error loading translations:', error);
         // Fallback to Slovak if loading fails
         if (currentLanguage !== 'sk') {
+            console.log('Falling back to Slovak translations');
             currentLanguage = 'sk';
-            const response = await fetch('/src/locales/sk.json');
-            translations = await response.json();
+            const baseUrl = import.meta.env.BASE_URL || '/';
+            const response = await fetch(`${baseUrl}src/locales/sk.json`);
+            if (response.ok) {
+                translations = await response.json();
+            }
         }
     }
 }
 
 // Apply translations to elements
 function applyTranslations() {
+    console.log('Applying translations, current language:', currentLanguage);
+    let translatedCount = 0;
+    
     // Update elements with data-i18n attribute
     document.querySelectorAll('[data-i18n]').forEach(element => {
         const key = element.getAttribute('data-i18n');
         const translation = getNestedTranslation(translations, key);
         if (translation) {
             element.textContent = translation;
+            translatedCount++;
+        } else {
+            console.warn('Translation not found for key:', key);
         }
     });
     
@@ -72,8 +94,13 @@ function applyTranslations() {
         const translation = getNestedTranslation(translations, key);
         if (translation) {
             element.placeholder = translation;
+            translatedCount++;
+        } else {
+            console.warn('Placeholder translation not found for key:', key);
         }
     });
+    
+    console.log('Applied', translatedCount, 'translations');
 }
 
 // Get nested translation value
@@ -93,15 +120,31 @@ function getNestedTranslation(obj, path) {
 // Initialize language switcher
 function initLanguageSwitcher() {
     const languageOptions = document.querySelectorAll('.language-option');
+    console.log('Initializing language switcher, found options:', languageOptions.length);
     
+    // Remove all existing listeners by cloning and replacing
     languageOptions.forEach(option => {
+        const newOption = option.cloneNode(true);
+        option.parentNode.replaceChild(newOption, option);
+    });
+    
+    // Get fresh references after cloning
+    const freshOptions = document.querySelectorAll('.language-option');
+    
+    freshOptions.forEach(option => {
         option.addEventListener('click', async (e) => {
             e.preventDefault();
+            e.stopPropagation();
             const newLang = option.getAttribute('data-lang');
+            console.log('Language option clicked:', newLang, 'Current:', currentLanguage);
             
             if (newLang !== currentLanguage) {
+                console.log('Switching language from', currentLanguage, 'to', newLang);
                 currentLanguage = newLang;
                 localStorage.setItem('language', currentLanguage);
+                
+                // Update HTML lang attribute
+                document.documentElement.setAttribute('lang', currentLanguage);
                 
                 // Load new translations
                 await loadTranslations();
@@ -111,6 +154,8 @@ function initLanguageSwitcher() {
                 
                 // Update active language option
                 updateActiveLanguageOption();
+            } else {
+                console.log('Language already set to', currentLanguage);
             }
         });
     });
@@ -122,10 +167,13 @@ function initLanguageSwitcher() {
 // Update active language option
 function updateActiveLanguageOption() {
     const languageOptions = document.querySelectorAll('.language-option');
+    console.log('Updating active language option, currentLanguage:', currentLanguage);
     languageOptions.forEach(option => {
+        const lang = option.getAttribute('data-lang');
         option.classList.remove('active');
-        if (option.getAttribute('data-lang') === currentLanguage) {
+        if (lang === currentLanguage) {
             option.classList.add('active');
+            console.log('Set active class on:', lang);
         }
     });
 }
@@ -721,6 +769,55 @@ document.querySelectorAll('.content-card, .service-card, .project-card, .team-ca
     observer.observe(card);
 });
 
+
+// Navbar scroll behavior
+let lastScrollTop = 0;
+let scrollThreshold = 150; // Scroll distance before hiding navbar (not immediately)
+let navbar = null;
+
+function initNavbarScroll() {
+    navbar = document.querySelector('.navbar');
+    if (!navbar) return;
+    
+    let scrollTimeout;
+    
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const scrollDelta = scrollTop - lastScrollTop;
+        
+        // Clear timeout
+        clearTimeout(scrollTimeout);
+        
+        // Update navbar background based on scroll position
+        if (scrollTop > 50) {
+            // Scrolled down - add royal blue background
+            navbar.style.background = 'var(--primary-color)';
+        } else {
+            // At top - transparent background
+            navbar.style.background = 'transparent';
+        }
+        
+        // Handle navbar visibility based on scroll direction
+        if (Math.abs(scrollDelta) > 5) { // Only react to significant scroll
+            if (scrollDelta > 0 && scrollTop > scrollThreshold) {
+                // Scrolling down and past threshold - hide navbar
+                navbar.style.transform = 'translateY(-100%)';
+            } else if (scrollDelta < 0) {
+                // Scrolling up - show navbar
+                navbar.style.transform = 'translateY(0)';
+            }
+        }
+        
+        lastScrollTop = scrollTop;
+    }, { passive: true });
+}
+
+// Initialize navbar scroll behavior when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initNavbarScroll);
+} else {
+    initNavbarScroll();
+}
 
 // Cleanup on page unload
 window.addEventListener('beforeunload', function() {
