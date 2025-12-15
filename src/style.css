@@ -1133,14 +1133,16 @@ body:not(.homepage) #loading-screen {
         left: -100%;
         top: 70px;
         flex-direction: column;
-        background: var(--navbar-bg);
+        background: var(--primary-color);
         backdrop-filter: blur(10px);
         width: 100%;
         text-align: center;
         transition: 0.3s;
         box-shadow: 0 10px 27px var(--shadow-color);
-        padding: 2rem 0;
+        padding: 0.5rem 0;
         z-index: 1000;
+        max-height: calc(100vh - 70px);
+        overflow-y: auto;
     }
 
     .nav-menu.active {
@@ -1148,13 +1150,13 @@ body:not(.homepage) #loading-screen {
     }
 
     .nav-menu li {
-        margin: 1rem 0;
+        margin: 0.4rem 0;
     }
 
     .nav-menu .nav-link {
         color: var(--navbar-text);
-        font-size: 1.1rem;
-        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        padding: 0.4rem 1rem;
         display: block;
     }
 
@@ -1171,8 +1173,8 @@ body:not(.homepage) #loading-screen {
 
     .mobile-language-switcher {
         display: block;
-        margin-top: 1rem;
-        padding-top: 1rem;
+        margin-top: 0.5rem;
+        padding-top: 0.5rem;
         border-top: 1px solid rgba(255, 255, 255, 0.2);
         text-align: center;
     }
