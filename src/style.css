@@ -732,44 +732,7 @@ h2 {
     color: var(--secondary-color);
 }
 
-.content-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin: 2rem 0;
-}
-
-.content-card {
-    background: var(--card-background);
-    padding: 2rem;
-    border-radius: 15px;
-    border: 1px solid var(--border-color);
-    box-shadow: 0 4px 15px var(--shadow-color);
-    transition: all 0.3s ease;
-}
-
-.content-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px var(--shadow-hover);
-}
-
-.content-card h3 {
-    color: var(--primary-color);
-    margin-bottom: 1rem;
-    font-size: 1.3rem;
-}
-
-.content-card p {
-    color: var(--text-color);
-    line-height: 1.6;
-}
-
 /* Cards on subpages need white background */
-.page .content-card,
-.page .service-card,
-.page .project-card,
-.page .team-card,
-.page .pricing-card,
 .page .contact-info,
 .page .contact-form {
     background: var(--card-background);
@@ -777,197 +740,14 @@ h2 {
     box-shadow: 0 4px 15px var(--shadow-color);
 }
 
-.page .content-card h3,
-.page .service-card h3,
-.page .project-card h3,
-.page .team-card h3,
-.page .pricing-card h3,
 .page .contact-info h3 {
     color: var(--primary-color);
 }
 
-.page .content-card p,
-.page .service-card p,
-.page .project-card p,
-.page .team-card p,
-.page .pricing-card p,
 .page .contact-info p {
     color: var(--text-color);
 }
 
-/* Projects Grid */
-.projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin: 2rem 0;
-}
-
-.project-card {
-    background: white;
-    padding: 2rem;
-    border-radius: 15px;
-    border: 1px solid #e9ecef;
-    box-shadow: 0 4px 15px rgba(0, 35, 102, 0.1);
-    text-align: center;
-    transition: all 0.3s ease;
-}
-
-.project-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 8px 25px rgba(0, 35, 102, 0.2);
-}
-
-.project-image {
-    font-size: 4rem;
-    margin-bottom: 1rem;
-}
-
-.project-card h3 {
-    color: #002366;
-    margin-bottom: 1rem;
-    font-size: 1.3rem;
-}
-
-.project-card p {
-    color: #666;
-    line-height: 1.5;
-}
-
-/* Team Grid */
-.team-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-    margin: 2rem 0;
-}
-
-.team-card {
-    background: white;
-    padding: 2rem;
-    border-radius: 15px;
-    border: 1px solid #e9ecef;
-    box-shadow: 0 4px 15px rgba(0, 35, 102, 0.1);
-    text-align: center;
-    transition: all 0.3s ease;
-}
-
-.team-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0, 35, 102, 0.2);
-}
-
-.team-avatar {
-    width: 80px;
-    height: 80px;
-    background: linear-gradient(45deg, #002366, #003d99);
-    border-radius: 50%;
-    margin: 0 auto 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
-    color: white;
-}
-
-.team-card h3 {
-    color: #002366;
-    margin-bottom: 0.5rem;
-    font-size: 1.2rem;
-}
-
-.team-position {
-    color: #003d99;
-    font-weight: 600;
-    margin-bottom: 1rem;
-    font-size: 1rem;
-}
-
-.team-card p:last-child {
-    color: #666;
-    line-height: 1.5;
-    font-size: 0.9rem;
-}
-
-/* Pricing Grid */
-.pricing-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin: 2rem 0;
-}
-
-.pricing-card {
-    background: white;
-    padding: 2rem;
-    border-radius: 15px;
-    border: 1px solid #e9ecef;
-    box-shadow: 0 4px 15px rgba(0, 35, 102, 0.1);
-    text-align: center;
-    transition: all 0.3s ease;
-    position: relative;
-}
-
-.pricing-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0, 35, 102, 0.2);
-}
-
-.pricing-card.featured {
-    border: 2px solid #002366;
-    transform: scale(1.05);
-}
-
-.pricing-card.featured::before {
-    content: 'Odporúčané';
-    position: absolute;
-    top: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: linear-gradient(45deg, #002366, #003d99);
-    color: white;
-    padding: 5px 20px;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: 600;
-}
-
-.pricing-card h3 {
-    color: #002366;
-    margin-bottom: 1rem;
-    font-size: 1.3rem;
-}
-
-.pricing-price {
-    font-size: 2rem;
-    font-weight: 700;
-    color: #002366;
-    margin-bottom: 1rem;
-}
-
-.pricing-card p {
-    color: #666;
-    line-height: 1.5;
-    margin-bottom: 2rem;
-}
-
-.pricing-btn {
-    background: linear-gradient(45deg, #002366, #003d99);
-    color: white;
-    border: none;
-    padding: 12px 30px;
-  border-radius: 8px;
-  cursor: pointer;
-    font-size: 1rem;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    width: 100%;
-}
-
-.pricing-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(0, 35, 102, 0.4);
-}
 
 /* Pricing Diagram */
 .pricing-diagram-container {
@@ -1073,15 +853,6 @@ h2 {
 
 
 /* Donut Labels (text lists around chart) - positioned next to segments */
-.donut-labels {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 10;
-}
 
 .label-group {
     position: absolute;
@@ -1139,44 +910,6 @@ h2 {
     left: 3%;
 }
 
-/* Services Grid */
-.services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    margin: 2rem 0;
-}
-
-.service-card {
-    background: white;
-  padding: 2rem;
-    border-radius: 15px;
-    border: 1px solid #e9ecef;
-    box-shadow: 0 4px 15px rgba(0, 35, 102, 0.1);
-  text-align: center;
-    transition: all 0.3s ease;
-}
-
-.service-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 8px 25px rgba(0, 35, 102, 0.2);
-}
-
-.service-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-}
-
-.service-card h3 {
-    color: #002366;
-    margin-bottom: 1rem;
-    font-size: 1.2rem;
-}
-
-.service-card p {
-    color: #666;
-    line-height: 1.5;
-}
 
 /* Contact Section */
 .contact-content {
@@ -1335,11 +1068,6 @@ body:not(.homepage) #loading-screen {
     
     .donut-segment-label {
         font-size: 14px;
-    }
-    
-    .donut-labels {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
     }
     
     .label-group {
