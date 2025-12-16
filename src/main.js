@@ -84,7 +84,12 @@ function applyTranslations() {
         const key = element.getAttribute('data-i18n');
         const translation = getNestedTranslation(translations, key);
         if (translation) {
-            element.textContent = translation;
+            // Check if translation contains HTML (like links)
+            if (translation.includes('<a ') || translation.includes('<br>') || translation.includes('<strong>') || translation.includes('<em>')) {
+                element.innerHTML = translation;
+            } else {
+                element.textContent = translation;
+            }
             translatedCount++;
         } else {
             console.warn('Translation not found for key:', key);
@@ -187,6 +192,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initNavigation();
     initThemeSwitcher();
     initTeamCards();
+    initServicesCarousel();
     
     // Only show loading screen on homepage (CSS handles hiding on subpages)
     const isHomepage = window.location.pathname === '/' || window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/');
@@ -772,6 +778,88 @@ document.querySelectorAll('.content-card, .service-card, .project-card, .team-ca
     card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     observer.observe(card);
 });
+
+// Services Carousel
+function initServicesCarousel() {
+    const carousel = document.querySelector('.services-carousel');
+    if (!carousel) return;
+    
+    const slides = carousel.querySelectorAll('.carousel-slide');
+    const prevButton = carousel.querySelector('.carousel-arrow-prev');
+    const nextButton = carousel.querySelector('.carousel-arrow-next');
+    const indicators = carousel.querySelectorAll('.carousel-indicator');
+    const tabs = carousel.querySelectorAll('.carousel-tab');
+    
+    let currentSlide = 0;
+    const totalSlides = slides.length;
+    
+    function showSlide(index) {
+        // Remove active class from all slides, indicators, and tabs
+        slides.forEach(slide => slide.classList.remove('active'));
+        indicators.forEach(indicator => indicator.classList.remove('active'));
+        tabs.forEach(tab => tab.classList.remove('active'));
+        
+        // Add active class to current slide, indicator, and tab
+        if (slides[index]) {
+            slides[index].classList.add('active');
+        }
+        if (indicators[index]) {
+            indicators[index].classList.add('active');
+        }
+        if (tabs[index]) {
+            tabs[index].classList.add('active');
+        }
+        
+        currentSlide = index;
+    }
+    
+    function nextSlide() {
+        const next = (currentSlide + 1) % totalSlides;
+        showSlide(next);
+    }
+    
+    function prevSlide() {
+        const prev = (currentSlide - 1 + totalSlides) % totalSlides;
+        showSlide(prev);
+    }
+    
+    // Event listeners
+    if (nextButton) {
+        nextButton.addEventListener('click', nextSlide);
+    }
+    
+    if (prevButton) {
+        prevButton.addEventListener('click', prevSlide);
+    }
+    
+    // Indicator clicks
+    indicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', () => {
+            showSlide(index);
+        });
+    });
+    
+    // Tab clicks
+    tabs.forEach((tab, index) => {
+        tab.addEventListener('click', () => {
+            showSlide(index);
+        });
+    });
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (!carousel.closest('.page.active')) return;
+        
+        if (e.key === 'ArrowLeft') {
+            prevSlide();
+        } else if (e.key === 'ArrowRight') {
+            nextSlide();
+        }
+    });
+    
+    // Initialize first slide
+    showSlide(0);
+}
 
 // Team card mobile click handler
 function initTeamCards() {

@@ -81,7 +81,48 @@
   },
   "services": {
     "title": "Our Services",
-    "subtitle": "Professional drone services for your needs"
+    "subtitle": "Professional drone services for your needs",
+    "carousel": {
+      "item1": {
+        "title": "Video Production and Video Creation",
+        "description": "Complete video production from script, through filming to post-production. We create custom advertising, presentation and promotional videos for companies, real estate agencies, hotels, events and social media."
+      },
+      "item2": {
+        "title": "Photography",
+        "description": "We offer professional photography of real estate, events, products and other objects with emphasis on detail, composition and post-production. The resulting photographs are suitable for web, print and social media."
+      },
+      "item3": {
+        "title": "Aerial Shots with Drone",
+        "description": "We capture your property, area, event or landscape from above in top quality. Aerial shots are ideal for presentations, marketing, monitoring and documentation."
+      },
+      "item4": {
+        "title": "Have Footage and Need Post-Production?",
+        "description": "Post-production is what turns ordinary video into content that engages and stays in memory. Send us your materials and we'll bring them to life. We'll take care of precise editing, balanced colors, the right music and subtle effects that underline the atmosphere and story of your video."
+      }
+    },
+    "process": {
+      "title": "How Does It All Work?",
+      "step1": {
+        "title": "Write to Us",
+        "description": "Send us an email at <a href=\"mailto:info@droneye.sk\">info@droneye.sk</a> with your idea, the concept you're interested in, location and the expected date of flying."
+      },
+      "step2": {
+        "title": "Consultation, Advice",
+        "description": "Together we will agree on a date, go through your idea and video goals in detail and then connect it with our creativity and experience."
+      },
+      "step3": {
+        "title": "Permission",
+        "description": "We will then secure all necessary pre-flight permits and administration for you in accordance with the applicable rules of the given country."
+      },
+      "step4": {
+        "title": "Flying",
+        "description": "On the agreed date we will arrive at the location and carry out filming according to the pre-agreed concept."
+      },
+      "step5": {
+        "title": "Post-Production",
+        "description": "We will take care of professional photo editing and video editing to licensed music, and on request we will further adjust the content according to your ideas."
+      }
+    }
   },
   "contact": {
     "title": "Contact",

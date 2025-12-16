@@ -81,7 +81,48 @@
   },
   "services": {
     "title": "Naše služby",
-    "subtitle": "Profesionálne drone služby pre vaše potreby"
+    "subtitle": "Profesionálne drone služby pre vaše potreby",
+    "carousel": {
+      "item1": {
+        "title": "Video produkcia a tvorba videí",
+        "description": "Kompletná produkcia videí od scenára, cez natáčanie až po postprodukciu. Vytvárame reklamné, prezentačné a promo videá na mieru pre firmy, realitné kancelárie, hotely, eventy aj sociálne siete."
+      },
+      "item2": {
+        "title": "Fotografovanie",
+        "description": "Ponúkame profesionálne fotografovanie nehnuteľností, eventov, produktov a ďalších objektov s dôrazom na detail, kompozíciu a postprodukciu. Výsledné fotografie sú vhodné pre web, tlač aj sociálne siete."
+      },
+      "item3": {
+        "title": "Letecké zábery dronom",
+        "description": "Zachytíme vašu nehnuteľnosť, areál, podujatie či krajinu z výšky v špičkovej kvalite. Letecké zábery sú ideálne pre prezentácie, marketing, monitoring aj dokumentáciu."
+      },
+      "item4": {
+        "title": "Máte zábery a chýba vám postprodukcia?",
+        "description": "Práve postprodukcia je to, čo z obyčajného videa urobí obsah, ktorý zaujme a zostane v pamäti. Pošlite nám vaše materiály a my im vdýchneme život. Postaráme sa o precízny strih, vyvážené farby, správnu hudbu aj jemné efekty, ktoré podčiarknu atmosféru a príbeh vášho videa."
+      }
+    },
+    "process": {
+      "title": "Ako To celé prebieha?",
+      "step1": {
+        "title": "Napíšte nám",
+        "description": "Pošlite nám e-mail na <a href=\"mailto:info@droneye.sk\">info@droneye.sk</a> s Vašou predstavou, nápadom o ktorý máte záujem, miestom a termínom predpokladaného lietania."
+      },
+      "step2": {
+        "title": "Konzultácia, poradenstvo",
+        "description": "Spoločne si dohodneme termín, detailne prejdeme vašu predstavu a ciele videa a následne ju prepojíme s našou kreativitou a skúsenosťami."
+      },
+      "step3": {
+        "title": "Povolenie",
+        "description": "Následne za vás zabezpečíme vybavenie všetkých potrebných predletových povolení a administratívy v súlade s platnými pravidlami danej krajiny."
+      },
+      "step4": {
+        "title": "Lietanie",
+        "description": "V stanovenom termíne dorazíme na miesto a zrealizujeme nakrúcanie podľa vopred dohodnutého konceptu."
+      },
+      "step5": {
+        "title": "Postprodukcia",
+        "description": "Postaráme sa o profesionálnu úpravu fotografií aj strih videa do licencovanej hudby, pričom na požiadanie obsah ďalej upravíme podľa vašich predstáv."
+      }
+    }
   },
   "contact": {
     "title": "Kontakt",
