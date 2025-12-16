@@ -785,59 +785,59 @@ function initServicesCarousel() {
     if (!carousel) return;
     
     const slides = carousel.querySelectorAll('.carousel-slide');
-    const prevButton = carousel.querySelector('.carousel-arrow-prev');
-    const nextButton = carousel.querySelector('.carousel-arrow-next');
-    const indicators = carousel.querySelectorAll('.carousel-indicator');
     const tabs = carousel.querySelectorAll('.carousel-tab');
     
     let currentSlide = 0;
     const totalSlides = slides.length;
     
     function showSlide(index) {
-        // Remove active class from all slides, indicators, and tabs
+        // Remove active class from all slides and tabs
         slides.forEach(slide => slide.classList.remove('active'));
-        indicators.forEach(indicator => indicator.classList.remove('active'));
         tabs.forEach(tab => tab.classList.remove('active'));
         
-        // Add active class to current slide, indicator, and tab
+        // Add active class to current slide and tab
         if (slides[index]) {
             slides[index].classList.add('active');
-        }
-        if (indicators[index]) {
-            indicators[index].classList.add('active');
         }
         if (tabs[index]) {
             tabs[index].classList.add('active');
         }
         
         currentSlide = index;
+        
+        // Update arrow event listeners for new active slide
+        updateArrowListeners();
     }
     
-    function nextSlide() {
-        const next = (currentSlide + 1) % totalSlides;
-        showSlide(next);
+    function updateArrowListeners() {
+        const activeSlide = carousel.querySelector('.carousel-slide.active');
+        if (!activeSlide) return;
+        
+        const card = activeSlide.querySelector('.service-card-carousel');
+        if (!card) return;
+        
+        const prevButton = card.querySelector('.carousel-arrow-prev');
+        const nextButton = card.querySelector('.carousel-arrow-next');
+        
+        // Remove old listeners by cloning
+        if (prevButton) {
+            const newPrev = prevButton.cloneNode(true);
+            prevButton.parentNode.replaceChild(newPrev, prevButton);
+            newPrev.addEventListener('click', () => {
+                const prev = (currentSlide - 1 + totalSlides) % totalSlides;
+                showSlide(prev);
+            });
+        }
+        
+        if (nextButton) {
+            const newNext = nextButton.cloneNode(true);
+            nextButton.parentNode.replaceChild(newNext, nextButton);
+            newNext.addEventListener('click', () => {
+                const next = (currentSlide + 1) % totalSlides;
+                showSlide(next);
+            });
+        }
     }
-    
-    function prevSlide() {
-        const prev = (currentSlide - 1 + totalSlides) % totalSlides;
-        showSlide(prev);
-    }
-    
-    // Event listeners
-    if (nextButton) {
-        nextButton.addEventListener('click', nextSlide);
-    }
-    
-    if (prevButton) {
-        prevButton.addEventListener('click', prevSlide);
-    }
-    
-    // Indicator clicks
-    indicators.forEach((indicator, index) => {
-        indicator.addEventListener('click', () => {
-            showSlide(index);
-        });
-    });
     
     // Tab clicks
     tabs.forEach((tab, index) => {
@@ -851,9 +851,11 @@ function initServicesCarousel() {
         if (!carousel.closest('.page.active')) return;
         
         if (e.key === 'ArrowLeft') {
-            prevSlide();
+            const prev = (currentSlide - 1 + totalSlides) % totalSlides;
+            showSlide(prev);
         } else if (e.key === 'ArrowRight') {
-            nextSlide();
+            const next = (currentSlide + 1) % totalSlides;
+            showSlide(next);
         }
     });
     

@@ -83,19 +83,25 @@
     "title": "Our Services",
     "subtitle": "Professional drone services for your needs",
     "carousel": {
-      "item1": {
+      "title": "Our Services",
+      "subtitle": "We offer a wide range of professional drone services for your needs",
+      "tab1": "Video Production",
+      "tab2": "Photography",
+      "tab3": "Drone Shots",
+      "tab4": "Post-Production",
+      "card1": {
         "title": "Video Production and Video Creation",
         "description": "Complete video production from script, through filming to post-production. We create custom advertising, presentation and promotional videos for companies, real estate agencies, hotels, events and social media."
       },
-      "item2": {
+      "card2": {
         "title": "Photography",
         "description": "We offer professional photography of real estate, events, products and other objects with emphasis on detail, composition and post-production. The resulting photographs are suitable for web, print and social media."
       },
-      "item3": {
+      "card3": {
         "title": "Aerial Shots with Drone",
         "description": "We capture your property, area, event or landscape from above in top quality. Aerial shots are ideal for presentations, marketing, monitoring and documentation."
       },
-      "item4": {
+      "card4": {
         "title": "Have Footage and Need Post-Production?",
         "description": "Post-production is what turns ordinary video into content that engages and stays in memory. Send us your materials and we'll bring them to life. We'll take care of precise editing, balanced colors, the right music and subtle effects that underline the atmosphere and story of your video."
       }
