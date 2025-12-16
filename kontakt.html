@@ -40,6 +40,47 @@
     <meta name="geo.placename" content="Bratislava">
     <meta name="geo.position" content="48.1486;17.1077">
     <meta name="ICBM" content="48.1486, 17.1077">
+    
+    <!-- Hreflang Tags -->
+    <link rel="alternate" hreflang="sk" href="https://www.droneye.sk/kontakt" />
+    <link rel="alternate" hreflang="en" href="https://www.droneye.sk/kontakt?lang=en" />
+    <link rel="alternate" hreflang="x-default" href="https://www.droneye.sk/kontakt" />
+    
+    <!-- Structured Data - ContactPage -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ContactPage",
+      "mainEntity": {
+        "@type": "Organization",
+        "name": "DroneEye",
+        "telephone": "+421950614303",
+        "email": "info@droneye.sk"
+      }
+    }
+    </script>
+    
+    <!-- Structured Data - BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Domov",
+          "item": "https://www.droneye.sk/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Kontakt",
+          "item": "https://www.droneye.sk/kontakt"
+        }
+      ]
+    }
+    </script>
     
     <script>
         // Hide content until translations are loaded to prevent flash of wrong language
@@ -51,8 +92,8 @@
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script type="module" crossorigin src="/droneye/assets/three-BjNtol_2.js"></script>
-  <script type="module" crossorigin src="/droneye/assets/main-DUhzvDOi.js"></script>
-  <link rel="stylesheet" crossorigin href="/droneye/assets/main-CKfxn_7V.css">
+  <script type="module" crossorigin src="/droneye/assets/main-CxIgtygk.js"></script>
+  <link rel="stylesheet" crossorigin href="/droneye/assets/main-bgMO5NDE.css">
 </head>
 <body>
     <!-- Navigation -->
@@ -122,8 +163,8 @@
                 <div class="contact-content">
                     <div class="contact-info">
                         <h3 data-i18n="contact.info.title">Kontaktné údaje</h3>
-                        <p data-i18n="contact.info.email">📧 info@droneye.sk</p>
-                        <p data-i18n="contact.info.phone">📞 +421 123 456 789</p>
+                        <p><a href="mailto:info@droneye.sk" data-i18n="contact.info.email">📧 info@droneye.sk</a></p>
+                        <p><a href="tel:+421950614303" data-i18n="contact.info.phone">📞 +421 950 614 303</a></p>
                         <p data-i18n="contact.info.address">📍 Bratislava, Slovensko</p>
                     </div>
                     <form class="contact-form">
