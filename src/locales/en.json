@@ -106,6 +106,30 @@
         "description": "Post-production is what turns ordinary video into content that engages and stays in memory. Send us your materials and we'll bring them to life. We'll take care of precise editing, balanced colors, the right music and subtle effects that underline the atmosphere and story of your video."
       }
     },
+    "equipment": {
+      "title": "What We Fly With",
+      "subtitle": "We use professional drones and equipment for the best results",
+      "flightTime": "Flight Time:",
+      "range": "Range:",
+      "resolution": "Video Resolution:",
+      "format": "Format:",
+      "item1": {
+        "title": "DJI Avata 2 FPV (2x)",
+        "feature": "Ultra-wide 155° FOV",
+        "flightTime": "23 minutes",
+        "range": "13 km",
+        "resolution": "4K/60fps",
+        "format": "H.265 / H.264"
+      },
+      "item2": {
+        "title": "DJI Mavic 4 Pro Combo",
+        "feature": "100 MP Hasselblad Camera",
+        "flightTime": "51 minutes",
+        "range": "30 km",
+        "resolution": "6K/60fps HDR",
+        "format": "ProRes 4444XQ / H.265 / H.264"
+      }
+    },
     "process": {
       "title": "How Does It All Work?",
       "step1": {

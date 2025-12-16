@@ -106,6 +106,30 @@
         "description": "Práve postprodukcia je to, čo z obyčajného videa urobí obsah, ktorý zaujme a zostane v pamäti. Pošlite nám vaše materiály a my im vdýchneme život. Postaráme sa o precízny strih, vyvážené farby, správnu hudbu aj jemné efekty, ktoré podčiarknu atmosféru a príbeh vášho videa."
       }
     },
+    "equipment": {
+      "title": "S čím lietame",
+      "subtitle": "Používame profesionálne drony a vybavenie pre najlepšie výsledky",
+      "flightTime": "Čas letu:",
+      "range": "Dolet:",
+      "resolution": "Rozlíšenie videa:",
+      "format": "Formát:",
+      "item1": {
+        "title": "DJI Avata 2 FPV (2x)",
+        "feature": "Ultraširoký 155° FOV",
+        "flightTime": "23 minút",
+        "range": "13 km",
+        "resolution": "4K/60fps",
+        "format": "H.265 / H.264"
+      },
+      "item2": {
+        "title": "DJI Mavic 4 Pro Combo",
+        "feature": "100 MP Hasselblad kamera",
+        "flightTime": "51 minút",
+        "range": "30 km",
+        "resolution": "6K/60fps HDR",
+        "format": "ProRes 4444XQ / H.265 / H.264"
+      }
+    },
     "process": {
       "title": "Ako To celé prebieha?",
       "step1": {
