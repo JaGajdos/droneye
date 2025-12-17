@@ -14,7 +14,53 @@
   },
   "projects": {
     "title": "Naše projekty",
-    "subtitle": "Pozrite si naše najnovšie úspešné projekty"
+    "subtitle": "Pozrite si naše najnovšie úspešné projekty",
+    "videos": {
+      "title": "Videá",
+      "subtitle": "Pozrite si, čo dokážeme vytvoriť s našimi profesionálnymi dronmi",
+      "item1": {
+        "title": "Video projekt 1"
+      },
+      "item2": {
+        "title": "Video projekt 2"
+      },
+      "item3": {
+        "title": "Video projekt 3"
+      },
+      "item4": {
+        "title": "Video projekt 4"
+      },
+      "item5": {
+        "title": "Video projekt 5"
+      },
+      "item6": {
+        "title": "Video projekt 6"
+      },
+      "cta": "Kontaktujte nás"
+    },
+    "photos": {
+      "title": "Fotografie",
+      "subtitle": "Objavte kvalitu našich leteckých snímok zachytených z výšky",
+      "cta": "Kontaktujte nás",
+      "item1": {
+        "title": "Fotografia projektu 1"
+      },
+      "item2": {
+        "title": "Fotografia projektu 2"
+      },
+      "item3": {
+        "title": "Fotografia projektu 3"
+      },
+      "item4": {
+        "title": "Fotografia projektu 4"
+      },
+      "item5": {
+        "title": "Fotografia projektu 5"
+      },
+      "item6": {
+        "title": "Fotografia projektu 6"
+      }
+    }
   },
   "team": {
     "title": "Náš tím",
@@ -84,6 +130,7 @@
     "carousel": {
       "title": "Naše služby",
       "subtitle": "Ponúkame široký rozsah profesionálnych dronových služieb pre vaše potreby",
+      "cta": "Kontaktujte nás",
       "tab1": "Video produkcia",
       "tab2": "Fotografovanie",
       "tab3": "Zábery dronom",
@@ -131,6 +178,7 @@
     },
     "process": {
       "title": "Ako To celé prebieha?",
+      "cta": "Kontaktujte nás",
       "step1": {
         "title": "Napíšte nám",
         "description": "Pošlite nám e-mail na <a href=\"mailto:info@droneye.sk\">info@droneye.sk</a> s Vašou predstavou, nápadom o ktorý máte záujem, miestom a termínom predpokladaného lietania."
@@ -163,6 +211,7 @@
       "address": "📍 Bratislava, Slovensko"
     },
     "form": {
+      "title": "Napíšte nám",
       "name": "Meno",
       "email": "Email",
       "message": "Správa",

@@ -14,7 +14,53 @@
   },
   "projects": {
     "title": "Our Projects",
-    "subtitle": "Check out our latest successful projects"
+    "subtitle": "Check out our latest successful projects",
+    "videos": {
+      "title": "Videos",
+      "subtitle": "Discover what we can create with our professional drones",
+      "item1": {
+        "title": "Video project 1"
+      },
+      "item2": {
+        "title": "Video project 2"
+      },
+      "item3": {
+        "title": "Video project 3"
+      },
+      "item4": {
+        "title": "Video project 4"
+      },
+      "item5": {
+        "title": "Video project 5"
+      },
+      "item6": {
+        "title": "Video project 6"
+      },
+      "cta": "Contact Us"
+    },
+    "photos": {
+      "title": "Photographs",
+      "subtitle": "Explore the quality of our aerial shots captured from above",
+      "cta": "Contact Us",
+      "item1": {
+        "title": "Project photo 1"
+      },
+      "item2": {
+        "title": "Project photo 2"
+      },
+      "item3": {
+        "title": "Project photo 3"
+      },
+      "item4": {
+        "title": "Project photo 4"
+      },
+      "item5": {
+        "title": "Project photo 5"
+      },
+      "item6": {
+        "title": "Project photo 6"
+      }
+    }
   },
   "team": {
     "title": "Our Team",
@@ -84,6 +130,7 @@
     "carousel": {
       "title": "Our Services",
       "subtitle": "We offer a wide range of professional drone services for your needs",
+      "cta": "Contact Us",
       "tab1": "Video Production",
       "tab2": "Photography",
       "tab3": "Drone Shots",
@@ -163,6 +210,7 @@
       "address": "📍 Bratislava, Slovakia"
     },
     "form": {
+      "title": "Contact Us",
       "name": "Name",
       "email": "Email",
       "message": "Message",
