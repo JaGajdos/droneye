@@ -84,6 +84,78 @@
   },
   "pricing": {
     "title": "Pricing",
+    "subtitle": "Individual solutions for every project",
+    "main": {
+      "title": "Price of Our Services"
+    },
+    "factors": {
+      "title": "What influences the price?",
+      "item1": {
+        "label": "Drone type and technology",
+        "value": "We use top-of-the-line DJI machines"
+      },
+      "item2": {
+        "label": "Complexity and location",
+        "value": "Number of filming hours, terrain accessibility, required permits."
+      },
+      "item3": {
+        "label": "Post-production",
+        "value": "Depends on whether you need just raw material or a complete output (editing, color corrections, music, subtitles)."
+      }
+    },
+    "quote": {
+      "title": "How to get a price quote?",
+      "description": "We'll be happy to contact you with a proposal that will match exactly your ideas.",
+      "item1": "Where and when you want to film",
+      "item2": "What purpose the material will serve",
+      "item3": "Approximate scope and your expectations",
+      "cta": "Contact Us"
+    },
+    "basic": {
+      "title": "Basic",
+      "label": "Basic Package",
+      "price": "250",
+      "cta": "Contact"
+    },
+    "professional": {
+      "title": "Professional",
+      "label": "Professional Package",
+      "price": "500",
+      "cta": "Contact"
+    },
+    "custom": {
+      "label": "Individual",
+      "description": "Every project is unique and requires an individual approach. Contact us and we'll prepare a price quote exactly according to your needs.",
+      "cta": "Contact"
+    },
+    "included": {
+      "title": "What services are included in the price?",
+      "description": "The price list applies to the production of raw aerial footage and drone photographs, i.e., the time we spend directly on site."
+    },
+    "postproduction": {
+      "title": "What about video or photo editing?",
+      "description": "By agreement with the client, each of our aerial photographs or video footage goes through professional post-production in our studio. How does the whole process work?",
+      "step1": {
+        "title": "Music Selection",
+        "description": "A well-chosen musical background in videos represents half the success. It creates the basic pillar and emotion from which subsequent post-production follows. Therefore, before the actual video post-production, we will send you 5 suitable music samples from the audio bank for selection."
+      },
+      "step2": {
+        "title": "Editing",
+        "description": "Based on the selected music according to the concept, we will create a rough cut that we will send to you for approval. Then we will enrich the video with additional features and sound effects."
+      },
+      "step3": {
+        "title": "Color Grading",
+        "description": "After approving the rough cut, we work on color grading. The image gets colors, shadows, temperature – in short, the right juice. We create color grading on professional calibrated 4K monitors."
+      },
+      "step4": {
+        "title": "2D / 3D Animations",
+        "description": "According to requirements, we also create 2D animations – original animated logo at the beginning of the video, tracked texts attached in the 3D space of the video or name tags displayed in the corner of the video. We also create 3D visualizations – animations of environments and buildings."
+      },
+      "step5": {
+        "title": "Final Render",
+        "description": "After approving the entire project, we export the video itself in the highest formats suitable for TV, online space and socials like Instagram, Facebook, Youtube. Finally, we upload it to the cloud, from where it will go to you."
+      }
+    },
     "diagram": {
       "lietanie": {
         "title": "Flying",

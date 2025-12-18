@@ -84,6 +84,78 @@
   },
   "pricing": {
     "title": "Cenová ponuka",
+    "subtitle": "Individuálne riešenia pre každý projekt",
+    "main": {
+      "title": "Cena našich služieb"
+    },
+    "factors": {
+      "title": "Čo ovplyvňuje cenu?",
+      "item1": {
+        "label": "Typ dronu a technika",
+        "value": "Používame špičkové stroje od DJI"
+      },
+      "item2": {
+        "label": "Náročnosť a lokalita",
+        "value": "Počet natáčacích hodín, dostupnosť terénu, potrebné povolenia."
+      },
+      "item3": {
+        "label": "Postprodukcia",
+        "value": "Záleží, či potrebujete len surový materiál alebo kompletný výstup (strih, farebné korekcie, hudba, titulky)."
+      }
+    },
+    "quote": {
+      "title": "Ako získať cenovú ponuku?",
+      "description": "Radi sa vám ozveme s návrhom, ktorý bude zodpovedať presne vašim predstavám.",
+      "item1": "Kde a kedy chcete natáčať",
+      "item2": "Na aký účel bude materiál slúžiť",
+      "item3": "Približný rozsah a vaše očakávania",
+      "cta": "Kontaktujte nás"
+    },
+    "basic": {
+      "title": "Basic",
+      "label": "Základný balík",
+      "price": "250",
+      "cta": "Kontakt"
+    },
+    "professional": {
+      "title": "Professional",
+      "label": "Profesionálny balík",
+      "price": "500",
+      "cta": "Kontakt"
+    },
+    "custom": {
+      "label": "Individuálne",
+      "description": "Každý projekt je jedinečný a vyžaduje individuálny prístup. Kontaktujte nás a pripravíme vám cenovú ponuku presne podľa vašich potrieb.",
+      "cta": "Kontakt"
+    },
+    "included": {
+      "title": "Aké služby sú zahrnuté v cene?",
+      "description": "Cenník sa vzťahuje na produkciu surových leteckých záberov a fotografií z dronu, teda na čas, ktorý strávime priamo na pľaci."
+    },
+    "postproduction": {
+      "title": "A úprava videa alebo fotografií?",
+      "description": "Po dohode s klientom každá naša letecká fotografia alebo videozáber prechádza profesionálnou postprodukciou v našom štúdiu. Ako celý proces prebieha?",
+      "step1": {
+        "title": "Výber hudby",
+        "description": "Vhodne zvolený hudobný podmaz pri videách predstavuje polovicu úspechu. Vytvorí základný pilier a emóciu, od ktorých sa odvíja následná postprodukcia. Preto vám pred samotnou postprodukciou videa odošleme na výber 5 vhodných hudobných ukážok z audiobanky."
+      },
+      "step2": {
+        "title": "Strih",
+        "description": "Na základe vybranej hudby podľa námetu vytvoríme hrubý strih, ktorý vám odošleme na odsúhlasenie. Následne video obohatíme o ďalšie vychytávky a zvukové efekty."
+      },
+      "step3": {
+        "title": "Colorgrading",
+        "description": "Po odsúhlasení hrubého strihu pracujeme na colorgradingu. Obraz dostane farby, tiene, teplotu – skrátka tú správnu šťavu. Colorgrading tvoríme na profesionálnych kalibrovaných 4K monitoroch."
+      },
+      "step4": {
+        "title": "2D / 3D animácie",
+        "description": "Podľa požiadavky vytvoríme aj 2D animácie – originálne animované logo na začiatok videa, natrackované texty pripnuté v 3D priestore videa alebo menovky zobrazujúce sa v rohu videa. Tvoríme aj 3D vizualizácie – animácie prostredí a budov."
+      },
+      "step5": {
+        "title": "Final render",
+        "description": "Po odsúhlasení celého projektu samotné video vyexportujeme v najvyšších formátoch vhodných pre TV, online priestor a socials ako Instagram, Facebook, Youtube. Na záver ho hodíme na cloud, odkiaľ už poputuje k vám."
+      }
+    },
     "diagram": {
       "lietanie": {
         "title": "Lietanie",
