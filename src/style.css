@@ -2409,6 +2409,22 @@ body:not(.homepage) #loading-screen {
         border-radius: 8px;
     }
 
+    /* Dark mode mobile menu */
+    [data-theme="dark"] .nav-menu {
+        background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    [data-theme="dark"] .nav-menu .nav-link {
+        color: #e0e0e0;
+    }
+
+    [data-theme="dark"] .nav-menu .nav-link:hover,
+    [data-theme="dark"] .nav-menu .nav-link.active {
+        background: rgba(255, 255, 255, 0.05);
+        color: #ffffff;
+    }
+
     .language-switcher {
         display: none;
     }
@@ -2454,6 +2470,28 @@ body:not(.homepage) #loading-screen {
         color: #002366;
         font-weight: 600;
         border-color: white;
+    }
+
+    /* Dark mode mobile language switcher */
+    [data-theme="dark"] .mobile-language-switcher {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    [data-theme="dark"] .mobile-language-buttons .language-option {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: #e0e0e0;
+    }
+
+    [data-theme="dark"] .mobile-language-buttons .language-option:hover {
+        background: rgba(255, 255, 255, 0.15);
+        border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    [data-theme="dark"] .mobile-language-buttons .language-option.active {
+        background: rgba(74, 158, 255, 0.3);
+        color: #ffffff;
+        border-color: rgba(74, 158, 255, 0.5);
     }
 
     .hamburger {

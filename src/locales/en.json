@@ -289,5 +289,27 @@
       "submit": "Send"
     }
   },
+  "footer": {
+    "contact": "Contact",
+    "quickContact": "Quick Contact",
+    "form": {
+      "name": "Your Name",
+      "email": "Email",
+      "message": "Message",
+      "submit": "Send"
+    },
+    "copyright": "All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms"
+  },
+  "pageTitle": {
+    "home": "DroneEye - Modern Drone Services and 3D Mapping",
+    "contact": "Contact - DroneEye",
+    "projects": "Our Projects - DroneEye",
+    "services": "Our Services - DroneEye",
+    "team": "Our Team - DroneEye",
+    "pricing": "Pricing - DroneEye",
+    "dronetext": "Drone 3D Model - DroneEye"
+  },
   "loading": "Loading..."
 }

@@ -290,5 +290,27 @@
       "submit": "Odoslať"
     }
   },
+  "footer": {
+    "contact": "Kontakt",
+    "quickContact": "Rýchly kontakt",
+    "form": {
+      "name": "Vaše meno",
+      "email": "Email",
+      "message": "Správa",
+      "submit": "Odoslať"
+    },
+    "copyright": "Všetky práva vyhradené.",
+    "privacy": "Ochrana údajov",
+    "terms": "Podmienky"
+  },
+  "pageTitle": {
+    "home": "DroneEye - Moderné drone služby a 3D mapovanie",
+    "contact": "Kontakt - DroneEye",
+    "projects": "Naše projekty - DroneEye",
+    "services": "Naše služby - DroneEye",
+    "team": "Náš tím - DroneEye",
+    "pricing": "Cenová ponuka - DroneEye",
+    "dronetext": "Drone 3D Model - DroneEye"
+  },
   "loading": "Načítavam..."
 }

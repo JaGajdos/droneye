@@ -6,8 +6,15 @@ let translations = {};
 
 // Initialize internationalization
 async function initInternationalization() {
-    // Load saved language from localStorage or default to 'sk'
-    currentLanguage = localStorage.getItem('language') || 'sk';
+    // Check URL parameter for language first, then localStorage, then default to 'sk'
+    const urlParams = new URLSearchParams(window.location.search);
+    const langParam = urlParams.get('lang');
+    if (langParam && ['sk', 'en', 'de'].includes(langParam)) {
+        currentLanguage = langParam;
+        localStorage.setItem('language', currentLanguage);
+    } else {
+        currentLanguage = localStorage.getItem('language') || 'sk';
+    }
     
     // Set HTML lang attribute to current language (default: 'sk')
     document.documentElement.setAttribute('lang', currentLanguage);
@@ -87,6 +94,19 @@ function applyTranslations() {
             console.warn('Placeholder translation not found for key:', key);
         }
     });
+    
+    // Update page title
+    const titleElement = document.querySelector('title[data-i18n-title]');
+    if (titleElement) {
+        const key = titleElement.getAttribute('data-i18n-title');
+        const translation = getNestedTranslation(translations, key);
+        if (translation) {
+            titleElement.textContent = translation;
+            translatedCount++;
+        } else {
+            console.warn('Title translation not found for key:', key);
+        }
+    }
     
     console.log('Applied', translatedCount, 'translations');
 }
