@@ -35,9 +35,24 @@ async function initInternationalization() {
 // Load translation files
 async function loadTranslations() {
     try {
-        const baseUrl = import.meta.env.BASE_URL || '/';
+        // Get base URL - handle both local dev and GitHub Pages
+        let baseUrl = import.meta.env.BASE_URL;
+        
+        // If BASE_URL is not set or is '/', detect from current path
+        if (!baseUrl || baseUrl === '/') {
+            const path = window.location.pathname;
+            // Remove filename and get directory path
+            const pathDir = path.substring(0, path.lastIndexOf('/') + 1);
+            baseUrl = pathDir;
+        }
+        
+        // Ensure baseUrl ends with /
+        if (!baseUrl.endsWith('/')) {
+            baseUrl += '/';
+        }
+        
         const translationPath = `${baseUrl}src/locales/${currentLanguage}.json`;
-        console.log('Loading translations from:', translationPath);
+        console.log('Loading translations from:', translationPath, 'Base URL:', baseUrl);
         const response = await fetch(translationPath);
         
         if (!response.ok) {
@@ -52,7 +67,18 @@ async function loadTranslations() {
         if (currentLanguage !== 'sk') {
             console.log('Falling back to Slovak translations');
             currentLanguage = 'sk';
-            const baseUrl = import.meta.env.BASE_URL || '/';
+            
+            // Try to load Slovak with same base URL logic
+            let baseUrl = import.meta.env.BASE_URL;
+            if (!baseUrl || baseUrl === '/') {
+                const path = window.location.pathname;
+                const pathDir = path.substring(0, path.lastIndexOf('/') + 1);
+                baseUrl = pathDir;
+            }
+            if (!baseUrl.endsWith('/')) {
+                baseUrl += '/';
+            }
+            
             const response = await fetch(`${baseUrl}src/locales/sk.json`);
             if (response.ok) {
                 translations = await response.json();
