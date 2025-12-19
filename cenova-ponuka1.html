@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="sk" data-theme="royal-blue">
+<html lang="sk" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -77,7 +77,6 @@
             document.documentElement.style.visibility = 'hidden';
         })();
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>
     <!-- Navigation -->
@@ -335,9 +334,15 @@
         
         <div class="footer-bottom">
             <p>&copy; 2024 DroneEye. Všetky práva vyhradené.</p>
-            <div class="footer-legal">
-                <a href="#">Ochrana údajov</a>
-                <a href="#">Podmienky</a>
+            <div class="footer-bottom-right">
+                <div class="footer-theme-switcher">
+                    <button class="footer-theme-btn" data-theme="light" title="Light mode">☀️</button>
+                    <button class="footer-theme-btn" data-theme="dark" title="Dark mode">🌙</button>
+                </div>
+                <div class="footer-legal">
+                    <a href="#">Ochrana údajov</a>
+                    <a href="#">Podmienky</a>
+                </div>
             </div>
         </div>
     </footer>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="sk" data-theme="royal-blue">
+<html lang="sk" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -68,6 +68,9 @@
     }
     </script>
     
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/assets/fontawesome/css/all.min.css">
+    
     <link rel="stylesheet" href="/src/style.css">
     <script>
         // Hide content until translations are loaded to prevent flash of wrong language
@@ -77,7 +80,6 @@
             document.documentElement.style.visibility = 'hidden';
         })();
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>
     <!-- Navigation -->
@@ -303,9 +305,15 @@
         
         <div class="footer-bottom">
             <p>&copy; 2024 DroneEye. Všetky práva vyhradené.</p>
-            <div class="footer-legal">
-                <a href="#">Ochrana údajov</a>
-                <a href="#">Podmienky</a>
+            <div class="footer-bottom-right">
+                <div class="footer-theme-switcher">
+                    <button class="footer-theme-btn" data-theme="light" title="Light mode"><i class="fas fa-sun"></i></button>
+                    <button class="footer-theme-btn" data-theme="dark" title="Dark mode"><i class="fas fa-moon"></i></button>
+                </div>
+                <div class="footer-legal">
+                    <a href="#">Ochrana údajov</a>
+                    <a href="#">Podmienky</a>
+                </div>
             </div>
         </div>
     </footer>

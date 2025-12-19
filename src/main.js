@@ -679,29 +679,70 @@ document.getElementById('start-animation-btn')?.addEventListener('click', functi
 
 // Theme switching functionality
 function initThemeSwitcher() {
-    // Load saved theme from localStorage or default to 'royal-blue'
-    const savedTheme = localStorage.getItem('theme') || 'royal-blue';
+    // Check for system preference or saved theme
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const savedTheme = localStorage.getItem('theme') || (prefersDark ? 'dark' : 'light');
     setTheme(savedTheme);
     
     // Add theme switcher to navigation if it doesn't exist
     if (!document.querySelector('.theme-switcher')) {
         addThemeSwitcher();
     }
+    
+    // Listen for system theme changes (only if user hasn't manually set a theme)
+    if (window.matchMedia) {
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) {
+                setTheme(e.matches ? 'dark' : 'light');
+            }
+        });
+    }
 }
 
 function setTheme(themeName) {
-    document.documentElement.setAttribute('data-theme', themeName);
-    localStorage.setItem('theme', themeName);
+    // Map old theme names to new ones
+    const themeMap = {
+        'royal-blue': 'light',
+        'forest-green': 'light',
+        'sunset-orange': 'light',
+        'deep-purple': 'light',
+        'ocean-blue': 'light'
+    };
+    const mappedTheme = themeMap[themeName] || themeName;
+    
+    document.documentElement.setAttribute('data-theme', mappedTheme);
+    localStorage.setItem('theme', mappedTheme);
     
     // Update theme switcher if it exists
     const themeSwitcher = document.querySelector('.theme-switcher');
     if (themeSwitcher) {
-        const currentThemeBtn = themeSwitcher.querySelector(`[data-theme="${themeName}"]`);
-        if (currentThemeBtn) {
-            // Remove active class from all theme buttons
-            themeSwitcher.querySelectorAll('.theme-btn').forEach(btn => btn.classList.remove('active'));
-            // Add active class to current theme button
-            currentThemeBtn.classList.add('active');
+        const themeBtn = themeSwitcher.querySelector('.theme-btn');
+        if (themeBtn) {
+            themeBtn.setAttribute('data-theme', mappedTheme);
+            const icon = mappedTheme === 'dark' ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+            themeBtn.innerHTML = icon;
+        }
+        
+        // Update active state in options
+        themeSwitcher.querySelectorAll('.theme-option').forEach(option => {
+            option.classList.toggle('active', option.getAttribute('data-theme') === mappedTheme);
+        });
+    }
+    
+    // Update footer theme switcher if it exists
+    const footerThemeBtns = document.querySelectorAll('.footer-theme-btn');
+    footerThemeBtns.forEach(btn => {
+        const btnTheme = btn.getAttribute('data-theme');
+        btn.classList.toggle('active', btnTheme === mappedTheme);
+    });
+    
+    // Update navbar background if scrolled
+    if (navbar) {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        if (scrollTop > 50) {
+            navbar.style.background = 'var(--footer-bg)';
+        } else {
+            navbar.style.background = 'var(--navbar-bg)';
         }
     }
 }
@@ -712,17 +753,17 @@ function addThemeSwitcher() {
     
     const themeSwitcher = document.createElement('div');
     themeSwitcher.className = 'theme-switcher';
+    const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+    const sunIcon = '<i class="fas fa-sun"></i>';
+    const moonIcon = '<i class="fas fa-moon"></i>';
+    const currentIcon = currentTheme === 'dark' ? moonIcon : sunIcon;
+    
     themeSwitcher.innerHTML = `
         <div class="theme-dropdown">
-            <button class="theme-btn" data-theme="royal-blue">👑</button>
+            <button class="theme-btn" data-theme="${currentTheme}">${currentIcon}</button>
             <div class="theme-options">
-                <div class="theme-option" data-theme="royal-blue">👑 Royal Blue</div>
-                <div class="theme-option" data-theme="forest-green">🌲 Forest Green</div>
-                <div class="theme-option" data-theme="sunset-orange">🌅 Sunset Orange</div>
-                <div class="theme-option" data-theme="deep-purple">💜 Deep Purple</div>
-                <div class="theme-option" data-theme="ocean-blue">🌊 Ocean Blue</div>
-                <div class="theme-option" data-theme="dark">🌙 Dark</div>
-                <div class="theme-option" data-theme="light">☀️ Light</div>
+                <div class="theme-option" data-theme="dark">${moonIcon} Dark</div>
+                <div class="theme-option" data-theme="light">${sunIcon} Light</div>
             </div>
         </div>
     `;
@@ -743,6 +784,10 @@ function addThemeSwitcher() {
             const theme = option.getAttribute('data-theme');
             setTheme(theme);
             themeSwitcher.classList.remove('active');
+            // Update button theme attribute and icon
+            themeBtn.setAttribute('data-theme', theme);
+            const icon = theme === 'dark' ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+            themeBtn.innerHTML = icon;
         });
     });
     
@@ -932,11 +977,17 @@ function initNavbarScroll() {
         
         // Update navbar background based on scroll position
         if (scrollTop > 50) {
-            // Scrolled down - add royal blue background
-            navbar.style.background = 'var(--primary-color)';
+            // Scrolled down - use footer background color
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            if (currentTheme === 'dark') {
+                // In dark mode, use footer background color when scrolled
+                navbar.style.background = 'var(--footer-bg)';
+            } else {
+                navbar.style.background = 'var(--primary-color)';
+            }
         } else {
-            // At top - transparent background
-            navbar.style.background = 'transparent';
+            // At top - use navbar-bg variable (transparent for both themes)
+            navbar.style.background = 'var(--navbar-bg)';
         }
         
         // Handle navbar visibility based on scroll direction
@@ -1126,3 +1177,28 @@ window.addEventListener('beforeunload', function() {
         renderer.dispose();
     }
 });
+
+// Initialize footer theme switcher
+function initFooterThemeSwitcher() {
+    const footerThemeBtns = document.querySelectorAll('.footer-theme-btn');
+    footerThemeBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const theme = btn.getAttribute('data-theme');
+            setTheme(theme);
+        });
+    });
+    
+    // Set initial active state
+    const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+    footerThemeBtns.forEach(btn => {
+        const btnTheme = btn.getAttribute('data-theme');
+        btn.classList.toggle('active', btnTheme === currentTheme);
+    });
+}
+
+// Initialize footer theme switcher when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initFooterThemeSwitcher);
+} else {
+    initFooterThemeSwitcher();
+}

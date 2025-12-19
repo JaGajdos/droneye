@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="sk" data-theme="royal-blue">
+<html lang="sk" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -124,6 +124,9 @@
     }
     </script>
     
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/assets/fontawesome/css/all.min.css">
+    
     <link rel="stylesheet" href="/src/style.css">
     <script>
         // Hide content until translations are loaded to prevent flash of wrong language
@@ -133,7 +136,6 @@
             document.documentElement.style.visibility = 'hidden';
         })();
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>
     <!-- Navigation -->
@@ -200,7 +202,7 @@
             <!-- Subpage Content -->
             <div class="subpage-content">
                 <!-- Carousel Section -->
-                <div class="content-section content-section-bg-color">
+                <div class="content-section">
                     <div class="container">
                         <div class="services-carousel-wrapper">
                             <div class="services-carousel-text">
@@ -348,7 +350,7 @@
         </section>
         
         <!-- Equipment Section -->
-                <div class="content-section content-section-bg-color" style="background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.95) 100%);">
+        <div class="content-section">
             <div class="container">
                 <h2 class="section-title equipment-title" data-i18n="services.equipment.title">S čím lietame</h2>
                 <p class="section-subtitle equipment-subtitle" data-i18n="services.equipment.subtitle">Používame profesionálne drony a vybavenie pre najlepšie výsledky</p>
@@ -431,9 +433,15 @@
         
         <div class="footer-bottom">
             <p>&copy; 2024 Droneye. Všetky práva vyhradené.</p>
-            <div class="footer-legal">
-                <a href="#">Ochrana údajov</a>
-                <a href="#">Podmienky</a>
+            <div class="footer-bottom-right">
+                <div class="footer-theme-switcher">
+                    <button class="footer-theme-btn" data-theme="light" title="Light mode"><i class="fas fa-sun"></i></button>
+                    <button class="footer-theme-btn" data-theme="dark" title="Dark mode"><i class="fas fa-moon"></i></button>
+                </div>
+                <div class="footer-legal">
+                    <a href="#">Ochrana údajov</a>
+                    <a href="#">Podmienky</a>
+                </div>
             </div>
         </div>
     </footer>
