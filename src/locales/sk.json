@@ -1,0 +1,316 @@
+{
+  "nav": {
+    "home": "Domov",
+    "services": "Naše služby",
+    "projects": "Naše projekty",
+    "team": "Náš tím",
+    "pricing": "Cenová ponuka",
+    "contact": "Kontakt"
+  },
+  "hero": {
+    "title": "Vitajte v Droneye",
+    "subtitle": "We see what you want to see",
+    "cta": "Explore"
+  },
+  "projects": {
+    "title": "Naše projekty",
+    "subtitle": "Pozrite si naše najnovšie úspešné projekty",
+    "videos": {
+      "title": "Videá",
+      "subtitle": "Pozrite si, čo dokážeme vytvoriť s našimi profesionálnymi dronmi",
+      "item1": {
+        "title": "Video projekt 1"
+      },
+      "item2": {
+        "title": "Video projekt 2"
+      },
+      "item3": {
+        "title": "Video projekt 3"
+      },
+      "item4": {
+        "title": "Video projekt 4"
+      },
+      "item5": {
+        "title": "Video projekt 5"
+      },
+      "item6": {
+        "title": "Video projekt 6"
+      },
+      "cta": "Kontaktujte nás"
+    },
+    "photos": {
+      "title": "Fotografie",
+      "subtitle": "Objavte kvalitu našich leteckých snímok zachytených z výšky",
+      "cta": "Kontaktujte nás",
+      "item1": {
+        "title": "Fotografia projektu 1"
+      },
+      "item2": {
+        "title": "Fotografia projektu 2"
+      },
+      "item3": {
+        "title": "Fotografia projektu 3"
+      },
+      "item4": {
+        "title": "Fotografia projektu 4"
+      },
+      "item5": {
+        "title": "Fotografia projektu 5"
+      },
+      "item6": {
+        "title": "Fotografia projektu 6"
+      }
+    }
+  },
+  "team": {
+    "title": "Náš tím",
+    "subtitle": "Poznajte našich odborníkov",
+    "description": "Sme tím profesionálov, ktorí sa venujú dronovým službám s vášňou a dôrazom na detail. Špecializujeme sa na videá, fotografie, letecké zábery s dronom a ďalšie dronové služby. Každý člen nášho tímu prispieva svojou odbornosťou k vytvoreniu výnimočných výsledkov pre našich klientov.",
+    "member1": {
+      "name": "Ján Novák",
+      "position": "Hlavný pilot a technický riaditeľ",
+      "description": "S viac ako 10-ročnou skúsenosťou v dronovom lietaní je Ján naším hlavným pilotom. Špecializuje sa na technické lety, mapovanie a bezpečnostné operácie. Je certifikovaný pilot s licenciou pre komerčné lety."
+    },
+    "member2": {
+      "name": "Mária Kováčová",
+      "position": "Videograf a kreatívny riaditeľ",
+      "description": "Mária je naša kreatívna duša, ktorá transformuje surové zábery do pútavých príbehov. S bohatými skúsenosťami v produkcii a post-produkcii vytvára videá, ktoré zachytávajú emócie a krásu každého projektu."
+    },
+    "member3": {
+      "name": "Peter Horváth",
+      "position": "Fotograf a post-produkčný špecialista",
+      "description": "Peter je expert na fotografiu a post-produkciu. S dokonalým zmyslom pre detail a kompozíciu vytvára snímky, ktoré zachytávajú jedinečnú perspektívu z neba. Jeho práca bola ocenená na viacerých medzinárodných súťažiach."
+    }
+  },
+  "pricing": {
+    "title": "Cenová ponuka",
+    "subtitle": "Individuálne riešenia pre každý projekt",
+    "main": {
+      "title": "Cena našich služieb"
+    },
+    "factors": {
+      "title": "Čo ovplyvňuje cenu?",
+      "item1": {
+        "label": "Typ dronu a technika",
+        "value": "Používame špičkové stroje od DJI"
+      },
+      "item2": {
+        "label": "Náročnosť a lokalita",
+        "value": "Počet natáčacích hodín, dostupnosť terénu, potrebné povolenia."
+      },
+      "item3": {
+        "label": "Postprodukcia",
+        "value": "Záleží, či potrebujete len surový materiál alebo kompletný výstup (strih, farebné korekcie, hudba, titulky)."
+      }
+    },
+    "quote": {
+      "title": "Ako získať cenovú ponuku?",
+      "description": "Radi sa vám ozveme s návrhom, ktorý bude zodpovedať presne vašim predstavám.",
+      "item1": "Kde a kedy chcete natáčať",
+      "item2": "Na aký účel bude materiál slúžiť",
+      "item3": "Približný rozsah a vaše očakávania",
+      "cta": "Kontaktujte nás"
+    },
+    "basic": {
+      "title": "Basic",
+      "label": "Základný balík",
+      "price": "250",
+      "cta": "Kontakt"
+    },
+    "professional": {
+      "title": "Professional",
+      "label": "Profesionálny balík",
+      "price": "500",
+      "cta": "Kontakt"
+    },
+    "custom": {
+      "label": "Individuálne",
+      "description": "Každý projekt je jedinečný a vyžaduje individuálny prístup. Kontaktujte nás a pripravíme vám cenovú ponuku presne podľa vašich potrieb.",
+      "cta": "Kontakt"
+    },
+    "included": {
+      "title": "Aké služby sú zahrnuté v cene?",
+      "description": "Cenník sa vzťahuje na produkciu surových leteckých záberov a fotografií z dronu, teda na čas, ktorý strávime priamo na pľaci."
+    },
+    "postproduction": {
+      "title": "A úprava videa alebo fotografií?",
+      "description": "Po dohode s klientom každá naša letecká fotografia alebo videozáber prechádza profesionálnou postprodukciou v našom štúdiu. Ako celý proces prebieha?",
+      "step1": {
+        "title": "Výber hudby",
+        "description": "Vhodne zvolený hudobný podmaz pri videách predstavuje polovicu úspechu. Vytvorí základný pilier a emóciu, od ktorých sa odvíja následná postprodukcia. Preto vám pred samotnou postprodukciou videa odošleme na výber 5 vhodných hudobných ukážok z audiobanky."
+      },
+      "step2": {
+        "title": "Strih",
+        "description": "Na základe vybranej hudby podľa námetu vytvoríme hrubý strih, ktorý vám odošleme na odsúhlasenie. Následne video obohatíme o ďalšie vychytávky a zvukové efekty."
+      },
+      "step3": {
+        "title": "Colorgrading",
+        "description": "Po odsúhlasení hrubého strihu pracujeme na colorgradingu. Obraz dostane farby, tiene, teplotu – skrátka tú správnu šťavu. Colorgrading tvoríme na profesionálnych kalibrovaných 4K monitoroch."
+      },
+      "step4": {
+        "title": "2D / 3D animácie",
+        "description": "Podľa požiadavky vytvoríme aj 2D animácie – originálne animované logo na začiatok videa, natrackované texty pripnuté v 3D priestore videa alebo menovky zobrazujúce sa v rohu videa. Tvoríme aj 3D vizualizácie – animácie prostredí a budov."
+      },
+      "step5": {
+        "title": "Final render",
+        "description": "Po odsúhlasení celého projektu samotné video vyexportujeme v najvyšších formátoch vhodných pre TV, online priestor a socials ako Instagram, Facebook, Youtube. Na záver ho hodíme na cloud, odkiaľ už poputuje k vám."
+      }
+    },
+    "diagram": {
+      "lietanie": {
+        "title": "Lietanie",
+        "items": [
+          "Predpríprava letu",
+          "Analýza počasia",
+          "Lietanie"
+        ]
+      },
+      "povolenia": {
+        "title": "Povolenia",
+        "items": [
+          "Prevádzkové povolenie",
+          "Specific",
+          "Predletové povolenie",
+          "Dronové právne služby a CAMO povinnosti"
+        ]
+      },
+      "bezpecnost": {
+        "title": "Bezpečnosť",
+        "items": [
+          "Padák a ochrana vrtúľ",
+          "Poistenie dronu",
+          "Náhradné drony",
+          "FTS Systém"
+        ]
+      },
+      "spolupraca": {
+        "title": "Spolupráca",
+        "items": [
+          "10r Know How",
+          "Konzultácia s klientom",
+          "Obhliadky",
+          "Cenová ponuka",
+          "Odovzdanie materiálov pomocou cloudu",
+          "Archivácia materiálu"
+        ]
+      }
+    }
+  },
+  "services": {
+    "title": "Naše služby",
+    "subtitle": "Profesionálne drone služby pre vaše potreby",
+    "carousel": {
+      "title": "Naše služby",
+      "subtitle": "Ponúkame široký rozsah profesionálnych dronových služieb pre vaše potreby",
+      "cta": "Kontaktujte nás",
+      "tab1": "Video produkcia",
+      "tab2": "Fotografovanie",
+      "tab3": "Zábery dronom",
+      "tab4": "Postprodukcia",
+      "card1": {
+        "title": "Video produkcia a tvorba videí",
+        "description": "Kompletná produkcia videí od scenára, cez natáčanie až po postprodukciu. Vytvárame reklamné, prezentačné a promo videá na mieru pre firmy, realitné kancelárie, hotely, eventy aj sociálne siete."
+      },
+      "card2": {
+        "title": "Fotografovanie",
+        "description": "Ponúkame profesionálne fotografovanie nehnuteľností, eventov, produktov a ďalších objektov s dôrazom na detail, kompozíciu a postprodukciu. Výsledné fotografie sú vhodné pre web, tlač aj sociálne siete."
+      },
+      "card3": {
+        "title": "Letecké zábery dronom",
+        "description": "Zachytíme vašu nehnuteľnosť, areál, podujatie či krajinu z výšky v špičkovej kvalite. Letecké zábery sú ideálne pre prezentácie, marketing, monitoring aj dokumentáciu."
+      },
+      "card4": {
+        "title": "Máte zábery a chýba vám postprodukcia?",
+        "description": "Práve postprodukcia je to, čo z obyčajného videa urobí obsah, ktorý zaujme a zostane v pamäti. Pošlite nám vaše materiály a my im vdýchneme život. Postaráme sa o precízny strih, vyvážené farby, správnu hudbu aj jemné efekty, ktoré podčiarknu atmosféru a príbeh vášho videa."
+      }
+    },
+    "equipment": {
+      "title": "S čím lietame",
+      "subtitle": "Používame profesionálne drony a vybavenie pre najlepšie výsledky",
+      "flightTime": "Čas letu:",
+      "range": "Dolet:",
+      "resolution": "Rozlíšenie videa:",
+      "format": "Formát:",
+      "item1": {
+        "title": "DJI Avata 2 FPV (2x)",
+        "feature": "Ultraširoký 155° FOV",
+        "flightTime": "23 minút",
+        "range": "13 km",
+        "resolution": "4K/60fps",
+        "format": "H.265 / H.264"
+      },
+      "item2": {
+        "title": "DJI Mavic 4 Pro Combo",
+        "feature": "100 MP Hasselblad kamera",
+        "flightTime": "51 minút",
+        "range": "30 km",
+        "resolution": "6K/60fps HDR",
+        "format": "ProRes 4444XQ / H.265 / H.264"
+      }
+    },
+    "process": {
+      "title": "Ako To celé prebieha?",
+      "cta": "Kontaktujte nás",
+      "step1": {
+        "title": "Napíšte nám",
+        "description": "Pošlite nám e-mail na <a href=\"mailto:info@droneye.sk\">info@droneye.sk</a> s Vašou predstavou, nápadom o ktorý máte záujem, miestom a termínom predpokladaného lietania."
+      },
+      "step2": {
+        "title": "Konzultácia, poradenstvo",
+        "description": "Spoločne si dohodneme termín, detailne prejdeme vašu predstavu a ciele videa a následne ju prepojíme s našou kreativitou a skúsenosťami."
+      },
+      "step3": {
+        "title": "Povolenie",
+        "description": "Následne za vás zabezpečíme vybavenie všetkých potrebných predletových povolení a administratívy v súlade s platnými pravidlami danej krajiny."
+      },
+      "step4": {
+        "title": "Lietanie",
+        "description": "V stanovenom termíne dorazíme na miesto a zrealizujeme nakrúcanie podľa vopred dohodnutého konceptu."
+      },
+      "step5": {
+        "title": "Postprodukcia",
+        "description": "Postaráme sa o profesionálnu úpravu fotografií aj strih videa do licencovanej hudby, pričom na požiadanie obsah ďalej upravíme podľa vašich predstáv."
+      }
+    }
+  },
+  "contact": {
+    "title": "Kontakt",
+    "subtitle": "Spojte sa s nami pre vaše potreby",
+    "info": {
+      "title": "Kontaktné údaje",
+      "email": "📧 info@droneye.sk",
+      "phone": "📞 +421 950 614 303",
+      "address": "📍 Bratislava, Slovensko"
+    },
+    "form": {
+      "title": "Napíšte nám",
+      "name": "Meno",
+      "email": "Email",
+      "message": "Správa",
+      "submit": "Odoslať"
+    }
+  },
+  "footer": {
+    "contact": "Kontakt",
+    "quickContact": "Rýchly kontakt",
+    "form": {
+      "name": "Vaše meno",
+      "email": "Email",
+      "message": "Správa",
+      "submit": "Odoslať"
+    },
+    "copyright": "Všetky práva vyhradené.",
+    "privacy": "Ochrana údajov",
+    "terms": "Podmienky"
+  },
+  "pageTitle": {
+    "home": "DroneEye - Moderné drone služby a 3D mapovanie",
+    "contact": "Kontakt - DroneEye",
+    "projects": "Naše projekty - DroneEye",
+    "services": "Naše služby - DroneEye",
+    "team": "Náš tím - DroneEye",
+    "pricing": "Cenová ponuka - DroneEye",
+    "dronetext": "Drone 3D Model - DroneEye"
+  },
+  "loading": "Načítavam..."
+}

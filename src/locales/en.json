@@ -1,0 +1,315 @@
+{
+  "nav": {
+    "home": "Home",
+    "services": "Our Services",
+    "projects": "Our Projects",
+    "team": "Our Team",
+    "pricing": "Pricing",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Welcome to Droneye",
+    "subtitle": "We see what you want to see",
+    "cta": "Explore"
+  },
+  "projects": {
+    "title": "Our Projects",
+    "subtitle": "Check out our latest successful projects",
+    "videos": {
+      "title": "Videos",
+      "subtitle": "Discover what we can create with our professional drones",
+      "item1": {
+        "title": "Video project 1"
+      },
+      "item2": {
+        "title": "Video project 2"
+      },
+      "item3": {
+        "title": "Video project 3"
+      },
+      "item4": {
+        "title": "Video project 4"
+      },
+      "item5": {
+        "title": "Video project 5"
+      },
+      "item6": {
+        "title": "Video project 6"
+      },
+      "cta": "Contact Us"
+    },
+    "photos": {
+      "title": "Photographs",
+      "subtitle": "Explore the quality of our aerial shots captured from above",
+      "cta": "Contact Us",
+      "item1": {
+        "title": "Project photo 1"
+      },
+      "item2": {
+        "title": "Project photo 2"
+      },
+      "item3": {
+        "title": "Project photo 3"
+      },
+      "item4": {
+        "title": "Project photo 4"
+      },
+      "item5": {
+        "title": "Project photo 5"
+      },
+      "item6": {
+        "title": "Project photo 6"
+      }
+    }
+  },
+  "team": {
+    "title": "Our Team",
+    "subtitle": "Meet our experts",
+    "description": "We are a team of professionals dedicated to drone services with passion and attention to detail. We specialize in videos, photography, aerial shots with drones, and other drone services. Each member of our team contributes their expertise to create exceptional results for our clients.",
+    "member1": {
+      "name": "Ján Novák",
+      "position": "Chief Pilot and Technical Director",
+      "description": "With over 10 years of experience in drone flying, Ján is our chief pilot. He specializes in technical flights, mapping, and security operations. He is a certified pilot with a license for commercial flights."
+    },
+    "member2": {
+      "name": "Mária Kováčová",
+      "position": "Videographer and Creative Director",
+      "description": "Mária is our creative soul who transforms raw footage into compelling stories. With extensive experience in production and post-production, she creates videos that capture the emotions and beauty of every project."
+    },
+    "member3": {
+      "name": "Peter Horváth",
+      "position": "Photographer and Post-Production Specialist",
+      "description": "Peter is an expert in photography and post-production. With a perfect sense of detail and composition, he creates images that capture the unique perspective from the sky. His work has been awarded at several international competitions."
+    }
+  },
+  "pricing": {
+    "title": "Pricing",
+    "subtitle": "Individual solutions for every project",
+    "main": {
+      "title": "Price of Our Services"
+    },
+    "factors": {
+      "title": "What influences the price?",
+      "item1": {
+        "label": "Drone type and technology",
+        "value": "We use top-of-the-line DJI machines"
+      },
+      "item2": {
+        "label": "Complexity and location",
+        "value": "Number of filming hours, terrain accessibility, required permits."
+      },
+      "item3": {
+        "label": "Post-production",
+        "value": "Depends on whether you need just raw material or a complete output (editing, color corrections, music, subtitles)."
+      }
+    },
+    "quote": {
+      "title": "How to get a price quote?",
+      "description": "We'll be happy to contact you with a proposal that will match exactly your ideas.",
+      "item1": "Where and when you want to film",
+      "item2": "What purpose the material will serve",
+      "item3": "Approximate scope and your expectations",
+      "cta": "Contact Us"
+    },
+    "basic": {
+      "title": "Basic",
+      "label": "Basic Package",
+      "price": "250",
+      "cta": "Contact"
+    },
+    "professional": {
+      "title": "Professional",
+      "label": "Professional Package",
+      "price": "500",
+      "cta": "Contact"
+    },
+    "custom": {
+      "label": "Individual",
+      "description": "Every project is unique and requires an individual approach. Contact us and we'll prepare a price quote exactly according to your needs.",
+      "cta": "Contact"
+    },
+    "included": {
+      "title": "What services are included in the price?",
+      "description": "The price list applies to the production of raw aerial footage and drone photographs, i.e., the time we spend directly on site."
+    },
+    "postproduction": {
+      "title": "What about video or photo editing?",
+      "description": "By agreement with the client, each of our aerial photographs or video footage goes through professional post-production in our studio. How does the whole process work?",
+      "step1": {
+        "title": "Music Selection",
+        "description": "A well-chosen musical background in videos represents half the success. It creates the basic pillar and emotion from which subsequent post-production follows. Therefore, before the actual video post-production, we will send you 5 suitable music samples from the audio bank for selection."
+      },
+      "step2": {
+        "title": "Editing",
+        "description": "Based on the selected music according to the concept, we will create a rough cut that we will send to you for approval. Then we will enrich the video with additional features and sound effects."
+      },
+      "step3": {
+        "title": "Color Grading",
+        "description": "After approving the rough cut, we work on color grading. The image gets colors, shadows, temperature – in short, the right juice. We create color grading on professional calibrated 4K monitors."
+      },
+      "step4": {
+        "title": "2D / 3D Animations",
+        "description": "According to requirements, we also create 2D animations – original animated logo at the beginning of the video, tracked texts attached in the 3D space of the video or name tags displayed in the corner of the video. We also create 3D visualizations – animations of environments and buildings."
+      },
+      "step5": {
+        "title": "Final Render",
+        "description": "After approving the entire project, we export the video itself in the highest formats suitable for TV, online space and socials like Instagram, Facebook, Youtube. Finally, we upload it to the cloud, from where it will go to you."
+      }
+    },
+    "diagram": {
+      "lietanie": {
+        "title": "Flying",
+        "items": [
+          "Flight preparation",
+          "Weather analysis",
+          "Flying"
+        ]
+      },
+      "povolenia": {
+        "title": "Permissions",
+        "items": [
+          "Operating permit",
+          "Specific",
+          "Pre-flight permit",
+          "Drone legal services and CAMO obligations"
+        ]
+      },
+      "bezpecnost": {
+        "title": "Safety",
+        "items": [
+          "Parachute and propeller protection",
+          "Drone insurance",
+          "Backup drones",
+          "FTS System"
+        ]
+      },
+      "spolupraca": {
+        "title": "Cooperation",
+        "items": [
+          "10 years Know How",
+          "Client consultation",
+          "Inspections",
+          "Price offer",
+          "Material delivery via cloud",
+          "Material archiving"
+        ]
+      }
+    }
+  },
+  "services": {
+    "title": "Our Services",
+    "subtitle": "Professional drone services for your needs",
+    "carousel": {
+      "title": "Our Services",
+      "subtitle": "We offer a wide range of professional drone services for your needs",
+      "cta": "Contact Us",
+      "tab1": "Video Production",
+      "tab2": "Photography",
+      "tab3": "Drone Shots",
+      "tab4": "Post-Production",
+      "card1": {
+        "title": "Video Production and Video Creation",
+        "description": "Complete video production from script, through filming to post-production. We create custom advertising, presentation and promotional videos for companies, real estate agencies, hotels, events and social media."
+      },
+      "card2": {
+        "title": "Photography",
+        "description": "We offer professional photography of real estate, events, products and other objects with emphasis on detail, composition and post-production. The resulting photographs are suitable for web, print and social media."
+      },
+      "card3": {
+        "title": "Aerial Shots with Drone",
+        "description": "We capture your property, area, event or landscape from above in top quality. Aerial shots are ideal for presentations, marketing, monitoring and documentation."
+      },
+      "card4": {
+        "title": "Have Footage and Need Post-Production?",
+        "description": "Post-production is what turns ordinary video into content that engages and stays in memory. Send us your materials and we'll bring them to life. We'll take care of precise editing, balanced colors, the right music and subtle effects that underline the atmosphere and story of your video."
+      }
+    },
+    "equipment": {
+      "title": "What We Fly With",
+      "subtitle": "We use professional drones and equipment for the best results",
+      "flightTime": "Flight Time:",
+      "range": "Range:",
+      "resolution": "Video Resolution:",
+      "format": "Format:",
+      "item1": {
+        "title": "DJI Avata 2 FPV (2x)",
+        "feature": "Ultra-wide 155° FOV",
+        "flightTime": "23 minutes",
+        "range": "13 km",
+        "resolution": "4K/60fps",
+        "format": "H.265 / H.264"
+      },
+      "item2": {
+        "title": "DJI Mavic 4 Pro Combo",
+        "feature": "100 MP Hasselblad Camera",
+        "flightTime": "51 minutes",
+        "range": "30 km",
+        "resolution": "6K/60fps HDR",
+        "format": "ProRes 4444XQ / H.265 / H.264"
+      }
+    },
+    "process": {
+      "title": "How Does It All Work?",
+      "step1": {
+        "title": "Write to Us",
+        "description": "Send us an email at <a href=\"mailto:info@droneye.sk\">info@droneye.sk</a> with your idea, the concept you're interested in, location and the expected date of flying."
+      },
+      "step2": {
+        "title": "Consultation, Advice",
+        "description": "Together we will agree on a date, go through your idea and video goals in detail and then connect it with our creativity and experience."
+      },
+      "step3": {
+        "title": "Permission",
+        "description": "We will then secure all necessary pre-flight permits and administration for you in accordance with the applicable rules of the given country."
+      },
+      "step4": {
+        "title": "Flying",
+        "description": "On the agreed date we will arrive at the location and carry out filming according to the pre-agreed concept."
+      },
+      "step5": {
+        "title": "Post-Production",
+        "description": "We will take care of professional photo editing and video editing to licensed music, and on request we will further adjust the content according to your ideas."
+      }
+    }
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Get in touch with us for your needs",
+    "info": {
+      "title": "Contact Information",
+      "email": "📧 info@droneye.sk",
+      "phone": "📞 +421 950 614 303",
+      "address": "📍 Bratislava, Slovakia"
+    },
+    "form": {
+      "title": "Contact Us",
+      "name": "Name",
+      "email": "Email",
+      "message": "Message",
+      "submit": "Send"
+    }
+  },
+  "footer": {
+    "contact": "Contact",
+    "quickContact": "Quick Contact",
+    "form": {
+      "name": "Your Name",
+      "email": "Email",
+      "message": "Message",
+      "submit": "Send"
+    },
+    "copyright": "All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms"
+  },
+  "pageTitle": {
+    "home": "DroneEye - Modern Drone Services and 3D Mapping",
+    "contact": "Contact - DroneEye",
+    "projects": "Our Projects - DroneEye",
+    "services": "Our Services - DroneEye",
+    "team": "Our Team - DroneEye",
+    "pricing": "Pricing - DroneEye",
+    "dronetext": "Drone 3D Model - DroneEye"
+  },
+  "loading": "Loading..."
+}
