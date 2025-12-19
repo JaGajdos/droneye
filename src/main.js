@@ -284,27 +284,88 @@ function initNavigation() {
         });
     });
     
-    // Mobile menu toggle
-    hamburger.addEventListener('click', () => {
+    // Make hamburger keyboard accessible
+    hamburger.setAttribute('tabindex', '0');
+    hamburger.setAttribute('role', 'button');
+    hamburger.setAttribute('aria-label', 'Toggle navigation menu');
+    hamburger.setAttribute('aria-expanded', 'false');
+    
+    function toggleMobileMenu() {
+        const isActive = navMenu.classList.contains('active');
         hamburger.classList.toggle('active');
         navMenu.classList.toggle('active');
+        hamburger.setAttribute('aria-expanded', !isActive ? 'true' : 'false');
         // Prevent body scroll when menu is open
-        if (navMenu.classList.contains('active')) {
+        if (!isActive) {
             document.body.style.overflow = 'hidden';
+            // Focus first menu item when opening
+            setTimeout(() => {
+                const firstLink = navMenu.querySelector('.nav-link');
+                if (firstLink) firstLink.focus();
+            }, 100);
         } else {
             document.body.style.overflow = '';
+        }
+    }
+    
+    // Mobile menu toggle
+    hamburger.addEventListener('click', toggleMobileMenu);
+    
+    // Keyboard support for hamburger
+    hamburger.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggleMobileMenu();
         }
     });
 
     // Close button in mobile menu
     const mobileMenuClose = document.querySelector('.mobile-menu-close');
     if (mobileMenuClose) {
-        mobileMenuClose.addEventListener('click', () => {
+        mobileMenuClose.setAttribute('tabindex', '0');
+        mobileMenuClose.setAttribute('aria-label', 'Close navigation menu');
+        
+        function closeMobileMenu() {
             navMenu.classList.remove('active');
             hamburger.classList.remove('active');
+            hamburger.setAttribute('aria-expanded', 'false');
             document.body.style.overflow = '';
+            hamburger.focus(); // Return focus to hamburger
+        }
+        
+        mobileMenuClose.addEventListener('click', closeMobileMenu);
+        
+        // Keyboard support for close button
+        mobileMenuClose.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                closeMobileMenu();
+            }
         });
     }
+    
+    // Keyboard navigation in mobile menu
+    navLinks.forEach((link, index) => {
+        link.setAttribute('tabindex', '0');
+        
+        link.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                navMenu.classList.remove('active');
+                hamburger.classList.remove('active');
+                hamburger.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
+                hamburger.focus();
+            } else if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                const nextLink = navLinks[index + 1] || navLinks[0];
+                if (nextLink) nextLink.focus();
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                const prevLink = navLinks[index - 1] || navLinks[navLinks.length - 1];
+                if (prevLink) prevLink.focus();
+            }
+        });
+    });
     
     // Close mobile menu when clicking on overlay (dark background)
     navMenu.addEventListener('click', (e) => {
@@ -515,19 +576,82 @@ function addThemeSwitcher() {
     const themeBtn = themeSwitcher.querySelector('.theme-btn');
     const themeOptions = themeSwitcher.querySelectorAll('.theme-option');
     
+    // Make theme button keyboard accessible
+    themeBtn.setAttribute('tabindex', '0');
+    themeBtn.setAttribute('role', 'button');
+    themeBtn.setAttribute('aria-label', 'Toggle theme switcher');
+    themeBtn.setAttribute('aria-expanded', 'false');
+    themeBtn.setAttribute('aria-haspopup', 'true');
+    
     themeBtn.addEventListener('click', () => {
+        const isActive = themeSwitcher.classList.contains('active');
         themeSwitcher.classList.toggle('active');
+        themeBtn.setAttribute('aria-expanded', !isActive ? 'true' : 'false');
     });
     
-    themeOptions.forEach(option => {
+    // Keyboard support for theme button
+    themeBtn.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            const isActive = themeSwitcher.classList.contains('active');
+            themeSwitcher.classList.toggle('active');
+            themeBtn.setAttribute('aria-expanded', !isActive ? 'true' : 'false');
+            if (!isActive) {
+                // Focus first option when opening
+                setTimeout(() => {
+                    const firstOption = themeOptions[0];
+                    if (firstOption) firstOption.focus();
+                }, 100);
+            }
+        } else if (e.key === 'Escape' && themeSwitcher.classList.contains('active')) {
+            themeSwitcher.classList.remove('active');
+            themeBtn.setAttribute('aria-expanded', 'false');
+        }
+    });
+    
+    // Make theme options keyboard accessible
+    themeOptions.forEach((option, index) => {
+        option.setAttribute('tabindex', '0');
+        option.setAttribute('role', 'menuitem');
+        option.setAttribute('aria-label', `Switch to ${option.getAttribute('data-theme')} theme`);
+        
         option.addEventListener('click', () => {
             const theme = option.getAttribute('data-theme');
             setTheme(theme);
             themeSwitcher.classList.remove('active');
+            themeBtn.setAttribute('aria-expanded', 'false');
             // Update button theme attribute and icon
             themeBtn.setAttribute('data-theme', theme);
             const icon = theme === 'dark' ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
             themeBtn.innerHTML = icon;
+            themeBtn.focus(); // Return focus to button
+        });
+        
+        // Keyboard support for theme options
+        option.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                const theme = option.getAttribute('data-theme');
+                setTheme(theme);
+                themeSwitcher.classList.remove('active');
+                themeBtn.setAttribute('aria-expanded', 'false');
+                themeBtn.setAttribute('data-theme', theme);
+                const icon = theme === 'dark' ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+                themeBtn.innerHTML = icon;
+                themeBtn.focus();
+            } else if (e.key === 'Escape') {
+                themeSwitcher.classList.remove('active');
+                themeBtn.setAttribute('aria-expanded', 'false');
+                themeBtn.focus();
+            } else if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                const nextOption = themeOptions[index + 1] || themeOptions[0];
+                if (nextOption) nextOption.focus();
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                const prevOption = themeOptions[index - 1] || themeOptions[themeOptions.length - 1];
+                if (prevOption) prevOption.focus();
+            }
         });
     });
     
@@ -578,7 +702,10 @@ function initServicesCarousel() {
     function showSlide(index) {
         // Remove active class from all slides and tabs
         slides.forEach(slide => slide.classList.remove('active'));
-        tabs.forEach(tab => tab.classList.remove('active'));
+        tabs.forEach((tab, i) => {
+            tab.classList.remove('active');
+            tab.setAttribute('aria-selected', 'false');
+        });
         
         // Add active class to current slide and tab
         if (slides[index]) {
@@ -586,6 +713,7 @@ function initServicesCarousel() {
         }
         if (tabs[index]) {
             tabs[index].classList.add('active');
+            tabs[index].setAttribute('aria-selected', 'true');
         }
         
         currentSlide = index;
@@ -606,39 +734,151 @@ function initServicesCarousel() {
         
         // Remove old listeners by cloning
         if (prevButton) {
+            prevButton.setAttribute('tabindex', '0');
+            prevButton.setAttribute('aria-label', 'Previous slide');
             const newPrev = prevButton.cloneNode(true);
             prevButton.parentNode.replaceChild(newPrev, prevButton);
             newPrev.addEventListener('click', () => {
                 const prev = (currentSlide - 1 + totalSlides) % totalSlides;
                 showSlide(prev);
             });
+            newPrev.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    const prev = (currentSlide - 1 + totalSlides) % totalSlides;
+                    showSlide(prev);
+                }
+            });
         }
         
         if (nextButton) {
+            nextButton.setAttribute('tabindex', '0');
+            nextButton.setAttribute('aria-label', 'Next slide');
             const newNext = nextButton.cloneNode(true);
             nextButton.parentNode.replaceChild(newNext, nextButton);
             newNext.addEventListener('click', () => {
                 const next = (currentSlide + 1) % totalSlides;
                 showSlide(next);
             });
+            newNext.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    const next = (currentSlide + 1) % totalSlides;
+                    showSlide(next);
+                }
+            });
         }
     }
     
-    // Tab clicks
+    // Make tabs keyboard accessible
     tabs.forEach((tab, index) => {
+        tab.setAttribute('tabindex', '0');
+        tab.setAttribute('role', 'tab');
+        tab.setAttribute('aria-selected', index === 0 ? 'true' : 'false');
+        tab.setAttribute('aria-controls', `carousel-slide-${index}`);
+        
+        // Tab clicks
         tab.addEventListener('click', () => {
             showSlide(index);
         });
+        
+        // Keyboard support for tabs
+        tab.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                showSlide(index);
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                const prev = (index - 1 + totalSlides) % totalSlides;
+                tabs[prev].focus();
+                showSlide(prev);
+            } else if (e.key === 'ArrowRight') {
+                e.preventDefault();
+                const next = (index + 1) % totalSlides;
+                tabs[next].focus();
+                showSlide(next);
+            } else if (e.key === 'Home') {
+                e.preventDefault();
+                tabs[0].focus();
+                showSlide(0);
+            } else if (e.key === 'End') {
+                e.preventDefault();
+                tabs[totalSlides - 1].focus();
+                showSlide(totalSlides - 1);
+            }
+        });
     });
     
-    // Keyboard navigation
-    document.addEventListener('keydown', (e) => {
-        if (!carousel.closest('.page.active')) return;
+    // Update aria-selected when slide changes
+    const originalShowSlide = showSlide;
+    showSlide = function(index) {
+        originalShowSlide(index);
+        tabs.forEach((tab, i) => {
+            tab.setAttribute('aria-selected', i === index ? 'true' : 'false');
+        });
+    };
+    
+    // Make arrow buttons keyboard accessible
+    function updateArrowListeners() {
+        const activeSlide = carousel.querySelector('.carousel-slide.active');
+        if (!activeSlide) return;
         
+        const card = activeSlide.querySelector('.service-card-carousel');
+        if (!card) return;
+        
+        const prevButton = card.querySelector('.carousel-arrow-prev');
+        const nextButton = card.querySelector('.carousel-arrow-next');
+        
+        // Remove old listeners by cloning
+        if (prevButton) {
+            prevButton.setAttribute('tabindex', '0');
+            prevButton.setAttribute('aria-label', 'Previous slide');
+            const newPrev = prevButton.cloneNode(true);
+            prevButton.parentNode.replaceChild(newPrev, prevButton);
+            newPrev.addEventListener('click', () => {
+                const prev = (currentSlide - 1 + totalSlides) % totalSlides;
+                showSlide(prev);
+            });
+            newPrev.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    const prev = (currentSlide - 1 + totalSlides) % totalSlides;
+                    showSlide(prev);
+                }
+            });
+        }
+        
+        if (nextButton) {
+            nextButton.setAttribute('tabindex', '0');
+            nextButton.setAttribute('aria-label', 'Next slide');
+            const newNext = nextButton.cloneNode(true);
+            nextButton.parentNode.replaceChild(newNext, nextButton);
+            newNext.addEventListener('click', () => {
+                const next = (currentSlide + 1) % totalSlides;
+                showSlide(next);
+            });
+            newNext.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    const next = (currentSlide + 1) % totalSlides;
+                    showSlide(next);
+                }
+            });
+        }
+    }
+    
+    // Keyboard navigation for carousel (when carousel container is focused)
+    carousel.setAttribute('tabindex', '0');
+    carousel.setAttribute('role', 'region');
+    carousel.setAttribute('aria-label', 'Services carousel');
+    
+    carousel.addEventListener('keydown', (e) => {
         if (e.key === 'ArrowLeft') {
+            e.preventDefault();
             const prev = (currentSlide - 1 + totalSlides) % totalSlides;
             showSlide(prev);
         } else if (e.key === 'ArrowRight') {
+            e.preventDefault();
             const next = (currentSlide + 1) % totalSlides;
             showSlide(next);
         }
@@ -790,9 +1030,17 @@ function initPhotoGallery() {
         });
     });
     
-    // Close lightbox
+    // Make lightbox buttons keyboard accessible
     if (closeBtn) {
+        closeBtn.setAttribute('tabindex', '0');
+        closeBtn.setAttribute('aria-label', 'Close lightbox');
         closeBtn.addEventListener('click', closeLightbox);
+        closeBtn.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                closeLightbox();
+            }
+        });
     }
     
     // Close on background click
@@ -804,28 +1052,68 @@ function initPhotoGallery() {
     
     // Navigation buttons
     if (prevBtn) {
+        prevBtn.setAttribute('tabindex', '0');
+        prevBtn.setAttribute('aria-label', 'Previous photo');
         prevBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             showPreviousPhoto();
         });
+        prevBtn.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                showPreviousPhoto();
+            }
+        });
     }
     
     if (nextBtn) {
+        nextBtn.setAttribute('tabindex', '0');
+        nextBtn.setAttribute('aria-label', 'Next photo');
         nextBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             showNextPhoto();
         });
+        nextBtn.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                showNextPhoto();
+            }
+        });
     }
+    
+    // Make photo items keyboard accessible
+    photoItems.forEach(item => {
+        item.setAttribute('tabindex', '0');
+        item.setAttribute('role', 'button');
+        item.setAttribute('aria-label', 'Open photo gallery');
+        
+        item.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                const galleryImages = item.querySelectorAll('.photo-gallery-images img');
+                if (galleryImages.length === 0) return;
+                
+                currentGallery = Array.from(galleryImages).map(img => ({
+                    src: img.src,
+                    alt: img.alt
+                }));
+                currentPhotoIndex = 0;
+                openLightbox();
+            }
+        });
+    });
     
     // Keyboard navigation
     document.addEventListener('keydown', (e) => {
-        if (!lightbox.classList.contains('active')) return;
+        if (!lightbox || !lightbox.classList.contains('active')) return;
         
         if (e.key === 'Escape') {
             closeLightbox();
         } else if (e.key === 'ArrowLeft') {
+            e.preventDefault();
             showPreviousPhoto();
         } else if (e.key === 'ArrowRight') {
+            e.preventDefault();
             showNextPhoto();
         }
     });
@@ -833,6 +1121,11 @@ function initPhotoGallery() {
 
 function openLightbox() {
     if (!lightbox || currentGallery.length === 0) return;
+    
+    // Make lightbox keyboard accessible
+    lightbox.setAttribute('role', 'dialog');
+    lightbox.setAttribute('aria-label', 'Photo gallery');
+    lightbox.setAttribute('aria-modal', 'true');
     
     // Hide navbar when lightbox opens
     const navbar = document.querySelector('.navbar');
@@ -843,6 +1136,12 @@ function openLightbox() {
     lightbox.classList.add('active');
     document.body.style.overflow = 'hidden';
     updateLightboxImage();
+    
+    // Focus close button when opening
+    const closeBtn = document.querySelector('.photo-lightbox-close');
+    if (closeBtn) {
+        setTimeout(() => closeBtn.focus(), 100);
+    }
 }
 
 function closeLightbox() {
@@ -855,7 +1154,17 @@ function closeLightbox() {
     }
     
     lightbox.classList.remove('active');
+    lightbox.removeAttribute('role');
+    lightbox.removeAttribute('aria-label');
+    lightbox.removeAttribute('aria-modal');
     document.body.style.overflow = '';
+    
+    // Return focus to the photo item that opened the lightbox
+    const activePhotoItem = document.querySelector('.photo-item[data-gallery]:focus, .photo-item[data-gallery][tabindex="0"]');
+    if (activePhotoItem) {
+        activePhotoItem.focus();
+    }
+    
     currentGallery = [];
     currentPhotoIndex = 0;
 }
@@ -865,7 +1174,7 @@ function updateLightboxImage() {
     
     const photo = currentGallery[currentPhotoIndex];
     lightboxImage.src = photo.src;
-    lightboxImage.alt = photo.alt;
+    lightboxImage.alt = photo.alt || `Photo ${currentPhotoIndex + 1} of ${currentGallery.length}`;
     lightboxCurrent.textContent = currentPhotoIndex + 1;
     lightboxTotal.textContent = currentGallery.length;
     
@@ -922,9 +1231,23 @@ window.addEventListener('beforeunload', function() {
 function initFooterThemeSwitcher() {
     const footerThemeBtns = document.querySelectorAll('.footer-theme-btn');
     footerThemeBtns.forEach(btn => {
+        btn.setAttribute('tabindex', '0');
+        btn.setAttribute('role', 'button');
+        const theme = btn.getAttribute('data-theme');
+        btn.setAttribute('aria-label', `Switch to ${theme} theme`);
+        
         btn.addEventListener('click', () => {
             const theme = btn.getAttribute('data-theme');
             setTheme(theme);
+        });
+        
+        // Keyboard support for footer theme buttons
+        btn.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                const theme = btn.getAttribute('data-theme');
+                setTheme(theme);
+            }
         });
     });
     

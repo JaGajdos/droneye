@@ -110,7 +110,7 @@
                         </a>
                     </div>
                     <button class="mobile-menu-close" aria-label="Close menu">
-                        <i class="fas fa-times"></i>
+                        <i class="fas fa-times" aria-hidden="true"></i>
                     </button>
                 </li>
                 <li class="nav-item">
@@ -335,11 +335,11 @@
                         
                         <!-- Lightbox Modal -->
                         <div id="photo-lightbox" class="photo-lightbox">
-                            <span class="photo-lightbox-close">&times;</span>
-                            <button class="photo-lightbox-prev">&#10094;</button>
-                            <button class="photo-lightbox-next">&#10095;</button>
+                            <button class="photo-lightbox-close" aria-label="Close lightbox">&times;</button>
+                            <button class="photo-lightbox-prev" aria-label="Previous photo">&#10094;</button>
+                            <button class="photo-lightbox-next" aria-label="Next photo">&#10095;</button>
                             <div class="photo-lightbox-content">
-                                <img id="lightbox-image" src="" alt="" />
+                                <img id="lightbox-image" src="" alt="Photo gallery image" />
                                 <div class="photo-lightbox-counter">
                                     <span id="lightbox-current">1</span> / <span id="lightbox-total">1</span>
                                 </div>
@@ -403,8 +403,8 @@
             <p>&copy; 2024 Droneye. <span data-i18n="footer.copyright">Všetky práva vyhradené.</span></p>
             <div class="footer-bottom-right">
                 <div class="footer-theme-switcher">
-                    <button class="footer-theme-btn" data-theme="light" title="Light mode"><i class="fas fa-sun"></i></button>
-                    <button class="footer-theme-btn" data-theme="dark" title="Dark mode"><i class="fas fa-moon"></i></button>
+                    <button class="footer-theme-btn" data-theme="light" title="Light mode" aria-label="Switch to light mode"><i class="fas fa-sun" aria-hidden="true"></i></button>
+                    <button class="footer-theme-btn" data-theme="dark" title="Dark mode" aria-label="Switch to dark mode"><i class="fas fa-moon" aria-hidden="true"></i></button>
                 </div>
                 <div class="footer-legal">
                     <a href="#" data-i18n="footer.privacy">Ochrana údajov</a>
