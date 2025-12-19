@@ -129,8 +129,8 @@ body.homepage #canvas-container {
 .nav-menu {
     display: flex;
     list-style: none;
-    gap: 2rem;
-  margin: 0;
+    gap: 1rem;
+    margin: 0;
     padding: 0;
     justify-content: center;
     grid-column: 2;
