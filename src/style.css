@@ -129,12 +129,17 @@ body.homepage #canvas-container {
 .nav-menu {
     display: flex;
     list-style: none;
-    gap: 1rem;
+    gap: 2rem;
     margin: 0;
     padding: 0;
     justify-content: center;
     grid-column: 2;
     justify-self: center;
+}
+
+/* Hide mobile menu header on desktop */
+.nav-menu .mobile-menu-header {
+    display: none;
 }
 
 .nav-link {
@@ -2413,6 +2418,7 @@ body:not(.homepage) #loading-screen {
         padding-top: 0;
         padding-bottom: 2rem;
         box-sizing: border-box;
+        gap: 1rem;
     }
 
     .nav-menu.active {
@@ -2446,9 +2452,9 @@ body:not(.homepage) #loading-screen {
         align-items: center;
     }
 
-    /* Mobile menu header with logo and close button */
+    /* Mobile menu header with logo and close button - only visible on mobile */
     .nav-menu .mobile-menu-header {
-        display: flex;
+        display: flex !important;
         justify-content: space-between;
         align-items: center;
         width: 100%;
