@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="sk" data-theme="royal-blue">
+<html lang="sk" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Naše služby - DroneEye</title>
+    <title data-i18n-title="pageTitle.services">Naše služby - DroneEye</title>
     <meta name="description" content="Profesionálne drone služby, letecké snímkovanie, mapovanie a analýza dát. Moderné riešenia pre vaše potreby.">
     <meta name="keywords" content="drone služby, letecké snímkovanie, mapovanie, analýza dát, 3D modely, Bratislava">
     <meta name="author" content="DroneEye">
@@ -44,6 +44,7 @@
     <!-- Hreflang Tags -->
     <link rel="alternate" hreflang="sk" href="https://www.droneye.sk/sluzby" />
     <link rel="alternate" hreflang="en" href="https://www.droneye.sk/sluzby?lang=en" />
+    <link rel="alternate" hreflang="de" href="https://www.droneye.sk/sluzby?lang=de" />
     <link rel="alternate" hreflang="x-default" href="https://www.droneye.sk/sluzby" />
     
     <!-- Structured Data - Service -->
@@ -123,6 +124,8 @@
       ]
     }
     </script>
+    
+    <!-- Font Awesome -->
     
     <script>
         // Hide content until translations are loaded to prevent flash of wrong language
@@ -132,10 +135,8 @@
             document.documentElement.style.visibility = 'hidden';
         })();
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script type="module" crossorigin src="/droneye/assets/three-BjNtol_2.js"></script>
-  <script type="module" crossorigin src="/droneye/assets/main-Dq7i0ieH.js"></script>
-  <link rel="stylesheet" crossorigin href="/droneye/assets/main-B9HUa_7p.css">
+  <script type="module" crossorigin src="/droneye/assets/main-CROuqshg.js"></script>
+  <link rel="stylesheet" crossorigin href="/droneye/assets/main-BtRU7HjD.css">
 </head>
 <body>
     <!-- Navigation -->
@@ -169,6 +170,7 @@
                     <div class="mobile-language-buttons">
                         <button class="language-option active" data-lang="sk">SK</button>
                         <button class="language-option" data-lang="en">EN</button>
+                        <button class="language-option" data-lang="de">DE</button>
                     </div>
                 </li>
             </ul>
@@ -176,6 +178,7 @@
                 <div class="language-buttons">
                     <button class="language-option active" data-lang="sk">SK</button>
                     <button class="language-option" data-lang="en">EN</button>
+                    <button class="language-option" data-lang="de">DE</button>
                 </div>
             </div>
             <div class="hamburger">
@@ -202,7 +205,7 @@
             <!-- Subpage Content -->
             <div class="subpage-content">
                 <!-- Carousel Section -->
-                <div class="content-section content-section-bg-color">
+                <div class="content-section">
                     <div class="container">
                         <div class="services-carousel-wrapper">
                             <div class="services-carousel-text">
@@ -350,14 +353,14 @@
         </section>
         
         <!-- Equipment Section -->
-                <div class="content-section content-section-bg-color" style="background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.95) 100%);">
+        <div class="content-section">
             <div class="container">
                 <h2 class="section-title equipment-title" data-i18n="services.equipment.title">S čím lietame</h2>
                 <p class="section-subtitle equipment-subtitle" data-i18n="services.equipment.subtitle">Používame profesionálne drony a vybavenie pre najlepšie výsledky</p>
                 <div class="equipment-grid">
                     <div class="equipment-card">
                         <div class="equipment-image">
-                            <img src="/droneye/assets/DJI_Avata_2-CHkEF_fa.webp" alt="DJI Avata 2 FPV" loading="lazy" />
+                            <img src="/droneye/assets/DJI_Avata_2-Cm5M26-5.webp" alt="DJI Avata 2 FPV" loading="lazy" />
                         </div>
                         <h3 data-i18n="services.equipment.item1.title">DJI Avata 2 FPV (2x)</h3>
                         <p class="equipment-feature" data-i18n="services.equipment.item1.feature">Ultraširoký 155° FOV</p>
@@ -370,7 +373,7 @@
                     </div>
                     <div class="equipment-card">
                         <div class="equipment-image">
-                            <img src="/droneye/assets/DJI_Mavic_4-CJzW0re2.webp" alt="DJI Mavic 4 Pro Combo" loading="lazy" />
+                            <img src="/droneye/assets/DJI_Mavic_4-ZEaGypAe.webp" alt="DJI Mavic 4 Pro Combo" loading="lazy" />
                         </div>
                         <h3 data-i18n="services.equipment.item2.title">DJI Mavic 4 Pro Combo</h3>
                         <p class="equipment-feature" data-i18n="services.equipment.item2.feature">100 MP Hasselblad kamera</p>
@@ -397,7 +400,7 @@
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
-                <h3>Kontakt</h3>
+                <h3 data-i18n="footer.contact">Kontakt</h3>
                 <ul class="footer-links">
                     <li><a href="mailto:info@droneye.sk">📧 info@droneye.sk</a></li>
                     <li><a href="tel:+421950614303">📞 +421 950 614 303</a></li>
@@ -421,21 +424,27 @@
             </div>
             
             <div class="footer-section footer-form">
-                <h3>Rýchly kontakt</h3>
+                <h3 data-i18n="footer.quickContact">Rýchly kontakt</h3>
                 <form class="footer-contact-form">
-                    <input type="text" placeholder="Vaše meno" required>
-                    <input type="email" placeholder="Email" required>
-                    <textarea placeholder="Správa" rows="3" required></textarea>
-                    <button type="submit">Odoslať</button>
+                    <input type="text" data-i18n-placeholder="footer.form.name" placeholder="Vaše meno" required>
+                    <input type="email" data-i18n-placeholder="footer.form.email" placeholder="Email" required>
+                    <textarea data-i18n-placeholder="footer.form.message" placeholder="Správa" rows="3" required></textarea>
+                    <button type="submit" data-i18n="footer.form.submit">Odoslať</button>
                 </form>
             </div>
         </div>
         
         <div class="footer-bottom">
-            <p>&copy; 2024 Droneye. Všetky práva vyhradené.</p>
-            <div class="footer-legal">
-                <a href="#">Ochrana údajov</a>
-                <a href="#">Podmienky</a>
+            <p>&copy; 2024 Droneye. <span data-i18n="footer.copyright">Všetky práva vyhradené.</span></p>
+            <div class="footer-bottom-right">
+                <div class="footer-theme-switcher">
+                    <button class="footer-theme-btn" data-theme="light" title="Light mode"><i class="fas fa-sun"></i></button>
+                    <button class="footer-theme-btn" data-theme="dark" title="Dark mode"><i class="fas fa-moon"></i></button>
+                </div>
+                <div class="footer-legal">
+                    <a href="#" data-i18n="footer.privacy">Ochrana údajov</a>
+                    <a href="#" data-i18n="footer.terms">Podmienky</a>
+                </div>
             </div>
         </div>
     </footer>

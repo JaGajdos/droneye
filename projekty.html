@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="sk" data-theme="royal-blue">
+<html lang="sk" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Naše projekty - DroneEye</title>
+    <title data-i18n-title="pageTitle.projects">Naše projekty - DroneEye</title>
     <meta name="description" content="Pozrite si naše najnovšie úspešné projekty - letecké mapovanie, monitoring poľnohospodárskych plôch a inspekcia energetických vedení.">
     <meta name="keywords" content="drone projekty, letecké mapovanie, monitoring, inspekcia vedení, 3D mapovanie, Bratislava">
     <meta name="author" content="DroneEye">
@@ -44,6 +44,7 @@
     <!-- Hreflang Tags -->
     <link rel="alternate" hreflang="sk" href="https://www.droneye.sk/projekty" />
     <link rel="alternate" hreflang="en" href="https://www.droneye.sk/projekty?lang=en" />
+    <link rel="alternate" hreflang="de" href="https://www.droneye.sk/projekty?lang=de" />
     <link rel="alternate" hreflang="x-default" href="https://www.droneye.sk/projekty" />
     
     <!-- Structured Data - CollectionPage -->
@@ -78,6 +79,8 @@
       ]
     }
     </script>
+    
+    <!-- Font Awesome -->
     
     <script>
         // Hide content until translations are loaded to prevent flash of wrong language
@@ -87,10 +90,8 @@
             document.documentElement.style.visibility = 'hidden';
         })();
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script type="module" crossorigin src="/droneye/assets/three-BjNtol_2.js"></script>
-  <script type="module" crossorigin src="/droneye/assets/main-Dq7i0ieH.js"></script>
-  <link rel="stylesheet" crossorigin href="/droneye/assets/main-B9HUa_7p.css">
+  <script type="module" crossorigin src="/droneye/assets/main-CROuqshg.js"></script>
+  <link rel="stylesheet" crossorigin href="/droneye/assets/main-BtRU7HjD.css">
 </head>
 <body>
     <!-- Navigation -->
@@ -124,6 +125,7 @@
                     <div class="mobile-language-buttons">
                         <button class="language-option active" data-lang="sk">SK</button>
                         <button class="language-option" data-lang="en">EN</button>
+                        <button class="language-option" data-lang="de">DE</button>
                     </div>
                 </li>
             </ul>
@@ -131,6 +133,7 @@
                 <div class="language-buttons">
                     <button class="language-option active" data-lang="sk">SK</button>
                     <button class="language-option" data-lang="en">EN</button>
+                    <button class="language-option" data-lang="de">DE</button>
                 </div>
             </div>
             <div class="hamburger">
@@ -157,7 +160,7 @@
             <!-- Subpage Content -->
             <div class="subpage-content">
                 <!-- Videos Section -->
-                <div class="content-section content-section-bg-color">
+                <div class="content-section">
                     <div class="container">
                         <h2 class="section-title" data-i18n="projects.videos.title">Prezentačné videá</h2>
                         <p class="section-subtitle" data-i18n="projects.videos.subtitle">Pozrite si naše najnovšie videá</p>
@@ -250,72 +253,72 @@
                             <!-- Photo Gallery 1 - Multiple photos -->
                             <div class="photo-item" data-gallery="gallery1">
                                 <div class="photo-gallery-preview">
-                                    <img src="/droneye/assets/DJI_Avata_2-CHkEF_fa.webp" alt="DJI Avata 2 FPV" loading="lazy" />
+                                    <img src="/droneye/assets/DJI_Avata_2-Cm5M26-5.webp" alt="DJI Avata 2 FPV" loading="lazy" />
                                     <div class="photo-count-badge" data-count="3"></div>
                                 </div>
                                 <h3 class="photo-title" data-i18n="projects.photos.item1.title">Fotografia projektu 1</h3>
                                 <div class="photo-gallery-images" style="display: none;">
-                                    <img src="/droneye/assets/DJI_Avata_2-CHkEF_fa.webp" alt="DJI Avata 2 FPV" />
-                                    <img src="/droneye/assets/DJI_Mavic_4-CJzW0re2.webp" alt="DJI Mavic 4 Pro Combo" />
-                                    <img src="/droneye/assets/DJI_Avata_2-CHkEF_fa.webp" alt="DJI Avata 2 FPV" />
+                                    <img src="/droneye/assets/DJI_Avata_2-Cm5M26-5.webp" alt="DJI Avata 2 FPV" />
+                                    <img src="/droneye/assets/DJI_Mavic_4-ZEaGypAe.webp" alt="DJI Mavic 4 Pro Combo" />
+                                    <img src="/droneye/assets/DJI_Avata_2-Cm5M26-5.webp" alt="DJI Avata 2 FPV" />
                                 </div>
                             </div>
                             <!-- Photo Gallery 2 - Multiple photos -->
                             <div class="photo-item" data-gallery="gallery2">
                                 <div class="photo-gallery-preview">
-                                    <img src="/droneye/assets/DJI_Mavic_4-CJzW0re2.webp" alt="DJI Mavic 4 Pro Combo" loading="lazy" />
+                                    <img src="/droneye/assets/DJI_Mavic_4-ZEaGypAe.webp" alt="DJI Mavic 4 Pro Combo" loading="lazy" />
                                     <div class="photo-count-badge" data-count="2"></div>
                                 </div>
                                 <h3 class="photo-title" data-i18n="projects.photos.item2.title">Fotografia projektu 2</h3>
                                 <div class="photo-gallery-images" style="display: none;">
-                                    <img src="/droneye/assets/DJI_Mavic_4-CJzW0re2.webp" alt="DJI Mavic 4 Pro Combo" />
-                                    <img src="/droneye/assets/DJI_Avata_2-CHkEF_fa.webp" alt="DJI Avata 2 FPV" />
+                                    <img src="/droneye/assets/DJI_Mavic_4-ZEaGypAe.webp" alt="DJI Mavic 4 Pro Combo" />
+                                    <img src="/droneye/assets/DJI_Avata_2-Cm5M26-5.webp" alt="DJI Avata 2 FPV" />
                                 </div>
                             </div>
                             <!-- Photo Gallery 3 - Single photo -->
                             <div class="photo-item" data-gallery="gallery3">
                                 <div class="photo-gallery-preview">
-                                    <img src="/droneye/assets/DJI_Avata_2-CHkEF_fa.webp" alt="DJI Avata 2 FPV" loading="lazy" />
+                                    <img src="/droneye/assets/DJI_Avata_2-Cm5M26-5.webp" alt="DJI Avata 2 FPV" loading="lazy" />
                                 </div>
                                 <h3 class="photo-title" data-i18n="projects.photos.item3.title">Fotografia projektu 3</h3>
                                 <div class="photo-gallery-images" style="display: none;">
-                                    <img src="/droneye/assets/DJI_Avata_2-CHkEF_fa.webp" alt="DJI Avata 2 FPV" />
+                                    <img src="/droneye/assets/DJI_Avata_2-Cm5M26-5.webp" alt="DJI Avata 2 FPV" />
                                 </div>
                             </div>
                             <!-- Photo Gallery 4 - Multiple photos -->
                             <div class="photo-item" data-gallery="gallery4">
                                 <div class="photo-gallery-preview">
-                                    <img src="/droneye/assets/DJI_Mavic_4-CJzW0re2.webp" alt="DJI Mavic 4 Pro Combo" loading="lazy" />
+                                    <img src="/droneye/assets/DJI_Mavic_4-ZEaGypAe.webp" alt="DJI Mavic 4 Pro Combo" loading="lazy" />
                                     <div class="photo-count-badge" data-count="4"></div>
                                 </div>
                                 <h3 class="photo-title" data-i18n="projects.photos.item4.title">Fotografia projektu 4</h3>
                                 <div class="photo-gallery-images" style="display: none;">
-                                    <img src="/droneye/assets/DJI_Mavic_4-CJzW0re2.webp" alt="DJI Mavic 4 Pro Combo" />
-                                    <img src="/droneye/assets/DJI_Avata_2-CHkEF_fa.webp" alt="DJI Avata 2 FPV" />
-                                    <img src="/droneye/assets/DJI_Mavic_4-CJzW0re2.webp" alt="DJI Mavic 4 Pro Combo" />
-                                    <img src="/droneye/assets/DJI_Avata_2-CHkEF_fa.webp" alt="DJI Avata 2 FPV" />
+                                    <img src="/droneye/assets/DJI_Mavic_4-ZEaGypAe.webp" alt="DJI Mavic 4 Pro Combo" />
+                                    <img src="/droneye/assets/DJI_Avata_2-Cm5M26-5.webp" alt="DJI Avata 2 FPV" />
+                                    <img src="/droneye/assets/DJI_Mavic_4-ZEaGypAe.webp" alt="DJI Mavic 4 Pro Combo" />
+                                    <img src="/droneye/assets/DJI_Avata_2-Cm5M26-5.webp" alt="DJI Avata 2 FPV" />
                                 </div>
                             </div>
                             <!-- Photo Gallery 5 - Multiple photos -->
                             <div class="photo-item" data-gallery="gallery5">
                                 <div class="photo-gallery-preview">
-                                    <img src="/droneye/assets/DJI_Avata_2-CHkEF_fa.webp" alt="DJI Avata 2 FPV" loading="lazy" />
+                                    <img src="/droneye/assets/DJI_Avata_2-Cm5M26-5.webp" alt="DJI Avata 2 FPV" loading="lazy" />
                                     <div class="photo-count-badge" data-count="2"></div>
                                 </div>
                                 <h3 class="photo-title" data-i18n="projects.photos.item5.title">Fotografia projektu 5</h3>
                                 <div class="photo-gallery-images" style="display: none;">
-                                    <img src="/droneye/assets/DJI_Avata_2-CHkEF_fa.webp" alt="DJI Avata 2 FPV" />
-                                    <img src="/droneye/assets/DJI_Mavic_4-CJzW0re2.webp" alt="DJI Mavic 4 Pro Combo" />
+                                    <img src="/droneye/assets/DJI_Avata_2-Cm5M26-5.webp" alt="DJI Avata 2 FPV" />
+                                    <img src="/droneye/assets/DJI_Mavic_4-ZEaGypAe.webp" alt="DJI Mavic 4 Pro Combo" />
                                 </div>
                             </div>
                             <!-- Photo Gallery 6 - Single photo -->
                             <div class="photo-item" data-gallery="gallery6">
                                 <div class="photo-gallery-preview">
-                                    <img src="/droneye/assets/DJI_Mavic_4-CJzW0re2.webp" alt="DJI Mavic 4 Pro Combo" loading="lazy" />
+                                    <img src="/droneye/assets/DJI_Mavic_4-ZEaGypAe.webp" alt="DJI Mavic 4 Pro Combo" loading="lazy" />
                                 </div>
                                 <h3 class="photo-title" data-i18n="projects.photos.item6.title">Fotografia projektu 6</h3>
                                 <div class="photo-gallery-images" style="display: none;">
-                                    <img src="/droneye/assets/DJI_Mavic_4-CJzW0re2.webp" alt="DJI Mavic 4 Pro Combo" />
+                                    <img src="/droneye/assets/DJI_Mavic_4-ZEaGypAe.webp" alt="DJI Mavic 4 Pro Combo" />
                                 </div>
                             </div>
                         </div>
@@ -352,7 +355,7 @@
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
-                <h3>Kontakt</h3>
+                <h3 data-i18n="footer.contact">Kontakt</h3>
                 <ul class="footer-links">
                     <li><a href="mailto:info@droneye.sk">📧 info@droneye.sk</a></li>
                     <li><a href="tel:+421950614303">📞 +421 950 614 303</a></li>
@@ -376,21 +379,27 @@
             </div>
             
             <div class="footer-section footer-form">
-                <h3>Rýchly kontakt</h3>
+                <h3 data-i18n="footer.quickContact">Rýchly kontakt</h3>
                 <form class="footer-contact-form">
-                    <input type="text" placeholder="Vaše meno" required>
-                    <input type="email" placeholder="Email" required>
-                    <textarea placeholder="Správa" rows="3" required></textarea>
-                    <button type="submit">Odoslať</button>
+                    <input type="text" data-i18n-placeholder="footer.form.name" placeholder="Vaše meno" required>
+                    <input type="email" data-i18n-placeholder="footer.form.email" placeholder="Email" required>
+                    <textarea data-i18n-placeholder="footer.form.message" placeholder="Správa" rows="3" required></textarea>
+                    <button type="submit" data-i18n="footer.form.submit">Odoslať</button>
                 </form>
             </div>
         </div>
         
         <div class="footer-bottom">
-            <p>&copy; 2024 Droneye. Všetky práva vyhradené.</p>
-            <div class="footer-legal">
-                <a href="#">Ochrana údajov</a>
-                <a href="#">Podmienky</a>
+            <p>&copy; 2024 Droneye. <span data-i18n="footer.copyright">Všetky práva vyhradené.</span></p>
+            <div class="footer-bottom-right">
+                <div class="footer-theme-switcher">
+                    <button class="footer-theme-btn" data-theme="light" title="Light mode"><i class="fas fa-sun"></i></button>
+                    <button class="footer-theme-btn" data-theme="dark" title="Dark mode"><i class="fas fa-moon"></i></button>
+                </div>
+                <div class="footer-legal">
+                    <a href="#" data-i18n="footer.privacy">Ochrana údajov</a>
+                    <a href="#" data-i18n="footer.terms">Podmienky</a>
+                </div>
             </div>
         </div>
     </footer>
