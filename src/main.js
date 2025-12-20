@@ -1265,3 +1265,68 @@ if (document.readyState === 'loading') {
 } else {
     initFooterThemeSwitcher();
 }
+
+// Initialize process steps scroll animation for mobile
+function initProcessStepsScrollAnimation() {
+    // Only run on mobile devices (max-width: 1076px)
+    if (window.innerWidth > 1076) return;
+    
+    const processSteps = document.querySelectorAll('.process-step');
+    if (processSteps.length === 0) return;
+    
+    // Options for Intersection Observer
+    const observerOptions = {
+        root: null, // viewport
+        rootMargin: '-20% 0px -20% 0px', // trigger when 20% from top and bottom
+        threshold: 0.5 // trigger when 50% visible
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        // Find the most visible step (highest intersection ratio)
+        let mostVisibleStep = null;
+        let highestRatio = 0;
+        
+        entries.forEach(entry => {
+            if (entry.isIntersecting && entry.intersectionRatio > highestRatio) {
+                highestRatio = entry.intersectionRatio;
+                mostVisibleStep = entry.target;
+            }
+        });
+        
+        // Remove in-view class from all steps first
+        processSteps.forEach(step => step.classList.remove('in-view'));
+        
+        // Add in-view class only to the most visible step
+        if (mostVisibleStep) {
+            mostVisibleStep.classList.add('in-view');
+        }
+    }, observerOptions);
+    
+    // Observe each process step
+    processSteps.forEach(step => {
+        observer.observe(step);
+    });
+    
+    // Re-initialize on window resize (in case user resizes window)
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            // Disconnect existing observer
+            observer.disconnect();
+            // Remove all in-view classes
+            processSteps.forEach(step => step.classList.remove('in-view'));
+            // Re-initialize if still on mobile
+            if (window.innerWidth <= 1076) {
+                initProcessStepsScrollAnimation();
+            }
+        }, 250);
+    });
+}
+
+// Initialize process steps scroll animation when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initProcessStepsScrollAnimation);
+} else {
+    initProcessStepsScrollAnimation();
+}

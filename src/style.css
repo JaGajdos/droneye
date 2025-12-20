@@ -1874,6 +1874,24 @@ h2 {
     box-shadow: 0 6px 20px rgba(0, 35, 102, 0.4);
 }
 
+/* Auto-hover effect on mobile when in viewport */
+@media (max-width: 1076px) {
+    .process-step.in-view {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 35px var(--shadow-hover), 0 4px 15px var(--shadow-color);
+        border-color: var(--primary-color);
+    }
+    
+    .process-step.in-view::before {
+        transform: scaleX(1);
+    }
+    
+    .process-step.in-view .process-step-number {
+        transform: scale(1.1);
+        box-shadow: 0 6px 20px rgba(0, 35, 102, 0.4);
+    }
+}
+
 .process-step-number {
     width: 60px;
     height: 60px;
