@@ -27,6 +27,56 @@
     --footer-text: white;
     --canvas-bg: linear-gradient(135deg, #002366 0%, #003d99 50%, #001a4d 100%);
     --loading-bg: linear-gradient(135deg, #002366 0%, #003d99 50%, #001a4d 100%);
+    
+    /* Font Size Variables - Unified System */
+    /* Headings */
+    --font-size-hero-title: 3rem;
+    --font-size-hero-title-tablet: 2.5rem;
+    --font-size-hero-title-mobile: 2rem;
+    
+    --font-size-section-title: 2.5rem;
+    --font-size-section-title-tablet: 2rem;
+    --font-size-section-title-mobile: 1.75rem;
+    
+    --font-size-card-title: 1.5rem;
+    --font-size-card-title-tablet: 1.3rem;
+    --font-size-card-title-mobile: 1.2rem;
+    
+    --font-size-small-heading: 1.3rem;
+    
+    /* Subtitles */
+    --font-size-hero-subtitle: 1.3rem;
+    --font-size-hero-subtitle-mobile: 1.1rem;
+    
+    --font-size-section-subtitle: 1.2rem;
+    --font-size-section-subtitle-mobile: 1rem;
+    
+    /* Body Text */
+    --font-size-body: 1.1rem;
+    --font-size-body-mobile: 1rem;
+    
+    --font-size-small: 0.9rem;
+    --font-size-small-mobile: 0.85rem;
+    
+    /* Special Elements */
+    --font-size-button: 1.1rem;
+    --font-size-nav-link: 1.2rem;
+    --font-size-nav-link-mobile: 1.1rem;
+    --font-size-form-input: 1rem;
+    --font-size-footer: 1rem;
+    --font-size-footer-link: 0.9rem;
+    --font-size-ui-small: 0.9rem;
+    
+    /* Special Cases (converted from px to rem) */
+    --font-size-lightbox-close: 2.5rem; /* 40px */
+    --font-size-lightbox-nav: 1.875rem; /* 30px */
+    --font-size-lightbox-nav-tablet: 1.5rem; /* 24px */
+    --font-size-donut-center: 1.25rem; /* 20px */
+    --font-size-donut-label: 1rem; /* 16px */
+    --font-size-donut-label-tablet: 0.875rem; /* 14px */
+    --font-size-donut-label-small: 0.8125rem; /* 13px */
+    --font-size-donut-label-mobile: 0.75rem; /* 12px */
+    --font-size-donut-label-tiny: 0.6875rem; /* 11px */
 }
 
 /* Reset a základné štýly */
@@ -193,7 +243,7 @@ body.homepage #canvas-container {
     padding: 10px 16px;
     border-radius: 25px;
     cursor: pointer;
-    font-size: 1.2rem;
+    font-size: var(--font-size-nav-link);
     font-weight: 500;
     transition: all 0.3s ease;
     display: flex;
@@ -205,7 +255,7 @@ body.homepage #canvas-container {
 }
 
 .theme-btn i {
-    font-size: 1.1rem;
+    font-size: var(--font-size-button);
     transition: transform 0.3s ease;
 }
 
@@ -249,7 +299,7 @@ body.homepage #canvas-container {
     transition: all 0.3s ease;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     color: var(--text-color);
-    font-size: 0.9rem;
+    font-size: var(--font-size-ui-small);
     font-weight: 500;
     display: flex;
     align-items: center;
@@ -302,7 +352,7 @@ body.homepage #canvas-container {
     padding: 8px 12px;
     border-radius: 20px;
     cursor: pointer;
-    font-size: 0.85rem;
+    font-size: var(--font-size-small-mobile);
     font-weight: 500;
     transition: all 0.3s ease;
   display: flex;
@@ -403,14 +453,14 @@ body.homepage .main-content {
 }
 
 .subpage-hero h1 {
-    font-size: 3rem;
+    font-size: var(--font-size-hero-title);
     font-weight: 700;
     margin-bottom: 1rem;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .subpage-hero p {
-    font-size: 1.2rem;
+    font-size: var(--font-size-section-subtitle);
     opacity: 0.9;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
@@ -549,7 +599,7 @@ body.homepage .main-content {
 }
 
 .equipment-card h3 {
-    font-size: 1.5rem;
+    font-size: var(--font-size-card-title);
     color: var(--primary-color);
     margin: 1.5rem 1.5rem 0.75rem;
     margin-top: auto;
@@ -557,7 +607,7 @@ body.homepage .main-content {
 }
 
 .equipment-feature {
-    font-size: 1.1rem;
+    font-size: var(--font-size-body);
     color: var(--secondary-color);
     margin: 0 1.5rem 1rem;
     font-weight: 500;
@@ -572,7 +622,7 @@ body.homepage .main-content {
 }
 
 .equipment-specs li {
-    font-size: 1rem;
+    font-size: var(--font-size-form-input);
     color: var(--text-color);
     line-height: 1.8;
     margin-bottom: 0.5rem;
@@ -585,7 +635,7 @@ body.homepage .main-content {
 .equipment-specs li::before {
     content: '•';
     color: var(--primary-color);
-    font-size: 1.2rem;
+    font-size: var(--font-size-section-subtitle);
     font-weight: bold;
     position: absolute;
     left: 0;
@@ -611,7 +661,7 @@ body.homepage .main-content {
 
 /* Projects Page Sections */
 .section-title {
-    font-size: 2.5rem;
+    font-size: var(--font-size-section-title);
     text-align: center;
     color: var(--primary-color);
     margin-bottom: 1rem;
@@ -619,7 +669,7 @@ body.homepage .main-content {
 }
 
 .section-subtitle {
-    font-size: 1.2rem;
+    font-size: var(--font-size-body);
     text-align: center;
     color: var(--text-color);
     margin-bottom: 3rem;
@@ -628,7 +678,7 @@ body.homepage .main-content {
 
 /* Section Text - for paragraph text in sections */
 .section-text {
-    font-size: 1.1rem;
+    font-size: var(--font-size-body);
     line-height: 1.8;
     color: var(--text-color);
     text-align: center;
@@ -679,7 +729,7 @@ body.homepage .main-content {
 }
 
 .video-title {
-    font-size: 1.1rem;
+    font-size: var(--font-size-body);
     color: var(--primary-color);
     margin: 1rem 1rem 0.5rem;
     font-weight: 600;
@@ -819,7 +869,7 @@ body.homepage .main-content {
 }
 
 .photo-title {
-    font-size: 1.1rem;
+    font-size: var(--font-size-body);
     color: var(--primary-color);
     margin: 1rem 1rem 0.5rem;
     margin-top: auto;
@@ -889,7 +939,7 @@ body.homepage .main-content {
     top: 20px;
     right: 35px;
     color: white;
-    font-size: 40px;
+    font-size: var(--font-size-lightbox-close);
     font-weight: bold;
     cursor: pointer;
     z-index: 10000;
@@ -906,7 +956,7 @@ body.homepage .main-content {
     top: 50%;
     transform: translateY(-50%);
     color: white;
-    font-size: 30px;
+    font-size: var(--font-size-lightbox-nav);
     font-weight: bold;
     padding: 16px;
     cursor: pointer;
@@ -938,7 +988,7 @@ body.homepage .main-content {
 
 .photo-lightbox-counter {
     color: white;
-    font-size: 1.2rem;
+    font-size: var(--font-size-section-subtitle);
     margin-top: 1rem;
     text-align: center;
     font-weight: 600;
@@ -949,7 +999,7 @@ body.homepage .main-content {
     .photo-lightbox-next {
         width: 40px;
         height: 40px;
-        font-size: 24px;
+        font-size: var(--font-size-lightbox-nav-tablet);
         padding: 12px;
     }
     
@@ -964,7 +1014,7 @@ body.homepage .main-content {
     .photo-lightbox-close {
         top: 10px;
         right: 20px;
-        font-size: 30px;
+        font-size: var(--font-size-lightbox-nav);
     }
     
     .photo-lightbox-content img {
@@ -998,11 +1048,11 @@ body.homepage .main-content {
 
 @media (max-width: 768px) {
     .section-title {
-        font-size: 2rem;
+        font-size: var(--font-size-section-title-tablet);
     }
 
     .section-subtitle {
-        font-size: 1rem;
+        font-size: var(--font-size-body-mobile);
     }
 
     .videos-grid {
@@ -1021,7 +1071,7 @@ body.homepage .main-content {
 
 @media (max-width: 440px) {
     .section-title {
-        font-size: 1.75rem;
+        font-size: var(--font-size-section-title-mobile);
     }
 
     .photos-grid {
@@ -1074,7 +1124,7 @@ body.homepage .main-content {
     text-align: center;
     line-height: 40px;
     text-decoration: none;
-    font-size: 1.2rem;
+    font-size: var(--font-size-section-subtitle);
     transition: all 0.3s ease;
     overflow: hidden;
     display: flex;
@@ -1144,7 +1194,7 @@ body.homepage .main-content {
     border-radius: 8px;
     background: rgba(255, 255, 255, 0.1);
     color: white;
-    font-size: 0.9rem;
+    font-size: var(--font-size-footer-link);
     transition: all 0.3s ease;
 }
 
@@ -1214,7 +1264,7 @@ body.homepage .main-content {
     padding: 0.5rem 0.75rem;
     border-radius: 8px;
     cursor: pointer;
-    font-size: 1.1rem;
+    font-size: var(--font-size-button);
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
@@ -1244,7 +1294,7 @@ body.homepage .main-content {
 .footer-legal a {
     color: rgba(255, 255, 255, 0.8);
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: var(--font-size-footer-link);
     transition: color 0.3s ease;
 }
 
@@ -1284,7 +1334,7 @@ body.homepage .main-content {
 }
 
 .hero-title {
-    font-size: 3.5rem;
+    font-size: var(--font-size-hero-title);
     font-weight: 700;
     margin-bottom: 1rem;
     color: white;
@@ -1293,7 +1343,7 @@ body.homepage .main-content {
 }
 
 .hero-subtitle {
-    font-size: 1.3rem;
+    font-size: var(--font-size-hero-subtitle);
     margin-bottom: 2rem;
     color: rgba(255, 255, 255, 0.9);
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
@@ -1313,7 +1363,7 @@ body.homepage .main-content {
     color: white;
     border: 2px solid var(--primary-color);
     padding: 13px 28px;
-    font-size: 1.1rem;
+    font-size: var(--font-size-button);
     font-weight: 600;
     border-radius: 50px;
     cursor: pointer;
@@ -1342,7 +1392,7 @@ body.homepage .main-content {
     color: white;
     border: 2px solid var(--primary-color);
     padding: 13px 28px;
-    font-size: 1.1rem;
+    font-size: var(--font-size-button);
     font-weight: 600;
     border-radius: 50px;
     cursor: pointer;
@@ -1368,7 +1418,7 @@ body.homepage .main-content {
 
 /* Content Sections */
 h2 {
-    font-size: 2.5rem;
+    font-size: var(--font-size-section-title);
     text-align: center;
     color: var(--primary-color);
 }
@@ -1477,7 +1527,7 @@ h2 {
 }
 
 .team-card-description {
-    font-size: 1rem;
+    font-size: var(--font-size-form-input);
     line-height: 1.6;
     text-align: center;
     color: white;
@@ -1535,40 +1585,40 @@ h2 {
 }
 
 .carousel-tab {
-    background: transparent;
-    border: none;
+    background: var(--card-background);
+    border: 2px solid var(--border-color);
     color: var(--text-color);
-    padding: 0.5rem 0;
+    padding: 0.75rem 1.5rem;
     cursor: pointer;
-    font-size: 1rem;
+    font-size: var(--font-size-form-input);
     font-weight: 500;
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
     white-space: nowrap;
     font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     position: relative;
     text-decoration: none;
-    opacity: 0.8;
-    text-align: left;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px var(--shadow-color);
 }
 
 .carousel-tab:hover {
-    color: var(--primary-color);
-    opacity: 1;
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px var(--shadow-hover);
 }
 
 .carousel-tab.active {
-    color: var(--primary-color);
-    opacity: 1;
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+    box-shadow: 0 4px 12px rgba(0, 35, 102, 0.3);
 }
 
 .carousel-tab.active::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: var(--primary-color);
+    display: none;
 }
 
 .carousel-container {
@@ -1678,7 +1728,7 @@ h2 {
 }
 
 .service-card-carousel h3 {
-    font-size: 2rem;
+    font-size: var(--font-size-section-title-tablet);
     color: var(--primary-color);
     margin-top: 0;
     margin-bottom: 1.5rem;
@@ -1687,7 +1737,7 @@ h2 {
 }
 
 .service-card-carousel p {
-    font-size: 1.1rem;
+    font-size: var(--font-size-body);
     line-height: 1.8;
     color: var(--text-color);
     margin: 0;
@@ -1833,7 +1883,7 @@ h2 {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.5rem;
+    font-size: var(--font-size-card-title);
     font-weight: 600;
     margin: 0 auto 1.5rem;
     box-shadow: 0 4px 15px rgba(0, 35, 102, 0.3);
@@ -1855,14 +1905,14 @@ h2 {
 }
 
 .process-step h3 {
-    font-size: 1.3rem;
+    font-size: var(--font-size-small-heading);
     color: var(--primary-color);
     margin-bottom: 1rem;
     font-weight: 600;
 }
 
 .process-step p {
-    font-size: 0.95rem;
+    font-size: var(--font-size-body);
     line-height: 1.6;
     color: var(--text-color);
     margin: 0;
@@ -1900,14 +1950,14 @@ h2 {
 }
 
 .team-card-name {
-    font-size: 1.5rem;
+    font-size: var(--font-size-card-title);
     font-weight: 600;
     color: var(--primary-color);
     margin-bottom: 0.5rem;
 }
 
 .team-card-position {
-    font-size: 1rem;
+    font-size: var(--font-size-form-input);
     color: var(--secondary-color);
     font-weight: 500;
     margin: 0;
@@ -1977,7 +2027,7 @@ h2 {
 .donut-segment-label {
     position: absolute;
     font-family: 'Montserrat', sans-serif;
-    font-size: 20px;
+    font-size: var(--font-size-donut-center);
     font-weight: 700;
     z-index: 2;
     pointer-events: none;
@@ -2026,7 +2076,7 @@ h2 {
 
 .label-group h4 {
     font-family: 'Montserrat', sans-serif;
-    font-size: 16px;
+    font-size: var(--font-size-donut-label);
     font-weight: 700;
     color: #002366;
     margin-bottom: 0.75rem;
@@ -2040,7 +2090,7 @@ h2 {
 
 .label-group li {
     font-family: 'Montserrat', sans-serif;
-    font-size: 13px;
+    font-size: var(--font-size-donut-label-small);
     color: #002366;
     margin-bottom: 0.5rem;
     padding-left: 1rem;
@@ -2091,13 +2141,13 @@ h2 {
 .contact-info h3 {
     color: var(--primary-color);
     margin-bottom: 1.5rem;
-    font-size: 1.3rem;
+    font-size: var(--font-size-small-heading);
 }
 
 .contact-info p {
     color: var(--text-color);
     margin-bottom: 1rem;
-    font-size: 1.1rem;
+    font-size: var(--font-size-body);
 }
 
 .contact-info a {
@@ -2116,7 +2166,7 @@ h2 {
 }
 
 .contact-form-title {
-    font-size: 1.8rem;
+    font-size: var(--font-size-card-title);
     color: var(--primary-color);
     margin-bottom: 1.5rem;
     font-weight: 600;
@@ -2132,7 +2182,7 @@ h2 {
     border-radius: 8px;
     background: white;
     color: var(--text-color);
-    font-size: 1rem;
+    font-size: var(--font-size-form-input);
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
@@ -2156,7 +2206,7 @@ h2 {
     padding: 12px 30px;
   border-radius: 8px;
   cursor: pointer;
-    font-size: 1rem;
+    font-size: var(--font-size-button);
     font-weight: 600;
     transition: all 0.3s ease;
 }
@@ -2177,7 +2227,7 @@ footer {
 
 footer p {
     margin: 0;
-    font-size: 1rem;
+    font-size: var(--font-size-footer);
     opacity: 0.9;
 }
 
@@ -2269,12 +2319,12 @@ body:not(.homepage) #loading-screen {
     }
     
     .equipment-card h3 {
-        font-size: 1.3rem;
+        font-size: var(--font-size-card-title-tablet);
         margin: 1rem 1rem 0.5rem;
     }
     
     .equipment-feature {
-        font-size: 1rem;
+        font-size: var(--font-size-form-input);
         margin: 0 1rem 0.75rem;
     }
     
@@ -2283,7 +2333,7 @@ body:not(.homepage) #loading-screen {
     }
     
     .equipment-specs li {
-        font-size: 0.95rem;
+        font-size: var(--font-size-small);
         padding-left: 1.25rem;
     }
     
@@ -2315,7 +2365,7 @@ body:not(.homepage) #loading-screen {
     }
     
     .donut-segment-label {
-        font-size: 14px;
+        font-size: var(--font-size-donut-label-tablet);
     }
     
     .label-group {
@@ -2323,12 +2373,12 @@ body:not(.homepage) #loading-screen {
     }
     
     .label-group h4 {
-        font-size: 14px;
+        font-size: var(--font-size-donut-label-tablet);
         margin-bottom: 0.5rem;
     }
     
     .label-group li {
-        font-size: 11px;
+        font-size: var(--font-size-donut-label-tiny);
         margin-bottom: 0.4rem;
     }
     
@@ -2481,7 +2531,7 @@ body:not(.homepage) #loading-screen {
         background: transparent;
         border: none;
         color: var(--footer-text);
-        font-size: 1.5rem;
+        font-size: var(--font-size-card-title);
         cursor: pointer;
         padding: 0.5rem;
         display: flex;
@@ -2512,7 +2562,7 @@ body:not(.homepage) #loading-screen {
 
     .nav-menu .nav-link {
         color: var(--navbar-text);
-        font-size: 1.25rem;
+        font-size: var(--font-size-body);
         padding: 1rem 2rem;
         display: block;
         border-radius: 12px;
@@ -2598,7 +2648,7 @@ body:not(.homepage) #loading-screen {
         padding: 0.5rem 1rem;
         border-radius: 8px;
         cursor: pointer;
-        font-size: 1.1rem;
+        font-size: var(--font-size-button);
         font-weight: 500;
         transition: all 0.3s ease;
         min-width: 50px;
@@ -2673,11 +2723,11 @@ body:not(.homepage) #loading-screen {
     }
 
     .subpage-hero h1 {
-        font-size: 2.5rem;
+        font-size: var(--font-size-hero-title-tablet);
     }
 
     .subpage-hero p {
-        font-size: 1.1rem;
+        font-size: var(--font-size-hero-subtitle-mobile);
     }
 
     
@@ -2707,11 +2757,11 @@ body:not(.homepage) #loading-screen {
     }
 
     .hero-title {
-        font-size: 2.5rem;
+        font-size: var(--font-size-hero-title-tablet);
     }
     
     .hero-subtitle {
-        font-size: 1.1rem;
+        font-size: var(--font-size-hero-subtitle-mobile);
     }
     
     .hero-buttons {
@@ -2739,7 +2789,7 @@ body:not(.homepage) #loading-screen {
     }
 
     .hero-title {
-        font-size: 2rem;
+        font-size: var(--font-size-hero-title-mobile);
     }
 
     .container {
@@ -2777,7 +2827,7 @@ body:not(.homepage) #loading-screen {
     .carousel-tab {
         text-align: center;
         padding: 0.5rem 0.75rem;
-        font-size: 0.85rem;
+        font-size: var(--font-size-small-mobile);
         white-space: nowrap;
     }
     
@@ -2786,18 +2836,8 @@ body:not(.homepage) #loading-screen {
         padding-left: 0.75rem;
     }
     
-    .carousel-tab.active::before {
-        display: none;
-    }
-    
     .carousel-tab.active::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 2px;
-        background: var(--primary-color);
+        display: none;
     }
     
     .services-carousel {
@@ -2809,7 +2849,7 @@ body:not(.homepage) #loading-screen {
     }
     
     .service-card-carousel h3 {
-        font-size: 1.5rem;
+        font-size: var(--font-size-card-title);
         padding-right: 80px;
     }
     
@@ -2834,11 +2874,11 @@ body:not(.homepage) #loading-screen {
     }
     
     .service-card-carousel h3 {
-        font-size: 1.5rem;
+        font-size: var(--font-size-card-title);
     }
     
     .service-card-carousel p {
-        font-size: 1rem;
+        font-size: var(--font-size-form-input);
     }
     
     .carousel-arrow {
@@ -2856,11 +2896,11 @@ body:not(.homepage) #loading-screen {
     }
     
     .service-card-carousel h3 {
-        font-size: 1.5rem;
+        font-size: var(--font-size-card-title);
     }
     
     .service-card-carousel p {
-        font-size: 1rem;
+        font-size: var(--font-size-form-input);
     }
     
     .carousel-arrow {
@@ -2914,12 +2954,12 @@ body:not(.homepage) #loading-screen {
 @media (max-width: 440px) {
     
     .equipment-card h3 {
-        font-size: 1.2rem;
+        font-size: var(--font-size-card-title-mobile);
         margin: 1rem 1rem 0.5rem;
     }
     
     .equipment-feature {
-        font-size: 1rem;
+        font-size: var(--font-size-form-input);
         margin: 0 1rem 0.75rem;
     }
     
@@ -2928,7 +2968,7 @@ body:not(.homepage) #loading-screen {
     }
     
     .equipment-specs li {
-        font-size: 0.9rem;
+        font-size: var(--font-size-small);
         padding-left: 1.25rem;
     }
     
@@ -2944,7 +2984,7 @@ body:not(.homepage) #loading-screen {
     
     .carousel-tab {
         padding: 0.5rem 0.6rem;
-        font-size: 0.8rem;
+        font-size: var(--font-size-small-mobile);
     }
     
     .services-carousel {
@@ -2956,7 +2996,7 @@ body:not(.homepage) #loading-screen {
     }
     
     .service-card-carousel h3 {
-        font-size: 1.3rem;
+        font-size: var(--font-size-card-title-tablet);
         padding-right: 70px;
     }
     
@@ -2979,12 +3019,12 @@ body:not(.homepage) #loading-screen {
 @media (max-width: 320px) {
     
     .equipment-card h3 {
-        font-size: 1.1rem;
+        font-size: var(--font-size-body);
         margin: 0.75rem 0.75rem 0.5rem;
     }
     
     .equipment-feature {
-        font-size: 0.95rem;
+        font-size: var(--font-size-small);
         margin: 0 0.75rem 0.5rem;
     }
     
@@ -2993,7 +3033,7 @@ body:not(.homepage) #loading-screen {
     }
     
     .equipment-specs li {
-        font-size: 0.85rem;
+        font-size: var(--font-size-small-mobile);
         padding-left: 1rem;
     }
     
@@ -3011,7 +3051,7 @@ body:not(.homepage) #loading-screen {
     
     .carousel-tab {
         padding: 0.5rem;
-        font-size: 0.75rem;
+        font-size: var(--font-size-small-mobile);
         white-space: normal;
         text-align: center;
     }
@@ -3019,6 +3059,10 @@ body:not(.homepage) #loading-screen {
     .carousel-tab:hover,
     .carousel-tab.active {
         padding-left: 0.5rem;
+    }
+    
+    .carousel-tab.active::after {
+        display: none;
     }
     
     .services-carousel {
@@ -3030,13 +3074,13 @@ body:not(.homepage) #loading-screen {
     }
     
     .service-card-carousel h3 {
-        font-size: 1.1rem;
+        font-size: var(--font-size-body);
         padding-right: 60px;
         line-height: 1.3;
     }
     
     .service-card-carousel p {
-        font-size: 0.9rem;
+        font-size: var(--font-size-footer-link);
     }
     
     .carousel-arrows-in-card {
@@ -3093,7 +3137,7 @@ body:not(.homepage) #loading-screen {
 }
 
 .pricing-custom-card h3 {
-    font-size: 2rem;
+    font-size: var(--font-size-section-title-tablet);
     color: var(--primary-color);
     font-weight: 700;
     margin: 0 0 1.5rem 0;
@@ -3111,19 +3155,19 @@ body:not(.homepage) #loading-screen {
 }
 
 .pricing-amount {
-    font-size: 3rem;
+    font-size: var(--font-size-hero-title);
     color: var(--primary-color);
     font-weight: 700;
 }
 
 .pricing-currency {
-    font-size: 2rem;
+    font-size: var(--font-size-section-title-tablet);
     color: var(--primary-color);
     font-weight: 700;
 }
 
 .pricing-custom-label {
-    font-size: 1.2rem;
+    font-size: var(--font-size-section-subtitle);
     color: var(--text-color);
     margin-bottom: 2rem;
     font-weight: 500;
@@ -3167,7 +3211,7 @@ body:not(.homepage) #loading-screen {
 }
 
 .pricing-factor-card h3 {
-    font-size: 1.5rem;
+    font-size: var(--font-size-card-title);
     color: var(--primary-color);
     margin-bottom: 1rem;
     font-weight: 600;
@@ -3175,7 +3219,7 @@ body:not(.homepage) #loading-screen {
 
 .pricing-factor-card p {
     color: var(--text-color);
-    font-size: 1rem;
+    font-size: var(--font-size-form-input);
     line-height: 1.6;
     margin: 0;
 }
@@ -3204,7 +3248,7 @@ body:not(.homepage) #loading-screen {
     padding-left: 2rem;
     position: relative;
     color: var(--text-color);
-    font-size: 1.1rem;
+    font-size: var(--font-size-body);
     line-height: 1.8;
 }
 
@@ -3213,7 +3257,7 @@ body:not(.homepage) #loading-screen {
     position: absolute;
     left: 0;
     color: var(--primary-color);
-    font-size: 1.5rem;
+    font-size: var(--font-size-card-title);
     font-weight: 700;
     line-height: 1;
 }
@@ -3253,7 +3297,7 @@ body:not(.homepage) #loading-screen {
 }
 
 .pricing-included-card h3 {
-    font-size: 1.3rem;
+    font-size: var(--font-size-small-heading);
     color: white;
     background: var(--primary-color);
     margin: -2rem -1.5rem 1.5rem -1.5rem;
@@ -3270,12 +3314,12 @@ body:not(.homepage) #loading-screen {
 }
 
 .pricing-included-list li {
-    padding: 0.6rem 0;
+    padding: 0.4rem 0;
     padding-left: 1.5rem;
     position: relative;
     color: var(--text-color);
     line-height: 1.5;
-    font-size: 0.95rem;
+    font-size: var(--font-size-body);
 }
 
 .pricing-included-list li::before {
@@ -3284,7 +3328,7 @@ body:not(.homepage) #loading-screen {
     left: 0;
     color: var(--primary-color);
     font-weight: 700;
-    font-size: 1.5rem;
+    font-size: var(--font-size-card-title);
     line-height: 1;
 }
 
@@ -3325,20 +3369,20 @@ body:not(.homepage) #loading-screen {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.5rem;
+    font-size: var(--font-size-card-title);
     font-weight: 700;
     margin-bottom: 1.5rem;
 }
 
 .postproduction-step h3 {
-    font-size: 1.3rem;
+    font-size: var(--font-size-small-heading);
     color: var(--primary-color);
     margin-bottom: 1rem;
     font-weight: 600;
 }
 
 .postproduction-step p {
-    font-size: 1rem;
+    font-size: var(--font-size-form-input);
     line-height: 1.7;
     color: var(--text-color);
     margin: 0;
@@ -3414,12 +3458,12 @@ body:not(.homepage) #loading-screen {
     }
     
     .equipment-card h3 {
-        font-size: 1.2rem;
+        font-size: var(--font-size-card-title-mobile);
         margin: 1rem 1rem 0.5rem;
     }
     
     .equipment-feature {
-        font-size: 1rem;
+        font-size: var(--font-size-form-input);
         margin: 0 1rem 0.75rem;
     }
     
@@ -3428,7 +3472,7 @@ body:not(.homepage) #loading-screen {
     }
     
     .equipment-specs li {
-        font-size: 0.9rem;
+        font-size: var(--font-size-small);
         padding-left: 1.25rem;
     }
     
@@ -3458,7 +3502,7 @@ body:not(.homepage) #loading-screen {
         height: 80px;
     }
     .donut-segment-label {
-        font-size: 12px;
+        font-size: var(--font-size-donut-label-mobile);
     }
 }
 
