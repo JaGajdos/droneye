@@ -312,5 +312,28 @@
     "pricing": "Cenová ponuka - DroneEye",
     "dronetext": "Drone 3D Model - DroneEye"
   },
-  "loading": "Načítavam..."
+  "loading": "Načítavam...",
+  "dronetext": {
+    "text1": {
+      "title": "Sme vášniví piloti dronov, fotografovia a kameramani.",
+      "subtitle": "Vytvárame nezabudnuteľné momenty pre vás všade."
+    },
+    "text2": {
+      "title": "Ceníme si kreativitu a inovácie.",
+      "subtitle": "Posúvame hranice a predefinujeme to, čo je možné."
+    },
+    "text3": {
+      "title": "Počúvame vašich klientov.",
+      "subtitle": "Vždy hľadáme spätnú väzbu a používame ju na posúvanie našich hraníc."
+    },
+    "text4": {
+      "title": "Spolupráca je kľúč.",
+      "subtitle": "Začnite svoju cestu dnes a pozrite svet ako nikdy predtým."
+    },
+    "cta": {
+      "title": "Začnime spolu",
+      "subtitle": "Kontaktujte nás a vytvorme niečo výnimočné.",
+      "button": "Naše projekty"
+    }
+  }
 }

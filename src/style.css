@@ -1579,7 +1579,7 @@ h2 {
 .carousel-tabs {
     display: flex;
     flex-direction: row;
-    gap: 2rem;
+    gap: 1rem;
     flex-wrap: wrap;
     justify-content: flex-start;
 }

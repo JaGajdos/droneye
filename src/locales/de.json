@@ -312,6 +312,29 @@
     "pricing": "Preise - DroneEye",
     "dronetext": "Drohnen 3D Modell - DroneEye"
   },
-  "loading": "Lädt..."
+  "loading": "Lädt...",
+  "dronetext": {
+    "text1": {
+      "title": "Wir sind leidenschaftliche Drohnenpiloten, Fotografen und Kameramänner.",
+      "subtitle": "Wir schaffen unvergessliche Momente für Sie überall."
+    },
+    "text2": {
+      "title": "Wir schätzen Kreativität und Innovation.",
+      "subtitle": "Wir verschieben Grenzen und definieren neu, was möglich ist."
+    },
+    "text3": {
+      "title": "Wir hören auf Ihre Kunden.",
+      "subtitle": "Wir suchen immer nach Feedback und nutzen es, um unsere Grenzen zu verschieben."
+    },
+    "text4": {
+      "title": "Zusammenarbeit ist der Schlüssel.",
+      "subtitle": "Beginnen Sie noch heute Ihre Reise und sehen Sie die Welt wie nie zuvor."
+    },
+    "cta": {
+      "title": "Lassen Sie uns gemeinsam beginnen",
+      "subtitle": "Kontaktieren Sie uns und lassen Sie uns etwas Außergewöhnliches schaffen.",
+      "button": "Unsere Projekte"
+    }
+  }
 }
 

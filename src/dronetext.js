@@ -25,13 +25,19 @@ let droneTargetY = droneStartY;
 let dronePositionZ = 0; // Forward position (negative = forward/away)
 const autoMoveSpeed = 0.3; // Automatic forward movement speed (increased)
 
-// Color configuration - Royal blue theme (brighter for visibility)
+// Color configuration - Royal blue theme from project with detailed parts
 const droneColors = {
-    body: 0x0055cc,      // Brighter royal blue (more visible) - for Body
-    rotors: 0x00aaff,    // Light blue (very visible) - for Rotors
-    details: 0xcccccc,   // Light gray - for Cube002 and other details
-    accent: 0x66a3ff,    // Light blue accent
-    white: 0xffffff       // White
+    body: 0x002366,      // Royal blue (#002366) - primary color from project - for Body
+    bodyAccent: 0x003d99, // Secondary blue (#003d99) - for body accents
+    rotors: 0xff6600,    // Vibrant orange (very visible and lively) - for Rotors
+    camera: 0x1a1a1a,    // Dark gray/black - for camera
+    lens: 0x000000,      // Black - for camera lens
+    sensors: 0x4a9eff,   // Light blue - for sensors
+    frame: 0x001a4d,     // Darker blue - for frame/arms
+    details: 0xffffff,   // Bright white - for Cube002 and other details
+    accent: 0x003d99,    // Secondary blue (#003d99) from project
+    led: 0x00ffff,       // Cyan - for LED lights
+    white: 0xffffff      // White
 };
 
 // Function to change drone color (can be called from console or UI)
@@ -297,29 +303,43 @@ function createScenes() {
     const scene1 = new THREE.Scene();
     scene1.background = new THREE.Color(0x000000); // Deep space black
     
-    // Ambient light for space - brighter for drone visibility
-    scene1.add(new THREE.AmbientLight(0xffffff, 0.8));
+    // Ambient light for space - brighter for vibrant drone colors
+    scene1.add(new THREE.AmbientLight(0xffffff, 1.2));
     
-    // Add directional light for better drone visibility
-    const spaceDirLight = new THREE.DirectionalLight(0xffffff, 1.0);
+    // Add directional light for better drone visibility and vibrant colors
+    const spaceDirLight = new THREE.DirectionalLight(0xffffff, 1.5);
     spaceDirLight.position.set(5, 10, 5);
     scene1.add(spaceDirLight);
     
-    // Add stars - create in much larger space for infinite forward movement
+    // Add additional point light for more vibrant colors
+    const pointLight = new THREE.PointLight(0xffffff, 1.0, 100);
+    pointLight.position.set(0, 0, 10);
+    scene1.add(pointLight);
+    
+    // Add stars - create tunnel effect (cylindrical distribution)
     const starsGeometry = new THREE.BufferGeometry();
-    const starsCount = 2000;
+    const starsCount = 4000; // More stars for better infinite tunnel effect
     const starsPositions = new Float32Array(starsCount * 3);
-    const starsDistance = 500; // Large distance for stars (far away)
+    
+    // Tunnel parameters - wider tunnel for more side distribution
+    const tunnelMinRadius = 8; // Minimum distance from center (inner edge of tunnel)
+    const tunnelMaxRadius = 280; // Maximum distance from center (outer edge of tunnel) - very wide for maximum side stars
+    const tunnelLength = 1200; // Longer tunnel for better initial distribution
     
     for (let i = 0; i < starsCount * 3; i += 3) {
-        // Create stars in a large sphere around origin
-        const theta = Math.random() * Math.PI * 2; // Azimuth angle
-        const phi = Math.acos(2 * Math.random() - 1); // Polar angle
-        const radius = starsDistance + Math.random() * starsDistance; // Distance from center
+        // Create stars in cylindrical tunnel shape (not in center, more on edges)
+        const theta = Math.random() * Math.PI * 2; // Angle around Z axis
+        // Bias radius towards outer edge for tunnel effect (less stars in center)
+        const radiusFactor = Math.pow(Math.random(), 0.4); // Power < 1 biases towards larger values
+        const radius = tunnelMinRadius + radiusFactor * (tunnelMaxRadius - tunnelMinRadius);
         
-        starsPositions[i] = radius * Math.sin(phi) * Math.cos(theta); // x
-        starsPositions[i + 1] = radius * Math.sin(phi) * Math.sin(theta); // y
-        starsPositions[i + 2] = radius * Math.cos(phi); // z
+        // Random Z position along tunnel
+        const z = -Math.random() * tunnelLength;
+        
+        // Calculate X and Y from radius and angle (cylindrical coordinates)
+        starsPositions[i] = radius * Math.cos(theta); // x
+        starsPositions[i + 1] = radius * Math.sin(theta); // y
+        starsPositions[i + 2] = z; // z (along tunnel)
     }
     
     starsGeometry.setAttribute('position', new THREE.BufferAttribute(starsPositions, 3));
@@ -344,10 +364,11 @@ function createScenes() {
     const starsMaterial = new THREE.PointsMaterial({
         map: starTexture,
         color: 0xffffff,
-        size: 3.0,
+        size: 2.5, // Slightly smaller for more subtle effect
         sizeAttenuation: true,
         transparent: true,
-        alphaTest: 0.1
+        alphaTest: 0.1,
+        opacity: 0.9 // Slightly transparent for softer look
     });
     
     const stars = new THREE.Points(starsGeometry, starsMaterial);
@@ -750,71 +771,162 @@ function loadDroneModel() {
             console.group('📋 GLB node/mesh list');
             let meshCount = 0;
             let nodeCount = 0;
+            const meshPositions = []; // Store mesh positions for size-based coloring
             
+            // First pass: collect all meshes and their positions
             droneRoot.traverse((o) => {
                 if (o.isMesh) {
                     meshCount++;
-                    console.log(`MESH [${meshCount}]:`, o.name || '(no-name)', {
-                        name: o.name,
-                        type: o.type,
-                        material: o.material?.type,
-                        geometry: o.geometry?.type
-                    });
+                    const box = new THREE.Box3().setFromObject(o);
+                    const size = new THREE.Vector3();
+                    box.getSize(size);
+                    const center = new THREE.Vector3();
+                    box.getCenter(center);
                     
-                    // Apply colors to ALL meshes - Royal blue theme
-                    if (o.material) {
-                        const materials = Array.isArray(o.material) ? o.material : [o.material];
+                    meshPositions.push({
+                        mesh: o,
+                        size: size,
+                        center: center,
+                        name: o.name || ''
+                    });
+                }
+            });
+            
+            // Second pass: apply colors based on position, size, and name
+            meshPositions.forEach((meshData, index) => {
+                const o = meshData.mesh;
+                const name = (meshData.name || '').toLowerCase();
+                const size = meshData.size;
+                const center = meshData.center;
+                const maxSize = Math.max(size.x, size.y, size.z);
+                const isSmall = maxSize < 0.5; // Small parts
+                const isMedium = maxSize >= 0.5 && maxSize < 1.5; // Medium parts
+                const isLarge = maxSize >= 1.5; // Large parts
+                
+                console.log(`MESH [${index + 1}]:`, name || '(no-name)', {
+                    name: name,
+                    size: maxSize.toFixed(2),
+                    position: `(${center.x.toFixed(2)}, ${center.y.toFixed(2)}, ${center.z.toFixed(2)})`
+                });
+                
+                // Apply colors to ALL meshes - Vibrant colorful theme
+                if (o.material) {
+                    const materials = Array.isArray(o.material) ? o.material : [o.material];
+                    
+                    materials.forEach((mat, idx) => {
+                        // Detect different parts of the drone
+                        const isRotor = /rotor|prop|fan|blade/i.test(name);
+                        const isCamera = /camera|cam/i.test(name);
+                        const isLens = /lens/i.test(name);
+                        const isSensor = /sensor|detector|scanner/i.test(name);
+                        const isFrame = /frame|arm|leg|support/i.test(name);
+                        const isLED = /led|light|indicator/i.test(name);
+                        const isBody = /body|main|center|core/i.test(name);
+                        const isDetail = /cube|detail|part|component/i.test(name);
                         
-                        materials.forEach((mat, idx) => {
-                            // Apply to all material types
-                            if (mat.isMeshStandardMaterial || mat.isMeshPhongMaterial || mat.isMeshLambertMaterial || mat.isMeshBasicMaterial) {
-                                const isRotor = o.name && /rotor/i.test(o.name);
-                                const isBody = o.name && /body/i.test(o.name);
-                                const isDetail = o.name && /cube/i.test(o.name);
-                                
-                                let colorToApply;
-                                let emissiveColor;
-                                
-                                if (isRotor) {
-                                    // Rotors - light blue
-                                    colorToApply = droneColors.rotors;
-                                    emissiveColor = droneColors.rotors;
-                                    console.log(`Applied rotor color to ${o.name}:`, colorToApply.toString(16));
-                                } else if (isBody) {
-                                    // Body - royal blue
-                                    colorToApply = droneColors.body;
-                                    emissiveColor = droneColors.body;
-                                    console.log(`Applied body color to ${o.name}:`, colorToApply.toString(16));
-                                } else if (isDetail) {
-                                    // Details (Cube002, etc.) - light gray
-                                    colorToApply = droneColors.details;
-                                    emissiveColor = droneColors.details;
-                                    console.log(`Applied detail color to ${o.name}:`, colorToApply.toString(16));
-                                } else {
-                                    // Default - royal blue for unknown parts
-                                    colorToApply = droneColors.body;
-                                    emissiveColor = droneColors.body;
-                                    console.log(`Applied default body color to ${o.name || 'unnamed'}:`, colorToApply.toString(16));
-                                }
-                                
-                                mat.color.setHex(colorToApply);
-                                
-                                // Add emissive glow for better visibility in space
-                                if (mat.emissive !== undefined) {
-                                    mat.emissive.setHex(emissiveColor);
-                                    mat.emissiveIntensity = isRotor ? 0.3 : (isDetail ? 0.1 : 0.2); // Subtle glow
-                                }
-                                
-                                if (mat.metalness !== undefined) mat.metalness = isRotor ? 0.2 : (isDetail ? 0.5 : 0.3);
-                                if (mat.roughness !== undefined) mat.roughness = isRotor ? 0.5 : (isDetail ? 0.3 : 0.4);
-                                
-                                mat.needsUpdate = true;
+                        let colorToApply;
+                        let emissiveColor;
+                        let emissiveIntensity;
+                        
+                        if (isRotor) {
+                            // Rotors - vibrant orange
+                            colorToApply = droneColors.rotors;
+                            emissiveColor = droneColors.rotors;
+                            emissiveIntensity = 2.0;
+                            console.log(`Applied rotor color to ${name}:`, colorToApply.toString(16));
+                        } else if (isLens) {
+                            // Camera lens - black
+                            colorToApply = droneColors.lens;
+                            emissiveColor = 0x000000;
+                            emissiveIntensity = 0.0;
+                            console.log(`Applied lens color to ${name}:`, colorToApply.toString(16));
+                        } else if (isCamera) {
+                            // Camera body - black
+                            colorToApply = 0x000000;
+                            emissiveColor = 0x000000;
+                            emissiveIntensity = 0.0;
+                            console.log(`Applied camera color to ${name}:`, colorToApply.toString(16));
+                        } else if (isSensor) {
+                            // Sensors - light blue
+                            colorToApply = droneColors.sensors;
+                            emissiveColor = droneColors.sensors;
+                            emissiveIntensity = 1.2;
+                            console.log(`Applied sensor color to ${name}:`, colorToApply.toString(16));
+                        } else if (isLED) {
+                            // LED lights - cyan
+                            colorToApply = droneColors.led;
+                            emissiveColor = droneColors.led;
+                            emissiveIntensity = 2.5;
+                            console.log(`Applied LED color to ${name}:`, colorToApply.toString(16));
+                        } else if (isFrame) {
+                            // Frame/arms - darker blue
+                            colorToApply = droneColors.frame;
+                            emissiveColor = droneColors.frame;
+                            emissiveIntensity = 0.8;
+                            console.log(`Applied frame color to ${name}:`, colorToApply.toString(16));
+                        } else if (isDetail || isSmall) {
+                            // Small parts and details - white or secondary blue
+                            const useAccent = (index % 3) === 0; // Every 3rd uses accent
+                            colorToApply = useAccent ? droneColors.bodyAccent : droneColors.details;
+                            emissiveColor = useAccent ? droneColors.bodyAccent : droneColors.details;
+                            emissiveIntensity = useAccent ? 1.0 : 0.8;
+                            console.log(`Applied detail/small color to ${name}:`, colorToApply.toString(16));
+                        } else if (isMedium) {
+                            // Medium parts - alternate between royal blue and secondary blue
+                            const useAccent = (index % 2) === 0; // Alternate
+                            colorToApply = useAccent ? droneColors.bodyAccent : droneColors.body;
+                            emissiveColor = useAccent ? droneColors.bodyAccent : droneColors.body;
+                            emissiveIntensity = useAccent ? 1.2 : 1.5;
+                            console.log(`Applied medium part color to ${name}:`, colorToApply.toString(16));
+                        } else if (isLarge || isBody) {
+                            // Large parts/body - royal blue with some accent parts
+                            const useAccent = (index % 5) === 0 || (index % 5) === 2; // Some parts use accent
+                            colorToApply = useAccent ? droneColors.bodyAccent : droneColors.body;
+                            emissiveColor = useAccent ? droneColors.bodyAccent : droneColors.body;
+                            emissiveIntensity = useAccent ? 1.2 : 1.5;
+                            console.log(`Applied large/body color to ${name}:`, colorToApply.toString(16));
+                        } else {
+                            // Default - use index for consistent coloring pattern
+                            const pattern = index % 6;
+                            if (pattern === 0 || pattern === 3) {
+                                colorToApply = droneColors.body;
+                                emissiveColor = droneColors.body;
+                                emissiveIntensity = 1.5;
+                            } else if (pattern === 1 || pattern === 4) {
+                                colorToApply = droneColors.bodyAccent;
+                                emissiveColor = droneColors.bodyAccent;
+                                emissiveIntensity = 1.2;
                             } else {
-                                console.warn(`Material type not supported for ${o.name}:`, mat.type);
+                                colorToApply = droneColors.details;
+                                emissiveColor = droneColors.details;
+                                emissiveIntensity = 0.8;
                             }
+                            console.log(`Applied default pattern color to ${name || 'unnamed'}:`, colorToApply.toString(16));
+                        }
+                        
+                        // Create new MeshStandardMaterial with vibrant colors and very high emissive
+                        // Using MeshStandardMaterial with high emissive for self-illuminated vibrant colors
+                        const newMaterial = new THREE.MeshStandardMaterial({
+                            color: colorToApply,
+                            emissive: emissiveColor,
+                            emissiveIntensity: emissiveIntensity,
+                            metalness: isLens ? 0.8 : (isFrame ? 0.2 : 0.0), // Lens and frame slightly metallic
+                            roughness: isLens ? 0.05 : (isFrame ? 0.3 : 0.1), // Lens very smooth, frame rougher
                         });
-                    }
-                } else if (o.isObject3D && o.name) {
+                        
+                        // Replace material
+                        if (Array.isArray(o.material)) {
+                            o.material[idx] = newMaterial;
+                        } else {
+                            o.material = newMaterial;
+                        }
+                    });
+                }
+            });
+            
+            // Log node information
+            droneRoot.traverse((o) => {
+                if (o.isObject3D && o.name && !o.isMesh) {
                     nodeCount++;
                     console.log(`NODE [${nodeCount}]:`, o.name, {
                         name: o.name,
@@ -824,7 +936,7 @@ function loadDroneModel() {
                 }
             });
             
-            console.log(`Total: ${meshCount} meshes, ${nodeCount} named nodes`);
+            console.log(`Total: ${meshPositions.length} meshes, ${nodeCount} named nodes`);
             console.groupEnd();
             
             // Auto-detect rotors by name - look for meshes with rotor names
@@ -920,16 +1032,120 @@ function fitAndCenter(object3d) {
     // Move to center
     object3d.position.sub(center);
     
-    // Scale to larger size (target max ~5.0 units for bigger drone)
+    // Scale to larger size - smaller on mobile devices
     const maxDim = Math.max(size.x, size.y, size.z);
     if (maxDim > 0) {
-        const scale = 5.0 / maxDim; // Larger scale - bigger drone
+        // Check if mobile device (width <= 768px)
+        const isMobile = window.innerWidth <= 768;
+        const targetSize = isMobile ? 3.5 : 5.0; // Smaller on mobile
+        const scale = targetSize / maxDim;
         object3d.scale.setScalar(scale);
     }
     
     // Don't place on ground - we'll position it manually for flight
     // const box2 = new THREE.Box3().setFromObject(object3d);
     // object3d.position.y -= box2.min.y;
+}
+
+// Text animation - texts scroll up as user scrolls, longer visibility for readability
+function updateTexts() {
+    const textElements = document.querySelectorAll('.scroll-text');
+    const textCount = textElements.length;
+    // Longer range per text for better readability (each text gets more scroll space)
+    const progressPerText = 1 / textCount;
+    const fadeInOutRange = 0.08; // Smaller fade in/out range (8% of text's range) - longer visibility
+    
+    textElements.forEach((textEl, index) => {
+        const textStart = index * progressPerText;
+        const textEnd = (index + 1) * progressPerText;
+        const textFadeInEnd = textStart + fadeInOutRange;
+        const textFadeOutStart = textEnd - fadeInOutRange;
+        const isCTA = textEl.classList.contains('scroll-text-cta');
+        
+        // Calculate visibility and position based on scroll progress
+        let opacity = 0;
+        let translateY = 100;
+        
+        // CTA - stays at bottom, doesn't scroll up
+        if (isCTA) {
+            if (scrollProgress >= textStart) {
+                // CTA appears and stays at bottom
+                if (scrollProgress < textFadeInEnd) {
+                    // Fade in
+                    const localProgress = (scrollProgress - textStart) / (textFadeInEnd - textStart);
+                    opacity = localProgress;
+                    translateY = 50 * (1 - localProgress); // Start from 50px, move to 0
+                } else {
+                    // Fully visible, stays at bottom
+                    opacity = 1;
+                    translateY = 0; // Stay at bottom, don't move up
+                }
+            } else {
+                // CTA hasn't appeared yet
+                opacity = 0;
+                translateY = 50;
+            }
+        }
+        // First text - visible at start, much higher up, scrolls up
+        else if (index === 0) {
+            if (scrollProgress <= textEnd) {
+                // First text is visible from start and scrolls up
+                if (scrollProgress <= textFadeOutStart) {
+                    // Stay fully visible and move up slowly
+                    opacity = 1;
+                    // Start much higher (-200px), move up gradually
+                    const localProgress = scrollProgress / textFadeOutStart;
+                    translateY = -200 - (localProgress * 100); // From -200px to -300px (moving up)
+                } else {
+                    // Fade out and continue moving up
+                    const localProgress = (scrollProgress - textFadeOutStart) / (textEnd - textFadeOutStart);
+                    opacity = 1 - localProgress;
+                    translateY = -300 - (localProgress * 50); // Continue moving up
+                }
+            } else {
+                // First text has passed
+                opacity = 0;
+                translateY = -350;
+            }
+        } else {
+            // Other texts - appear lower, only after previous text disappears
+            if (scrollProgress >= textStart && scrollProgress <= textEnd) {
+                // Text is in its range
+                if (scrollProgress < textFadeInEnd) {
+                    // Fade in from bottom (lower position)
+                    const localProgress = (scrollProgress - textStart) / (textFadeInEnd - textStart);
+                    opacity = localProgress;
+                    translateY = 150 * (1 - localProgress); // Start from 150px, move to 0
+                } else if (scrollProgress <= textFadeOutStart) {
+                    // Fully visible in center (lower than first text) - LONG visibility period
+                    opacity = 1;
+                    translateY = 50; // Lower position than first text
+                } else {
+                    // Fade out and move up - same height as first text
+                    const localProgress = (scrollProgress - textFadeOutStart) / (textEnd - textFadeOutStart);
+                    opacity = 1 - localProgress;
+                    translateY = 50 - (localProgress * 400); // Move up to -300px (same as first text)
+                }
+            } else if (scrollProgress < textStart) {
+                // Text hasn't appeared yet - below screen
+                opacity = 0;
+                translateY = 150;
+            } else {
+                // Text has passed - above screen (same height as first text)
+                opacity = 0;
+                translateY = -300;
+            }
+        }
+        
+        textEl.style.opacity = opacity;
+        textEl.style.transform = `translateY(${translateY}px)`;
+        
+        if (opacity > 0.1) {
+            textEl.classList.add('visible');
+        } else {
+            textEl.classList.remove('visible');
+        }
+    });
 }
 
 // Animation loop
@@ -939,6 +1155,9 @@ function animate() {
     
     // Update scroll progress
     scrollProgress = Math.max(0, Math.min(1, scrollY / maxScroll));
+    
+    // Update text animations
+    updateTexts();
     
     // Determine current scene based on scroll progress
     const newSceneIndex = Math.min(Math.floor(scrollProgress * scenes.length), scenes.length - 1);
@@ -1046,9 +1265,11 @@ function animate() {
         if (currentSceneIndex === 0 && scene.userData.stars && droneRoot) {
             const stars = scene.userData.stars;
             const positions = stars.geometry.attributes.position;
-            const starSpeed = 80; // Speed at which stars approach (units per second) - much faster in space
+            const starSpeed = 120; // Speed at which stars approach (units per second) - faster movement
             const droneZ = 0; // Drone stays at fixed Z position
-            const resetDistance = 400; // Distance behind drone to reset stars
+            const resetDistance = 800; // Distance behind drone to reset stars - larger for infinite effect
+            const resetStartZ = droneZ + 30; // Start resetting stars before they pass drone (earlier reset)
+            const resetEndZ = droneZ - resetDistance; // End of reset range
             
             // Move stars forward (towards drone) continuously
             for (let i = 0; i < positions.count; i++) {
@@ -1057,23 +1278,33 @@ function animate() {
                 // Move star forward (towards drone)
                 const newZ = currentZ + starSpeed * dt;
                 
-                // If star passed the drone (went too far forward), reset it to the back
-                // Also reset if star is too far behind (to ensure continuous generation)
-                if (newZ > droneZ + 50 || currentZ < droneZ - resetDistance - 200) {
-                    // Reset star to random position BEHIND drone
-                    const theta = Math.random() * Math.PI * 2; // Azimuth angle (full circle)
-                    const phi = Math.random() * Math.PI; // Polar angle (0 to π)
-                    const radius = 100 + Math.random() * 400; // Distance from center
+                // Reset star if it passed the drone OR if it's too far behind
+                // Reset earlier (before passing drone) for smoother continuous effect
+                if (newZ > resetStartZ || currentZ < resetEndZ) {
+                    // Reset star to tunnel position BEHIND drone (cylindrical distribution)
+                    const theta = Math.random() * Math.PI * 2; // Angle around Z axis
+                    // Bias radius towards outer edge for tunnel effect - wider distribution
+                    const radiusFactor = Math.pow(Math.random(), 0.4); // Power < 1 biases towards larger values
+                    const tunnelMinRadius = 8;
+                    const tunnelMaxRadius = 280; // Very wide tunnel for maximum side stars
+                    const radius = tunnelMinRadius + radiusFactor * (tunnelMaxRadius - tunnelMinRadius);
                     
-                    // Calculate position in sphere
-                    const x = radius * Math.sin(phi) * Math.cos(theta);
-                    const y = radius * Math.sin(phi) * Math.sin(theta);
-                    const z = radius * Math.cos(phi);
+                    // Calculate X and Y from radius and angle (cylindrical coordinates)
+                    const x = radius * Math.cos(theta);
+                    const y = radius * Math.sin(theta);
                     
-                    // Place star behind drone (negative Z direction) - ensure it's within visible range
+                    // Distribute stars evenly along reset range to avoid gaps
+                    // Use star index to create consistent distribution pattern
+                    const resetRange = resetDistance * 0.8; // Use 80% of reset distance for distribution
+                    const baseZ = droneZ - resetDistance;
+                    // Distribute stars evenly using index to avoid clustering
+                    const zOffset = (i % 100) / 100 * resetRange; // Create pattern based on index
+                    const randomOffset = (Math.random() - 0.5) * resetRange * 0.2; // Small random variation
+                    
+                    // Place star behind drone (negative Z direction) - evenly distributed
                     positions.setX(i, x);
                     positions.setY(i, y);
-                    positions.setZ(i, droneZ - resetDistance - Math.random() * 200);
+                    positions.setZ(i, baseZ + zOffset + randomOffset);
                 } else {
                     positions.setZ(i, newZ);
                 }

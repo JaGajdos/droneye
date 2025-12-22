@@ -1277,7 +1277,7 @@ function initProcessStepsScrollAnimation() {
     // Options for Intersection Observer
     const observerOptions = {
         root: null, // viewport
-        rootMargin: '-20% 0px -20% 0px', // trigger when 20% from top and bottom
+        rootMargin: '-30% 0px -30% 0px', // trigger when 20% from top and bottom
         threshold: 0.5 // trigger when 50% visible
     };
     

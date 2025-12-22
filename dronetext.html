@@ -56,17 +56,82 @@
             display: block;
         }
         
-        .hint {
+        #text-container {
             position: fixed;
-            left: 12px;
-            top: 80px;
-            background: rgba(0, 0, 0, 0.55);
-            color: #fff;
-            padding: 10px 12px;
-            border-radius: 10px;
-            font: 13px/1.35 'Montserrat', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-            max-width: 520px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             z-index: 100;
+            pointer-events: none;
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+        }
+        
+        .scroll-text {
+            position: absolute;
+            width: 100%;
+            color: #fff;
+            font-family: 'Montserrat', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+            opacity: 0;
+            transform: translateY(100px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .scroll-text-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+            text-align: center;
+        }
+        
+        .scroll-text-subtitle {
+            font-size: 1rem;
+            font-weight: 400;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+            text-align: center;
+        }
+        
+        .scroll-text-cta .scroll-text-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .scroll-text-cta .scroll-text-subtitle {
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+        
+        .cta-button {
+            margin-top: 1.5rem;
+            padding: 0.75rem 2rem;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 30px;
+            font-family: 'Montserrat', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+            transition: all 0.3s ease;
+            pointer-events: auto;
+            display: inline-block;
+        }
+        
+        .cta-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.8);
+            transform: scale(1.05);
+        }
+        
+        .scroll-text.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         
         code {
@@ -135,13 +200,32 @@
         </div>
     </nav>
 
-    <div class="hint">
-        Scrolluj myšou alebo potiahnutím prsta (mobile) pre let dronu cez tri scény.<br>
-        Dron začína hore a postupne klesá pri scrollovaní.
-    </div>
-
     <div id="canvas-container">
         <canvas id="drone-canvas"></canvas>
+    </div>
+
+    <div id="text-container">
+        <div class="scroll-text" data-index="0">
+            <div class="scroll-text-title" data-i18n="dronetext.text1.title"></div>
+            <div class="scroll-text-subtitle" data-i18n="dronetext.text1.subtitle"></div>
+        </div>
+        <div class="scroll-text" data-index="1">
+            <div class="scroll-text-title" data-i18n="dronetext.text2.title"></div>
+            <div class="scroll-text-subtitle" data-i18n="dronetext.text2.subtitle"></div>
+        </div>
+        <div class="scroll-text" data-index="2">
+            <div class="scroll-text-title" data-i18n="dronetext.text3.title"></div>
+            <div class="scroll-text-subtitle" data-i18n="dronetext.text3.subtitle"></div>
+        </div>
+        <div class="scroll-text" data-index="3">
+            <div class="scroll-text-title" data-i18n="dronetext.text4.title"></div>
+            <div class="scroll-text-subtitle" data-i18n="dronetext.text4.subtitle"></div>
+        </div>
+        <div class="scroll-text scroll-text-cta" data-index="4">
+            <div class="scroll-text-title" data-i18n="dronetext.cta.title"></div>
+            <div class="scroll-text-subtitle" data-i18n="dronetext.cta.subtitle"></div>
+            <a href="/projekty" class="cta-button" data-i18n="dronetext.cta.button"></a>
+        </div>
     </div>
 
     <script type="module" src="/src/main.js"></script>
