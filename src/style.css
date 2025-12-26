@@ -454,6 +454,10 @@ body.homepage .main-content {
     padding: 0 2rem;
 }
 
+.subpage-hero-content p {
+    display: none;
+}
+
 .subpage-hero h1 {
     font-size: var(--font-size-hero-title);
     font-weight: 700;
