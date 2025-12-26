@@ -1,4 +1,5 @@
 // Global variables
+import { initContactForm } from './contact-form.js';
 
 // Internationalization
 let currentLanguage = 'sk';
@@ -212,6 +213,7 @@ function updateActiveLanguageOption() {
     });
 }
 
+
 // Initialize the application
 document.addEventListener('DOMContentLoaded', function() {
     initInternationalization();
@@ -219,6 +221,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initThemeSwitcher();
     initTeamCards();
     initServicesCarousel();
+    initContactForm(translations);
     
     // Only show loading screen on homepage (CSS handles hiding on subpages)
     const isHomepage = window.location.pathname === '/' || window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/');
@@ -423,35 +426,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Form submission handler
-document.querySelector('.contact-form')?.addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    // Get form data
-    const formData = new FormData(this);
-    const name = this.querySelector('input[type="text"]').value;
-    const email = this.querySelector('input[type="email"]').value;
-    const message = this.querySelector('textarea').value;
-    
-    // Simple validation
-    if (!name || !email || !message) {
-        alert(translations.contact?.form?.error || 'Prosím vyplňte všetky polia.');
-        return;
-    }
-    
-    // Simulate form submission
-    const button = this.querySelector('button');
-    const originalText = button.textContent;
-    button.textContent = translations.contact?.form?.sending || 'Odosielam...';
-    button.disabled = true;
-    
-    setTimeout(() => {
-        alert(translations.contact?.form?.success || 'Ďakujeme za vašu správu! Čoskoro vás budeme kontaktovať.');
-        this.reset();
-        button.textContent = originalText;
-        button.disabled = false;
-    }, 2000);
-});
 
 // CTA Button handler - only on homepage
 document.getElementById('start-animation-btn')?.addEventListener('click', function() {

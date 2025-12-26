@@ -286,8 +286,21 @@
       "title": "Napíšte nám",
       "name": "Meno",
       "email": "Email",
+      "phone": "Telefónne číslo",
       "message": "Správa",
-      "submit": "Odoslať"
+      "consent": "Súhlasím so spracovaním osobných údajov pre účely tohto formulára.",
+      "submit": "Odoslať",
+      "sending": "Odosielam...",
+      "success": "Ďakujeme za vašu správu! Čoskoro vás budeme kontaktovať.",
+      "errors": {
+        "name": "Meno je povinné pole.",
+        "email": "Email je povinné pole.",
+        "emailInvalid": "Email má nesprávny formát.",
+        "phone": "Telefónne číslo je povinné pole.",
+        "message": "Správa je povinné pole.",
+        "consent": "Musíte súhlasiť so spracovaním osobných údajov.",
+        "submit": "Nastala chyba pri odosielaní formulára. Skúste to prosím znova."
+      }
     }
   },
   "footer": {
@@ -296,8 +309,21 @@
     "form": {
       "name": "Vaše meno",
       "email": "Email",
+      "phone": "Telefónne číslo",
       "message": "Správa",
-      "submit": "Odoslať"
+      "consent": "Súhlasím so spracovaním osobných údajov pre účely tohto formulára.",
+      "submit": "Odoslať",
+      "sending": "Odosielam...",
+      "success": "Ďakujeme za vašu správu! Čoskoro vás budeme kontaktovať.",
+      "errors": {
+        "name": "Meno je povinné pole.",
+        "email": "Email je povinné pole.",
+        "emailInvalid": "Email má nesprávny formát.",
+        "phone": "Telefónne číslo je povinné pole.",
+        "message": "Správa je povinné pole.",
+        "consent": "Musíte súhlasiť so spracovaním osobných údajov.",
+        "submit": "Nastala chyba pri odosielaní formulára. Skúste to prosím znova."
+      }
     },
     "copyright": "Všetky práva vyhradené.",
     "legislation": "Legislatíva",
@@ -361,7 +387,7 @@
     "title": "GDPR",
     "subtitle": "Memorandum na Ochranu osobných údajov",
     "intro": "Ochrana súkromia našich zákazníkov pri spracúvaní osobných údajov je pre nás veľmi dôležitá. Pri spracúvaní vašich osobných údajov postupujeme v súlade s platnými právnymi predpismi a zabezpečujeme ich ochranu v maximálnej možnej miere. Všetci návštevníci našej stránky, ktorí sú s nami v kontakte ako zákazníci, nám poskytli v tejto súvislosti svoje osobné údaje. Na tejto web stránke nájdete všetky potrebné informácie týkajúce sa spracúvania osobných údajov.",
-    "intro2": "Toto Memorandum na Ochranu osobných údajov (ďalej len ako „Memorandum"), vám poskytne informácie o tom, ako nakladáme s vašimi osobnými údajmi, ako nás môžete kontaktovať v prípade uplatňovania si práv alebo, ak máte otázky ohľadom spracúvania vašich osobných údajov. Memorandum je súčasťou Všeobecných obchodných podmienok spoločnosti DroneEye.",
+    "intro2": "Toto Memorandum na Ochranu osobných údajov (ďalej len ako \"Memorandum\"), vám poskytne informácie o tom, ako nakladáme s vašimi osobnými údajmi, ako nás môžete kontaktovať v prípade uplatňovania si práv alebo, ak máte otázky ohľadom spracúvania vašich osobných údajov. Memorandum je súčasťou Všeobecných obchodných podmienok spoločnosti DroneEye.",
     "intro3": "Odporúčame vám, aby ste si informácie obsiahnuté v tomto Memorande dôkladne prečítali. Zmeny týkajúce sa podmienok ochrany osobných údajov sú zverejnené na našej internetovej stránke www.droneye.sk, formou aktualizácie. Týmto spôsobom zabezpečíme, aby ste vždy mali k dispozícii aktuálne informácie o tom, za akých podmienok spracúvame vaše osobné údaje.",
     "section1": {
       "title": "1. O nás",
@@ -423,7 +449,7 @@
     },
     "section10": {
       "title": "10. Spracúvanie vašich osobných údajov prostredníctvom našich internetových stránok",
-      "description": "Pri používaní našej internetovej stránky: www.droneye.sk (ďalej len ako „Internetová stránka"), môže byť prístup do niektorých častí Internetovej stránky podmienený poskytnutím vašich osobných údajov. Toto poskytnutie podmieňuje prístup alebo správnu funkčnosť Internetových stránok a z tohto dôvodu je potrebné, aby ste nám udelili súhlas na spracúvanie vami poskytnutých osobných údajov."
+      "description": "Pri používaní našej internetovej stránky: www.droneye.sk (ďalej len ako \"Internetová stránka\"), môže byť prístup do niektorých častí Internetovej stránky podmienený poskytnutím vašich osobných údajov. Toto poskytnutie podmieňuje prístup alebo správnu funkčnosť Internetových stránok a z tohto dôvodu je potrebné, aby ste nám udelili súhlas na spracúvanie vami poskytnutých osobných údajov."
     },
     "section11": {
       "title": "11. Spracúvanie údajov prostredníctvom cookies",

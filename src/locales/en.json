@@ -285,8 +285,21 @@
       "title": "Contact Us",
       "name": "Name",
       "email": "Email",
+      "phone": "Phone Number",
       "message": "Message",
-      "submit": "Send"
+      "consent": "I agree to the processing of personal data for the purposes of this form.",
+      "submit": "Send",
+      "sending": "Sending...",
+      "success": "Thank you for your message! We will contact you soon.",
+      "errors": {
+        "name": "Name is a required field.",
+        "email": "Email is a required field.",
+        "emailInvalid": "Email has an invalid format.",
+        "phone": "Phone number is a required field.",
+        "message": "Message is a required field.",
+        "consent": "You must agree to the processing of personal data.",
+        "submit": "An error occurred while sending the form. Please try again."
+      }
     }
   },
   "footer": {
@@ -295,8 +308,21 @@
     "form": {
       "name": "Your Name",
       "email": "Email",
+      "phone": "Phone Number",
       "message": "Message",
-      "submit": "Send"
+      "consent": "I agree to the processing of personal data for the purposes of this form.",
+      "submit": "Send",
+      "sending": "Sending...",
+      "success": "Thank you for your message! We will contact you soon.",
+      "errors": {
+        "name": "Name is a required field.",
+        "email": "Email is a required field.",
+        "emailInvalid": "Email has an invalid format.",
+        "phone": "Phone number is a required field.",
+        "message": "Message is a required field.",
+        "consent": "You must agree to the processing of personal data.",
+        "submit": "An error occurred while sending the form. Please try again."
+      }
     },
     "copyright": "All rights reserved.",
     "legislation": "Legislation",

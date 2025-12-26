@@ -389,11 +389,33 @@
             </div>
             
             <div class="footer-section footer-form">
-                <h3 data-i18n="footer.quickContact">Rýchly kontakt</h3>
-                <form class="footer-contact-form">
-                    <input type="text" data-i18n-placeholder="footer.form.name" placeholder="Vaše meno" required>
-                    <input type="email" data-i18n-placeholder="footer.form.email" placeholder="Email" required>
-                    <textarea data-i18n-placeholder="footer.form.message" placeholder="Správa" rows="3" required></textarea>
+                <h3 data-i18n="footer.quickContact">Kontaktný formulár</h3>
+                <form class="footer-contact-form" novalidate>
+                    <div class="footer-form-field">
+                        <input type="text" name="name" data-i18n-placeholder="footer.form.name" placeholder="Vaše meno">
+                        <span class="footer-form-field-error" id="footer-error-name"></span>
+                    </div>
+                    <div class="footer-form-field">
+                        <input type="email" name="email" data-i18n-placeholder="footer.form.email" placeholder="Email">
+                        <span class="footer-form-field-error" id="footer-error-email"></span>
+                    </div>
+                    <div class="footer-form-field">
+                        <input type="tel" name="phone" data-i18n-placeholder="footer.form.phone" placeholder="Telefónne číslo">
+                        <span class="footer-form-field-error" id="footer-error-phone"></span>
+                    </div>
+                    <div class="footer-form-field">
+                        <textarea name="message" data-i18n-placeholder="footer.form.message" placeholder="Správa" rows="3"></textarea>
+                        <span class="footer-form-field-error" id="footer-error-message"></span>
+                    </div>
+                    <div class="footer-form-field">
+                        <label class="footer-form-consent">
+                            <input type="checkbox" name="consent">
+                            <span data-i18n="footer.form.consent">Súhlasím so spracovaním osobných údajov pre účely tohto formulára.</span>
+                        </label>
+                        <span class="footer-form-field-error" id="footer-error-consent"></span>
+                    </div>
+                    <div id="footer-form-success" class="footer-form-message footer-form-success" style="display: none;"></div>
+                    <div id="footer-form-error" class="footer-form-message footer-form-error" style="display: none;"></div>
                     <button type="submit" data-i18n="footer.form.submit">Odoslať</button>
                 </form>
             </div>
