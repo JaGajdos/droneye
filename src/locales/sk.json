@@ -1,9 +1,9 @@
 {
   "nav": {
     "home": "Domov",
-    "services": "Naše služby",
-    "projects": "Naše projekty",
-    "team": "Náš tím",
+    "services": "Služby",
+    "projects": "Projekty",
+    "team": "Tím",
     "pricing": "Cenová ponuka",
     "contact": "Kontakt"
   },

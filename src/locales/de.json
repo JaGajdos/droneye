@@ -1,9 +1,9 @@
 {
   "nav": {
     "home": "Startseite",
-    "services": "Unsere Dienstleistungen",
-    "projects": "Unsere Projekte",
-    "team": "Unser Team",
+    "services": "Dienstleistungen",
+    "projects": "Projekte",
+    "team": "Team",
     "pricing": "Preise",
     "contact": "Kontakt"
   },
