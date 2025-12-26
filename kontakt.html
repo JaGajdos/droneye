@@ -93,8 +93,8 @@
             document.documentElement.style.visibility = 'hidden';
         })();
     </script>
-  <script type="module" crossorigin src="/droneye/assets/main-CorEqXPr.js"></script>
-  <link rel="stylesheet" crossorigin href="/droneye/assets/main-By2E9Ngm.css">
+  <script type="module" crossorigin src="/droneye/assets/main-ZPOmQBfc.js"></script>
+  <link rel="stylesheet" crossorigin href="/droneye/assets/main-Cyw-VzV4.css">
 </head>
 <body>
     <!-- Navigation -->
@@ -180,11 +180,33 @@
                         <p><a href="tel:+421950614303" data-i18n="contact.info.phone">📞 +421 950 614 303</a></p>
                         <p data-i18n="contact.info.address">📍 Bratislava, Slovensko</p>
                     </div>
-                    <form class="contact-form">
+                    <form id="contact-form" class="contact-form" novalidate>
                         <h3 class="contact-form-title" data-i18n="contact.form.title">Napíšte nám</h3>
-                        <input type="text" placeholder="Meno" data-i18n-placeholder="contact.form.name" required>
-                        <input type="email" placeholder="Email" data-i18n-placeholder="contact.form.email" required>
-                        <textarea placeholder="Správa" data-i18n-placeholder="contact.form.message" rows="5" required></textarea>
+                        <div class="contact-form-field">
+                            <input type="text" name="name" placeholder="Meno" data-i18n-placeholder="contact.form.name">
+                            <span class="contact-form-field-error" id="error-name"></span>
+                        </div>
+                        <div class="contact-form-field">
+                            <input type="email" name="email" placeholder="Email" data-i18n-placeholder="contact.form.email">
+                            <span class="contact-form-field-error" id="error-email"></span>
+                        </div>
+                        <div class="contact-form-field">
+                            <input type="tel" name="phone" placeholder="Telefónne číslo" data-i18n-placeholder="contact.form.phone">
+                            <span class="contact-form-field-error" id="error-phone"></span>
+                        </div>
+                        <div class="contact-form-field">
+                            <textarea name="message" placeholder="Správa" data-i18n-placeholder="contact.form.message" rows="5"></textarea>
+                            <span class="contact-form-field-error" id="error-message"></span>
+                        </div>
+                        <div class="contact-form-field">
+                            <label class="contact-form-consent">
+                                <input type="checkbox" name="consent">
+                                <span data-i18n="contact.form.consent">Súhlasím so spracovaním osobných údajov pre účely tohto formulára.</span>
+                            </label>
+                            <span class="contact-form-field-error" id="error-consent"></span>
+                        </div>
+                        <div id="contact-form-success" class="contact-form-message contact-form-success" style="display: none;"></div>
+                        <div id="contact-form-error" class="contact-form-message contact-form-error" style="display: none;"></div>
                         <button type="submit" data-i18n="contact.form.submit">Odoslať</button>
                     </form>
                 </div>
@@ -228,11 +250,33 @@
             </div>
             
             <div class="footer-section footer-form">
-                <h3 data-i18n="footer.quickContact">Rýchly kontakt</h3>
-                <form class="footer-contact-form">
-                    <input type="text" data-i18n-placeholder="footer.form.name" placeholder="Vaše meno" required>
-                    <input type="email" data-i18n-placeholder="footer.form.email" placeholder="Email" required>
-                    <textarea data-i18n-placeholder="footer.form.message" placeholder="Správa" rows="3" required></textarea>
+                <h3 data-i18n="footer.quickContact">Kontaktný formulár</h3>
+                <form class="footer-contact-form" novalidate>
+                    <div class="footer-form-field">
+                        <input type="text" name="name" data-i18n-placeholder="footer.form.name" placeholder="Vaše meno">
+                        <span class="footer-form-field-error" id="footer-error-name"></span>
+                    </div>
+                    <div class="footer-form-field">
+                        <input type="email" name="email" data-i18n-placeholder="footer.form.email" placeholder="Email">
+                        <span class="footer-form-field-error" id="footer-error-email"></span>
+                    </div>
+                    <div class="footer-form-field">
+                        <input type="tel" name="phone" data-i18n-placeholder="footer.form.phone" placeholder="Telefónne číslo">
+                        <span class="footer-form-field-error" id="footer-error-phone"></span>
+                    </div>
+                    <div class="footer-form-field">
+                        <textarea name="message" data-i18n-placeholder="footer.form.message" placeholder="Správa" rows="3"></textarea>
+                        <span class="footer-form-field-error" id="footer-error-message"></span>
+                    </div>
+                    <div class="footer-form-field">
+                        <label class="footer-form-consent">
+                            <input type="checkbox" name="consent">
+                            <span data-i18n="footer.form.consent">Súhlasím so spracovaním osobných údajov pre účely tohto formulára.</span>
+                        </label>
+                        <span class="footer-form-field-error" id="footer-error-consent"></span>
+                    </div>
+                    <div id="footer-form-success" class="footer-form-message footer-form-success" style="display: none;"></div>
+                    <div id="footer-form-error" class="footer-form-message footer-form-error" style="display: none;"></div>
                     <button type="submit" data-i18n="footer.form.submit">Odoslať</button>
                 </form>
             </div>
@@ -246,12 +290,28 @@
                     <button class="footer-theme-btn" data-theme="dark" title="Dark mode" aria-label="Switch to dark mode"><i class="fas fa-moon" aria-hidden="true"></i></button>
                 </div>
                 <div class="footer-legal">
-                    <a href="#" data-i18n="footer.privacy">Ochrana údajov</a>
-                    <a href="#" data-i18n="footer.terms">Podmienky</a>
+                    <a href="/legislativa" data-i18n="footer.legislation">Legislatíva</a>
+                    <a href="/gdpr" data-i18n="footer.privacy">GDPR</a>
                 </div>
             </div>
         </div>
     </footer>
+
+    <!-- Cookie Consent Banner -->
+    <div id="cookie-banner" class="cookie-banner" style="display: none;">
+        <div class="cookie-banner-content">
+            <div class="cookie-banner-text">
+                <h4 data-i18n="cookies.title">Používame cookies</h4>
+                <p data-i18n="cookies.description">Táto stránka používa cookies na zlepšenie vášho zážitku. Pokračovaním v prehliadaní súhlasíte s používaním cookies v súlade s našou <a href="/gdpr">politikou cookies</a>.</p>
+            </div>
+            <div class="cookie-banner-buttons">
+                <button id="cookie-accept" class="cookie-btn cookie-btn-accept" data-i18n="cookies.accept">Prijať všetky</button>
+                <button id="cookie-reject" class="cookie-btn cookie-btn-reject" data-i18n="cookies.reject">Odmietnuť</button>
+                <button id="cookie-settings" class="cookie-btn cookie-btn-settings" data-i18n="cookies.settings">Nastavenia</button>
+            </div>
+        </div>
+    </div>
 
+    <script src="/src/cookies.js"></script>
 </body>
 </html>
