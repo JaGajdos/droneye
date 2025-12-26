@@ -29,6 +29,8 @@
     --loading-bg: var(--primary-color);
     --mobile-menu-header-bg: var(--footer-bg);
     --mobile-menu-body-bg: var(--primary-color);
+    --footer-contact-button-color: var(--secondary-color);
+    --footer-contact-button-color-hover: #0056b3;
     
     /* Font Size Variables - Unified System */
     /* Headings */
@@ -1368,7 +1370,7 @@ body.homepage .main-content {
 
 .footer-contact-form button {
     padding: 0.75rem 1.5rem;
-    background: var(--primary-color);
+    background: var(--footer-contact-button-color, var(--primary-color));
     color: white;
     border: none;
     border-radius: 8px;
@@ -1378,7 +1380,7 @@ body.homepage .main-content {
 }
 
 .footer-contact-form button:hover {
-    background: var(--secondary-color);
+    background: var(--footer-contact-button-color-hover, var(--secondary-color));
     transform: translateY(-1px);
     box-shadow: 0 4px 15px rgba(0, 35, 102, 0.4);
 }
@@ -3970,6 +3972,8 @@ body:not(.homepage) #loading-screen {
     --section-bg-color: var(--hero-bg);
     --mobile-menu-header-bg: var(--footer-bg);
     --mobile-menu-body-bg: var(--secondary-color);
+    --footer-contact-button-color: var(--secondary-color);
+    --footer-contact-button-color-hover: #0056b3;
     --section-bg-radial-1: rgba(0, 35, 102, 0.05);
     --section-bg-radial-2: rgba(0, 61, 153, 0.05);
     --section-bg-pattern: rgba(0, 35, 102, 0.02);
@@ -3998,6 +4002,8 @@ body:not(.homepage) #loading-screen {
     --section-bg-color: var(--hero-bg);
     --mobile-menu-header-bg: var(--footer-bg);
     --mobile-menu-body-bg: var(--background-color);
+    --footer-contact-button-color: var(--primary-color);
+    --footer-contact-button-color-hover: var(--secondary-color);
     --section-bg-radial-1: rgba(74, 158, 255, 0.08);
     --section-bg-radial-2: rgba(107, 179, 255, 0.08);
     --section-bg-pattern: rgba(74, 158, 255, 0.03);
