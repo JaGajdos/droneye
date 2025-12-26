@@ -123,18 +123,18 @@ function setCloudTexture(texturePathOrPaths) {
                     }
                     
                     // Create continuous cloud layer - 3D effect with multiple layers
-                    const cloudLayerHeight = 30; // Lower - clouds below drone
+                    const cloudLayerHeight = 45; // Higher - clouds positioned higher
                     const cloudScaleX = 30; // Width scale for sprite
                     const cloudScaleY = 20; // Height scale for sprite
                     const coverageWidth = 250; // Larger area to cover
                     const coverageDepth = 250;
-                    const spacing = 15; // Closer spacing for denser clouds
+                    const spacing = 25; // Wider spacing for fewer clouds
                     
-                    const xCount = Math.ceil(coverageWidth / spacing) + 6;
-                    const zCount = Math.ceil(coverageDepth / spacing) + 6;
+                    const xCount = Math.ceil(coverageWidth / spacing) + 2;
+                    const zCount = Math.ceil(coverageDepth / spacing) + 2;
                     
-                    // Create 3D effect with multiple layers at different heights - more layers for denser clouds
-                    const layerCount = 5; // More layers for denser, bushier clouds
+                    // Create 3D effect with multiple layers at different heights - fewer layers
+                    const layerCount = 3; // Fewer layers for less dense clouds
                     const layerSpacing = 1.5; // Vertical spacing between layers
                     
                     for (let layer = 0; layer < layerCount; layer++) {
@@ -143,8 +143,11 @@ function setCloudTexture(texturePathOrPaths) {
                         
                         for (let x = 0; x < xCount; x++) {
                             for (let z = 0; z < zCount; z++) {
-                                const xPos = (x - xCount / 2) * spacing + (Math.random() - 0.5) * 5 + layer * 2;
-                                const zPos = (z - zCount / 2) * spacing + (Math.random() - 0.5) * 5 + layer * 2;
+                                // Much larger random offset to break grid pattern and create seamless distribution
+                                const randomOffsetX = (Math.random() - 0.5) * spacing * 1.2;
+                                const randomOffsetZ = (Math.random() - 0.5) * spacing * 1.2;
+                                const xPos = (x - xCount / 2) * spacing + randomOffsetX + layer * 2;
+                                const zPos = (z - zCount / 2) * spacing + randomOffsetZ + layer * 2;
                                 const selectedTexture = availableTextures[Math.floor(Math.random() * availableTextures.length)];
                                 
                                 const cloud = createCloudForScene(xPos, layerY, zPos, cloudScaleX, cloudScaleY, selectedTexture, layerOpacity);
@@ -171,18 +174,18 @@ function setCloudTexture(texturePathOrPaths) {
                         const cloudGroup = skyScene.userData.cloudGroup;
                         cloudGroup.clear();
                         
-                        const cloudLayerHeight = 30; // Lower - clouds below drone
+                        const cloudLayerHeight = 45; // Higher - clouds positioned higher
                         const cloudScaleX = 30; // Width scale for sprite
                         const cloudScaleY = 20; // Height scale for sprite
                         const coverageWidth = 250; // Larger area to cover
                         const coverageDepth = 250;
-                        const spacing = 15; // Closer spacing for denser clouds
+                        const spacing = 25; // Wider spacing for fewer clouds
                         
-                        const xCount = Math.ceil(coverageWidth / spacing) + 6;
-                        const zCount = Math.ceil(coverageDepth / spacing) + 6;
+                        const xCount = Math.ceil(coverageWidth / spacing) + 2;
+                        const zCount = Math.ceil(coverageDepth / spacing) + 2;
                         
-                        // Create 3D effect with multiple layers at different heights - more layers for denser clouds
-                        const layerCount = 5; // More layers for denser, bushier clouds
+                        // Create 3D effect with multiple layers at different heights - fewer layers
+                        const layerCount = 3; // Fewer layers for less dense clouds
                         const layerSpacing = 1.5; // Vertical spacing between layers
                         
                         for (let layer = 0; layer < layerCount; layer++) {
@@ -191,8 +194,11 @@ function setCloudTexture(texturePathOrPaths) {
                             
                             for (let x = 0; x < xCount; x++) {
                                 for (let z = 0; z < zCount; z++) {
-                                    const xPos = (x - xCount / 2) * spacing + (Math.random() - 0.5) * 5 + layer * 2;
-                                    const zPos = (z - zCount / 2) * spacing + (Math.random() - 0.5) * 5 + layer * 2;
+                                    // Much larger random offset to break grid pattern and create seamless distribution
+                                    const randomOffsetX = (Math.random() - 0.5) * spacing * 1.2;
+                                    const randomOffsetZ = (Math.random() - 0.5) * spacing * 1.2;
+                                    const xPos = (x - xCount / 2) * spacing + randomOffsetX + layer * 2;
+                                    const zPos = (z - zCount / 2) * spacing + randomOffsetZ + layer * 2;
                                     const selectedTexture = availableTextures[Math.floor(Math.random() * availableTextures.length)];
                                     
                                     const cloud = createCloudForScene(xPos, layerY, zPos, cloudScaleX, cloudScaleY, selectedTexture, layerOpacity);
@@ -525,7 +531,7 @@ function createScenes() {
         }
         
         // Create a continuous cloud layer covering the entire bottom area - 3D effect with multiple layers
-        const cloudLayerHeight = 30; // Lower - clouds below drone
+        const cloudLayerHeight = 45; // Higher - clouds positioned higher
         // Use sprite scaling - realistic cloud sizes
         const cloudScaleX = 30; // Width scale for sprite
         const cloudScaleY = 20; // Height scale for sprite
@@ -533,25 +539,27 @@ function createScenes() {
         // Create many clouds to cover the entire area - denser coverage
         const coverageWidth = 250; // Larger area to cover
         const coverageDepth = 250;
-        const spacing = 15; // Closer spacing for denser clouds
+        const spacing = 25; // Wider spacing for fewer clouds
         
-        const xCount = Math.ceil(coverageWidth / spacing) + 6; // Extra clouds for coverage
-        const zCount = Math.ceil(coverageDepth / spacing) + 6;
+        const xCount = Math.ceil(coverageWidth / spacing) + 2; // Fewer extra clouds
+        const zCount = Math.ceil(coverageDepth / spacing) + 2;
         
-        // Create 3D effect with multiple layers at different heights - more layers for denser clouds
-        const layerCount = 5; // More layers for denser, bushier clouds
+        // Create 3D effect with multiple layers at different heights - fewer layers
+        const layerCount = 3; // Fewer layers for less dense clouds
         const layerSpacing = 1.5; // Vertical spacing between layers
         
         for (let layer = 0; layer < layerCount; layer++) {
             const layerY = cloudLayerHeight + layer * layerSpacing;
             const layerOpacity = 0.5 - layer * 0.1; // More transparent for deeper layers (sprite opacity)
             
-            // Create grid of cloud sprites for this layer
+            // Create grid of cloud sprites for this layer with random distribution
             for (let x = 0; x < xCount; x++) {
                 for (let z = 0; z < zCount; z++) {
-                    // Calculate position with slight random offset for each layer
-                    const xPos = (x - xCount / 2) * spacing + (Math.random() - 0.5) * 5 + layer * 2;
-                    const zPos = (z - zCount / 2) * spacing + (Math.random() - 0.5) * 5 + layer * 2;
+                    // Much larger random offset to break grid pattern and create seamless distribution
+                    const randomOffsetX = (Math.random() - 0.5) * spacing * 1.2;
+                    const randomOffsetZ = (Math.random() - 0.5) * spacing * 1.2;
+                    const xPos = (x - xCount / 2) * spacing + randomOffsetX + layer * 2;
+                    const zPos = (z - zCount / 2) * spacing + randomOffsetZ + layer * 2;
                     
                     // Randomly select a texture for variation
                     const selectedTexture = availableTextures[Math.floor(Math.random() * availableTextures.length)];
@@ -569,47 +577,106 @@ function createScenes() {
     // Create clouds with textures
     createCloudsWithTextures(cloudTexturePaths);
     
-    // Scene 3: Ground/Nature scene
+    // Scene 3: Water surface scene with gentle clouds above
     const scene3 = new THREE.Scene();
-    scene3.background = new THREE.Color(0x90EE90); // Light green
+    scene3.background = new THREE.Color(0x87CEEB); // Sky blue
     scene3.add(new THREE.HemisphereLight(0xffffff, 0x444444, 1.2));
     const light3 = new THREE.DirectionalLight(0xffffff, 1.2);
     light3.position.set(5, 10, 5);
     scene3.add(light3);
     
-    // Add ground
-    const ground = new THREE.Mesh(
-        new THREE.PlaneGeometry(100, 100),
-        new THREE.MeshStandardMaterial({ color: 0x228B22, roughness: 1 })
-    );
-    ground.rotation.x = -Math.PI / 2;
-    ground.position.y = 0;
-    scene3.add(ground);
+    // Add realistic water surface with waves
+    const waterGeometry = new THREE.PlaneGeometry(300, 300, 64, 64); // More segments for smooth waves
+    const waterMaterial = new THREE.MeshStandardMaterial({ 
+        color: 0x1E90FF, // Bright blue (DodgerBlue) - very visible
+        roughness: 0.1,
+        metalness: 0.3,
+        side: THREE.DoubleSide
+    });
     
-    // Add some trees (dummy cylinders with spheres)
-    for (let i = 0; i < 10; i++) {
-        const tree = new THREE.Group();
+    const water = new THREE.Mesh(waterGeometry, waterMaterial);
+    water.rotation.x = -Math.PI / 2;
+    water.position.set(0, -3, 0); // Water below drone but visible, centered
+    water.receiveShadow = false;
+    water.castShadow = false;
+    
+    // Store original positions for wave animation
+    const positions = waterGeometry.attributes.position;
+    const originalPositions = new Float32Array(positions.array.length);
+    originalPositions.set(positions.array);
+    water.userData.originalPositions = originalPositions;
+    scene3.add(water);
+    scene3.userData.water = water; // Store reference for animation
+    
+    // Create gentle clouds above drone - similar to scene 2 but lighter and higher
+    const cloudGroup3 = new THREE.Group();
+    scene3.add(cloudGroup3);
+    scene3.userData.cloudGroup = cloudGroup3;
+    scene3.userData.cloudTexture = null;
+    
+    // Function to create clouds for scene 3 (gentle clouds above)
+    function createCloudsForScene3() {
+        const availableTextures = scene2.userData.cloudTextures || [];
+        if (availableTextures.length === 0) {
+            // If textures not loaded yet, wait for them
+            return;
+        }
         
-        const trunk = new THREE.Mesh(
-            new THREE.CylinderGeometry(0.3, 0.3, 3, 8),
-            new THREE.MeshStandardMaterial({ color: 0x8B4513 })
-        );
-        trunk.position.y = 1.5;
-        tree.add(trunk);
+        const cloudLayerHeight = 15; // Clouds above drone (lower position)
+        const cloudScaleX = 25; // Smaller clouds
+        const cloudScaleY = 18;
+        const coverageWidth = 400; // Wider coverage for clouds
+        const coverageDepth = 600; // Much deeper coverage - generate clouds far ahead
+        const spacing = 30; // Wider spacing for fewer, gentler clouds
         
-        const leaves = new THREE.Mesh(
-            new THREE.ConeGeometry(2, 3, 8),
-            new THREE.MeshStandardMaterial({ color: 0x228B22 })
-        );
-        leaves.position.y = 4;
-        tree.add(leaves);
+        const xCount = Math.ceil(coverageWidth / spacing) + 2;
+        const zCount = Math.ceil(coverageDepth / spacing) + 2;
         
-        tree.position.set(
-            (Math.random() - 0.5) * 40,
-            0,
-            (Math.random() - 0.5) * 40
-        );
-        scene3.add(tree);
+        // Fewer layers for gentler effect
+        const layerCount = 2;
+        const layerSpacing = 2.0;
+        
+        // Get drone position for relative cloud positioning (drone is at Z=0)
+        // Generate clouds already spread far ahead - from -600 to +100 (already ahead of drone)
+        const droneZ = 0;
+        const cloudStartZ = droneZ - coverageDepth; // Start at -600
+        const cloudEndZ = droneZ + 100; // Extend to +100 (already ahead)
+        const totalDepth = cloudEndZ - cloudStartZ; // Total depth: 700
+        
+        for (let layer = 0; layer < layerCount; layer++) {
+            const layerY = cloudLayerHeight + layer * layerSpacing;
+            const layerOpacity = 0.3 - layer * 0.1; // Lighter opacity (0.3, 0.2)
+            
+            for (let x = 0; x < xCount; x++) {
+                for (let z = 0; z < zCount; z++) {
+                    const randomOffsetX = (Math.random() - 0.5) * spacing * 1.2;
+                    const randomOffsetZ = (Math.random() - 0.5) * spacing * 1.2;
+                    const xPos = (x - xCount / 2) * spacing + randomOffsetX + layer * 2;
+                    // Distribute clouds across the full range from cloudStartZ to cloudEndZ
+                    const zProgress = z / (zCount - 1); // 0 to 1
+                    const zPos = cloudStartZ + zProgress * totalDepth + randomOffsetZ + layer * 2;
+                    
+                    const selectedTexture = availableTextures[Math.floor(Math.random() * availableTextures.length)];
+                    const cloud = createCloudForScene(xPos, layerY, zPos, cloudScaleX, cloudScaleY, selectedTexture, layerOpacity);
+                    if (cloud) {
+                        cloudGroup3.add(cloud);
+                    }
+                }
+            }
+        }
+    }
+    
+    // Create clouds when textures are available (use scene2 which has the cloud textures)
+    if (scene2.userData.cloudTextures && scene2.userData.cloudTextures.length > 0) {
+        createCloudsForScene3();
+    } else {
+        // Wait for textures to load
+        const checkTextures = setInterval(() => {
+            if (scene2.userData.cloudTextures && scene2.userData.cloudTextures.length > 0) {
+                createCloudsForScene3();
+                clearInterval(checkTextures);
+            }
+        }, 100);
     }
     
     scenes.push(scene1, scene2, scene3);
@@ -1191,6 +1258,9 @@ function animate() {
             if (currentSceneIndex === 1) {
                 // Sky scene - start higher
                 droneRoot.position.y = 63;
+            } else if (currentSceneIndex === 2) {
+                // Water scene - start at medium height (between water and clouds)
+                droneRoot.position.y = 20;
             } else {
                 // Other scenes - start at top
                 droneRoot.position.y = droneStartY;
@@ -1211,6 +1281,13 @@ function animate() {
     if (currentSceneIndex === 1) {
         // In sky scene, drone flies just above clouds (clouds at ~50-56, drone at 58-63)
         droneTargetY = 63 - (scrollProgress * 5); // Fly at 63-58 height, just above clouds at 50-56
+    } else if (currentSceneIndex === 2) {
+        // In water scene (scene 3), drone should stay above water surface (water at y = -3)
+        // Drone starts at y = 20 and can descend but not below y = 0 (above water)
+        const minY = 0; // Minimum height above water
+        const maxY = 20; // Starting height
+        droneTargetY = maxY - (scrollProgress * (maxY - minY));
+        droneTargetY = Math.max(droneTargetY, minY); // Ensure drone doesn't go below water
     } else {
         droneTargetY = droneStartY - (scrollProgress * (droneStartY - droneEndY));
     }
@@ -1334,11 +1411,11 @@ function animate() {
             });
         }
         
-        // Animate clouds - only in sky scene - infinite forward movement
+        // Animate clouds - only in sky scene (scene 1) - infinite forward movement
         if (currentSceneIndex === 1 && scene.userData.cloudGroup && droneRoot) {
             const time = clock.getElapsedTime();
             const droneZ = droneRoot.position.z;
-            const cloudSpeed = 2.0; // Speed at which clouds move forward (towards drone)
+            const cloudSpeed = 20.0; // Speed at which clouds move forward (towards drone) - faster movement
             
             // Animate each cloud - move forward continuously, reset when passed
             scene.userData.cloudGroup.children.forEach((cloud, index) => {
@@ -1357,6 +1434,56 @@ function animate() {
                     }
                 }
             });
+        }
+        
+        // Animate clouds - in water scene (scene 3) - gentle clouds above
+        if (currentSceneIndex === 2 && scene.userData.cloudGroup && droneRoot) {
+            const time = clock.getElapsedTime();
+            const droneZ = droneRoot.position.z;
+            const cloudSpeed = 15.0; // Slower movement for gentler effect
+            
+            // Animate each cloud - move forward continuously, reset when passed
+            scene.userData.cloudGroup.children.forEach((cloud, index) => {
+                if (cloud.userData.originalY !== undefined && cloud.userData.originalZ !== undefined) {
+                    // Move cloud forward (towards drone)
+                    cloud.position.z += cloudSpeed * dt;
+                    
+                    // Gentle vertical movement for clouds above
+                    cloud.position.y = cloud.userData.originalY + Math.sin(time * 0.2 + index) * 0.15;
+                    
+                    // If cloud passed the drone (went too far forward), reset it far ahead
+                    if (cloud.position.z > droneZ + 100) {
+                        // Reset cloud far ahead of drone (at the start of the range)
+                        cloud.position.z = droneZ - 600; // Reset to start position
+                        // Update originalZ to maintain relative position
+                        cloud.userData.originalZ = cloud.position.z;
+                    }
+                }
+            });
+        }
+        
+        // Animate water waves - only in water scene (scene 3)
+        if (currentSceneIndex === 2 && scene.userData.water) {
+            const time = clock.getElapsedTime();
+            const water = scene.userData.water;
+            const positions = water.geometry.attributes.position;
+            const originalPositions = water.userData.originalPositions;
+            
+            if (originalPositions) {
+                for (let i = 0; i < positions.count; i++) {
+                    const i3 = i * 3;
+                    const x = originalPositions[i3];
+                    const z = originalPositions[i3 + 2];
+                    
+                    // Create wave animation
+                    const wave1 = Math.sin(x * 0.1 + time * 0.5) * 0.3;
+                    const wave2 = Math.sin(z * 0.15 + time * 0.7) * 0.2;
+                    const wave3 = Math.sin((x + z) * 0.08 + time * 0.6) * 0.15;
+                    
+                    positions.setY(i, originalPositions[i3 + 1] + wave1 + wave2 + wave3);
+                }
+                positions.needsUpdate = true;
+            }
         }
     }
     
