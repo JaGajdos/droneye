@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="sk" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n-title="pageTitle.gdpr">GDPR - Ochrana osobných údajov - DroneEye</title>
+    <meta name="description" content="Memorandum na Ochranu osobných údajov spoločnosti DroneEye. Informácie o spracúvaní osobných údajov v súlade s GDPR.">
+    <meta name="keywords" content="GDPR, ochrana údajov, osobné údaje, cookies, súkromie, DroneEye">
+    <meta name="author" content="DroneEye">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="sk">
+    <meta name="revisit-after" content="7 days">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="apple-touch-icon" href="/favicon.png">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://www.droneye.sk/gdpr">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.droneye.sk/gdpr">
+    <meta property="og:title" content="GDPR - Ochrana osobných údajov - DroneEye">
+    <meta property="og:description" content="Memorandum na Ochranu osobných údajov spoločnosti DroneEye. Informácie o spracúvaní osobných údajov v súlade s GDPR.">
+    <meta property="og:image" content="https://www.droneye.sk/assets/gdpr-og.jpg">
+    <meta property="og:site_name" content="DroneEye">
+    <meta property="og:locale" content="sk_SK">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://www.droneye.sk/gdpr">
+    <meta property="twitter:title" content="GDPR - Ochrana osobných údajov - DroneEye">
+    <meta property="twitter:description" content="Memorandum na Ochranu osobných údajov spoločnosti DroneEye. Informácie o spracúvaní osobných údajov v súlade s GDPR.">
+    <meta property="twitter:image" content="https://www.droneye.sk/assets/gdpr-twitter.jpg">
+    
+    <!-- Additional SEO -->
+    <meta name="geo.region" content="SK">
+    <meta name="geo.placename" content="Bratislava">
+    <meta name="geo.position" content="48.1486;17.1077">
+    <meta name="ICBM" content="48.1486, 17.1077">
+    
+    <!-- Hreflang Tags -->
+    <link rel="alternate" hreflang="sk" href="https://www.droneye.sk/gdpr" />
+    <link rel="alternate" hreflang="en" href="https://www.droneye.sk/gdpr?lang=en" />
+    <link rel="alternate" hreflang="de" href="https://www.droneye.sk/gdpr?lang=de" />
+    <link rel="alternate" hreflang="x-default" href="https://www.droneye.sk/gdpr" />
+    
+    <!-- Structured Data - BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Domov",
+          "item": "https://www.droneye.sk/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "GDPR",
+          "item": "https://www.droneye.sk/gdpr"
+        }
+      ]
+    }
+    </script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/assets/fontawesome/css/all.min.css">
+    
+    <link rel="stylesheet" href="/src/style.css">
+    <script>
+        // Hide content until translations are loaded to prevent flash of wrong language
+        (function() {
+            const savedLang = localStorage.getItem('language') || 'sk';
+            document.documentElement.setAttribute('lang', savedLang);
+            document.documentElement.style.visibility = 'hidden';
+        })();
+    </script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="/" class="logo-link">
+                    <img src="assets/logo.svg" alt="DroneEye Logo" class="logo-img">
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item mobile-menu-header">
+                    <div class="mobile-menu-logo">
+                        <a href="/" class="logo-link">
+                            <img src="assets/logo.svg" alt="DroneEye Logo" class="logo-img">
+                        </a>
+                    </div>
+                    <button class="mobile-menu-close" aria-label="Close menu">
+                        <i class="fas fa-times" aria-hidden="true"></i>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <a href="/" class="nav-link" data-i18n="nav.home">Domov</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/sluzby" class="nav-link" data-i18n="nav.services">Naše služby</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/projekty" class="nav-link" data-i18n="nav.projects">Naše projekty</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/tim" class="nav-link" data-i18n="nav.team">Náš tím</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/cenova-ponuka" class="nav-link" data-i18n="nav.pricing">Cenová ponuka</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/kontakt" class="nav-link" data-i18n="nav.contact">Kontakt</a>
+                </li>
+                <li class="nav-item mobile-language-switcher">
+                    <div class="mobile-language-buttons">
+                        <button class="language-option active" data-lang="sk">SK</button>
+                        <button class="language-option" data-lang="en">EN</button>
+                        <button class="language-option" data-lang="de">DE</button>
+                    </div>
+                </li>
+            </ul>
+            <div class="language-switcher">
+                <div class="language-buttons">
+                    <button class="language-option active" data-lang="sk">SK</button>
+                    <button class="language-option" data-lang="en">EN</button>
+                    <button class="language-option" data-lang="de">DE</button>
+                </div>
+            </div>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- GDPR Page -->
+        <section class="page active">
+            <!-- Subpage Hero -->
+            <div class="subpage-hero">
+                <div class="subpage-hero-content">
+                    <h1 data-i18n="gdpr.title">GDPR</h1>
+                    <p data-i18n="gdpr.subtitle">Memorandum na Ochranu osobných údajov</p>
+                </div>
+            </div>
+            
+            <!-- Subpage Content -->
+            <div class="subpage-content">
+                <!-- Introduction Section -->
+                <div class="content-section-text">
+                    <div class="container">
+                        <p class="section-intro" data-i18n="gdpr.intro">Ochrana súkromia našich zákazníkov pri spracúvaní osobných údajov je pre nás veľmi dôležitá. Pri spracúvaní vašich osobných údajov postupujeme v súlade s platnými právnymi predpismi a zabezpečujeme ich ochranu v maximálnej možnej miere. Všetci návštevníci našej stránky, ktorí sú s nami v kontakte ako zákazníci, nám poskytli v tejto súvislosti svoje osobné údaje. Na tejto web stránke nájdete všetky potrebné informácie týkajúce sa spracúvania osobných údajov.</p>
+                        <p data-i18n="gdpr.intro2">Toto Memorandum na Ochranu osobných údajov (ďalej len ako „Memorandum"), vám poskytne informácie o tom, ako nakladáme s vašimi osobnými údajmi, ako nás môžete kontaktovať v prípade uplatňovania si práv alebo, ak máte otázky ohľadom spracúvania vašich osobných údajov. Memorandum je súčasťou Všeobecných obchodných podmienok spoločnosti DroneEye.</p>
+                        <p data-i18n="gdpr.intro3">Odporúčame vám, aby ste si informácie obsiahnuté v tomto Memorande dôkladne prečítali. Zmeny týkajúce sa podmienok ochrany osobných údajov sú zverejnené na našej internetovej stránke <strong>www.droneye.sk</strong>, formou aktualizácie. Týmto spôsobom zabezpečíme, aby ste vždy mali k dispozícii aktuálne informácie o tom, za akých podmienok spracúvame vaše osobné údaje.</p>
+                    </div>
+                </div>
+
+                <!-- Section 1 -->
+                <div class="content-section-text">
+                    <div class="container">
+                        <h2 class="section-title" data-i18n="gdpr.section1.title">1. O nás</h2>
+                        <p data-i18n="gdpr.section1.description1">Prostredníctvom našej webstránky <strong>www.droneye.sk</strong>, vám umožňujeme ako našim zákazníkom objednať letecké práce. V súvislosti s objednaním naších služieb sme povinní spracúvať vaše osobné údaje.</p>
+                        <p data-i18n="gdpr.section1.description2">Pri spracúvaní vašich osobných údajov sa riadime právnymi predpismi Slovenskej republiky, Nariadením Európskeho parlamentu a Rady (EÚ) č. 2016/679 o ochrane fyzických osôb pri spracúvaní osobných údajov a o voľnom pohybe takýchto údajov (všeobecné nariadenie o ochrane údajov alebo GDPR), zákonom č. 18/2018 Z. z o ochrane osobných údajov a ako aj ďalšími právnymi predpismi.</p>
+                        <p data-i18n="gdpr.section1.description3">Prevádzkovateľom informačných systémov, v ktorých sú spracúvané vaše osobné údaje je spoločnosť <strong>DroneEye, so sídlom Bratislava, Slovensko</strong>.</p>
+                    </div>
+                </div>
+
+                <!-- Section 2 -->
+                <div class="content-section-text">
+                    <div class="container">
+                        <h2 class="section-title" data-i18n="gdpr.section2.title">2. Aké údaje o vás spracúvame?</h2>
+                        <p data-i18n="gdpr.section2.description1">Za osobný údaj sa považuje taký údaj, na základe ktorého je možné identifikovať konkrétnu fyzickú osobu. To znamená, že nejde len o známe identifikátory ako meno, priezvisko, či dátum narodenia. GDPR definuje osobný údaj ako akékoľvek informácie, ktoré vedú k určeniu fyzickej osoby. Každá fyzická osoba, ktorej sa osobné údaje týkajú, sa považuje za dotknutú osobu s príslušnými právami k osobným údajom.</p>
+                        <p data-i18n="gdpr.section2.description2">V DroneEye spracúvame len také osobné údaje, aby sme vám poskytovali profesionálne služby, pričom rozsah týchto osobných údajov je určený všeobecne záväznými právnymi predpismi. V prípade, ak vaše osobné údaje spracúvame na základe súhlasu, zoznam, resp. rozsah údajov je presne uvedený priamo v súhlase, a to v miere potrebnej na splnenie účelu, na ktorý sú osobné údaje spracúvané.</p>
+                        <p data-i18n="gdpr.section2.description3">Medzi spracúvané údaje patria predovšetkým nasledujúce kategórie osobných údajov:</p>
+                        <ul class="gdpr-list">
+                            <li data-i18n="gdpr.section2.item1"><strong>Fakturačné údaje:</strong> meno, priezvisko, fakturačná adresa, emailová adresa, telefónny kontakt, adresa doručenia.</li>
+                            <li data-i18n="gdpr.section2.item2"><strong>Registračné údaje:</strong> údaje získané pri odoslaní kontaktného formulára www.droneye.sk/kontakt</li>
+                            <li data-i18n="gdpr.section2.item3"><strong>Marketingové údaje:</strong> meno a priezvisko, dátum narodenia, adresa, IP adresa, emailová adresa, telefónne číslo.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Section 3 -->
+                <div class="content-section-text">
+                    <div class="container">
+                        <h2 class="section-title" data-i18n="gdpr.section3.title">3. Prečo potrebujeme vaše osobné údaje?</h2>
+                        <p data-i18n="gdpr.section3.description">Vaše údaje spracúvame v nevyhnutnom rozsahu, pričom väčšina spracúvaní je odôvodnená tým, že tieto údaje potrebujeme na poskytnutie zakúpeného produktu.</p>
+                        <h3 data-i18n="gdpr.section3.subtitle1">3.1. Plníme si povinnosti vyplývajúce nám z príslušných právnych predpisov</h3>
+                        <ul class="gdpr-list">
+                            <li data-i18n="gdpr.section3.item1">Sme povinní identifikovať vás pri objednaní služieb a vystavení objednávky na vaše meno</li>
+                            <li data-i18n="gdpr.section3.item2">Pri našej činnosti sme povinní postupovať obozretne a rešpektovať vaše práva ako spotrebiteľa v súlade so zákonom č. 102/2014 Z. z. o ochrane spotrebiteľa pri predaji tovaru alebo poskytovaní služieb na diaľku</li>
+                            <li data-i18n="gdpr.section3.item3">Sme povinní vystaviť faktúru a evidovať ju v súlade so zákonom o DPH</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Section 4 -->
+                <div class="content-section-text">
+                    <div class="container">
+                        <h2 class="section-title" data-i18n="gdpr.section4.title">4. Doba uchovávania osobných údajov</h2>
+                        <p data-i18n="gdpr.section4.description1">Vaše osobné údaje uchovávame len po dobu, ktorá je nevyhnutná na splnenie účelu, na ktorý boli osobné údaje spracúvané, alebo po dobu, ktorú vyžadujú právne predpisy.</p>
+                        <p data-i18n="gdpr.section4.description2">V prípade, ak vaše osobné údaje spracúvame na základe súhlasu, uchovávame ich do doby odvolania súhlasu, alebo do doby, ktorá je potrebná na splnenie účelu spracúvania osobných údajov.</p>
+                        <p data-i18n="gdpr.section4.description3">Po uplynutí doby uchovávania osobných údajov budú vaše osobné údaje vymazané alebo anonymizované v súlade s platnými právnymi predpismi.</p>
+                    </div>
+                </div>
+
+                <!-- Section 5 -->
+                <div class="content-section-text">
+                    <div class="container">
+                        <h2 class="section-title" data-i18n="gdpr.section5.title">5. Vaše práva</h2>
+                        <p data-i18n="gdpr.section5.description">V súlade s GDPR máte nasledujúce práva týkajúce sa vašich osobných údajov:</p>
+                        <ul class="gdpr-list">
+                            <li data-i18n="gdpr.section5.item1">Právo na prístup k osobným údajom - máte právo získať informácie o tom, aké osobné údaje o vás spracúvame</li>
+                            <li data-i18n="gdpr.section5.item2">Právo na opravu - máte právo požadovať opravu nepresných alebo neúplných osobných údajov</li>
+                            <li data-i18n="gdpr.section5.item3">Právo na vymazanie - máte právo požadovať vymazanie vašich osobných údajov za určitých podmienok</li>
+                            <li data-i18n="gdpr.section5.item4">Právo na obmedzenie spracúvania - máte právo požadovať obmedzenie spracúvania vašich osobných údajov</li>
+                            <li data-i18n="gdpr.section5.item5">Právo na prenosnosť údajov - máte právo získať vaše osobné údaje v štruktúrovanom formáte</li>
+                            <li data-i18n="gdpr.section5.item6">Právo namietať - máte právo namietať proti spracúvaniu vašich osobných údajov</li>
+                            <li data-i18n="gdpr.section5.item7">Právo odvolať súhlas - ak spracúvame vaše osobné údaje na základe súhlasu, máte právo tento súhlas kedykoľvek odvolať</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Section 6 -->
+                <div class="content-section-text">
+                    <div class="container">
+                        <h2 class="section-title" data-i18n="gdpr.section6.title">6. Ako môžete uplatniť svoje práva</h2>
+                        <p data-i18n="gdpr.section6.description1">Ak chcete uplatniť niektoré z vašich práv uvedených vyššie, môžete nás kontaktovať prostredníctvom emailu na adrese info@droneye.sk alebo písomne na našu adresu.</p>
+                        <p data-i18n="gdpr.section6.description2">Vašu žiadosť vybavíme bez zbytočného odkladu, najneskôr do 30 dní od jej doručenia. V prípade zložitých žiadostí alebo veľkého počtu žiadostí si vyhradzujeme právo predĺžiť túto lehotu o ďalších 60 dní, o čom vás budeme informovať.</p>
+                    </div>
+                </div>
+
+                <!-- Section 7 -->
+                <div class="content-section-text">
+                    <div class="container">
+                        <h2 class="section-title" data-i18n="gdpr.section7.title">7. Zabezpečenie osobných údajov</h2>
+                        <p data-i18n="gdpr.section7.description1">Pri spracúvaní vašich osobných údajov používame vhodné technické a organizačné opatrenia na zabezpečenie ochrany vašich osobných údajov pred neoprávneným prístupom, stratou, zničením alebo zmenou.</p>
+                        <p data-i18n="gdpr.section7.description2">Naše systémy sú pravidelne aktualizované a monitorované, aby sme zabezpečili maximálnu bezpečnosť vašich osobných údajov.</p>
+                    </div>
+                </div>
+
+                <!-- Section 8 -->
+                <div class="content-section-text">
+                    <div class="container">
+                        <h2 class="section-title" data-i18n="gdpr.section8.title">8. Prenos osobných údajov do tretích krajín</h2>
+                        <p data-i18n="gdpr.section8.description">Vaše osobné údaje spracúvame výlučne v rámci Európskej únie. V prípade, ak by bolo potrebné preniesť vaše osobné údaje do tretích krajín, zabezpečíme, aby takéto prenosy boli v súlade s platnými právnymi predpismi a aby boli zabezpečené vhodné záruky ochrany vašich osobných údajov.</p>
+                    </div>
+                </div>
+
+                <!-- Section 9 -->
+                <div class="content-section-text">
+                    <div class="container">
+                        <h2 class="section-title" data-i18n="gdpr.section9.title">9. Automatizované rozhodovanie a profilovanie</h2>
+                        <p data-i18n="gdpr.section9.description">Vaše osobné údaje nepoužívame na automatizované rozhodovanie alebo profilovanie v zmysle GDPR. Všetky rozhodnutia týkajúce sa spracúvania vašich osobných údajov sú vykonávané ľudskými zamestnancami.</p>
+                    </div>
+                </div>
+
+                <!-- Section 10 -->
+                <div class="content-section-text">
+                    <div class="container">
+                        <h2 class="section-title" data-i18n="gdpr.section10.title">10. Spracúvanie vašich osobných údajov prostredníctvom našich internetových stránok</h2>
+                        <p data-i18n="gdpr.section10.description">Pri používaní našej internetovej stránky: www.droneye.sk (ďalej len ako „Internetová stránka"), môže byť prístup do niektorých častí Internetovej stránky podmienený poskytnutím vašich osobných údajov. Toto poskytnutie podmieňuje prístup alebo správnu funkčnosť Internetových stránok a z tohto dôvodu je potrebné, aby ste nám udelili súhlas na spracúvanie vami poskytnutých osobných údajov.</p>
+                    </div>
+                </div>
+
+                <!-- Section 11 - Cookies -->
+                <div class="content-section-text">
+                    <div class="container">
+                        <h2 class="section-title" data-i18n="gdpr.section11.title">11. Spracúvanie údajov prostredníctvom cookies</h2>
+                        <p data-i18n="gdpr.section11.description1">O návštevníkoch a používateľoch našej Internetovej stránke sme oprávnení zhromažďovať a iným spôsobom spracúvať údaje prostredníctvom nástrojov slúžiacich na automatizované zhromažďovanie údajov, najmä súborov cookies, protokolov a iných bežne používaných nástrojov na získavanie informácií prostredníctvom internetovej stránky.</p>
+                        <p data-i18n="gdpr.section11.description2">Pod pojmom cookie je možné predstaviť si malé množstvo údajov, ktoré sú ako súbor odoslané do vášho počítača (tabletu, smartfónu) z internetovej stránky, ktorú práve navštevujete. V počítači sa súbor údajov uloží a pri každej ďalšej návšteve rovnakej webovej stránky odošle počítač informáciu nášmu serveru.</p>
+                        <p data-i18n="gdpr.section11.description3">Väčšina internetových stránok, vrátane tej našej, využíva cookies. Zmyslom cookies je uľahčiť a spríjemniť vám používanie našich Internetových stránok. Súbor cookie totiž umožní webovej stránke rozpoznať, či ste ju už v minulosti navštívili a o ktorú sekciu ste mali záujem. Zároveň sú to práve cookies, vďaka ktorým si môžete uložiť svoje užívateľské nastavenia ako rozpoznanie jazyka či zapamätanie vášho prihlasovacieho mena. Pomocou cookies uchovávame údaje, ktoré nespájame s vašou osobou a prostredníctvom získaných údajov nerealizujeme identifikáciu zákazníka.</p>
+                        <p data-i18n="gdpr.section11.description4">Použitie súborov cookies nie je pre vás nebezpečné, cookies nemôžu prenášať vírusy ani čítať údaje z harddisku zariadenia.</p>
+                        <p data-i18n="gdpr.section11.description5">Návštevou našej internetovej stránke automaticky vyjadrujete svoj súhlas s použitím tejto technológie. Tento postup vyplýva z § 55 ods. 5 zákona č. 355/2011 Z. z. o elektronických komunikáciách, podľa ktorého sa za súhlas na tento účel považuje aj použitie príslušného nastavenia webového prehliadača alebo iného počítačového programu.</p>
+                        <p data-i18n="gdpr.section11.description6">Používanie cookies a ich povolenie vo webovom prehliadači je na slobodnej vôli každého používateľa webovej stránky. Súbory cookies môžete slobodne vymazať alebo vopred nastaviť váš internetový prehliadač tak, aby prijímanie súborov cookies buď odmietal, alebo vás upozorňoval, keď sa server snaží zaslať vám cookie. Potom sa však môže stať, že webové stránky, ktoré sú na podpore cookies závislé, nebudú fungovať tak, ako by ste si predstavovali, alebo že časti stránok pre vás nebudú dostupné.</p>
+                        <p data-i18n="gdpr.section11.description7">Využívame trvalé súbory cookies, ktoré nám pomáhajú identifikovať vaše zariadenie pri opätovnej návšteve Internetových stránok a umožňujú tak poskytovať služby v súlade s vašimi očakávaniami. Súbory Cookies uchovávame po dobu 1 roka.</p>
+                    </div>
+                </div>
+
+                <!-- Section 12 -->
+                <div class="content-section-text">
+                    <div class="container">
+                        <h2 class="section-title" data-i18n="gdpr.section12.title">12. Okruh príjemcov</h2>
+                        <p data-i18n="gdpr.section12.description1">Vaše osobné údaje nesprístupňujeme bezdôvodne žiadnym subjektom. Je však potrebné, aby niektoré osobné údaje boli sprístupnené vopred určenému okruhu príjemcov osobných údajov. V prípade zasielania tovaru (napr. vytlačená dronová fotografia) Vám ako konečnému zákazníkovi, poskytujeme Vaše osobné údaje poštovým doručovateľom alebo kuriérskym firmám. V prípade správy a údržby našej webovej stránky dochádza k sprístupneniu Vašich osobných údajov správcovi webovej stránky. V neposlednom rade sú to osoby ako účtovník a daňový poradca.</p>
+                        <p data-i18n="gdpr.section12.description2">Okruh príjemcov:</p>
+                        <ul class="gdpr-list">
+                            <li data-i18n="gdpr.section12.item1">Poštový doručovatelia v zmysle zákona 324/2011 Z. z. o poštových službách</li>
+                            <li data-i18n="gdpr.section12.item2">Kurierska spoločnosť</li>
+                            <li data-i18n="gdpr.section12.item3">Správca servera</li>
+                            <li data-i18n="gdpr.section12.item4">Správca webovej stránky</li>
+                            <li data-i18n="gdpr.section12.item5">Emailový poskytovateľ</li>
+                            <li data-i18n="gdpr.section12.item6">Daňový a účtovný poradca</li>
+                            <li data-i18n="gdpr.section12.item7">Subdodávatelia</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Section 13 -->
+                <div class="content-section-text">
+                    <div class="container">
+                        <h2 class="section-title" data-i18n="gdpr.section13.title">13. Záverečné ustanovenia</h2>
+                        <p data-i18n="gdpr.section13.description">Prevádzkovateľ je spoločnosť DroneEye, so sídlom Bratislava, Slovensko. Spoločnosť prevádzkuje internetovú stránku www.droneye.sk. V prípade otázok týkajúcich sa ochrany osobných údajov, na ktoré ste nenašli odpoveď v tomto dokumente, prosím napíšte na info@droneye.sk.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loader">
+            <div class="loader-circle"></div>
+            <p data-i18n="loading">Načítavam...</p>
+        </div>
+    </div>
+
+    <!-- Cookie Consent Banner -->
+    <div id="cookie-banner" class="cookie-banner" style="display: none;">
+        <div class="cookie-banner-content">
+            <div class="cookie-banner-text">
+                <h4 data-i18n="cookies.title">Používame cookies</h4>
+                <p data-i18n="cookies.description">Táto stránka používa cookies na zlepšenie vášho zážitku. Pokračovaním v prehliadaní súhlasíte s používaním cookies v súlade s našou <a href="/gdpr">politikou cookies</a>.</p>
+            </div>
+            <div class="cookie-banner-buttons">
+                <button id="cookie-accept" class="cookie-btn cookie-btn-accept" data-i18n="cookies.accept">Prijať všetky</button>
+                <button id="cookie-reject" class="cookie-btn cookie-btn-reject" data-i18n="cookies.reject">Odmietnuť</button>
+                <button id="cookie-settings" class="cookie-btn cookie-btn-settings" data-i18n="cookies.settings">Nastavenia</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3 data-i18n="footer.contact">Kontakt</h3>
+                <ul class="footer-links">
+                    <li><a href="mailto:info@droneye.sk">📧 info@droneye.sk</a></li>
+                    <li><a href="tel:+421950614303">📞 +421 950 614 303</a></li>
+                    <li>
+                        <div class="social-links">
+                            <a href="https://www.instagram.com/dron_eyesky" target="_blank" rel="nofollow" class="social-link">
+                                <img src="assets/instagram.png" alt="Instagram Droneye" loading="lazy" />
+                            </a>
+                            <a href="https://www.facebook.com/profile.php?id=100066345406669" target="_blank" rel="nofollow" class="social-link">
+                                <img src="assets/fb.png" alt="Facebook Droneye" loading="lazy" />
+                            </a>
+                            <a href="https://www.youtube.com/@dron_eyesky" target="_blank" rel="nofollow" class="social-link">
+                                <img src="assets/yt.png" alt="YouTube Droneye" loading="lazy" />
+                            </a>
+                            <a href="#" target="_blank" rel="nofollow" class="social-link">
+                                <img src="assets/linkedin.png" alt="LinkedIn Droneye" loading="lazy" />
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="footer-section footer-form">
+                <h3 data-i18n="footer.quickContact">Kontaktný formulár</h3>
+                <form class="footer-contact-form">
+                    <input type="text" data-i18n-placeholder="footer.form.name" placeholder="Vaše meno" required>
+                    <input type="email" data-i18n-placeholder="footer.form.email" placeholder="Email" required>
+                    <textarea data-i18n-placeholder="footer.form.message" placeholder="Správa" rows="3" required></textarea>
+                    <button type="submit" data-i18n="footer.form.submit">Odoslať</button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2024 Droneye. <span data-i18n="footer.copyright">Všetky práva vyhradené.</span></p>
+            <div class="footer-bottom-right">
+                <div class="footer-theme-switcher">
+                    <button class="footer-theme-btn" data-theme="light" title="Light mode" aria-label="Switch to light mode"><i class="fas fa-sun" aria-hidden="true"></i></button>
+                    <button class="footer-theme-btn" data-theme="dark" title="Dark mode" aria-label="Switch to dark mode"><i class="fas fa-moon" aria-hidden="true"></i></button>
+                </div>
+                <div class="footer-legal">
+                    <a href="/legislativa" data-i18n="footer.legislation">Legislatíva</a>
+                    <a href="/gdpr" data-i18n="footer.privacy">GDPR</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
+    <script src="/src/cookies.js"></script>
+</body>
+</html>
+

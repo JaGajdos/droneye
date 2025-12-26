@@ -301,8 +301,7 @@
     },
     "copyright": "Všetky práva vyhradené.",
     "legislation": "Legislatíva",
-    "privacy": "Ochrana údajov",
-    "terms": "Podmienky"
+    "privacy": "GDPR"
   },
   "pageTitle": {
     "home": "DroneEye - Moderné drone služby a 3D mapovanie",
@@ -312,7 +311,8 @@
     "team": "Náš tím - DroneEye",
     "pricing": "Cenová ponuka - DroneEye",
     "dronetext": "Drone 3D Model - DroneEye",
-    "legislation": "Legislatíva - DroneEye"
+    "legislation": "Legislatíva - DroneEye",
+    "gdpr": "GDPR - Ochrana osobných údajov - DroneEye"
   },
   "loading": "Načítavam...",
   "dronetext": {
@@ -336,6 +336,120 @@
       "title": "Začnime spolu",
       "subtitle": "Kontaktujte nás a vytvorme niečo výnimočné.",
       "button": "Naše projekty"
+    }
+  },
+  "cookies": {
+    "title": "Používame cookies",
+    "description": "Táto stránka používa cookies na zlepšenie vášho zážitku. Pokračovaním v prehliadaní súhlasíte s používaním cookies v súlade s našou <a href=\"/gdpr\">politikou cookies</a>.",
+    "accept": "Prijať všetky",
+    "reject": "Odmietnuť",
+    "settings": "Nastavenia",
+    "settingsTitle": "Nastavenia cookies",
+    "settingsDescription": "Vyberte, ktoré cookies chcete povoliť. Nevyhnutné cookies sú vždy aktívne, pretože sú potrebné pre základnú funkčnosť stránky.",
+    "necessary": "Nevyhnutné cookies",
+    "necessaryDesc": "Tieto cookies sú nevyhnutné pre fungovanie webovej stránky a nemôžu byť vypnuté.",
+    "analytics": "Analytické cookies",
+    "analyticsDesc": "Pomáhajú nám pochopiť, ako návštevníci používajú našu stránku.",
+    "marketing": "Marketingové cookies",
+    "marketingDesc": "Používame ich na personalizáciu reklám a meranie ich účinnosti.",
+    "save": "Uložiť nastavenia",
+    "close": "Zavrieť",
+    "youtubePlaceholder": "Pre zobrazenie tohto videa potrebujeme váš súhlas s analytickými cookies.",
+    "enableAnalytics": "Povoliť analytické cookies"
+  },
+  "gdpr": {
+    "title": "GDPR",
+    "subtitle": "Memorandum na Ochranu osobných údajov",
+    "intro": "Ochrana súkromia našich zákazníkov pri spracúvaní osobných údajov je pre nás veľmi dôležitá. Pri spracúvaní vašich osobných údajov postupujeme v súlade s platnými právnymi predpismi a zabezpečujeme ich ochranu v maximálnej možnej miere. Všetci návštevníci našej stránky, ktorí sú s nami v kontakte ako zákazníci, nám poskytli v tejto súvislosti svoje osobné údaje. Na tejto web stránke nájdete všetky potrebné informácie týkajúce sa spracúvania osobných údajov.",
+    "intro2": "Toto Memorandum na Ochranu osobných údajov (ďalej len ako „Memorandum"), vám poskytne informácie o tom, ako nakladáme s vašimi osobnými údajmi, ako nás môžete kontaktovať v prípade uplatňovania si práv alebo, ak máte otázky ohľadom spracúvania vašich osobných údajov. Memorandum je súčasťou Všeobecných obchodných podmienok spoločnosti DroneEye.",
+    "intro3": "Odporúčame vám, aby ste si informácie obsiahnuté v tomto Memorande dôkladne prečítali. Zmeny týkajúce sa podmienok ochrany osobných údajov sú zverejnené na našej internetovej stránke www.droneye.sk, formou aktualizácie. Týmto spôsobom zabezpečíme, aby ste vždy mali k dispozícii aktuálne informácie o tom, za akých podmienok spracúvame vaše osobné údaje.",
+    "section1": {
+      "title": "1. O nás",
+      "description1": "Prostredníctvom našej webstránky www.droneye.sk, vám umožňujeme ako našim zákazníkom objednať letecké práce. V súvislosti s objednaním naších služieb sme povinní spracúvať vaše osobné údaje.",
+      "description2": "Pri spracúvaní vašich osobných údajov sa riadime právnymi predpismi Slovenskej republiky, Nariadením Európskeho parlamentu a Rady (EÚ) č. 2016/679 o ochrane fyzických osôb pri spracúvaní osobných údajov a o voľnom pohybe takýchto údajov (všeobecné nariadenie o ochrane údajov alebo GDPR), zákonom č. 18/2018 Z. z o ochrane osobných údajov a ako aj ďalšími právnymi predpismi.",
+      "description3": "Prevádzkovateľom informačných systémov, v ktorých sú spracúvané vaše osobné údaje je spoločnosť DroneEye, so sídlom Bratislava, Slovensko."
+    },
+    "section2": {
+      "title": "2. Aké údaje o vás spracúvame?",
+      "description1": "Za osobný údaj sa považuje taký údaj, na základe ktorého je možné identifikovať konkrétnu fyzickú osobu. To znamená, že nejde len o známe identifikátory ako meno, priezvisko, či dátum narodenia. GDPR definuje osobný údaj ako akékoľvek informácie, ktoré vedú k určeniu fyzickej osoby. Každá fyzická osoba, ktorej sa osobné údaje týkajú, sa považuje za dotknutú osobu s príslušnými právami k osobným údajom.",
+      "description2": "V DroneEye spracúvame len také osobné údaje, aby sme vám poskytovali profesionálne služby, pričom rozsah týchto osobných údajov je určený všeobecne záväznými právnymi predpismi. V prípade, ak vaše osobné údaje spracúvame na základe súhlasu, zoznam, resp. rozsah údajov je presne uvedený priamo v súhlase, a to v miere potrebnej na splnenie účelu, na ktorý sú osobné údaje spracúvané.",
+      "description3": "Medzi spracúvané údaje patria predovšetkým nasledujúce kategórie osobných údajov:",
+      "item1": "Fakturačné údaje: meno, priezvisko, fakturačná adresa, emailová adresa, telefónny kontakt, adresa doručenia.",
+      "item2": "Registračné údaje: údaje získané pri odoslaní kontaktného formulára www.droneye.sk/kontakt",
+      "item3": "Marketingové údaje: meno a priezvisko, dátum narodenia, adresa, IP adresa, emailová adresa, telefónne číslo."
+    },
+    "section3": {
+      "title": "3. Prečo potrebujeme vaše osobné údaje?",
+      "description": "Vaše údaje spracúvame v nevyhnutnom rozsahu, pričom väčšina spracúvaní je odôvodnená tým, že tieto údaje potrebujeme na poskytnutie zakúpeného produktu.",
+      "subtitle1": "3.1. Plníme si povinnosti vyplývajúce nám z príslušných právnych predpisov",
+      "item1": "Sme povinní identifikovať vás pri objednaní služieb a vystavení objednávky na vaše meno",
+      "item2": "Pri našej činnosti sme povinní postupovať obozretne a rešpektovať vaše práva ako spotrebiteľa v súlade so zákonom č. 102/2014 Z. z. o ochrane spotrebiteľa pri predaji tovaru alebo poskytovaní služieb na diaľku",
+      "item3": "Sme povinní vystaviť faktúru a evidovať ju v súlade so zákonom o DPH"
+    },
+    "section4": {
+      "title": "4. Doba uchovávania osobných údajov",
+      "description1": "Vaše osobné údaje uchovávame len po dobu, ktorá je nevyhnutná na splnenie účelu, na ktorý boli osobné údaje spracúvané, alebo po dobu, ktorú vyžadujú právne predpisy.",
+      "description2": "V prípade, ak vaše osobné údaje spracúvame na základe súhlasu, uchovávame ich do doby odvolania súhlasu, alebo do doby, ktorá je potrebná na splnenie účelu spracúvania osobných údajov.",
+      "description3": "Po uplynutí doby uchovávania osobných údajov budú vaše osobné údaje vymazané alebo anonymizované v súlade s platnými právnymi predpismi."
+    },
+    "section5": {
+      "title": "5. Vaše práva",
+      "description": "V súlade s GDPR máte nasledujúce práva týkajúce sa vašich osobných údajov:",
+      "item1": "Právo na prístup k osobným údajom - máte právo získať informácie o tom, aké osobné údaje o vás spracúvame",
+      "item2": "Právo na opravu - máte právo požadovať opravu nepresných alebo neúplných osobných údajov",
+      "item3": "Právo na vymazanie - máte právo požadovať vymazanie vašich osobných údajov za určitých podmienok",
+      "item4": "Právo na obmedzenie spracúvania - máte právo požadovať obmedzenie spracúvania vašich osobných údajov",
+      "item5": "Právo na prenosnosť údajov - máte právo získať vaše osobné údaje v štruktúrovanom formáte",
+      "item6": "Právo namietať - máte právo namietať proti spracúvaniu vašich osobných údajov",
+      "item7": "Právo odvolať súhlas - ak spracúvame vaše osobné údaje na základe súhlasu, máte právo tento súhlas kedykoľvek odvolať"
+    },
+    "section6": {
+      "title": "6. Ako môžete uplatniť svoje práva",
+      "description1": "Ak chcete uplatniť niektoré z vašich práv uvedených vyššie, môžete nás kontaktovať prostredníctvom emailu na adrese info@droneye.sk alebo písomne na našu adresu.",
+      "description2": "Vašu žiadosť vybavíme bez zbytočného odkladu, najneskôr do 30 dní od jej doručenia. V prípade zložitých žiadostí alebo veľkého počtu žiadostí si vyhradzujeme právo predĺžiť túto lehotu o ďalších 60 dní, o čom vás budeme informovať."
+    },
+    "section7": {
+      "title": "7. Zabezpečenie osobných údajov",
+      "description1": "Pri spracúvaní vašich osobných údajov používame vhodné technické a organizačné opatrenia na zabezpečenie ochrany vašich osobných údajov pred neoprávneným prístupom, stratou, zničením alebo zmenou.",
+      "description2": "Naše systémy sú pravidelne aktualizované a monitorované, aby sme zabezpečili maximálnu bezpečnosť vašich osobných údajov."
+    },
+    "section8": {
+      "title": "8. Prenos osobných údajov do tretích krajín",
+      "description": "Vaše osobné údaje spracúvame výlučne v rámci Európskej únie. V prípade, ak by bolo potrebné preniesť vaše osobné údaje do tretích krajín, zabezpečíme, aby takéto prenosy boli v súlade s platnými právnymi predpismi a aby boli zabezpečené vhodné záruky ochrany vašich osobných údajov."
+    },
+    "section9": {
+      "title": "9. Automatizované rozhodovanie a profilovanie",
+      "description": "Vaše osobné údaje nepoužívame na automatizované rozhodovanie alebo profilovanie v zmysle GDPR. Všetky rozhodnutia týkajúce sa spracúvania vašich osobných údajov sú vykonávané ľudskými zamestnancami."
+    },
+    "section10": {
+      "title": "10. Spracúvanie vašich osobných údajov prostredníctvom našich internetových stránok",
+      "description": "Pri používaní našej internetovej stránky: www.droneye.sk (ďalej len ako „Internetová stránka"), môže byť prístup do niektorých častí Internetovej stránky podmienený poskytnutím vašich osobných údajov. Toto poskytnutie podmieňuje prístup alebo správnu funkčnosť Internetových stránok a z tohto dôvodu je potrebné, aby ste nám udelili súhlas na spracúvanie vami poskytnutých osobných údajov."
+    },
+    "section11": {
+      "title": "11. Spracúvanie údajov prostredníctvom cookies",
+      "description1": "O návštevníkoch a používateľoch našej Internetovej stránke sme oprávnení zhromažďovať a iným spôsobom spracúvať údaje prostredníctvom nástrojov slúžiacich na automatizované zhromažďovanie údajov, najmä súborov cookies, protokolov a iných bežne používaných nástrojov na získavanie informácií prostredníctvom internetovej stránky.",
+      "description2": "Pod pojmom cookie je možné predstaviť si malé množstvo údajov, ktoré sú ako súbor odoslané do vášho počítača (tabletu, smartfónu) z internetovej stránky, ktorú práve navštevujete. V počítači sa súbor údajov uloží a pri každej ďalšej návšteve rovnakej webovej stránky odošle počítač informáciu nášmu serveru.",
+      "description3": "Väčšina internetových stránok, vrátane tej našej, využíva cookies. Zmyslom cookies je uľahčiť a spríjemniť vám používanie našich Internetových stránok. Súbor cookie totiž umožní webovej stránke rozpoznať, či ste ju už v minulosti navštívili a o ktorú sekciu ste mali záujem. Zároveň sú to práve cookies, vďaka ktorým si môžete uložiť svoje užívateľské nastavenia ako rozpoznanie jazyka či zapamätanie vášho prihlasovacieho mena. Pomocou cookies uchovávame údaje, ktoré nespájame s vašou osobou a prostredníctvom získaných údajov nerealizujeme identifikáciu zákazníka.",
+      "description4": "Použitie súborov cookies nie je pre vás nebezpečné, cookies nemôžu prenášať vírusy ani čítať údaje z harddisku zariadenia.",
+      "description5": "Návštevou našej internetovej stránke automaticky vyjadrujete svoj súhlas s použitím tejto technológie. Tento postup vyplýva z § 55 ods. 5 zákona č. 355/2011 Z. z. o elektronických komunikáciách, podľa ktorého sa za súhlas na tento účel považuje aj použitie príslušného nastavenia webového prehliadača alebo iného počítačového programu.",
+      "description6": "Používanie cookies a ich povolenie vo webovom prehliadači je na slobodnej vôli každého používateľa webovej stránky. Súbory cookies môžete slobodne vymazať alebo vopred nastaviť váš internetový prehliadač tak, aby prijímanie súborov cookies buď odmietal, alebo vás upozorňoval, keď sa server snaží zaslať vám cookie. Potom sa však môže stať, že webové stránky, ktoré sú na podpore cookies závislé, nebudú fungovať tak, ako by ste si predstavovali, alebo že časti stránok pre vás nebudú dostupné.",
+      "description7": "Využívame trvalé súbory cookies, ktoré nám pomáhajú identifikovať vaše zariadenie pri opätovnej návšteve Internetových stránok a umožňujú tak poskytovať služby v súlade s vašimi očakávaniami. Súbory Cookies uchovávame po dobu 1 roka."
+    },
+    "section12": {
+      "title": "12. Okruh príjemcov",
+      "description1": "Vaše osobné údaje nesprístupňujeme bezdôvodne žiadnym subjektom. Je však potrebné, aby niektoré osobné údaje boli sprístupnené vopred určenému okruhu príjemcov osobných údajov. V prípade zasielania tovaru (napr. vytlačená dronová fotografia) Vám ako konečnému zákazníkovi, poskytujeme Vaše osobné údaje poštovým doručovateľom alebo kuriérskym firmám. V prípade správy a údržby našej webovej stránky dochádza k sprístupneniu Vašich osobných údajov správcovi webovej stránky. V neposlednom rade sú to osoby ako účtovník a daňový poradca.",
+      "description2": "Okruh príjemcov:",
+      "item1": "Poštový doručovatelia v zmysle zákona 324/2011 Z. z. o poštových službách",
+      "item2": "Kurierska spoločnosť",
+      "item3": "Správca servera",
+      "item4": "Správca webovej stránky",
+      "item5": "Emailový poskytovateľ",
+      "item6": "Daňový a účtovný poradca",
+      "item7": "Subdodávatelia"
+    },
+    "section13": {
+      "title": "13. Záverečné ustanovenia",
+      "description": "Prevádzkovateľ je spoločnosť DroneEye, so sídlom Bratislava, Slovensko. Spoločnosť prevádzkuje internetovú stránku www.droneye.sk. V prípade otázok týkajúcich sa ochrany osobných údajov, na ktoré ste nenašli odpoveď v tomto dokumente, prosím napíšte na info@droneye.sk."
     }
   }
 }

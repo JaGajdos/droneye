@@ -300,8 +300,7 @@
     },
     "copyright": "All rights reserved.",
     "legislation": "Legislation",
-    "privacy": "Privacy Policy",
-    "terms": "Terms"
+    "privacy": "GDPR"
   },
   "pageTitle": {
     "home": "DroneEye - Modern Drone Services and 3D Mapping",
@@ -311,7 +310,8 @@
     "team": "Our Team - DroneEye",
     "pricing": "Pricing - DroneEye",
     "dronetext": "Drone 3D Model - DroneEye",
-    "legislation": "Legislation - DroneEye"
+    "legislation": "Legislation - DroneEye",
+    "gdpr": "GDPR - Privacy Policy - DroneEye"
   },
   "loading": "Loading...",
   "dronetext": {
@@ -364,6 +364,120 @@
     "management": {
       "title": "Permit Management",
       "description": "Our drone permits and operational documentation are managed by a verified and experienced company with which we work closely. This company ensures comprehensive management of our permits in the SPECIFIC category, including their regular updates and monitoring of current regulations, so that we can ensure the highest level of safety during our flights. With their help, we constantly adapt our operational documentation, thereby guaranteeing compliance with current aviation standards and regulations."
+    }
+  },
+  "cookies": {
+    "title": "We use cookies",
+    "description": "This website uses cookies to improve your experience. By continuing to browse, you agree to our use of cookies in accordance with our <a href=\"/gdpr\">cookie policy</a>.",
+    "accept": "Accept all",
+    "reject": "Reject",
+    "settings": "Settings",
+    "settingsTitle": "Cookie Settings",
+    "settingsDescription": "Select which cookies you want to allow. Necessary cookies are always active as they are required for basic website functionality.",
+    "necessary": "Necessary Cookies",
+    "necessaryDesc": "These cookies are essential for the website to function and cannot be disabled.",
+    "analytics": "Analytics Cookies",
+    "analyticsDesc": "Help us understand how visitors use our website.",
+    "marketing": "Marketing Cookies",
+    "marketingDesc": "Used to personalize ads and measure their effectiveness.",
+    "save": "Save Settings",
+    "close": "Close",
+    "youtubePlaceholder": "To view this video, we need your consent for analytics cookies.",
+    "enableAnalytics": "Enable Analytics Cookies"
+  },
+  "gdpr": {
+    "title": "GDPR",
+    "subtitle": "Privacy Policy Memorandum",
+    "intro": "Protecting the privacy of our customers when processing personal data is very important to us. When processing your personal data, we act in accordance with applicable legal regulations and ensure their protection to the maximum extent possible. All visitors to our website who are in contact with us as customers have provided us with their personal data in this regard. On this website you will find all the necessary information regarding the processing of personal data.",
+    "intro2": "This Privacy Policy Memorandum (hereinafter referred to as \"Memorandum\") will provide you with information on how we handle your personal data, how you can contact us in case of exercising your rights or if you have questions regarding the processing of your personal data. The Memorandum is part of the General Terms and Conditions of DroneEye.",
+    "intro3": "We recommend that you carefully read the information contained in this Memorandum. Changes regarding the conditions of personal data protection are published on our website www.droneye.sk in the form of an update. This way we ensure that you always have current information about the conditions under which we process your personal data.",
+    "section1": {
+      "title": "1. About us",
+      "description1": "Through our website www.droneye.sk, we allow you as our customers to order aerial work. In connection with ordering our services, we are obliged to process your personal data.",
+      "description2": "When processing your personal data, we are guided by the legal regulations of the Slovak Republic, Regulation (EU) 2016/679 of the European Parliament and of the Council on the protection of natural persons with regard to the processing of personal data and on the free movement of such data (General Data Protection Regulation or GDPR), Act No. 18/2018 Coll. on the protection of personal data and other legal regulations.",
+      "description3": "The operator of information systems in which your personal data is processed is DroneEye, with its registered office in Bratislava, Slovakia."
+    },
+    "section2": {
+      "title": "2. What data do we process about you?",
+      "description1": "Personal data is considered to be data on the basis of which a specific natural person can be identified. This means that it is not just about known identifiers such as name, surname, or date of birth. GDPR defines personal data as any information that leads to the determination of a natural person. Every natural person whose personal data is concerned is considered a data subject with the relevant rights to personal data.",
+      "description2": "At DroneEye, we process only such personal data in order to provide you with professional services, and the scope of this personal data is determined by generally binding legal regulations. In the case where we process your personal data on the basis of consent, the list or scope of data is precisely stated directly in the consent, to the extent necessary to fulfill the purpose for which the personal data is processed.",
+      "description3": "The processed data includes primarily the following categories of personal data:",
+      "item1": "Billing data: name, surname, billing address, email address, phone contact, delivery address.",
+      "item2": "Registration data: data obtained when submitting the contact form www.droneye.sk/contact",
+      "item3": "Marketing data: name and surname, date of birth, address, IP address, email address, phone number."
+    },
+    "section3": {
+      "title": "3. Why do we need your personal data?",
+      "description": "We process your data to the necessary extent, and most processing is justified by the fact that we need this data to provide the purchased product.",
+      "subtitle1": "3.1. We fulfill our obligations arising from relevant legal regulations",
+      "item1": "We are obliged to identify you when ordering services and issuing an order in your name",
+      "item2": "In our activities, we are obliged to act prudently and respect your rights as a consumer in accordance with Act No. 102/2014 Coll. on consumer protection in the sale of goods or provision of services at a distance",
+      "item3": "We are obliged to issue an invoice and record it in accordance with the VAT Act"
+    },
+    "section4": {
+      "title": "4. Retention period of personal data",
+      "description1": "We retain your personal data only for the period necessary to fulfill the purpose for which the personal data were processed, or for the period required by legal regulations.",
+      "description2": "If we process your personal data on the basis of consent, we retain them until the consent is withdrawn, or until the period necessary to fulfill the purpose of processing personal data.",
+      "description3": "After the retention period expires, your personal data will be deleted or anonymized in accordance with applicable legal regulations."
+    },
+    "section5": {
+      "title": "5. Your rights",
+      "description": "In accordance with GDPR, you have the following rights regarding your personal data:",
+      "item1": "Right of access to personal data - you have the right to obtain information about what personal data we process about you",
+      "item2": "Right to rectification - you have the right to request correction of inaccurate or incomplete personal data",
+      "item3": "Right to erasure - you have the right to request deletion of your personal data under certain conditions",
+      "item4": "Right to restriction of processing - you have the right to request restriction of processing of your personal data",
+      "item5": "Right to data portability - you have the right to obtain your personal data in a structured format",
+      "item6": "Right to object - you have the right to object to the processing of your personal data",
+      "item7": "Right to withdraw consent - if we process your personal data on the basis of consent, you have the right to withdraw this consent at any time"
+    },
+    "section6": {
+      "title": "6. How you can exercise your rights",
+      "description1": "If you wish to exercise any of your rights listed above, you can contact us via email at info@droneye.sk or in writing to our address.",
+      "description2": "We will process your request without undue delay, no later than 30 days from its delivery. In case of complex requests or a large number of requests, we reserve the right to extend this period by another 60 days, of which we will inform you."
+    },
+    "section7": {
+      "title": "7. Security of personal data",
+      "description1": "When processing your personal data, we use appropriate technical and organizational measures to ensure the protection of your personal data against unauthorized access, loss, destruction or alteration.",
+      "description2": "Our systems are regularly updated and monitored to ensure maximum security of your personal data."
+    },
+    "section8": {
+      "title": "8. Transfer of personal data to third countries",
+      "description": "We process your personal data exclusively within the European Union. In case it would be necessary to transfer your personal data to third countries, we will ensure that such transfers are in accordance with applicable legal regulations and that appropriate guarantees for the protection of your personal data are secured."
+    },
+    "section9": {
+      "title": "9. Automated decision-making and profiling",
+      "description": "We do not use your personal data for automated decision-making or profiling within the meaning of GDPR. All decisions regarding the processing of your personal data are made by human employees."
+    },
+    "section10": {
+      "title": "10. Processing of your personal data through our website",
+      "description": "When using our website: www.droneye.sk (hereinafter referred to as \"Website\"), access to some parts of the Website may be conditional on providing your personal data. This provision conditions access or proper functioning of the Website and for this reason it is necessary for you to grant us consent to process the personal data you have provided."
+    },
+    "section11": {
+      "title": "11. Processing data through cookies",
+      "description1": "We are authorized to collect and otherwise process data about visitors and users of our Website through tools used for automated data collection, especially cookie files, logs and other commonly used tools for obtaining information through the website.",
+      "description2": "A cookie can be thought of as a small amount of data that is sent as a file to your computer (tablet, smartphone) from the website you are currently visiting. The data file is stored in the computer and on each subsequent visit to the same website, the computer sends information to our server.",
+      "description3": "Most websites, including ours, use cookies. The purpose of cookies is to facilitate and improve your use of our Website. A cookie file allows the website to recognize whether you have visited it in the past and which section you were interested in. At the same time, it is cookies that allow you to save your user settings such as language recognition or remembering your login name. Using cookies, we store data that we do not associate with your person and through the obtained data we do not realize customer identification.",
+      "description4": "Using cookie files is not dangerous for you, cookies cannot transmit viruses or read data from the device's hard drive.",
+      "description5": "By visiting our website, you automatically express your consent to the use of this technology. This procedure follows from § 55 para. 5 of Act No. 355/2011 Coll. on electronic communications, according to which the use of the appropriate setting of a web browser or other computer program is also considered consent for this purpose.",
+      "description6": "The use of cookies and their permission in a web browser is at the free will of each website user. You can freely delete cookie files or set your internet browser in advance to either reject cookie files or warn you when the server tries to send you a cookie. However, it may then happen that websites that depend on cookie support will not work as you would expect, or that parts of the pages will not be available to you.",
+      "description7": "We use persistent cookie files that help us identify your device when you revisit the Website and thus allow us to provide services in accordance with your expectations. We store Cookie files for 1 year."
+    },
+    "section12": {
+      "title": "12. Circle of recipients",
+      "description1": "We do not unnecessarily make your personal data available to any entities. However, it is necessary that some personal data be made available to a predetermined circle of recipients of personal data. In the case of sending goods (e.g. printed drone photograph) to you as the end customer, we provide your personal data to postal carriers or courier companies. In the case of management and maintenance of our website, your personal data is made available to the website administrator. Last but not least, these are persons such as an accountant and tax advisor.",
+      "description2": "Circle of recipients:",
+      "item1": "Postal carriers within the meaning of Act 324/2011 Coll. on postal services",
+      "item2": "Courier company",
+      "item3": "Server administrator",
+      "item4": "Website administrator",
+      "item5": "Email provider",
+      "item6": "Tax and accounting advisor",
+      "item7": "Subcontractors"
+    },
+    "section13": {
+      "title": "13. Final provisions",
+      "description": "The operator is DroneEye, with its registered office in Bratislava, Slovakia. The company operates the website www.droneye.sk. In case of questions regarding personal data protection that you did not find an answer to in this document, please write to info@droneye.sk."
     }
   }
 }

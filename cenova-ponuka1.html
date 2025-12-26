@@ -354,14 +354,29 @@
                 </div>
                 <div class="footer-legal">
                     <a href="/legislativa" data-i18n="footer.legislation">Legislatíva</a>
-                    <a href="#" data-i18n="footer.privacy">Ochrana údajov</a>
-                    <a href="#" data-i18n="footer.terms">Podmienky</a>
+                    <a href="/gdpr" data-i18n="footer.privacy">GDPR</a>
                 </div>
             </div>
         </div>
     </footer>
 
+    <!-- Cookie Consent Banner -->
+    <div id="cookie-banner" class="cookie-banner" style="display: none;">
+        <div class="cookie-banner-content">
+            <div class="cookie-banner-text">
+                <h4 data-i18n="cookies.title">Používame cookies</h4>
+                <p data-i18n="cookies.description">Táto stránka používa cookies na zlepšenie vášho zážitku. Pokračovaním v prehliadaní súhlasíte s používaním cookies v súlade s našou <a href="/gdpr">politikou cookies</a>.</p>
+            </div>
+            <div class="cookie-banner-buttons">
+                <button id="cookie-accept" class="cookie-btn cookie-btn-accept" data-i18n="cookies.accept">Prijať všetky</button>
+                <button id="cookie-reject" class="cookie-btn cookie-btn-reject" data-i18n="cookies.reject">Odmietnuť</button>
+                <button id="cookie-settings" class="cookie-btn cookie-btn-settings" data-i18n="cookies.settings">Nastavenia</button>
+            </div>
+        </div>
+    </div>
+
     <script type="module" src="/src/main.js"></script>
+    <script src="/src/cookies.js"></script>
 </body>
 </html>
 

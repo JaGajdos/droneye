@@ -301,8 +301,7 @@
     },
     "copyright": "Alle Rechte vorbehalten.",
     "legislation": "Gesetzgebung",
-    "privacy": "Datenschutz",
-    "terms": "Bedingungen"
+    "privacy": "DSGVO"
   },
   "pageTitle": {
     "home": "DroneEye - Moderne Drohnendienstleistungen und 3D-Kartierung",
@@ -312,7 +311,8 @@
     "team": "Unser Team - DroneEye",
     "pricing": "Preise - DroneEye",
     "dronetext": "Drohnen 3D Modell - DroneEye",
-    "legislation": "Gesetzgebung - DroneEye"
+    "legislation": "Gesetzgebung - DroneEye",
+    "gdpr": "DSGVO - Datenschutz - DroneEye"
   },
   "loading": "Lädt...",
   "dronetext": {
@@ -365,6 +365,120 @@
     "management": {
       "title": "Genehmigungsverwaltung",
       "description": "Unsere Drohnengenehmigungen und Betriebsdokumentation werden von einem verifizierten und erfahrenen Unternehmen verwaltet, mit dem wir eng zusammenarbeiten. Dieses Unternehmen gewährleistet eine umfassende Verwaltung unserer Genehmigungen in der Kategorie SPECIFIC, einschließlich ihrer regelmäßigen Aktualisierung und Überwachung aktueller Vorschriften, damit wir das höchste Sicherheitsniveau während unserer Flüge gewährleisten können. Mit ihrer Hilfe passen wir unsere Betriebsdokumentation ständig an und garantieren damit die Einhaltung aktueller Luftfahrtstandards und -vorschriften."
+    }
+  },
+  "cookies": {
+    "title": "Wir verwenden Cookies",
+    "description": "Diese Website verwendet Cookies, um Ihr Erlebnis zu verbessern. Durch weiteres Surfen stimmen Sie der Verwendung von Cookies gemäß unserer <a href=\"/gdpr\">Cookie-Richtlinie</a> zu.",
+    "accept": "Alle akzeptieren",
+    "reject": "Ablehnen",
+    "settings": "Einstellungen",
+    "settingsTitle": "Cookie-Einstellungen",
+    "settingsDescription": "Wählen Sie aus, welche Cookies Sie zulassen möchten. Notwendige Cookies sind immer aktiv, da sie für die grundlegende Funktionalität der Website erforderlich sind.",
+    "necessary": "Notwendige Cookies",
+    "necessaryDesc": "Diese Cookies sind für die Funktionalität der Website unerlässlich und können nicht deaktiviert werden.",
+    "analytics": "Analyse-Cookies",
+    "analyticsDesc": "Helfen uns zu verstehen, wie Besucher unsere Website nutzen.",
+    "marketing": "Marketing-Cookies",
+    "marketingDesc": "Werden zur Personalisierung von Werbung und zur Messung ihrer Wirksamkeit verwendet.",
+    "save": "Einstellungen speichern",
+    "close": "Schließen",
+    "youtubePlaceholder": "Um dieses Video anzuzeigen, benötigen wir Ihre Einwilligung für Analyse-Cookies.",
+    "enableAnalytics": "Analyse-Cookies aktivieren"
+  },
+  "gdpr": {
+    "title": "DSGVO",
+    "subtitle": "Memorandum zum Datenschutz",
+    "intro": "Der Schutz der Privatsphäre unserer Kunden bei der Verarbeitung personenbezogener Daten ist für uns sehr wichtig. Bei der Verarbeitung Ihrer personenbezogenen Daten handeln wir in Übereinstimmung mit geltenden Rechtsvorschriften und gewährleisten ihren Schutz in größtmöglichem Umfang. Alle Besucher unserer Website, die als Kunden mit uns in Kontakt stehen, haben uns in diesem Zusammenhang ihre personenbezogenen Daten zur Verfügung gestellt. Auf dieser Website finden Sie alle notwendigen Informationen zur Verarbeitung personenbezogener Daten.",
+    "intro2": "Dieses Memorandum zum Datenschutz (im Folgenden als „Memorandum\" bezeichnet) gibt Ihnen Auskunft darüber, wie wir mit Ihren personenbezogenen Daten umgehen, wie Sie uns im Falle der Ausübung Ihrer Rechte kontaktieren können oder wenn Sie Fragen zur Verarbeitung Ihrer personenbezogenen Daten haben. Das Memorandum ist Teil der Allgemeinen Geschäftsbedingungen von DroneEye.",
+    "intro3": "Wir empfehlen Ihnen, die in diesem Memorandum enthaltenen Informationen sorgfältig zu lesen. Änderungen bezüglich der Bedingungen des Datenschutzes werden auf unserer Website www.droneye.sk in Form einer Aktualisierung veröffentlicht. Auf diese Weise stellen wir sicher, dass Sie immer aktuelle Informationen über die Bedingungen haben, unter denen wir Ihre personenbezogenen Daten verarbeiten.",
+    "section1": {
+      "title": "1. Über uns",
+      "description1": "Über unsere Website www.droneye.sk ermöglichen wir Ihnen als unseren Kunden, Luftarbeiten zu bestellen. Im Zusammenhang mit der Bestellung unserer Dienstleistungen sind wir verpflichtet, Ihre personenbezogenen Daten zu verarbeiten.",
+      "description2": "Bei der Verarbeitung Ihrer personenbezogenen Daten orientieren wir uns an den Rechtsvorschriften der Slowakischen Republik, der Verordnung (EU) 2016/679 des Europäischen Parlaments und des Rates zum Schutz natürlicher Personen bei der Verarbeitung personenbezogener Daten und zum freien Datenverkehr (Datenschutz-Grundverordnung oder DSGVO), dem Gesetz Nr. 18/2018 über den Schutz personenbezogener Daten und anderen Rechtsvorschriften.",
+      "description3": "Der Betreiber der Informationssysteme, in denen Ihre personenbezogenen Daten verarbeitet werden, ist DroneEye mit Sitz in Bratislava, Slowakei."
+    },
+    "section2": {
+      "title": "2. Welche Daten verarbeiten wir über Sie?",
+      "description1": "Personenbezogene Daten gelten als Daten, auf deren Grundlage eine bestimmte natürliche Person identifiziert werden kann. Das bedeutet, dass es sich nicht nur um bekannte Identifikatoren wie Name, Nachname oder Geburtsdatum handelt. Die DSGVO definiert personenbezogene Daten als alle Informationen, die zur Bestimmung einer natürlichen Person führen. Jede natürliche Person, deren personenbezogene Daten betroffen sind, gilt als betroffene Person mit den entsprechenden Rechten an personenbezogenen Daten.",
+      "description2": "Bei DroneEye verarbeiten wir nur solche personenbezogenen Daten, um Ihnen professionelle Dienstleistungen anzubieten, und der Umfang dieser personenbezogenen Daten wird durch allgemein verbindliche Rechtsvorschriften bestimmt. Falls wir Ihre personenbezogenen Daten auf der Grundlage einer Einwilligung verarbeiten, ist die Liste bzw. der Umfang der Daten direkt in der Einwilligung genau angegeben, und zwar in dem Umfang, der zur Erfüllung des Zwecks, für den die personenbezogenen Daten verarbeitet werden, erforderlich ist.",
+      "description3": "Zu den verarbeiteten Daten gehören vor allem die folgenden Kategorien personenbezogener Daten:",
+      "item1": "Rechnungsdaten: Name, Nachname, Rechnungsadresse, E-Mail-Adresse, Telefonkontakt, Lieferadresse.",
+      "item2": "Registrierungsdaten: Daten, die beim Absenden des Kontaktformulars www.droneye.sk/contact erhalten wurden",
+      "item3": "Marketingdaten: Name und Nachname, Geburtsdatum, Adresse, IP-Adresse, E-Mail-Adresse, Telefonnummer."
+    },
+    "section3": {
+      "title": "3. Warum benötigen wir Ihre personenbezogenen Daten?",
+      "description": "Wir verarbeiten Ihre Daten im notwendigen Umfang, und die meisten Verarbeitungen sind dadurch gerechtfertigt, dass wir diese Daten benötigen, um das gekaufte Produkt bereitzustellen.",
+      "subtitle1": "3.1. Wir erfüllen unsere Verpflichtungen aus den relevanten Rechtsvorschriften",
+      "item1": "Wir sind verpflichtet, Sie bei der Bestellung von Dienstleistungen und bei der Ausstellung einer Bestellung auf Ihren Namen zu identifizieren",
+      "item2": "Bei unserer Tätigkeit sind wir verpflichtet, umsichtig zu handeln und Ihre Rechte als Verbraucher in Übereinstimmung mit dem Gesetz Nr. 102/2014 über den Verbraucherschutz beim Verkauf von Waren oder der Erbringung von Dienstleistungen auf Distanz zu respektieren",
+      "item3": "Wir sind verpflichtet, eine Rechnung auszustellen und diese in Übereinstimmung mit dem Umsatzsteuergesetz zu führen"
+    },
+    "section4": {
+      "title": "4. Aufbewahrungsdauer personenbezogener Daten",
+      "description1": "Wir speichern Ihre personenbezogenen Daten nur für den Zeitraum, der zur Erfüllung des Zwecks, für den die personenbezogenen Daten verarbeitet wurden, erforderlich ist, oder für den Zeitraum, der von Rechtsvorschriften gefordert wird.",
+      "description2": "Falls wir Ihre personenbezogenen Daten auf der Grundlage einer Einwilligung verarbeiten, speichern wir sie bis zum Widerruf der Einwilligung oder bis zu dem Zeitraum, der zur Erfüllung des Zwecks der Verarbeitung personenbezogener Daten erforderlich ist.",
+      "description3": "Nach Ablauf der Aufbewahrungsfrist werden Ihre personenbezogenen Daten gemäß geltenden Rechtsvorschriften gelöscht oder anonymisiert."
+    },
+    "section5": {
+      "title": "5. Ihre Rechte",
+      "description": "Gemäß DSGVO haben Sie folgende Rechte bezüglich Ihrer personenbezogenen Daten:",
+      "item1": "Recht auf Zugang zu personenbezogenen Daten - Sie haben das Recht, Informationen darüber zu erhalten, welche personenbezogenen Daten wir über Sie verarbeiten",
+      "item2": "Recht auf Berichtigung - Sie haben das Recht, die Berichtigung ungenauer oder unvollständiger personenbezogener Daten zu verlangen",
+      "item3": "Recht auf Löschung - Sie haben das Recht, unter bestimmten Bedingungen die Löschung Ihrer personenbezogenen Daten zu verlangen",
+      "item4": "Recht auf Einschränkung der Verarbeitung - Sie haben das Recht, die Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen",
+      "item5": "Recht auf Datenübertragbarkeit - Sie haben das Recht, Ihre personenbezogenen Daten in einem strukturierten Format zu erhalten",
+      "item6": "Widerspruchsrecht - Sie haben das Recht, der Verarbeitung Ihrer personenbezogenen Daten zu widersprechen",
+      "item7": "Recht auf Widerruf der Einwilligung - Falls wir Ihre personenbezogenen Daten auf der Grundlage einer Einwilligung verarbeiten, haben Sie das Recht, diese Einwilligung jederzeit zu widerrufen"
+    },
+    "section6": {
+      "title": "6. Wie Sie Ihre Rechte ausüben können",
+      "description1": "Wenn Sie eines Ihrer oben aufgeführten Rechte ausüben möchten, können Sie uns per E-Mail unter info@droneye.sk oder schriftlich an unsere Adresse kontaktieren.",
+      "description2": "Wir werden Ihre Anfrage ohne unnötige Verzögerung bearbeiten, spätestens innerhalb von 30 Tagen nach Eingang. Bei komplexen Anfragen oder einer großen Anzahl von Anfragen behalten wir uns das Recht vor, diese Frist um weitere 60 Tage zu verlängern, wovon wir Sie informieren werden."
+    },
+    "section7": {
+      "title": "7. Sicherheit personenbezogener Daten",
+      "description1": "Bei der Verarbeitung Ihrer personenbezogenen Daten verwenden wir geeignete technische und organisatorische Maßnahmen, um den Schutz Ihrer personenbezogenen Daten vor unbefugtem Zugriff, Verlust, Zerstörung oder Änderung zu gewährleisten.",
+      "description2": "Unsere Systeme werden regelmäßig aktualisiert und überwacht, um die maximale Sicherheit Ihrer personenbezogenen Daten zu gewährleisten."
+    },
+    "section8": {
+      "title": "8. Übermittlung personenbezogener Daten in Drittländer",
+      "description": "Wir verarbeiten Ihre personenbezogenen Daten ausschließlich innerhalb der Europäischen Union. Falls es erforderlich wäre, Ihre personenbezogenen Daten in Drittländer zu übermitteln, stellen wir sicher, dass solche Übermittlungen gemäß geltenden Rechtsvorschriften erfolgen und dass angemessene Garantien für den Schutz Ihrer personenbezogenen Daten gewährleistet sind."
+    },
+    "section9": {
+      "title": "9. Automatisierte Entscheidungsfindung und Profilerstellung",
+      "description": "Wir verwenden Ihre personenbezogenen Daten nicht für automatisierte Entscheidungsfindung oder Profilerstellung im Sinne der DSGVO. Alle Entscheidungen bezüglich der Verarbeitung Ihrer personenbezogenen Daten werden von menschlichen Mitarbeitern getroffen."
+    },
+    "section10": {
+      "title": "10. Verarbeitung Ihrer personenbezogenen Daten über unsere Website",
+      "description": "Bei der Nutzung unserer Website: www.droneye.sk (im Folgenden als \"Website\" bezeichnet), kann der Zugang zu einigen Teilen der Website von der Bereitstellung Ihrer personenbezogenen Daten abhängig sein. Diese Bereitstellung ist Voraussetzung für den Zugang oder die ordnungsgemäße Funktionalität der Website, und aus diesem Grund ist es erforderlich, dass Sie uns die Einwilligung zur Verarbeitung der von Ihnen bereitgestellten personenbezogenen Daten erteilen."
+    },
+    "section11": {
+      "title": "11. Verarbeitung von Daten über Cookies",
+      "description1": "Wir sind berechtigt, Daten über Besucher und Benutzer unserer Website über Tools zu sammeln und anderweitig zu verarbeiten, die der automatisierten Datensammlung dienen, insbesondere Cookie-Dateien, Protokolle und andere häufig verwendete Tools zur Informationsbeschaffung über die Website.",
+      "description2": "Ein Cookie kann als eine kleine Datenmenge betrachtet werden, die als Datei an Ihren Computer (Tablet, Smartphone) von der Website gesendet wird, die Sie gerade besuchen. Die Datendatei wird im Computer gespeichert und bei jedem weiteren Besuch derselben Website sendet der Computer Informationen an unseren Server.",
+      "description3": "Die meisten Websites, einschließlich unserer, verwenden Cookies. Der Zweck von Cookies ist es, die Nutzung unserer Website zu erleichtern und zu verbessern. Eine Cookie-Datei ermöglicht es der Website zu erkennen, ob Sie sie bereits in der Vergangenheit besucht haben und an welchem Bereich Sie interessiert waren. Gleichzeitig sind es Cookies, dank derer Sie Ihre Benutzereinstellungen wie Spracherkennung oder das Speichern Ihres Anmeldenamens speichern können. Mit Cookies speichern wir Daten, die wir nicht mit Ihrer Person verknüpfen und durch die erhaltenen Daten führen wir keine Kundenidentifikation durch.",
+      "description4": "Die Verwendung von Cookie-Dateien ist für Sie nicht gefährlich, Cookies können keine Viren übertragen oder Daten von der Festplatte des Geräts lesen.",
+      "description5": "Durch den Besuch unserer Website drücken Sie automatisch Ihre Zustimmung zur Verwendung dieser Technologie aus. Dieses Verfahren folgt aus § 55 Abs. 5 des Gesetzes Nr. 355/2011 über elektronische Kommunikation, wonach auch die Verwendung der entsprechenden Einstellung eines Webbrowsers oder eines anderen Computerprogramms als Zustimmung für diesen Zweck angesehen wird.",
+      "description6": "Die Verwendung von Cookies und ihre Erlaubnis in einem Webbrowser liegt im freien Willen jedes Website-Benutzers. Sie können Cookie-Dateien frei löschen oder Ihren Internetbrowser im Voraus so einstellen, dass er entweder Cookie-Dateien ablehnt oder Sie warnt, wenn der Server versucht, Ihnen ein Cookie zu senden. Es kann dann jedoch passieren, dass Websites, die von der Cookie-Unterstützung abhängen, nicht so funktionieren, wie Sie es erwarten würden, oder dass Teile der Seiten für Sie nicht verfügbar sind.",
+      "description7": "Wir verwenden persistente Cookie-Dateien, die uns helfen, Ihr Gerät beim erneuten Besuch der Website zu identifizieren und ermöglichen es uns so, Dienstleistungen in Übereinstimmung mit Ihren Erwartungen bereitzustellen. Wir speichern Cookie-Dateien für 1 Jahr."
+    },
+    "section12": {
+      "title": "12. Empfängerkreis",
+      "description1": "Wir machen Ihre personenbezogenen Daten nicht unnötig für irgendwelche Entitäten verfügbar. Es ist jedoch notwendig, dass einige personenbezogene Daten einem vorher bestimmten Kreis von Empfängern personenbezogener Daten zur Verfügung gestellt werden. Im Falle des Versands von Waren (z.B. gedrucktes Drohnenfoto) an Sie als Endkunden stellen wir Ihre personenbezogenen Daten Postzustellern oder Kurierfirmen zur Verfügung. Im Falle der Verwaltung und Wartung unserer Website werden Ihre personenbezogenen Daten dem Website-Administrator zur Verfügung gestellt. Nicht zuletzt sind dies Personen wie ein Buchhalter und Steuerberater.",
+      "description2": "Empfängerkreis:",
+      "item1": "Postzusteller im Sinne des Gesetzes 324/2011 über Postdienste",
+      "item2": "Kurierfirma",
+      "item3": "Serveradministrator",
+      "item4": "Website-Administrator",
+      "item5": "E-Mail-Anbieter",
+      "item6": "Steuer- und Buchhaltungsberater",
+      "item7": "Unterauftragnehmer"
+    },
+    "section13": {
+      "title": "13. Schlussbestimmungen",
+      "description": "Der Betreiber ist DroneEye mit Sitz in Bratislava, Slowakei. Das Unternehmen betreibt die Website www.droneye.sk. Bei Fragen zum Datenschutz, auf die Sie in diesem Dokument keine Antwort gefunden haben, schreiben Sie bitte an info@droneye.sk."
     }
   }
 }

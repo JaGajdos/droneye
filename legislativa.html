@@ -158,14 +158,14 @@
             <!-- Subpage Content -->
             <div class="subpage-content">
                 <!-- Introduction Section -->
-                <div class="content-section">
+                <div class="content-section-text">
                     <div class="container">
                         <p class="section-intro" data-i18n="legislation.intro">Ako jedna z mála firiem na Slovensku vykonávame dronové lietania LEGÁLNE a disponujeme všetkými povoleniami k prevádzke UAS.</p>
                     </div>
                 </div>
 
                 <!-- Registration Section -->
-                <div class="content-section">
+                <div class="content-section-text">
                     <div class="container">
                         <h2 class="section-title" data-i18n="legislation.registration.title">Registrácia UAV</h2>
                         <p data-i18n="legislation.registration.description">Naše drony (UAS) od renomovanej značky DJI, sú oficiálne schválené Európskou agentúrou pre bezpečnosť letectva (EASA). Každý dron, ktorý používame, je zaregistrovaný v registri lietadiel Dopravného úradu Slovenskej republiky a pravidelne prechádza našimi kontrolami a údržbou. Týmto spôsobom garantujeme, že každý let je v súlade s najnovšími legislatívnymi normami a leteckými predpismi.</p>
@@ -173,7 +173,7 @@
                 </div>
 
                 <!-- Pilot License Section -->
-                <div class="content-section">
+                <div class="content-section-text">
                     <div class="container">
                         <h2 class="section-title" data-i18n="legislation.license.title">Pilotná licencia</h2>
                         <p data-i18n="legislation.license.description">Úspešne sme absolvovali teoretické a praktické skúšky pre kategórie A1/A3, A2 a STS na Dopravnom úrade Slovenskej republiky v divízii civilného letectva. Sme držiteľmi prevádzkového povolenia v osobitej kategórii ‚SPECIFIC' na lietanie s dronmi spôsobilými lietať bez pilota, v súlade s Nariadením (EÚ) 2019/947.</p>
@@ -196,7 +196,7 @@
                 </div>
 
                 <!-- Authorization Section -->
-                <div class="content-section">
+                <div class="content-section-text">
                     <div class="container">
                         <h2 class="section-title" data-i18n="legislation.authorization.title">Oprávnenie</h2>
                         <p data-i18n="legislation.authorization.description">Prevádzkové povolenie pre „osobitnú" kategóriu, vydané a schválené Dopravným úradom na základe prísneho posúdenia analýzy rizík SORA, nás oprávňuje legálne vykonávať lety s dronom za špecifických podmienok.</p>
@@ -204,7 +204,7 @@
                 </div>
 
                 <!-- Insurance Section -->
-                <div class="content-section">
+                <div class="content-section-text">
                     <div class="container">
                         <h2 class="section-title" data-i18n="legislation.insurance.title">Poistenie</h2>
                         <p data-i18n="legislation.insurance.description">Každý náš dron je riadne poistený proti zodpovednosti za škody spôsobené pádom, a to prostredníctvom uzatvoreného poistenia PZP (poistenie zodpovednosti za škodu). Poistná suma je stanovená na výšku až <strong>1 300 000 EUR</strong>, čo pokrýva prípadné riziká a zabezpečuje finančnú ochranu v prípade nepredvídaných udalostí počas prevádzky.</p>
@@ -212,7 +212,7 @@
                 </div>
 
                 <!-- Management Section -->
-                <div class="content-section">
+                <div class="content-section-text">
                     <div class="container">
                         <h2 class="section-title" data-i18n="legislation.management.title">Správa povolení</h2>
                         <p data-i18n="legislation.management.description">O naše dronové povolenia a prevádzkovú dokumentáciu sa stará overená a skúsená spoločnosť, s ktorou úzko spolupracujeme. Táto spoločnosť zabezpečuje komplexnú správu našich povolení v kategórii <strong>SPECIFIC</strong>, vrátane ich pravidelnej aktualizácie a monitorovania aktuálnych predpisov, aby sme mohli zabezpečiť najvyššiu úroveň bezpečnosti počas našich letov. S ich pomocou neustále prispôsobujeme našu prevádzkovú dokumentáciu, čím garantujeme súlad s aktuálnymi leteckými normami a predpismi.</p>
@@ -277,14 +277,29 @@
                 </div>
                 <div class="footer-legal">
                     <a href="/legislativa" data-i18n="footer.legislation">Legislatíva</a>
-                    <a href="#" data-i18n="footer.privacy">Ochrana údajov</a>
-                    <a href="#" data-i18n="footer.terms">Podmienky</a>
+                    <a href="/gdpr" data-i18n="footer.privacy">GDPR</a>
                 </div>
             </div>
         </div>
     </footer>
 
+    <!-- Cookie Consent Banner -->
+    <div id="cookie-banner" class="cookie-banner" style="display: none;">
+        <div class="cookie-banner-content">
+            <div class="cookie-banner-text">
+                <h4 data-i18n="cookies.title">Používame cookies</h4>
+                <p data-i18n="cookies.description">Táto stránka používa cookies na zlepšenie vášho zážitku. Pokračovaním v prehliadaní súhlasíte s používaním cookies v súlade s našou <a href="/gdpr">politikou cookies</a>.</p>
+            </div>
+            <div class="cookie-banner-buttons">
+                <button id="cookie-accept" class="cookie-btn cookie-btn-accept" data-i18n="cookies.accept">Prijať všetky</button>
+                <button id="cookie-reject" class="cookie-btn cookie-btn-reject" data-i18n="cookies.reject">Odmietnuť</button>
+                <button id="cookie-settings" class="cookie-btn cookie-btn-settings" data-i18n="cookies.settings">Nastavenia</button>
+            </div>
+        </div>
+    </div>
+
     <script type="module" src="/src/main.js"></script>
+    <script src="/src/cookies.js"></script>
 </body>
 </html>
 
