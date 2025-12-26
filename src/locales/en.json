@@ -291,7 +291,7 @@
   },
   "footer": {
     "contact": "Contact",
-    "quickContact": "Quick Contact",
+    "quickContact": "Contact Form",
     "form": {
       "name": "Your Name",
       "email": "Email",
@@ -299,6 +299,7 @@
       "submit": "Send"
     },
     "copyright": "All rights reserved.",
+    "legislation": "Legislation",
     "privacy": "Privacy Policy",
     "terms": "Terms"
   },
@@ -309,7 +310,8 @@
     "services": "Our Services - DroneEye",
     "team": "Our Team - DroneEye",
     "pricing": "Pricing - DroneEye",
-    "dronetext": "Drone 3D Model - DroneEye"
+    "dronetext": "Drone 3D Model - DroneEye",
+    "legislation": "Legislation - DroneEye"
   },
   "loading": "Loading...",
   "dronetext": {
@@ -333,6 +335,35 @@
       "title": "Let's start together",
       "subtitle": "Contact us and let's create something extraordinary.",
       "button": "Our Projects"
+    }
+  },
+  "legislation": {
+    "title": "Legislation",
+    "subtitle": "We do it only legally",
+    "intro": "As one of the few companies in Slovakia, we conduct drone flights LEGALLY and have all the permits for UAS operations.",
+    "registration": {
+      "title": "UAV Registration",
+      "description": "Our drones (UAS) from the renowned brand DJI are officially approved by the European Aviation Safety Agency (EASA). Every drone we use is registered in the aircraft registry of the Transport Authority of the Slovak Republic and regularly undergoes our inspections and maintenance. This way, we guarantee that every flight complies with the latest legislative standards and aviation regulations."
+    },
+    "license": {
+      "title": "Pilot License",
+      "description": "We have successfully completed theoretical and practical exams for categories A1/A3, A2 and STS at the Transport Authority of the Slovak Republic in the civil aviation division. We are holders of an operating permit in the 'SPECIFIC' category for flying drones capable of flying without a pilot, in accordance with Regulation (EU) 2019/947.",
+      "item1": "When flying, we do not endanger the safety of other aircraft, persons or property on the ground.",
+      "item2": "During each flight, in accordance with applicable legislation, we maintain constant visual contact with the drone.",
+      "item3": "For flying in CTR zone, we request permission from the airport tower.",
+      "item4": "We can secure special permission for takeoff in close proximity to airports and military areas."
+    },
+    "authorization": {
+      "title": "Authorization",
+      "description": "The operating permit for the 'specific' category, issued and approved by the Transport Authority based on a strict assessment of the SORA risk analysis, authorizes us to legally conduct drone flights under specific conditions."
+    },
+    "insurance": {
+      "title": "Insurance",
+      "description": "Each of our drones is properly insured against liability for damage caused by crashes, through concluded PZP insurance (liability insurance). The insurance amount is set at up to 1,300,000 EUR, which covers potential risks and ensures financial protection in case of unforeseen events during operation."
+    },
+    "management": {
+      "title": "Permit Management",
+      "description": "Our drone permits and operational documentation are managed by a verified and experienced company with which we work closely. This company ensures comprehensive management of our permits in the SPECIFIC category, including their regular updates and monitoring of current regulations, so that we can ensure the highest level of safety during our flights. With their help, we constantly adapt our operational documentation, thereby guaranteeing compliance with current aviation standards and regulations."
     }
   }
 }

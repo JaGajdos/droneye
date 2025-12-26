@@ -292,7 +292,7 @@
   },
   "footer": {
     "contact": "Kontakt",
-    "quickContact": "Rýchly kontakt",
+    "quickContact": "Kontaktný formulár",
     "form": {
       "name": "Vaše meno",
       "email": "Email",
@@ -300,6 +300,7 @@
       "submit": "Odoslať"
     },
     "copyright": "Všetky práva vyhradené.",
+    "legislation": "Legislatíva",
     "privacy": "Ochrana údajov",
     "terms": "Podmienky"
   },
@@ -310,7 +311,8 @@
     "services": "Naše služby - DroneEye",
     "team": "Náš tím - DroneEye",
     "pricing": "Cenová ponuka - DroneEye",
-    "dronetext": "Drone 3D Model - DroneEye"
+    "dronetext": "Drone 3D Model - DroneEye",
+    "legislation": "Legislatíva - DroneEye"
   },
   "loading": "Načítavam...",
   "dronetext": {

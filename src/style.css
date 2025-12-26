@@ -1426,6 +1426,167 @@ h2 {
     color: var(--primary-color);
 }
 
+.section-intro {
+    font-size: var(--font-size-body);
+    line-height: 1.8;
+    color: var(--text-color);
+    text-align: center;
+    font-weight: 500;
+    margin-bottom: 2rem;
+}
+
+/* Legislation List */
+.legislation-list {
+    list-style: none;
+    padding: 0;
+    margin: 2rem 0;
+}
+
+.legislation-list li {
+    padding: 1rem 0 1rem 2rem;
+    position: relative;
+    font-size: var(--font-size-body);
+    line-height: 1.8;
+    color: var(--text-color);
+    border-left: 3px solid var(--primary-color);
+    margin-bottom: 1rem;
+    padding-left: 2rem;
+}
+
+.legislation-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+/* License Tiles */
+.license-tiles {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin: 2.5rem 0;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media (max-width: 1024px) {
+    .license-tiles {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.license-tile {
+    background: var(--card-background);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 15px var(--shadow-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.license-tile::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.license-tile:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px var(--shadow-hover);
+}
+
+.license-tile:hover::before {
+    opacity: 1;
+}
+
+.license-tile-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    color: white;
+    font-size: 1.5rem;
+    box-shadow: 0 4px 15px rgba(0, 35, 102, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.license-tile:hover .license-tile-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.license-tile p {
+    font-size: var(--font-size-body);
+    line-height: 1.8;
+    color: var(--text-color);
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .license-tiles {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .license-tile {
+        padding: 1.5rem;
+    }
+    
+    .license-tile-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+    }
+}
+
+/* FAQ Section */
+.faq-item {
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.faq-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.faq-question {
+    font-size: var(--font-size-card-title);
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    line-height: 1.4;
+}
+
+.faq-answer {
+    font-size: var(--font-size-body);
+    line-height: 1.8;
+    color: var(--text-color);
+    margin: 0;
+}
+
 /* Cards on subpages need white background */
 .page .contact-info,
 .page .contact-form {
@@ -2539,7 +2700,6 @@ body:not(.homepage) #loading-screen {
         display: flex;
         align-items: center;
         justify-content: center;
-        transition: all 0.3s ease;
         width: 40px;
         height: 40px;
         border-radius: 8px;
@@ -2547,7 +2707,6 @@ body:not(.homepage) #loading-screen {
 
     .mobile-menu-close:hover {
         background: rgba(255, 255, 255, 0.1);
-        transform: rotate(90deg);
     }
 
     .nav-menu li {

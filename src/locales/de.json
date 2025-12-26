@@ -292,7 +292,7 @@
   },
   "footer": {
     "contact": "Kontakt",
-    "quickContact": "Schneller Kontakt",
+    "quickContact": "Kontaktformular",
     "form": {
       "name": "Ihr Name",
       "email": "E-Mail",
@@ -300,6 +300,7 @@
       "submit": "Senden"
     },
     "copyright": "Alle Rechte vorbehalten.",
+    "legislation": "Gesetzgebung",
     "privacy": "Datenschutz",
     "terms": "Bedingungen"
   },
@@ -310,7 +311,8 @@
     "services": "Unsere Dienstleistungen - DroneEye",
     "team": "Unser Team - DroneEye",
     "pricing": "Preise - DroneEye",
-    "dronetext": "Drohnen 3D Modell - DroneEye"
+    "dronetext": "Drohnen 3D Modell - DroneEye",
+    "legislation": "Gesetzgebung - DroneEye"
   },
   "loading": "Lädt...",
   "dronetext": {
@@ -334,6 +336,35 @@
       "title": "Lassen Sie uns gemeinsam beginnen",
       "subtitle": "Kontaktieren Sie uns und lassen Sie uns etwas Außergewöhnliches schaffen.",
       "button": "Unsere Projekte"
+    }
+  },
+  "legislation": {
+    "title": "Gesetzgebung",
+    "subtitle": "Wir machen es nur legal",
+    "intro": "Als eines der wenigen Unternehmen in der Slowakei führen wir Drohnenflüge LEGAL durch und verfügen über alle Genehmigungen für UAS-Betriebe.",
+    "registration": {
+      "title": "UAV-Registrierung",
+      "description": "Unsere Drohnen (UAS) der renommierten Marke DJI sind offiziell von der Europäischen Agentur für Flugsicherheit (EASA) genehmigt. Jede Drohne, die wir verwenden, ist im Luftfahrzeugregister der Verkehrsbehörde der Slowakischen Republik registriert und durchläuft regelmäßig unsere Inspektionen und Wartung. Auf diese Weise garantieren wir, dass jeder Flug den neuesten gesetzlichen Normen und Luftfahrtvorschriften entspricht."
+    },
+    "license": {
+      "title": "Pilotenlizenz",
+      "description": "Wir haben erfolgreich theoretische und praktische Prüfungen für die Kategorien A1/A3, A2 und STS bei der Verkehrsbehörde der Slowakischen Republik in der Abteilung für Zivilluftfahrt abgelegt. Wir sind Inhaber einer Betriebsgenehmigung in der Kategorie 'SPECIFIC' für das Fliegen mit Drohnen, die ohne Pilot fliegen können, gemäß Verordnung (EU) 2019/947.",
+      "item1": "Beim Fliegen gefährden wir nicht die Sicherheit anderer Flugzeuge, Personen oder Eigentum am Boden.",
+      "item2": "Während jedes Fluges halten wir gemäß geltender Gesetzgebung ständigen Sichtkontakt mit der Drohne.",
+      "item3": "Für Flüge in der CTR-Zone beantragen wir eine Genehmigung vom Flughafenturm.",
+      "item4": "Wir können eine Sondergenehmigung für Starts in unmittelbarer Nähe von Flughäfen und militärischen Gebieten sicherstellen."
+    },
+    "authorization": {
+      "title": "Berechtigung",
+      "description": "Die Betriebsgenehmigung für die Kategorie 'spezifisch', die von der Verkehrsbehörde auf der Grundlage einer strengen Bewertung der SORA-Risikoanalyse ausgestellt und genehmigt wurde, berechtigt uns, Drohnenflüge unter bestimmten Bedingungen legal durchzuführen."
+    },
+    "insurance": {
+      "title": "Versicherung",
+      "description": "Jede unserer Drohnen ist ordnungsgemäß gegen Haftung für Schäden durch Abstürze versichert, durch abgeschlossene PZP-Versicherung (Haftpflichtversicherung). Die Versicherungssumme ist auf bis zu 1.300.000 EUR festgelegt, was potenzielle Risiken abdeckt und finanziellen Schutz bei unvorhergesehenen Ereignissen während des Betriebs gewährleistet."
+    },
+    "management": {
+      "title": "Genehmigungsverwaltung",
+      "description": "Unsere Drohnengenehmigungen und Betriebsdokumentation werden von einem verifizierten und erfahrenen Unternehmen verwaltet, mit dem wir eng zusammenarbeiten. Dieses Unternehmen gewährleistet eine umfassende Verwaltung unserer Genehmigungen in der Kategorie SPECIFIC, einschließlich ihrer regelmäßigen Aktualisierung und Überwachung aktueller Vorschriften, damit wir das höchste Sicherheitsniveau während unserer Flüge gewährleisten können. Mit ihrer Hilfe passen wir unsere Betriebsdokumentation ständig an und garantieren damit die Einhaltung aktueller Luftfahrtstandards und -vorschriften."
     }
   }
 }
