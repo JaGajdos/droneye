@@ -2,14 +2,14 @@
   "nav": {
     "home": "Startseite",
     "services": "Unsere Dienstleistungen",
-    "projects": "Projekte",
-    "team": "Team",
+    "projects": "Unsere Projekte",
+    "team": "Unsere Kurse",
     "pricing": "Preise",
     "contact": "Kontakt"
   },
   "hero": {
     "title": "Willkommen bei Droneye",
-    "subtitle": "We see what you want to see",
+    "subtitle": "Wir sehen, was Sie sehen möchten",
     "cta": "Entdecken"
   },
   "projects": {

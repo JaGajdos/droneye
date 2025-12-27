@@ -74,9 +74,112 @@
             document.documentElement.style.visibility = 'hidden';
         })();
     </script>
-  <script type="module" crossorigin src="/droneye/assets/main-BOKSINww.js"></script>
+    <style>
+        html, body {
+            margin: 0;
+            height: 100%;
+            overflow: auto; /* Allow scroll when animation starts */
+            touch-action: auto;
+        }
+        
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0; /* Behind hero section */
+        }
+        
+        canvas {
+            display: block;
+        }
+        
+        #text-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0; /* Behind hero section */
+            pointer-events: none;
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+        }
+        
+        .scroll-text {
+            position: absolute;
+            width: 100%;
+            color: #fff;
+            font-family: 'Montserrat', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+            opacity: 0;
+            transform: translateY(100px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .scroll-text-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+            text-align: center;
+        }
+        
+        .scroll-text-subtitle {
+            font-size: 1rem;
+            font-weight: 400;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+            text-align: center;
+        }
+        
+        .scroll-text-cta .scroll-text-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .scroll-text-cta .scroll-text-subtitle {
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+        
+        .cta-button {
+            margin-top: 1.5rem;
+            padding: 0.75rem 2rem;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 30px;
+            font-family: 'Montserrat', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+            transition: all 0.3s ease;
+            pointer-events: auto;
+            display: inline-block;
+        }
+        
+        .cta-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.8);
+            transform: scale(1.05);
+        }
+        
+        .scroll-text.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+  <script type="module" crossorigin src="/droneye/assets/style-DLciRNp5.js"></script>
+  <script type="module" crossorigin src="/droneye/assets/main-D1TWhPsZ.js"></script>
+  <script type="module" crossorigin src="/droneye/assets/three-CqXo3_43.js"></script>
+  <script type="module" crossorigin src="/droneye/assets/GLTFLoader-WDvlOK2D.js"></script>
+  <script type="module" crossorigin src="/droneye/assets/dronetext-Bg165Jh-.js"></script>
   <script type="module" crossorigin src="/droneye/assets/cookies-Ckv3Il1Y.js"></script>
-  <link rel="stylesheet" crossorigin href="/droneye/assets/main-Be7tUQk2.css">
+  <link rel="stylesheet" crossorigin href="/droneye/assets/style-A_64a4XT.css">
 </head>
 <body class="homepage">
     <!-- Navigation -->
@@ -95,10 +198,10 @@
                     <a href="/sluzby" class="nav-link" data-i18n="nav.services">Naše služby</a>
                 </li>
                 <li class="nav-item">
-                    <a href="/projekty" class="nav-link" data-i18n="nav.projects">Projekty</a>
+                    <a href="/projekty" class="nav-link" data-i18n="nav.projects">Naše projekty</a>
                 </li>
                 <li class="nav-item">
-                    <a href="/tim" class="nav-link" data-i18n="nav.team">Tím</a>
+                    <a href="/kurzy" class="nav-link" data-i18n="nav.team">Naše kurzy</a>
                 </li>
                 <li class="nav-item">
                     <a href="/cenova-ponuka" class="nav-link" data-i18n="nav.pricing">Cenová ponuka</a>
@@ -132,25 +235,46 @@
         </div>
     </nav>
 
-    <!-- Three.js Canvas Background -->
-    <div id="canvas-container">
-        <canvas id="three-canvas"></canvas>
-    </div>
-
-    <!-- Main Content -->
+    <!-- Hero Section -->
     <main class="main-content">
-        <!-- Home Page -->
-        <section class="page active">
-            <div class="hero">
-                <h1 class="hero-title" data-i18n="hero.title">Vitajte v Droneye</h1>
-                <p class="hero-subtitle" data-i18n="hero.subtitle">We see what you want to see</p>
-                <div class="hero-buttons">
-                    <button class="cta-button" data-i18n="hero.cta" id="start-animation-btn">Explore</button>
-                    <a href="/sluzby" class="hero-button-secondary" data-i18n="services.title">Naše služby</a>
-                </div>
+        <section class="hero">
+            <h1 class="hero-title" data-i18n="hero.title">Vitajte v Droneye</h1>
+            <p class="hero-subtitle" data-i18n="hero.subtitle">We see what you want to see</p>
+            <div class="hero-buttons">
+                <button id="start-animation-btn" class="hero-button-primary" data-i18n="hero.cta">Explore</button>
+                <a href="/sluzby" class="hero-button-secondary" data-i18n="nav.services">Naše služby</a>
             </div>
         </section>
     </main>
+
+    <!-- Three.js Canvas Background (visible from start) -->
+    <div id="canvas-container">
+        <canvas id="drone-canvas"></canvas>
+    </div>
+
+    <div id="text-container">
+        <div class="scroll-text" data-index="0">
+            <div class="scroll-text-title" data-i18n="dronetext.text1.title"></div>
+            <div class="scroll-text-subtitle" data-i18n="dronetext.text1.subtitle"></div>
+        </div>
+        <div class="scroll-text" data-index="1">
+            <div class="scroll-text-title" data-i18n="dronetext.text2.title"></div>
+            <div class="scroll-text-subtitle" data-i18n="dronetext.text2.subtitle"></div>
+        </div>
+        <div class="scroll-text" data-index="2">
+            <div class="scroll-text-title" data-i18n="dronetext.text3.title"></div>
+            <div class="scroll-text-subtitle" data-i18n="dronetext.text3.subtitle"></div>
+        </div>
+        <div class="scroll-text" data-index="3">
+            <div class="scroll-text-title" data-i18n="dronetext.text4.title"></div>
+            <div class="scroll-text-subtitle" data-i18n="dronetext.text4.subtitle"></div>
+        </div>
+        <div class="scroll-text scroll-text-cta" data-index="4">
+            <div class="scroll-text-title" data-i18n="dronetext.cta.title"></div>
+            <div class="scroll-text-subtitle" data-i18n="dronetext.cta.subtitle"></div>
+            <a href="/projekty" class="cta-button" data-i18n="dronetext.cta.button"></a>
+        </div>
+    </div>
 
     <!-- Loading Screen -->
     <div id="loading-screen">

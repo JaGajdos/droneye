@@ -2,15 +2,15 @@
   "nav": {
     "home": "Domov",
     "services": "Naše služby",
-    "projects": "Projekty",
-    "team": "Tím",
+    "projects": "Naše projekty",
+    "team": "Naše kurzy",
     "pricing": "Cenová ponuka",
     "contact": "Kontakt"
   },
   "hero": {
     "title": "Vitajte v Droneye",
-    "subtitle": "We see what you want to see",
-    "cta": "Explore"
+    "subtitle": "Vidíme to, čo chcete vidieť",
+    "cta": "Preskúmať"
   },
   "projects": {
     "title": "Naše projekty",
