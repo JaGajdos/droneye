@@ -92,16 +92,6 @@
                 </a>
             </div>
             <ul class="nav-menu">
-                <li class="nav-item mobile-menu-header">
-                    <div class="mobile-menu-logo">
-                        <a href="/" class="logo-link">
-                            <img src="assets/logo.svg" alt="DroneEye Logo" class="logo-img">
-                        </a>
-                    </div>
-                    <button class="mobile-menu-close" aria-label="Close menu">
-                        <i class="fas fa-times" aria-hidden="true"></i>
-                    </button>
-                </li>
                 <li class="nav-item">
                     <a href="/" class="nav-link" data-i18n="nav.home">Domov</a>
                 </li>
@@ -109,10 +99,10 @@
                     <a href="/sluzby" class="nav-link" data-i18n="nav.services">Naše služby</a>
                 </li>
                 <li class="nav-item">
-                    <a href="/projekty" class="nav-link" data-i18n="nav.projects">Naše projekty</a>
+                    <a href="/projekty" class="nav-link" data-i18n="nav.projects">Projekty</a>
                 </li>
                 <li class="nav-item">
-                    <a href="/tim" class="nav-link" data-i18n="nav.team">Náš tím</a>
+                    <a href="/tim" class="nav-link" data-i18n="nav.team">Tím</a>
                 </li>
                 <li class="nav-item">
                     <a href="/cenova-ponuka" class="nav-link" data-i18n="nav.pricing">Cenová ponuka</a>
@@ -140,6 +130,9 @@
                 <span class="bar"></span>
                 <span class="bar"></span>
             </div>
+            <button class="mobile-menu-close" aria-label="Close menu" style="display: none;">
+                <i class="fas fa-times" aria-hidden="true"></i>
+            </button>
         </div>
     </nav>
 
@@ -415,7 +408,7 @@
     </footer>
 
     <script type="module" src="/src/main.js"></script>
-    <script src="/src/cookies.js"></script>
+    <script type="module" src="/src/cookies.js"></script>
 </body>
 </html>
 

@@ -298,6 +298,42 @@ function initNavigation() {
         hamburger.classList.toggle('active');
         navMenu.classList.toggle('active');
         hamburger.setAttribute('aria-expanded', !isActive ? 'true' : 'false');
+        
+        // Handle close button in nav-container
+        const navContainer = document.querySelector('.nav-container');
+        const navContainerClose = navContainer ? navContainer.querySelector('.mobile-menu-close') : null;
+        if (navContainerClose) {
+            if (!isActive) {
+                navContainerClose.style.display = 'flex';
+            } else {
+                navContainerClose.style.display = 'none';
+            }
+        }
+        
+        // Update navbar background when menu opens/closes
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        if (!isActive) {
+            // Menu opening - set background like when scrolled
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            if (currentTheme === 'dark') {
+                navbar.style.background = 'var(--footer-bg)';
+            } else {
+                navbar.style.background = 'var(--primary-color)';
+            }
+        } else {
+            // Menu closing - restore background based on scroll position
+            if (scrollTop > 50) {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                if (currentTheme === 'dark') {
+                    navbar.style.background = 'var(--footer-bg)';
+                } else {
+                    navbar.style.background = 'var(--primary-color)';
+                }
+            } else {
+                navbar.style.background = 'var(--navbar-bg)';
+            }
+        }
+        
         // Prevent body scroll when menu is open
         if (!isActive) {
             document.body.style.overflow = 'hidden';
@@ -322,7 +358,7 @@ function initNavigation() {
         }
     });
 
-    // Close button in mobile menu
+    // Close button in mobile menu (can be in nav-menu or nav-container)
     const mobileMenuClose = document.querySelector('.mobile-menu-close');
     if (mobileMenuClose) {
         mobileMenuClose.setAttribute('tabindex', '0');
@@ -333,6 +369,26 @@ function initNavigation() {
             hamburger.classList.remove('active');
             hamburger.setAttribute('aria-expanded', 'false');
             document.body.style.overflow = '';
+            
+            // Hide close button in nav-container if it exists
+            const navContainerClose = document.querySelector('.nav-container .mobile-menu-close');
+            if (navContainerClose) {
+                navContainerClose.style.display = 'none';
+            }
+            
+            // Restore navbar background based on scroll position
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > 50) {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                if (currentTheme === 'dark') {
+                    navbar.style.background = 'var(--footer-bg)';
+                } else {
+                    navbar.style.background = 'var(--primary-color)';
+                }
+            } else {
+                navbar.style.background = 'var(--navbar-bg)';
+            }
+            
             hamburger.focus(); // Return focus to hamburger
         }
         
@@ -930,8 +986,12 @@ function initNavbarScroll() {
         clearTimeout(scrollTimeout);
         
         // Update navbar background based on scroll position
-        if (scrollTop > 50) {
-            // Scrolled down - use footer background color
+        // If mobile menu is open, always show background
+        const navMenu = document.querySelector('.nav-menu');
+        const isMenuOpen = navMenu && navMenu.classList.contains('active');
+        
+        if (scrollTop > 50 || isMenuOpen) {
+            // Scrolled down or menu is open - use footer background color
             const currentTheme = document.documentElement.getAttribute('data-theme');
             if (currentTheme === 'dark') {
                 // In dark mode, use footer background color when scrolled
@@ -940,7 +1000,7 @@ function initNavbarScroll() {
                 navbar.style.background = 'var(--primary-color)';
             }
         } else {
-            // At top - use navbar-bg variable (transparent for both themes)
+            // At top and menu closed - use navbar-bg variable (transparent for both themes)
             navbar.style.background = 'var(--navbar-bg)';
         }
         
