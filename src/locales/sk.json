@@ -364,6 +364,35 @@
       "button": "Naše projekty"
     }
   },
+  "legislation": {
+    "title": "Legislatíva",
+    "subtitle": "Robíme to iba legálne",
+    "intro": "Ako jedna z mála firiem na Slovensku vykonávame dronové lietania LEGÁLNE a disponujeme všetkými povoleniami k prevádzke UAS.",
+    "registration": {
+      "title": "Registrácia UAV",
+      "description": "Naše drony (UAS) od renomovanej značky DJI, sú oficiálne schválené Európskou agentúrou pre bezpečnosť letectva (EASA). Každý dron, ktorý používame, je zaregistrovaný v registri lietadiel Dopravného úradu Slovenskej republiky a pravidelne prechádza našimi kontrolami a údržbou. Týmto spôsobom garantujeme, že každý let je v súlade s najnovšími legislatívnymi normami a leteckými predpismi."
+    },
+    "license": {
+      "title": "Pilotná licencia",
+      "description": "Úspešne sme absolvovali teoretické a praktické skúšky pre kategórie A1/A3, A2 a STS na Dopravnom úrade Slovenskej republiky v divízii civilného letectva. Sme držiteľmi prevádzkového povolenia v osobitej kategórii ‚SPECIFIC' na lietanie s dronmi spôsobilými lietať bez pilota, v súlade s Nariadením (EÚ) 2019/947.",
+      "item1": "Pri lietaní neohrozujeme bezpečnosť iných lietadiel, osôb alebo majetkov na zemi.",
+      "item2": "Počas každého letu na základe platnej legislatívy dodržiavame neustály vizuálny kontakt s dronom.",
+      "item3": "Pre lietanie v CTR zóne žiadame povolenie od letiskovej veže.",
+      "item4": "Vieme zabezpečiť špeciálne povolenie pre vzlet v tesnej blízkosti letísk a vojenských oblastí."
+    },
+    "authorization": {
+      "title": "Oprávnenie",
+      "description": "Prevádzkové povolenie pre \"osobitnú\" kategóriu, vydané a schválené Dopravným úradom na základe prísneho posúdenia analýzy rizík SORA, nás oprávňuje legálne vykonávať lety s dronom za špecifických podmienok."
+    },
+    "insurance": {
+      "title": "Poistenie",
+      "description": "Každý náš dron je riadne poistený proti zodpovednosti za škody spôsobené pádom, a to prostredníctvom uzatvoreného poistenia PZP (poistenie zodpovednosti za škodu). Poistná suma je stanovená na výšku až <strong>1 300 000 EUR</strong>, čo pokrýva prípadné riziká a zabezpečuje finančnú ochranu v prípade nepredvídaných udalostí počas prevádzky."
+    },
+    "management": {
+      "title": "Správa povolení",
+      "description": "O naše dronové povolenia a prevádzkovú dokumentáciu sa stará overená a skúsená spoločnosť, s ktorou úzko spolupracujeme. Táto spoločnosť zabezpečuje komplexnú správu našich povolení v kategórii <strong>SPECIFIC</strong>, vrátane ich pravidelnej aktualizácie a monitorovania aktuálnych predpisov, aby sme mohli zabezpečiť najvyššiu úroveň bezpečnosti počas našich letov. S ich pomocou neustále prispôsobujeme našu prevádzkovú dokumentáciu, čím garantujeme súlad s aktuálnymi leteckými normami a predpismi."
+    }
+  },
   "cookies": {
     "title": "Používame cookies",
     "description": "Táto stránka používa cookies na zlepšenie vášho zážitku. Pokračovaním v prehliadaní súhlasíte s používaním cookies v súlade s našou <a href=\"/gdpr\">politikou cookies</a>.",

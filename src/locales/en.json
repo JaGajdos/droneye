@@ -250,6 +250,7 @@
     },
     "process": {
       "title": "How Does It All Work?",
+      "cta": "Contact us",
       "step1": {
         "title": "Write to Us",
         "description": "Send us an email at <a href=\"mailto:info@droneye.sk\">info@droneye.sk</a> with your idea, the concept you're interested in, location and the expected date of flying."
@@ -385,11 +386,11 @@
     },
     "insurance": {
       "title": "Insurance",
-      "description": "Each of our drones is properly insured against liability for damage caused by crashes, through concluded PZP insurance (liability insurance). The insurance amount is set at up to 1,300,000 EUR, which covers potential risks and ensures financial protection in case of unforeseen events during operation."
+      "description": "Each of our drones is properly insured against liability for damage caused by crashes, through concluded PZP insurance (liability insurance). The insurance amount is set at up to <strong>1,300,000 EUR</strong>, which covers potential risks and ensures financial protection in case of unforeseen events during operation."
     },
     "management": {
       "title": "Permit Management",
-      "description": "Our drone permits and operational documentation are managed by a verified and experienced company with which we work closely. This company ensures comprehensive management of our permits in the SPECIFIC category, including their regular updates and monitoring of current regulations, so that we can ensure the highest level of safety during our flights. With their help, we constantly adapt our operational documentation, thereby guaranteeing compliance with current aviation standards and regulations."
+      "description": "Our drone permits and operational documentation are managed by a verified and experienced company with which we work closely. This company ensures comprehensive management of our permits in the <strong>SPECIFIC</strong> category, including their regular updates and monitoring of current regulations, so that we can ensure the highest level of safety during our flights. With their help, we constantly adapt our operational documentation, thereby guaranteeing compliance with current aviation standards and regulations."
     }
   },
   "cookies": {

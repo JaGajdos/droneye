@@ -386,11 +386,11 @@
     },
     "insurance": {
       "title": "Versicherung",
-      "description": "Jede unserer Drohnen ist ordnungsgemäß gegen Haftung für Schäden durch Abstürze versichert, durch abgeschlossene PZP-Versicherung (Haftpflichtversicherung). Die Versicherungssumme ist auf bis zu 1.300.000 EUR festgelegt, was potenzielle Risiken abdeckt und finanziellen Schutz bei unvorhergesehenen Ereignissen während des Betriebs gewährleistet."
+      "description": "Jede unserer Drohnen ist ordnungsgemäß gegen Haftung für Schäden durch Abstürze versichert, durch abgeschlossene PZP-Versicherung (Haftpflichtversicherung). Die Versicherungssumme ist auf bis zu <strong>1.300.000 EUR</strong> festgelegt, was potenzielle Risiken abdeckt und finanziellen Schutz bei unvorhergesehenen Ereignissen während des Betriebs gewährleistet."
     },
     "management": {
       "title": "Genehmigungsverwaltung",
-      "description": "Unsere Drohnengenehmigungen und Betriebsdokumentation werden von einem verifizierten und erfahrenen Unternehmen verwaltet, mit dem wir eng zusammenarbeiten. Dieses Unternehmen gewährleistet eine umfassende Verwaltung unserer Genehmigungen in der Kategorie SPECIFIC, einschließlich ihrer regelmäßigen Aktualisierung und Überwachung aktueller Vorschriften, damit wir das höchste Sicherheitsniveau während unserer Flüge gewährleisten können. Mit ihrer Hilfe passen wir unsere Betriebsdokumentation ständig an und garantieren damit die Einhaltung aktueller Luftfahrtstandards und -vorschriften."
+      "description": "Unsere Drohnengenehmigungen und Betriebsdokumentation werden von einem verifizierten und erfahrenen Unternehmen verwaltet, mit dem wir eng zusammenarbeiten. Dieses Unternehmen gewährleistet eine umfassende Verwaltung unserer Genehmigungen in der Kategorie <strong>SPECIFIC</strong>, einschließlich ihrer regelmäßigen Aktualisierung und Überwachung aktueller Vorschriften, damit wir das höchste Sicherheitsniveau während unserer Flüge gewährleisten können. Mit ihrer Hilfe passen wir unsere Betriebsdokumentation ständig an und garantieren damit die Einhaltung aktueller Luftfahrtstandards und -vorschriften."
     }
   },
   "cookies": {
