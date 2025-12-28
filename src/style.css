@@ -74,12 +74,6 @@
     --font-size-lightbox-close: 2.5rem; /* 40px */
     --font-size-lightbox-nav: 1.875rem; /* 30px */
     --font-size-lightbox-nav-tablet: 1.5rem; /* 24px */
-    --font-size-donut-center: 1.25rem; /* 20px */
-    --font-size-donut-label: 1rem; /* 16px */
-    --font-size-donut-label-tablet: 0.875rem; /* 14px */
-    --font-size-donut-label-small: 0.8125rem; /* 13px */
-    --font-size-donut-label-mobile: 0.75rem; /* 12px */
-    --font-size-donut-label-tiny: 0.6875rem; /* 11px */
 }
 
 /* Reset a základné štýly */
@@ -220,7 +214,6 @@ button {
     transform: scale(1.05);
 }
 
-#three-canvas,
 #drone-canvas {
     width: 100%;
     height: 100%;
@@ -926,46 +919,6 @@ body.homepage .main-content {
     padding: 2rem 0;
 }
 
-.instagram-feed-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.instagram-feed-container iframe,
-.instagram-feed-container .snapwidget-widget,
-.instagram-feed-container .lightwidget-widget {
-    width: 100% !important;
-    max-width: 1200px !important;
-    margin: 0 auto;
-    display: block;
-    min-height: 600px;
-    border: none;
-}
-
-.instagram-link-wrapper {
-    text-align: center;
-    margin-top: 2rem;
-}
-
-.instagram-link {
-    display: inline-block;
-    padding: 0.75rem 2rem;
-    background: linear-gradient(135deg, #833ab4 0%, #fd1d1d 50%, #fcb045 100%);
-    color: white;
-    text-decoration: none;
-    border-radius: 25px;
-    font-weight: 600;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 15px rgba(131, 58, 180, 0.3);
-}
-
-.instagram-link:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(131, 58, 180, 0.4);
-}
-
 .photos-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -1654,33 +1607,6 @@ h2 {
     margin-bottom: 2rem;
 }
 
-/* Legislation List */
-.legislation-list {
-    list-style: none;
-    padding: 0;
-    margin: 2rem 0;
-}
-
-.legislation-list li {
-    padding: 1rem 0 1rem 2rem;
-    position: relative;
-    font-size: var(--font-size-body);
-    line-height: 1.8;
-    color: var(--text-color);
-    border-left: 3px solid var(--primary-color);
-    margin-bottom: 1rem;
-    padding-left: 2rem;
-}
-
-.legislation-list li::before {
-    content: '✓';
-    position: absolute;
-    left: 0;
-    color: var(--primary-color);
-    font-weight: bold;
-    font-size: 1.2rem;
-}
-
 /* License Tiles */
 .license-tiles {
     display: grid;
@@ -1727,25 +1653,6 @@ h2 {
 
 .license-tile:hover::before {
     opacity: 1;
-}
-
-.license-tile-icon {
-    width: 60px;
-    height: 60px;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 1.5rem;
-    color: white;
-    font-size: 1.5rem;
-    box-shadow: 0 4px 15px rgba(0, 35, 102, 0.2);
-    transition: transform 0.3s ease;
-}
-
-.license-tile:hover .license-tile-icon {
-    transform: scale(1.1) rotate(5deg);
 }
 
 .license-tile p {
@@ -1795,21 +1702,6 @@ h2 {
     border-bottom: none;
     margin-bottom: 0;
     padding-bottom: 0;
-}
-
-.faq-question {
-    font-size: var(--font-size-card-title);
-    font-weight: 600;
-    color: var(--primary-color);
-    margin-bottom: 1rem;
-    line-height: 1.4;
-}
-
-.faq-answer {
-    font-size: var(--font-size-body);
-    line-height: 1.8;
-    color: var(--text-color);
-    margin: 0;
 }
 
 /* Cards on subpages need white background */
@@ -2159,33 +2051,6 @@ h2 {
     height: 24px;
 }
 
-.carousel-indicators {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    margin-top: 2rem;
-}
-
-.carousel-indicator {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    border: 2px solid var(--primary-color);
-    background: transparent;
-    cursor: pointer;
-    transition: background 0.3s ease, transform 0.3s ease;
-    padding: 0;
-}
-
-.carousel-indicator:hover {
-    transform: scale(1.2);
-}
-
-.carousel-indicator.active {
-    background: var(--primary-color);
-}
-
-
 /* Process title extends section-title */
 
 .process-steps {
@@ -2227,15 +2092,6 @@ h2 {
 
 .process-step:hover::before {
     transform: scaleX(1);
-}
-
-.process-step-arrow {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--primary-color);
-    align-self: center;
-    flex-shrink: 0;
 }
 
 .process-step:hover {
@@ -2309,19 +2165,6 @@ h2 {
     text-decoration: underline;
 }
 
-.process-step-arrow {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--primary-color);
-    align-self: center;
-}
-
-.process-step-arrow svg {
-    width: 32px;
-    height: 32px;
-}
-
 .team-card-content {
     padding: 1.5rem;
     text-align: center;
@@ -2340,158 +2183,6 @@ h2 {
     font-weight: 500;
     margin: 0;
 }
-
-
-
-
-/* Donut Chart CSS */
-.donut-chart-wrapper {
-    position: relative;
-    width: 100%;
-    max-width: 900px;
-    margin: 0 auto;
-    background: conic-gradient(
-        from -90deg,
-        rgba(0, 61, 153, 0.3) 0deg 90deg,
-        rgba(179, 217, 255, 0.3) 90deg 180deg,
-        rgba(102, 153, 255, 0.3) 180deg 270deg,
-        rgba(0, 26, 77, 0.3) 270deg 360deg
-    );
-    border-radius: 20px;
-}
-
-.donut-chart {
-    position: relative;
-    width: 500px;
-    height: 500px;
-    margin: 0 auto;
-    border-radius: 50%;
-    background: conic-gradient(
-        from -90deg,
-        rgba(0, 61, 153, 1) 0deg 90deg,
-        rgba(179, 217, 255, 1) 90deg 180deg,
-        rgba(102, 153, 255, 1) 180deg 270deg,
-        rgba(0, 26, 77, 1) 270deg 360deg
-    );
-    box-shadow: 0 4px 15px rgba(0, 35, 102, 0.1);
-}
-
-
-.donut-center {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 200px;
-    height: 200px;
-    background: white;
-    border-radius: 50%;
-    z-index: 1;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Segment labels inside donut chart - centered on each segment */
-.donut-segment-label {
-    position: absolute;
-    font-family: 'Montserrat', sans-serif;
-    font-size: var(--font-size-donut-center);
-    font-weight: 700;
-    z-index: 2;
-    pointer-events: none;
-    text-shadow: 0 1px 3px rgba(255, 255, 255, 0.8);
-    white-space: nowrap;
-    top: 50%;
-    left: 50%;
-    transform-origin: center;
-}
-
-/* Segment 1: Lietanie - center at -58.235° (stred segmentu 0° až 63.53°) */
-.segment-label-1 {
-    color: white;
-    top: 24%;
-    left: 12%;
-}
-
-/* Segment 2: Povolenia - center at 15.885° (stred segmentu 63.53° až 148.24°) */
-.segment-label-2 {
-    color: #002366;
-    top: 24%;
-    left: 60%;
-}
-
-/* Segment 3: Bezpečnosť - center at 100.595° (stred segmentu 148.24° až 232.95°) */
-.segment-label-3 {
-    color: #002366;
-    top: 70%;
-    left: 60%;
-}
-
-/* Segment 4: Spolupráca - center at 206.475° (stred segmentu 232.95° až 360°) */
-.segment-label-4 {
-    color: white;
-    top: 70%;
-    left: 12%;
-}
-
-
-/* Donut Labels (text lists around chart) - positioned next to segments */
-
-.label-group {
-    position: absolute;
-    width: 12rem;
-}
-
-.label-group h4 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: var(--font-size-donut-label);
-    font-weight: 700;
-    color: #002366;
-    margin-bottom: 0.75rem;
-}
-
-.label-group ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.label-group li {
-    font-family: 'Montserrat', sans-serif;
-    font-size: var(--font-size-donut-label-small);
-    color: #002366;
-    margin-bottom: 0.5rem;
-    padding-left: 1rem;
-    position: relative;
-    line-height: 1.5;
-    list-style: none;
-}
-
-
-/* Position label groups next to their segments - same height as donut */
-/* Segment 1: Lietanie - top (0° to 90°) */
-.label-group-1 {
-    top: 10%;
-    left: 3%;
-}
-
-/* Segment 2: Povolenia - right (90° to 180°) */
-.label-group-2 {
-    top: 10%;
-    right: 1%;
-}
-
-/* Segment 3: Bezpečnosť - bottom (180° to 270°) */
-.label-group-3 {
-    top: 60%;
-    right: 1%;
-}
-
-/* Segment 4: Spolupráca - left (270° to 360°) */
-.label-group-4 {
-    top: 60%;
-    left: 3%;
-}
-
 
 /* Contact Section */
 .contact-content {
@@ -2785,15 +2476,6 @@ body:not(.homepage) #loading-screen {
     margin: 3rem auto 0;
 }
 
-
-.pricing-cards-wrapper {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
 .pricing-custom-card {
     background: var(--card-background);
     border: 2px solid var(--primary-color);
@@ -2821,31 +2503,6 @@ body:not(.homepage) #loading-screen {
 
 .pricing-custom-card .section-text {
     margin-bottom: 2rem;
-}
-
-.pricing-custom-price {
-    display: flex;
-    align-items: baseline;
-    gap: 0.2rem;
-}
-
-.pricing-amount {
-    font-size: var(--font-size-hero-title);
-    color: var(--primary-color);
-    font-weight: 700;
-}
-
-.pricing-currency {
-    font-size: var(--font-size-section-title-tablet);
-    color: var(--primary-color);
-    font-weight: 700;
-}
-
-.pricing-custom-label {
-    font-size: var(--font-size-section-subtitle);
-    color: var(--text-color);
-    margin-bottom: 2rem;
-    font-weight: 500;
 }
 
 .pricing-contact-btn {
@@ -2963,62 +2620,6 @@ body:not(.homepage) #loading-screen {
     display: block;
 }
 
-
-.postproduction-steps {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-    margin-top: 3rem;
-    max-width: 1400px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.postproduction-step {
-    background: var(--card-background);
-    border-radius: 12px;
-    padding: 2rem;
-    box-shadow: 0 4px 15px var(--shadow-color);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.postproduction-step:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px var(--shadow-hover);
-}
-
-.postproduction-step-number {
-    width: 50px;
-    height: 50px;
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: var(--font-size-card-title);
-    font-weight: 700;
-    margin-bottom: 1.5rem;
-}
-
-.postproduction-step h3 {
-    font-size: var(--font-size-small-heading);
-    color: var(--primary-color);
-    margin-bottom: 1rem;
-    font-weight: 600;
-}
-
-.postproduction-step p {
-    font-size: var(--font-size-form-input);
-    line-height: 1.7;
-    color: var(--text-color);
-    margin: 0;
-}
-
 /* ========================================
    RESPONSIVE DESIGN - MEDIA QUERIES
    ======================================== */
@@ -3054,38 +2655,8 @@ body:not(.homepage) #loading-screen {
         gap: 1rem;
     }
 
-    .instagram-posts-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
-    }
-
     .license-tiles {
         grid-template-columns: repeat(2, 1fr);
-    }
-
-    /* Tablet label group positions - copy from desktop */
-    .label-group-1 {
-        top: 2%;
-        left: 2%;
-    }
-    
-    .label-group-2 {
-        top: 2%;
-        right: 2%;
-    }
-    
-    .label-group-3 {
-        top: 52%;
-        right: 2%;
-    }
-    
-    .label-group-4 {
-        top: 52%;
-        left: 2%;
-    }
-
-    .donut-chart-wrapper {
-        padding: 20% 0;
     }
 
     .nav-container {
@@ -3561,18 +3132,6 @@ body:not(.homepage) #loading-screen {
         height: 40px;
     }
 
-    .label-group-3 {
-        bottom: 2%;
-        right: 2%;
-        top: auto;
-    }
-    
-    .label-group-4 {
-        bottom: 2%;
-        left: 2%;
-        top: auto;
-    }
-
     .team-card:hover .team-card-overlay {
         opacity: 1;
         visibility: visible;
@@ -3675,46 +3234,6 @@ body:not(.homepage) #loading-screen {
     }
 }
 
-@media (max-width: 350px) {
-    .donut-chart-wrapper {
-        padding: 100% 0;
-    }
-}
-
-@media (max-width: 370px) {
-    .donut-chart-wrapper {
-        padding: 90% 0;
-    }
-}
-
-@media (max-width: 390px) {
-    .donut-chart-wrapper {
-        padding: 80% 0;
-    }
-    .donut-chart {
-        width: 95%;
-        max-width: 250px;
-        height: 250px;
-    }
-    
-    .donut-center {
-        width: 80px;
-        height: 80px;
-    }
-    .donut-segment-label {
-        font-size: var(--font-size-donut-label-mobile);
-    }
-}
-
-@media (max-width: 420px) {
-    .donut-chart-wrapper {
-        padding: 70% 0;
-    }
-    .label-group {
-        width: 50%;
-    }
-}
-
 @media (max-width: 440px) {
     .section-title {
         font-size: var(--font-size-section-title-mobile);
@@ -3788,9 +3307,6 @@ body:not(.homepage) #loading-screen {
 }
 
 @media (max-width: 480px) {
-    .donut-chart-wrapper {
-        padding: 50% 0;
-    }
     
     .equipment-image {
         margin: 0;
@@ -3817,29 +3333,6 @@ body:not(.homepage) #loading-screen {
     
 }
 
-@media (max-width: 560px) {
-    .donut-chart-wrapper {
-        padding: 40% 0;
-    }
-    
-}
-
-@media (max-width: 600px) {
-    /* Tablet label group positions - copy from desktop */
-    .label-group-1 {
-        top: 2%;
-        left: 2%;
-    }
-    
-    .label-group-2 {
-        top: 2%;
-        right: 2%;
-    }
-
-    .donut-chart-wrapper {
-        padding: 30% 0;
-    }
-}
 
 @media (max-width: 768px) {
     .photo-lightbox-prev,
@@ -3885,8 +3378,8 @@ body:not(.homepage) #loading-screen {
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     }
 
-    .instagram-feed-container iframe {
-        min-height: 400px;
+    .equipment-grid {
+        grid-template-columns: 1fr;
     }
 
     .license-tiles {
@@ -3908,18 +3401,12 @@ body:not(.homepage) #loading-screen {
         background-attachment: scroll; /* Better performance on mobile */
     }
     
-    .pricing-cards-wrapper {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
-    
     .pricing-custom-card {
         padding: 2rem 1.5rem;
         max-width: 100%;
     }
     
-    .pricing-factors-grid,
-    .postproduction-steps {
+    .pricing-factors-grid {
         grid-template-columns: 1fr;
     }
     
