@@ -812,7 +812,8 @@ function initNavbarScroll() {
         }
         
         // Handle navbar visibility based on scroll direction
-        if (Math.abs(scrollDelta) > 5) { // Only react to significant scroll
+        // Don't hide navbar if mobile menu is open
+        if (!isMenuOpen && Math.abs(scrollDelta) > 5) { // Only react to significant scroll
             if (scrollDelta > 0 && scrollTop > scrollThreshold) {
                 // Scrolling down and past threshold - hide navbar
                 navbar.style.transform = 'translateY(-100%)';
@@ -820,6 +821,9 @@ function initNavbarScroll() {
                 // Scrolling up - show navbar
                 navbar.style.transform = 'translateY(0)';
             }
+        } else if (isMenuOpen) {
+            // Ensure navbar is visible when menu is open
+            navbar.style.transform = 'translateY(0)';
         }
         
         lastScrollTop = scrollTop;
