@@ -69,7 +69,8 @@ export default defineConfig({
         kontakt: 'kontakt.html',
         dronetext: 'dronetext.html',
         legislativa: 'legislativa.html',
-        gdpr: 'gdpr.html'
+        gdpr: 'gdpr.html',
+        'gamiable-demo': 'gamiable-demo.html'
       },
       output: {
         manualChunks: {

@@ -215,16 +215,23 @@ function setCloudTexture(texturePathOrPaths) {
     });
 }
 
-// Helper function to create cloud sprite (always faces camera)
+// Helper function to create cloud (Gamiable style - Mesh with PlaneGeometry)
 function createCloudForScene(x, y, z, scaleX, scaleY, cloudTexture, opacity = 0.5) {
     if (!cloudTexture) return null;
     
-    // Create sprite material (always faces camera)
-    const cloudMaterial = new THREE.SpriteMaterial({
+    // Gamiable style: Use Mesh with PlaneGeometry instead of Sprite for better 3D effect
+    const cloudSize = Math.max(scaleX, scaleY); // Use average size for plane geometry
+    const cloudGeometry = new THREE.PlaneGeometry(cloudSize, cloudSize);
+    
+    // Create material similar to Gamiable style
+    const cloudMaterial = new THREE.MeshStandardMaterial({
         map: cloudTexture,
         transparent: true,
         opacity: opacity,
         depthWrite: false,
+        side: THREE.DoubleSide,
+        roughness: 0.8, // Less reflective, more matte like clouds
+        metalness: 0.0
     });
     
     // Don't repeat texture - use original size
@@ -232,14 +239,19 @@ function createCloudForScene(x, y, z, scaleX, scaleY, cloudTexture, opacity = 0.
     cloudTexture.wrapT = THREE.ClampToEdgeWrapping;
     cloudTexture.flipY = false;
     
-    // Create sprite
-    const cloud = new THREE.Sprite(cloudMaterial);
-    cloud.scale.set(scaleX, scaleY, 1);
+    // Create mesh (Gamiable style)
+    const cloud = new THREE.Mesh(cloudGeometry, cloudMaterial);
     cloud.position.set(x, y, z);
+    
+    // Random rotation for 3D effect (like Gamiable)
+    cloud.rotation.z = (Math.random() - 0.5) * Math.PI * 0.3; // Slight random rotation
+    cloud.rotation.x = (Math.random() - 0.5) * Math.PI * 0.1;
+    cloud.rotation.y = (Math.random() - 0.5) * Math.PI * 0.1;
     
     // Store original position for animation
     cloud.userData.originalY = y;
     cloud.userData.originalZ = z;
+    cloud.userData.originalRotationZ = cloud.rotation.z;
     
     return cloud;
 }
@@ -249,6 +261,12 @@ window.setCloudTexture = setCloudTexture;
 
 // Initialize Three.js
 function init() {
+    // Prevent multiple initializations
+    if (isInitialized && scene && renderer) {
+        console.log('Animation already initialized, skipping init()...');
+        return;
+    }
+    
     const canvas = document.getElementById('drone-canvas');
     
     if (!canvas) {
@@ -275,6 +293,8 @@ function init() {
         0.01,
         1000
     );
+    // Camera will be updated in animate() to follow drone
+    // Initial position - will be updated when drone loads
     camera.position.set(0, 15, 15);
     camera.lookAt(0, 0, 0);
     
@@ -296,9 +316,6 @@ function init() {
     
     // Start animation
     animate();
-    
-    // Initialize navigation
-    initNavigation();
 }
 
 // Create three dummy scenes
@@ -386,212 +403,128 @@ function createScenes() {
     // Add aurora borealis tunnel effect (polar light)
     createAuroraTunnel(scene1);
     
-    // Scene 2: Sky scene with clouds
+    // Scene 2: Sky scene with clouds - EXACT Gamiable implementation
     const scene2 = new THREE.Scene();
-    scene2.background = new THREE.Color(0x87CEEB); // Sky blue
-    scene2.add(new THREE.HemisphereLight(0xffffff, 0x87CEEB, 1.2)); // Bright sky lighting
-    const sunLight = new THREE.DirectionalLight(0xffffff, 1.5);
-    sunLight.position.set(10, 20, 5);
-    sunLight.castShadow = false;
-    scene2.add(sunLight);
+    scene2.background = new THREE.Color(0x194244); // Gamiable sky color (darker blue-gray)
     
-    // Add ambient light for bright sky
-    const ambientLight2 = new THREE.AmbientLight(0xffffff, 0.8);
-    scene2.add(ambientLight2);
+    // Gamiable constants
+    const CLOUD_COUNT = 500; // Gamiable uses 500 clouds
+    const CLOUD_SPEED = 100; // Gamiable CLOUD_SPEED = 100
+    const FAR = 1000; // Far distance
     
-    // Create clouds - cloud layer at the bottom of the screen
-    const cloudGroup = new THREE.Group();
-    scene2.add(cloudGroup);
-    scene2.userData.cloudGroup = cloudGroup;
-    scene2.userData.cloudTexture = null; // Will store cloud texture when loaded
+    // Helper functions for random (Gamiable style)
+    const rnd = (min, max) => min + Math.random() * (max - min);
+    const rndFS = (range) => (Math.random() - 0.5) * 2 * range;
     
-    // Load cloud textures - cloud1.png and cloud2.png from public folder
-    const cloudTexturePaths = [
-        `${import.meta.env.BASE_URL}cloud1.png`,
-        `${import.meta.env.BASE_URL}cloud2.png`
-    ];
+    // Create group (Gamiable style)
+    const skyGroup = new THREE.Group();
+    skyGroup.position.set(0, 200, 0); // Gamiable: group.position.set(0, 200, 0)
+    scene2.add(skyGroup);
+    scene2.userData.skyGroup = skyGroup;
+    scene2.userData.clouds = []; // Store cloud array like Gamiable
     
-    // Function to create cloud material with texture
-    function createCloudMaterial(texture) {
-        if (!texture) {
-            console.warn('No texture provided for cloud material');
-            return null;
+    // Sky background - try to load sky.jpg, fallback to simple material
+    const textureLoader = new THREE.TextureLoader();
+    
+    // Simple shader-like fallback for sky background (Gamiable uses ShaderMaterial)
+    const skyMaterial = new THREE.MeshBasicMaterial({
+        color: 0x194244, // Gamiable uColor default
+        side: THREE.DoubleSide,
+        depthTest: false, // Gamiable: depthTest: false
+        depthWrite: false // Gamiable: depthWrite: false
+    });
+    
+    // Try to load sky.jpg texture
+    textureLoader.load(
+        `${import.meta.env.BASE_URL}sky.jpg`,
+        (texture) => {
+            texture.flipY = true; // Gamiable: texture.flipY = true
+            skyMaterial.map = texture;
+            skyMaterial.needsUpdate = true;
+        },
+        undefined,
+        () => {
+            // Fallback: use solid color
+            console.warn('sky.jpg not found, using solid color');
+        }
+    );
+    
+    const skyPlane = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), skyMaterial);
+    skyPlane.scale.set(1000, 1000, 1); // Gamiable: scale.set(1000, 1000, 1)
+    skyPlane.rotation.x = Math.PI / 2; // Gamiable: rotation.x = Math.PI / 2
+    skyPlane.position.set(0, 0, -900); // Gamiable: position.set(0, 0, -900)
+    skyPlane.renderOrder = -100; // Gamiable: renderOrder = -100
+    skyGroup.add(skyPlane);
+    scene2.userData.skyPlane = skyPlane;
+    scene2.userData.skyMaterial = skyMaterial; // Store for animation updates
+    
+    // Clouds - try to load cloud.png, fallback to simple material
+    // Simple shader-like fallback for clouds (Gamiable uses ShaderMaterial)
+    const cloudMaterial = new THREE.MeshStandardMaterial({
+        transparent: true,
+        depthWrite: false, // Gamiable: depthWrite: false
+        side: THREE.DoubleSide,
+        roughness: 1.0,
+        metalness: 0.0
+    });
+    
+    // Try to load cloud.png texture
+    textureLoader.load(
+        `${import.meta.env.BASE_URL}cloud.png`,
+        (texture) => {
+            cloudMaterial.map = texture;
+            cloudMaterial.needsUpdate = true;
+            createGamiableClouds();
+        },
+        undefined,
+        () => {
+            // Fallback: create white clouds without texture
+            console.warn('cloud.png not found, creating white clouds');
+            cloudMaterial.color = new THREE.Color(0xffffff);
+            cloudMaterial.opacity = 0.8;
+            createGamiableClouds();
+        }
+    );
+    
+    // Function to create Gamiable style clouds (EXACT implementation)
+    function createGamiableClouds() {
+        scene2.userData.clouds = [];
+        
+        for (let i = 0; i < CLOUD_COUNT; i++) {
+            const size = rnd(100, 175); // Gamiable: rnd(100, 175)
+            const cloud = new THREE.Mesh(new THREE.PlaneGeometry(size, size), cloudMaterial);
+            cloud.position.set(rndFS(1500), rndFS(50) - 100, -rndFS(FAR)); // Gamiable exact
+            cloud.renderOrder = FAR + cloud.position.z; // Gamiable: renderOrder = FAR + cloud.position.z
+            cloud.rotation.z = rndFS(2 * Math.PI); // Gamiable: rndFS(2 * Math.PI)
+            scene2.userData.clouds.push(cloud);
+            skyGroup.add(cloud);
         }
         
-        const material = new THREE.MeshStandardMaterial({
-            map: texture,
-            transparent: true,
-            opacity: 0.9,
-            side: THREE.DoubleSide,
-            depthWrite: false,
-            alphaTest: 0.1
-        });
-        
-        // Don't repeat texture - use original size
-        texture.wrapS = THREE.ClampToEdgeWrapping;
-        texture.wrapT = THREE.ClampToEdgeWrapping;
-        
-        return material;
+        console.log(`✅ Created ${CLOUD_COUNT} Gamiable-style clouds (exact implementation)`);
     }
     
-    // Function to create a cloud sprite (always faces camera)
-    function createCloudPlane(x, y, z, scaleX, scaleY, cloudTexture, opacity = 0.5) {
-        if (!cloudTexture) return null;
-        
-        // Create sprite material (always faces camera)
-        const cloudMaterial = new THREE.SpriteMaterial({
-            map: cloudTexture,
-            transparent: true,
-            opacity: opacity,
-            depthWrite: false,
-        });
-        
-        // Don't repeat texture - use original size
-        cloudTexture.wrapS = THREE.ClampToEdgeWrapping;
-        cloudTexture.wrapT = THREE.ClampToEdgeWrapping;
-        cloudTexture.flipY = false;
-        
-        // Create sprite
-        const cloud = new THREE.Sprite(cloudMaterial);
-        cloud.scale.set(scaleX, scaleY, 1);
-        cloud.position.set(x, y, z);
-        
-        // Store original position for animation
-        cloud.userData.originalY = y;
-        cloud.userData.originalZ = z;
-        
-        return cloud;
-    }
-    
-    // Function to load cloud textures and create clouds
-    function createCloudsWithTextures(texturePaths) {
-        if (!texturePaths || texturePaths.length === 0) {
-            // No textures provided, create clouds without texture
-            createClouds();
-            return;
-        }
-        
-        const textureLoader = new THREE.TextureLoader();
-        const loadedTextures = [];
-        let loadedCount = 0;
-        
-        // Load all textures
-        texturePaths.forEach((path, index) => {
-            textureLoader.load(
-                path,
-                (texture) => {
-                    console.log(`✅ Cloud texture ${index + 1} loaded successfully`);
-                    texture.flipY = false; // Adjust if needed based on your texture
-                    loadedTextures[index] = texture;
-                    loadedCount++;
-                    
-                    // When all textures are loaded, create clouds
-                    if (loadedCount === texturePaths.length) {
-                        scene2.userData.cloudTextures = loadedTextures;
-                        createClouds(loadedTextures);
-                    }
-                },
-                undefined,
-                (err) => {
-                    console.warn(`⚠️ Failed to load cloud texture ${index + 1}, skipping:`, err);
-                    loadedCount++;
-                    
-                    // If all textures failed or all loaded, create clouds
-                    if (loadedCount === texturePaths.length) {
-                        if (loadedTextures.length > 0) {
-                            scene2.userData.cloudTextures = loadedTextures.filter(t => t !== undefined);
-                            createClouds(loadedTextures.filter(t => t !== undefined));
-                        } else {
-                            createClouds(); // Fallback to clouds without texture
-                        }
-                    }
-                }
-            );
-        });
-    }
-    
-    // Function to create cloud layer - full sky coverage at bottom
-    function createClouds(cloudTextures = null) {
-        // Clear existing clouds if any
-        cloudGroup.clear();
-        
-        if (!cloudTextures || (Array.isArray(cloudTextures) && cloudTextures.length === 0)) {
-            console.warn('No cloud textures available');
-            return;
-        }
-        
-        // Get available textures
-        const availableTextures = Array.isArray(cloudTextures) 
-            ? cloudTextures.filter(t => t !== undefined)
-            : [cloudTextures].filter(t => t !== undefined);
-        
-        if (availableTextures.length === 0) {
-            console.warn('No valid cloud textures');
-            return;
-        }
-        
-        // Create a continuous cloud layer covering the entire bottom area - 3D effect with multiple layers
-        const cloudLayerHeight = 45; // Higher - clouds positioned higher
-        // Use sprite scaling - realistic cloud sizes
-        const cloudScaleX = 30; // Width scale for sprite
-        const cloudScaleY = 20; // Height scale for sprite
-        
-        // Create many clouds to cover the entire area - denser coverage
-        const coverageWidth = 250; // Larger area to cover
-        const coverageDepth = 250;
-        const spacing = 25; // Wider spacing for fewer clouds
-        
-        const xCount = Math.ceil(coverageWidth / spacing) + 2; // Fewer extra clouds
-        const zCount = Math.ceil(coverageDepth / spacing) + 2;
-        
-        // Create 3D effect with multiple layers at different heights - fewer layers
-        const layerCount = 3; // Fewer layers for less dense clouds
-        const layerSpacing = 1.5; // Vertical spacing between layers
-        
-        for (let layer = 0; layer < layerCount; layer++) {
-            const layerY = cloudLayerHeight + layer * layerSpacing;
-            const layerOpacity = 0.5 - layer * 0.1; // More transparent for deeper layers (sprite opacity)
-            
-            // Create grid of cloud sprites for this layer with random distribution
-            for (let x = 0; x < xCount; x++) {
-                for (let z = 0; z < zCount; z++) {
-                    // Much larger random offset to break grid pattern and create seamless distribution
-                    const randomOffsetX = (Math.random() - 0.5) * spacing * 1.2;
-                    const randomOffsetZ = (Math.random() - 0.5) * spacing * 1.2;
-                    const xPos = (x - xCount / 2) * spacing + randomOffsetX + layer * 2;
-                    const zPos = (z - zCount / 2) * spacing + randomOffsetZ + layer * 2;
-                    
-                    // Randomly select a texture for variation
-                    const selectedTexture = availableTextures[Math.floor(Math.random() * availableTextures.length)];
-                    
-                    // Create cloud sprite (always faces camera)
-                    const cloud = createCloudPlane(xPos, layerY, zPos, cloudScaleX, cloudScaleY, selectedTexture, layerOpacity);
-                    if (cloud) {
-                        cloudGroup.add(cloud);
-                    }
-                }
-            }
-        }
-    }
-    
-    // Create clouds with textures
-    createCloudsWithTextures(cloudTexturePaths);
-    
-    // Scene 3: Water surface scene with gentle clouds above
+    // Scene 3: Water surface scene with gentle clouds above (inspired by gamiable.com)
     const scene3 = new THREE.Scene();
     scene3.background = new THREE.Color(0x87CEEB); // Sky blue
-    scene3.add(new THREE.HemisphereLight(0xffffff, 0x444444, 1.2));
-    const light3 = new THREE.DirectionalLight(0xffffff, 1.2);
-    light3.position.set(5, 10, 5);
+    // Enhanced lighting for realistic water scene
+    scene3.add(new THREE.HemisphereLight(0xffffff, 0x87CEEB, 1.4)); // Brighter, more sky-like
+    const light3 = new THREE.DirectionalLight(0xffffff, 1.5);
+    light3.position.set(5, 15, 5);
     scene3.add(light3);
     
-    // Add realistic water surface with waves
-    const waterGeometry = new THREE.PlaneGeometry(300, 300, 64, 64); // More segments for smooth waves
+    // Add ambient light for water scene
+    const ambientLight3 = new THREE.AmbientLight(0xffffff, 0.9);
+    scene3.add(ambientLight3);
+    
+    // Add realistic water surface with waves (enhanced for gamiable.com style)
+    const waterGeometry = new THREE.PlaneGeometry(400, 400, 128, 128); // More segments for smoother waves
     const waterMaterial = new THREE.MeshStandardMaterial({ 
         color: 0x1E90FF, // Bright blue (DodgerBlue) - very visible
-        roughness: 0.1,
-        metalness: 0.3,
-        side: THREE.DoubleSide
+        roughness: 0.05, // More reflective water
+        metalness: 0.4, // More metallic for water reflection
+        side: THREE.DoubleSide,
+        transparent: true,
+        opacity: 0.95 // Slightly transparent for depth
     });
     
     const water = new THREE.Mesh(waterGeometry, waterMaterial);
@@ -599,6 +532,9 @@ function createScenes() {
     water.position.set(0, -3, 0); // Water below drone but visible, centered
     water.receiveShadow = false;
     water.castShadow = false;
+    
+    // Add water reflection effect (simple environment map simulation)
+    waterMaterial.envMapIntensity = 0.5;
     
     // Store original positions for wave animation
     const positions = waterGeometry.attributes.position;
@@ -622,19 +558,20 @@ function createScenes() {
             return;
         }
         
+        // Enhanced clouds for water scene (inspired by gamiable.com)
         const cloudLayerHeight = 15; // Clouds above drone (lower position)
-        const cloudScaleX = 25; // Smaller clouds
-        const cloudScaleY = 18;
-        const coverageWidth = 400; // Wider coverage for clouds
+        const cloudScaleX = 28; // Slightly larger clouds for better visibility
+        const cloudScaleY = 20;
+        const coverageWidth = 450; // Wider coverage for clouds
         const coverageDepth = 600; // Much deeper coverage - generate clouds far ahead
-        const spacing = 30; // Wider spacing for fewer, gentler clouds
+        const spacing = 28; // Slightly tighter spacing for more clouds
         
-        const xCount = Math.ceil(coverageWidth / spacing) + 2;
-        const zCount = Math.ceil(coverageDepth / spacing) + 2;
+        const xCount = Math.ceil(coverageWidth / spacing) + 3; // More clouds for seamless coverage
+        const zCount = Math.ceil(coverageDepth / spacing) + 3;
         
-        // Fewer layers for gentler effect
-        const layerCount = 2;
-        const layerSpacing = 2.0;
+        // More layers for better depth effect
+        const layerCount = 3; // More layers for depth
+        const layerSpacing = 1.8;
         
         // Get drone position for relative cloud positioning (drone is at Z=0)
         // Generate clouds already spread far ahead - from -600 to +100 (already ahead of drone)
@@ -645,7 +582,8 @@ function createScenes() {
         
         for (let layer = 0; layer < layerCount; layer++) {
             const layerY = cloudLayerHeight + layer * layerSpacing;
-            const layerOpacity = 0.3 - layer * 0.1; // Lighter opacity (0.3, 0.2)
+            // Enhanced opacity for water scene clouds (inspired by gamiable.com)
+            const layerOpacity = 0.35 - layer * 0.1; // More visible clouds (0.35, 0.25, 0.15)
             
             for (let x = 0; x < xCount; x++) {
                 for (let z = 0; z < zCount; z++) {
@@ -822,17 +760,29 @@ function loadDroneModel() {
         (gltf) => {
             console.log('✅ Model loaded successfully!', gltf);
             droneRoot = gltf.scene;
+            console.log('✅ droneRoot set:', { droneRoot: !!droneRoot });
             
             // Center and scale
             fitAndCenter(droneRoot);
             
-            // Position drone at start position (high up)
+            // Position drone at start position (high up, centered)
             droneRoot.position.y = droneStartY;
-            droneRoot.position.x = 0;
+            droneRoot.position.x = 0; // Start centered
             droneRoot.position.z = dronePositionZ;
+            // Show drone from the start
+            droneRoot.visible = true;
             
-            // Add to current scene
-            scene.add(droneRoot);
+            // Add to ALL scenes for smooth transitions
+            scenes.forEach((s, index) => {
+                if (s && !s.children.includes(droneRoot)) {
+                    s.add(droneRoot);
+                    console.log(`Added drone to scene ${index} during model load`);
+                }
+            });
+            // Also add to current scene
+            if (scene && !scene.children.includes(droneRoot)) {
+                scene.add(droneRoot);
+            }
             
             // Log all nodes/meshes and apply colors
             console.group('📋 GLB node/mesh list');
@@ -1120,13 +1070,16 @@ function updateTexts() {
     const textCount = textElements.length;
     // Longer range per text for better readability (each text gets more scroll space)
     const progressPerText = 1 / textCount;
-    const fadeInOutRange = 0.08; // Smaller fade in/out range (8% of text's range) - longer visibility
+    const fadeInRange = 0.05; // Quick fade in (5% of text's range)
+    const fadeOutRange = 0.05; // Quick fade out (5% of text's range)
+    const stayDownRange = 0.15; // Time text stays down before scrolling up (15% of text's range)
     
     textElements.forEach((textEl, index) => {
         const textStart = index * progressPerText;
         const textEnd = (index + 1) * progressPerText;
-        const textFadeInEnd = textStart + fadeInOutRange;
-        const textFadeOutStart = textEnd - fadeInOutRange;
+        const textFadeInEnd = textStart + fadeInRange;
+        const textStayDownEnd = textFadeInEnd + stayDownRange; // Text stays down longer
+        const textFadeOutStart = textEnd - fadeOutRange;
         const isCTA = textEl.classList.contains('scroll-text-cta');
         
         // Calculate visibility and position based on scroll progress
@@ -1141,11 +1094,11 @@ function updateTexts() {
                     // Fade in
                     const localProgress = (scrollProgress - textStart) / (textFadeInEnd - textStart);
                     opacity = localProgress;
-                    translateY = 50 * (1 - localProgress); // Start from 50px, move to 0
+                    translateY = 50 * (1 - localProgress) + 30; // Start from 50px, move to 30px (lower)
                 } else {
-                    // Fully visible, stays at bottom
+                    // Fully visible, stays at bottom (lower position)
                     opacity = 1;
-                    translateY = 0; // Stay at bottom, don't move up
+                    translateY = 30; // Stay lower on screen
                 }
             } else {
                 // CTA hasn't appeared yet
@@ -1175,23 +1128,28 @@ function updateTexts() {
                 translateY = -350;
             }
         } else {
-            // Other texts - appear lower, only after previous text disappears
+            // Other texts - appear lower, stay down longer, then scroll up
             if (scrollProgress >= textStart && scrollProgress <= textEnd) {
                 // Text is in its range
                 if (scrollProgress < textFadeInEnd) {
                     // Fade in from bottom (lower position)
                     const localProgress = (scrollProgress - textStart) / (textFadeInEnd - textStart);
                     opacity = localProgress;
-                    translateY = 150 * (1 - localProgress); // Start from 150px, move to 0
-                } else if (scrollProgress <= textFadeOutStart) {
-                    // Fully visible in center (lower than first text) - LONG visibility period
+                    translateY = 150 * (1 - localProgress); // Start from 150px, move to 50px
+                } else if (scrollProgress <= textStayDownEnd) {
+                    // Stay fully visible DOWN (50px) - LONG period before scrolling up
                     opacity = 1;
-                    translateY = 50; // Lower position than first text
+                    translateY = 50; // Stay down longer
+                } else if (scrollProgress <= textFadeOutStart) {
+                    // Scroll up while still visible
+                    const localProgress = (scrollProgress - textStayDownEnd) / (textFadeOutStart - textStayDownEnd);
+                    opacity = 1;
+                    translateY = 50 - (localProgress * 350); // Move from 50px to -300px
                 } else {
-                    // Fade out and move up - same height as first text
+                    // Fade out while moving up
                     const localProgress = (scrollProgress - textFadeOutStart) / (textEnd - textFadeOutStart);
                     opacity = 1 - localProgress;
-                    translateY = 50 - (localProgress * 400); // Move up to -300px (same as first text)
+                    translateY = -300 - (localProgress * 50); // Continue moving up
                 }
             } else if (scrollProgress < textStart) {
                 // Text hasn't appeared yet - below screen
@@ -1299,8 +1257,10 @@ function animate() {
     //     dronePositionZ -= autoMoveSpeed * dt * 30 * speedMultiplier; // Move forward faster (negative Z = away from camera)
     // }
     
-    // Smoothly move drone (only Y movement, no forward movement)
-    if (droneRoot) {
+    // Smoothly move drone (Y movement)
+    if (droneRoot && droneRoot.visible) {
+        // Keep drone at center
+        droneRoot.position.x = 0;
         droneRoot.position.y += (droneTargetY - droneRoot.position.y) * 0.1;
         droneRoot.position.z = 0; // Keep drone at fixed Z position (no forward movement)
         
@@ -1334,8 +1294,10 @@ function animate() {
         camera.position.x = cameraOffsetX;
         
         // Look at drone with slight downward angle (not straight down)
+        // Use actual drone position X for lookAt during entrance animation
+        const droneX = droneRoot.position.x;
         const lookAtY = targetY - 1; // Look slightly below drone center
-        camera.lookAt(cameraOffsetX * 0.5, lookAtY, 0); // Look at fixed Z position
+        camera.lookAt(droneX * 0.5, lookAtY, 0); // Look at drone's X position (centered when at 0)
         
         // Animate stars moving forward (infinite forward movement) - only in space scene
         // Drone stays at fixed position (Z=0), stars move towards it
@@ -1411,53 +1373,65 @@ function animate() {
             });
         }
         
-        // Animate clouds - only in sky scene (scene 1) - infinite forward movement
-        if (currentSceneIndex === 1 && scene.userData.cloudGroup && droneRoot) {
-            const time = clock.getElapsedTime();
-            const droneZ = droneRoot.position.z;
-            const cloudSpeed = 20.0; // Speed at which clouds move forward (towards drone) - faster movement
+        // Animate clouds - only in sky scene (scene 2) - EXACT Gamiable implementation
+        if (currentSceneIndex === 1 && scene.userData.clouds && scene.userData.clouds.length > 0) {
+            const CLOUD_SPEED = 100; // Gamiable CLOUD_SPEED = 100
+            const FAR = 1000; // Gamiable FAR = 1000
+            const speed = CLOUD_SPEED * dt; // Gamiable: const speed = CLOUD_SPEED * delta
             
-            // Animate each cloud - move forward continuously, reset when passed
-            scene.userData.cloudGroup.children.forEach((cloud, index) => {
-                if (cloud.userData.originalY !== undefined && cloud.userData.originalZ !== undefined) {
-                    // Move cloud forward (towards drone)
-                    cloud.position.z += cloudSpeed * dt;
-                    
-                    // Keep clouds at bottom - minimal vertical movement
-                    cloud.position.y = cloud.userData.originalY + Math.sin(time * 0.3 + index) * 0.2;
-                    
-                    // If cloud passed the drone (went too far forward), reset it to the back
-                    if (cloud.position.z > droneZ + 50) {
-                        // Reset cloud to its original position relative to drone (maintain grid pattern)
-                        const offsetZ = cloud.userData.originalZ - droneZ;
-                        cloud.position.z = droneZ + offsetZ - 200; // Reset far behind
-                    }
+            // Update sky material color (Gamiable: this.skyMaterial.uniforms.uColor.value.copy(currentClearColor))
+            if (scene.userData.skyMaterial) {
+                // Gamiable updates uColor to match currentClearColor
+                // We'll update the material color to match scene background
+                const currentColor = scene.background;
+                if (scene.userData.skyMaterial.color) {
+                    scene.userData.skyMaterial.color.copy(currentColor);
                 }
-            });
+            }
+            
+            // Animate each cloud - EXACT Gamiable style (for loop, not forEach)
+            for (let i = 0; i < scene.userData.clouds.length; i++) {
+                // Move cloud forward (Gamiable: this.clouds[i].position.z += speed)
+                scene.userData.clouds[i].position.z += speed;
+                
+                // Reset when cloud passes (Gamiable: if (this.clouds[i].position.z > 0) { this.clouds[i].position.z -= FAR; })
+                if (scene.userData.clouds[i].position.z > 0) {
+                    scene.userData.clouds[i].position.z -= FAR;
+                }
+                
+                // Update render order for depth (Gamiable: this.clouds[i].renderOrder = FAR + this.clouds[i].position.z)
+                scene.userData.clouds[i].renderOrder = FAR + scene.userData.clouds[i].position.z;
+            }
         }
         
-        // Animate clouds - in water scene (scene 3) - gentle clouds above
+        // Animate clouds - in water scene (scene 3) - Gamiable style gentle clouds above
         if (currentSceneIndex === 2 && scene.userData.cloudGroup && droneRoot) {
             const time = clock.getElapsedTime();
             const droneZ = droneRoot.position.z;
-            const cloudSpeed = 15.0; // Slower movement for gentler effect
+            const cloudSpeed = 80.0; // Gamiable style speed (slightly slower for water scene)
+            const FAR = 1000; // Far distance for reset
             
-            // Animate each cloud - move forward continuously, reset when passed
+            // Animate each cloud - Gamiable style continuous movement
             scene.userData.cloudGroup.children.forEach((cloud, index) => {
                 if (cloud.userData.originalY !== undefined && cloud.userData.originalZ !== undefined) {
-                    // Move cloud forward (towards drone)
+                    // Move cloud forward (towards drone) - Gamiable style
                     cloud.position.z += cloudSpeed * dt;
                     
-                    // Gentle vertical movement for clouds above
-                    cloud.position.y = cloud.userData.originalY + Math.sin(time * 0.2 + index) * 0.15;
+                    // Gentle floating animation (Gamiable style)
+                    cloud.position.y = cloud.userData.originalY + Math.sin(time * 0.2 + index * 0.1) * 0.4;
                     
-                    // If cloud passed the drone (went too far forward), reset it far ahead
-                    if (cloud.position.z > droneZ + 100) {
-                        // Reset cloud far ahead of drone (at the start of the range)
-                        cloud.position.z = droneZ - 600; // Reset to start position
-                        // Update originalZ to maintain relative position
-                        cloud.userData.originalZ = cloud.position.z;
+                    // Gentle rotation animation for 3D effect (Gamiable style)
+                    if (cloud.userData.originalRotationZ !== undefined) {
+                        cloud.rotation.z = cloud.userData.originalRotationZ + Math.sin(time * 0.12 + index * 0.05) * 0.08;
                     }
+                    
+                    // Reset when cloud passes (Gamiable style)
+                    if (cloud.position.z > 0) {
+                        cloud.position.z -= FAR; // Reset to far back
+                    }
+                    
+                    // Update render order for depth (Gamiable style)
+                    cloud.renderOrder = FAR + cloud.position.z;
                 }
             });
         }
@@ -1475,12 +1449,13 @@ function animate() {
                     const x = originalPositions[i3];
                     const z = originalPositions[i3 + 2];
                     
-                    // Create wave animation
-                    const wave1 = Math.sin(x * 0.1 + time * 0.5) * 0.3;
-                    const wave2 = Math.sin(z * 0.15 + time * 0.7) * 0.2;
-                    const wave3 = Math.sin((x + z) * 0.08 + time * 0.6) * 0.15;
+                    // Enhanced wave animation (inspired by gamiable.com)
+                    const wave1 = Math.sin(x * 0.08 + time * 0.4) * 0.4; // Larger, slower waves
+                    const wave2 = Math.sin(z * 0.12 + time * 0.6) * 0.3;
+                    const wave3 = Math.sin((x + z) * 0.06 + time * 0.5) * 0.2;
+                    const wave4 = Math.sin((x * 0.15 + z * 0.1 + time * 0.3) * 0.5) * 0.15; // Additional wave layer
                     
-                    positions.setY(i, originalPositions[i3 + 1] + wave1 + wave2 + wave3);
+                    positions.setY(i, originalPositions[i3 + 1] + wave1 + wave2 + wave3 + wave4);
                 }
                 positions.needsUpdate = true;
             }
@@ -1539,75 +1514,16 @@ function onTouchEnd(event) {
     }, 150);
 }
 
-// Navigation System
-function initNavigation() {
-    const navLinks = document.querySelectorAll('.nav-link');
-    const hamburger = document.querySelector('.hamburger');
-    const navMenu = document.querySelector('.nav-menu');
-    
-    // Fix all navigation links to use base path
-    const basePath = import.meta.env.BASE_URL;
-    
-    // Fix all links starting with '/' to use base path
-    function fixLinkPath(link) {
-        const href = link.getAttribute('href');
-        if (href && href.startsWith('/') && !href.startsWith(basePath) && !href.startsWith('//')) {
-            // Remove leading slash and add base path
-            const newHref = basePath + href.substring(1);
-            link.setAttribute('href', newHref);
-        }
-    }
-    
-    // Fix navigation links
-    navLinks.forEach(fixLinkPath);
-    
-    // Fix logo link
-    const logoLink = document.querySelector('.logo-link');
-    if (logoLink) {
-        const href = logoLink.getAttribute('href');
-        if (href === '/' || href === '') {
-            logoLink.setAttribute('href', basePath);
-        } else {
-            fixLinkPath(logoLink);
-        }
-    }
-    
-    // Fix footer links (if any)
-    const footerLinks = document.querySelectorAll('footer a[href^="/"]');
-    footerLinks.forEach(fixLinkPath);
-    
-    // Navigation click handlers
-    navLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            // Update active states
-            navLinks.forEach(l => l.classList.remove('active'));
-            link.classList.add('active');
-            
-            // Close mobile menu
-            navMenu.classList.remove('active');
-            hamburger.classList.remove('active');
-        });
-    });
-    
-    // Mobile menu toggle
-    hamburger.addEventListener('click', () => {
-        hamburger.classList.toggle('active');
-        navMenu.classList.toggle('active');
-    });
-    
-    // Close mobile menu when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
-            navMenu.classList.remove('active');
-            hamburger.classList.remove('active');
-        }
-    });
-}
 
-// Initialize when DOM is ready
+
+// Flag to prevent multiple initializations
+let isInitialized = false;
+
+// Initialize when DOM is ready - start animation immediately (scene visible, drone off-screen)
 document.addEventListener('DOMContentLoaded', () => {
-    init();
-    // Show content after initialization (was hidden by inline script)
-    document.documentElement.style.visibility = 'visible';
+    if (!isInitialized) {
+        init(); // Start animation immediately, but drone will be off-screen until "Explore" is clicked
+        isInitialized = true;
+    }
 });
 

@@ -94,12 +94,19 @@ html[style*="visibility: hidden"] body {
     visibility: hidden;
 }
 
+html, body {
+    margin: 0;
+    height: 100%;
+}
+
 body {
     font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     color: var(--text-color);
     background-color: var(--background-color);
     overflow-x: hidden;
+    overflow: auto; /* Allow scroll when animation starts */
+    touch-action: auto;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -115,19 +122,111 @@ button {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1;
+    z-index: 0; /* Behind hero section */
     background: var(--canvas-bg);
+    display: none; /* Hidden by default */
 }
 
-/* Show canvas immediately on homepage */
-body.homepage #canvas-container {
-    z-index: 1;
+/* Show canvas when animation starts */
+#canvas-container.show {
+    display: block;
+    z-index: 0;
 }
 
-#three-canvas {
+/* Text container */
+#text-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0; /* Behind hero section */
+    pointer-events: none;
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
+    display: none; /* Hidden by default */
+}
+
+/* Show text container when animation starts */
+#text-container.show {
+    display: block;
+    z-index: 0;
+}
+
+/* Scroll text styles */
+.scroll-text {
+    position: absolute;
+    width: 100%;
+    color: #fff;
+    font-family: 'Montserrat', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    opacity: 0;
+    transform: translateY(100px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.scroll-text-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+    text-align: center;
+}
+
+.scroll-text-subtitle {
+    font-size: 1rem;
+    font-weight: 400;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+    text-align: center;
+}
+
+.scroll-text-cta .scroll-text-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.scroll-text-cta .scroll-text-subtitle {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.scroll-text.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* CTA button in scroll text */
+#text-container .cta-button {
+    margin-top: 1.5rem;
+    padding: 0.75rem 2rem;
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 30px;
+    font-family: 'Montserrat', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+    transition: all 0.3s ease;
+    pointer-events: auto;
+    display: inline-block;
+}
+
+#text-container .cta-button:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.8);
+    transform: scale(1.05);
+}
+
+#three-canvas,
+#drone-canvas {
     width: 100%;
     height: 100%;
     display: block;
+    pointer-events: none; /* Allow clicks to pass through canvas to navbar */
 }
 
 /* Navigation */
@@ -402,8 +501,8 @@ body.homepage #canvas-container {
 /* Main Content */
 .main-content {
     position: relative;
-    z-index: 1;
-  min-height: 100vh;
+    z-index: 10; /* Above animation */
+    min-height: 100vh;
     margin-top: 0; /* No margin - hero starts from top */
 }
 
@@ -1485,6 +1584,8 @@ body.homepage .main-content {
     background: transparent;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     transition: opacity 0.5s ease, transform 0.5s ease;
+    position: relative;
+    z-index: 10; /* Above animation */
 }
 
 .hero.hidden {
@@ -1547,6 +1648,41 @@ body.homepage .main-content {
     box-shadow: 0 4px 15px rgba(0, 35, 102, 0.4);
 }
 
+.hero-button-primary {
+    background: var(--primary-color);
+    color: white;
+    border: 2px solid var(--primary-color);
+    padding: 13px 28px;
+    font-size: var(--font-size-button);
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    min-width: 150px;
+    text-align: center;
+    font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    box-sizing: border-box;
+    margin: 0;
+    outline: none;
+    animation: fadeInUp 1s ease-out 0.4s both;
+}
+
+.hero-button-primary:hover {
+    background: var(--secondary-color);
+    border-color: var(--secondary-color);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(0, 35, 102, 0.4);
+}
+
+.hero-button-primary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
 .hero-button-secondary {
     background: var(--primary-color);
     color: white;
@@ -1592,7 +1728,7 @@ h2 {
     font-size: var(--font-size-body);
     line-height: 1.8;
     color: var(--text-color);
-    text-align: center;
+    text-align: left;
     font-weight: 500;
     margin-bottom: 2rem;
 }
@@ -4017,7 +4153,7 @@ body:not(.homepage) #loading-screen {
     --loading-bg: var(--primary-color);
     --section-bg-color: var(--hero-bg);
     --mobile-menu-header-bg: var(--footer-bg);
-    --mobile-menu-body-bg: var(--secondary-color);
+    --mobile-menu-body-bg: var(--footer-bg);
     --footer-contact-button-color: var(--secondary-color);
     --footer-contact-button-color-hover: #0056b3;
     --section-bg-radial-1: rgba(0, 35, 102, 0.05);
@@ -4047,7 +4183,7 @@ body:not(.homepage) #loading-screen {
     --loading-bg: var(--canvas-bg);
     --section-bg-color: var(--hero-bg);
     --mobile-menu-header-bg: var(--footer-bg);
-    --mobile-menu-body-bg: var(--background-color);
+    --mobile-menu-body-bg: var(--footer-bg);
     --footer-contact-button-color: var(--primary-color);
     --footer-contact-button-color-hover: var(--secondary-color);
     --section-bg-radial-1: rgba(74, 158, 255, 0.08);

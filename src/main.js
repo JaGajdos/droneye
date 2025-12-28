@@ -5,6 +5,9 @@ import { initContactForm } from './contact-form.js';
 let currentLanguage = 'sk';
 let translations = {};
 
+// Animation state
+let animationStarted = false;
+
 // Initialize internationalization
 async function initInternationalization() {
     // Check URL parameter for language first, then localStorage, then default to 'sk'
@@ -282,6 +285,7 @@ function initNavigation() {
             link.classList.add('active');
             
             // Close mobile menu
+            console.log('🔴 [navMenu] Removing active class - Navigation link clicked');
             navMenu.classList.remove('active');
             hamburger.classList.remove('active');
         });
@@ -295,20 +299,13 @@ function initNavigation() {
     
     function toggleMobileMenu() {
         const isActive = navMenu.classList.contains('active');
+        console.log(`🔄 [navMenu] Toggling active class - Current state: ${isActive}, Will be: ${!isActive}`);
         hamburger.classList.toggle('active');
         navMenu.classList.toggle('active');
         hamburger.setAttribute('aria-expanded', !isActive ? 'true' : 'false');
         
-        // Handle close button in nav-container
-        const navContainer = document.querySelector('.nav-container');
-        const navContainerClose = navContainer ? navContainer.querySelector('.mobile-menu-close') : null;
-        if (navContainerClose) {
-            if (!isActive) {
-                navContainerClose.style.display = 'flex';
-            } else {
-                navContainerClose.style.display = 'none';
-            }
-        }
+        // CSS handles showing/hiding close button and hamburger via :has() selector
+        // No need to manually set display here
         
         // Update navbar background when menu opens/closes
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -334,15 +331,29 @@ function initNavigation() {
             }
         }
         
-        // Prevent body scroll when menu is open
+        // Prevent body scroll when menu is open (but preserve homepage overflow: hidden)
         if (!isActive) {
+            // On homepage, body already has overflow: hidden from CSS, so don't override it
+            // On other pages, set overflow: hidden to prevent scrolling
+   
             document.body.style.overflow = 'hidden';
-            // Focus first menu item when opening
-            setTimeout(() => {
-                const firstLink = navMenu.querySelector('.nav-link');
-                if (firstLink) firstLink.focus();
-            }, 100);
+
+            // Focus close button when opening (CSS handles display)
+            const navContainerClose = document.querySelector('.nav-container .mobile-menu-close');
+            if (navContainerClose) {
+                setTimeout(() => {
+                    navContainerClose.focus();
+                }, 100);
+            } else {
+                // Fallback: focus first menu item
+                setTimeout(() => {
+                    const firstLink = navMenu.querySelector('.nav-link');
+                    if (firstLink) firstLink.focus();
+                }, 100);
+            }
         } else {
+            // On homepage, keep overflow: hidden (handled by CSS)
+            // On other pages, restore overflow
             document.body.style.overflow = '';
         }
     }
@@ -365,17 +376,13 @@ function initNavigation() {
         mobileMenuClose.setAttribute('aria-label', 'Close navigation menu');
         
         function closeMobileMenu() {
+            console.log('🔴 [navMenu] Removing active class - Close button clicked');
             navMenu.classList.remove('active');
             hamburger.classList.remove('active');
             hamburger.setAttribute('aria-expanded', 'false');
-            document.body.style.overflow = '';
             
-            // Hide close button in nav-container if it exists
-            const navContainerClose = document.querySelector('.nav-container .mobile-menu-close');
-            if (navContainerClose) {
-                navContainerClose.style.display = 'none';
-            }
             
+            // CSS handles hiding close button via :has() selector when menu is closed
             // Restore navbar background based on scroll position
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             if (scrollTop > 50) {
@@ -409,6 +416,7 @@ function initNavigation() {
         
         link.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
+                console.log('🔴 [navMenu] Removing active class - Escape key pressed');
                 navMenu.classList.remove('active');
                 hamburger.classList.remove('active');
                 hamburger.setAttribute('aria-expanded', 'false');
@@ -430,6 +438,7 @@ function initNavigation() {
     navMenu.addEventListener('click', (e) => {
         // If clicking on the menu itself (not on links), close it
         if (e.target === navMenu || e.target.classList.contains('nav-menu')) {
+            console.log('🔴 [navMenu] Removing active class - Overlay clicked');
             navMenu.classList.remove('active');
             hamburger.classList.remove('active');
             document.body.style.overflow = '';
@@ -439,6 +448,7 @@ function initNavigation() {
     // Close mobile menu when clicking on a link
     navLinks.forEach(link => {
         link.addEventListener('click', () => {
+            console.log('🔴 [navMenu] Removing active class - Link clicked');
             navMenu.classList.remove('active');
             hamburger.classList.remove('active');
             document.body.style.overflow = '';
@@ -448,6 +458,7 @@ function initNavigation() {
     // Close mobile menu when clicking outside
     document.addEventListener('click', (e) => {
         if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+            console.log('🔴 [navMenu] Removing active class - Clicked outside menu');
             navMenu.classList.remove('active');
             hamburger.classList.remove('active');
             document.body.style.overflow = '';
@@ -498,6 +509,20 @@ document.getElementById('start-animation-btn')?.addEventListener('click', functi
         hero.classList.add('hidden');
     }
     
+    // Show animation containers
+    const canvasContainer = document.getElementById('canvas-container');
+    const textContainer = document.getElementById('text-container');
+    if (canvasContainer) {
+        canvasContainer.classList.add('show');
+    }
+    if (textContainer) {
+        textContainer.classList.add('show');
+    }
+    
+    // Enable scroll on body
+    document.body.style.overflow = '';
+    document.documentElement.style.overflow = '';
+    
     // Start animation and enable scroll
     if (!animationStarted) {
         animationStarted = true;
@@ -531,32 +556,25 @@ function initThemeSwitcher() {
 }
 
 function setTheme(themeName) {
-    // Map old theme names to new ones
-    const themeMap = {
-        'royal-blue': 'light',
-        'forest-green': 'light',
-        'sunset-orange': 'light',
-        'deep-purple': 'light',
-        'ocean-blue': 'light'
-    };
-    const mappedTheme = themeMap[themeName] || themeName;
+    // Only support 'dark' and 'light' themes
+    const validTheme = (themeName === 'dark' || themeName === 'light') ? themeName : 'light';
     
-    document.documentElement.setAttribute('data-theme', mappedTheme);
-    localStorage.setItem('theme', mappedTheme);
+    document.documentElement.setAttribute('data-theme', validTheme);
+    localStorage.setItem('theme', validTheme);
     
     // Update theme switcher if it exists
     const themeSwitcher = document.querySelector('.theme-switcher');
     if (themeSwitcher) {
         const themeBtn = themeSwitcher.querySelector('.theme-btn');
         if (themeBtn) {
-            themeBtn.setAttribute('data-theme', mappedTheme);
-            const icon = mappedTheme === 'dark' ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+            themeBtn.setAttribute('data-theme', validTheme);
+            const icon = validTheme === 'dark' ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
             themeBtn.innerHTML = icon;
         }
         
         // Update active state in options
         themeSwitcher.querySelectorAll('.theme-option').forEach(option => {
-            option.classList.toggle('active', option.getAttribute('data-theme') === mappedTheme);
+            option.classList.toggle('active', option.getAttribute('data-theme') === validTheme);
         });
     }
     
@@ -564,7 +582,7 @@ function setTheme(themeName) {
     const footerThemeBtns = document.querySelectorAll('.footer-theme-btn');
     footerThemeBtns.forEach(btn => {
         const btnTheme = btn.getAttribute('data-theme');
-        btn.classList.toggle('active', btnTheme === mappedTheme);
+        btn.classList.toggle('active', btnTheme === validTheme);
     });
     
     // Update navbar background if scrolled

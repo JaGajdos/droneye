@@ -88,16 +88,16 @@
             </div>
             <ul class="nav-menu">
                 <li class="nav-item">
-                    <a href="/" class="nav-link active" data-i18n="nav.home">Domov</a>
+                    <a href="/" class="nav-link" data-i18n="nav.home">Domov</a>
                 </li>
                 <li class="nav-item">
-                    <a href="/sluzby" class="nav-link" data-i18n="nav.services">Naše služby</a>
+                    <a href="/sluzby" class="nav-link active" data-i18n="nav.services">Naše služby</a>
                 </li>
                 <li class="nav-item">
-                    <a href="/projekty" class="nav-link" data-i18n="nav.projects">Projekty</a>
+                    <a href="/projekty" class="nav-link" data-i18n="nav.projects">Naše projekty</a>
                 </li>
                 <li class="nav-item">
-                    <a href="/tim" class="nav-link" data-i18n="nav.team">Tím</a>
+                    <a href="/kurzy" class="nav-link" data-i18n="nav.team">Naše kurzy</a>
                 </li>
                 <li class="nav-item">
                     <a href="/cenova-ponuka" class="nav-link" data-i18n="nav.pricing">Cenová ponuka</a>
@@ -131,25 +131,46 @@
         </div>
     </nav>
 
-    <!-- Three.js Canvas Background -->
-    <div id="canvas-container">
-        <canvas id="three-canvas"></canvas>
-    </div>
-
-    <!-- Main Content -->
+    <!-- Hero Section -->
     <main class="main-content">
-        <!-- Home Page -->
-        <section class="page active">
-            <div class="hero">
-                <h1 class="hero-title" data-i18n="hero.title">Vitajte v Droneye</h1>
-                <p class="hero-subtitle" data-i18n="hero.subtitle">We see what you want to see</p>
-                <div class="hero-buttons">
-                    <button class="cta-button" data-i18n="hero.cta" id="start-animation-btn">Explore</button>
-                    <a href="/sluzby" class="hero-button-secondary" data-i18n="services.title">Naše služby</a>
-                </div>
+        <section class="hero">
+            <h1 class="hero-title" data-i18n="hero.title">Vitajte v Droneye</h1>
+            <p class="hero-subtitle" data-i18n="hero.subtitle">We see what you want to see</p>
+            <div class="hero-buttons">
+                <button id="start-animation-btn" class="hero-button-primary" data-i18n="hero.cta">Explore</button>
+                <a href="/sluzby" class="hero-button-secondary" data-i18n="nav.services">Naše služby</a>
             </div>
         </section>
     </main>
+
+    <!-- Three.js Canvas Background (visible from start) -->
+    <div id="canvas-container">
+        <canvas id="drone-canvas"></canvas>
+    </div>
+
+    <div id="text-container">
+        <div class="scroll-text" data-index="0">
+            <div class="scroll-text-title" data-i18n="dronetext.text1.title"></div>
+            <div class="scroll-text-subtitle" data-i18n="dronetext.text1.subtitle"></div>
+        </div>
+        <div class="scroll-text" data-index="1">
+            <div class="scroll-text-title" data-i18n="dronetext.text2.title"></div>
+            <div class="scroll-text-subtitle" data-i18n="dronetext.text2.subtitle"></div>
+        </div>
+        <div class="scroll-text" data-index="2">
+            <div class="scroll-text-title" data-i18n="dronetext.text3.title"></div>
+            <div class="scroll-text-subtitle" data-i18n="dronetext.text3.subtitle"></div>
+        </div>
+        <div class="scroll-text" data-index="3">
+            <div class="scroll-text-title" data-i18n="dronetext.text4.title"></div>
+            <div class="scroll-text-subtitle" data-i18n="dronetext.text4.subtitle"></div>
+        </div>
+        <div class="scroll-text scroll-text-cta" data-index="4">
+            <div class="scroll-text-title" data-i18n="dronetext.cta.title"></div>
+            <div class="scroll-text-subtitle" data-i18n="dronetext.cta.subtitle"></div>
+            <a href="/projekty" class="cta-button" data-i18n="dronetext.cta.button"></a>
+        </div>
+    </div>
 
     <!-- Loading Screen -->
     <div id="loading-screen">
@@ -175,6 +196,7 @@
     </div>
 
     <script type="module" src="/src/main.js"></script>
+    <script type="module" src="/src/dronetext.js"></script>
     <script type="module" src="/src/cookies.js"></script>
 </body>
 </html>
