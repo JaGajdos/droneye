@@ -318,6 +318,11 @@ document.getElementById('start-animation-btn')?.addEventListener('click', functi
         console.log('Animation started and scroll enabled!');
     }
     
+    // Start drone entrance animation
+    if (window.startDroneEntrance) {
+        window.startDroneEntrance();
+    }
+    
     // Keep button text as "Explore" and disable it
     this.disabled = true;
 });

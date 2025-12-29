@@ -25,6 +25,13 @@ let droneTargetY = droneStartY;
 let dronePositionZ = 0; // Forward position (negative = forward/away)
 const autoMoveSpeed = 0.3; // Automatic forward movement speed (increased)
 
+// Drone entrance animation
+let entranceAnimationActive = false;
+let entranceAnimationStartTime = 0;
+const entranceAnimationDuration = 2.0; // 2 seconds
+const entranceStartX = -30; // Start position from left
+const entranceEndX = 0; // End position (center)
+
 // Color configuration - Royal blue theme from project with detailed parts
 const droneColors = {
     body: 0x002366,      // Royal blue (#002366) - primary color from project - for Body
@@ -974,12 +981,12 @@ function loadDroneModel() {
             // Center and scale
             fitAndCenter(droneRoot);
             
-            // Position drone at start position (high up, centered)
+            // Position drone at start position (high up, off-screen left)
             droneRoot.position.y = droneStartY;
-            droneRoot.position.x = 0; // Start centered
+            droneRoot.position.x = entranceStartX; // Start from left (off-screen)
             droneRoot.position.z = dronePositionZ;
-            // Show drone from the start
-            droneRoot.visible = true;
+            // Hide drone initially - will be shown when entrance animation starts
+            droneRoot.visible = false;
             
             // Add to ALL scenes for smooth transitions
             scenes.forEach((s, index) => {
@@ -1466,10 +1473,31 @@ function animate() {
     //     dronePositionZ -= autoMoveSpeed * dt * 30 * speedMultiplier; // Move forward faster (negative Z = away from camera)
     // }
     
-    // Smoothly move drone (Y movement)
+    // Smoothly move drone (Y movement and entrance animation)
     if (droneRoot && droneRoot.visible) {
-        // Keep drone at center
-        droneRoot.position.x = 0;
+        // Handle entrance animation (flying in from left)
+        if (entranceAnimationActive) {
+            const elapsed = clock.getElapsedTime() - entranceAnimationStartTime;
+            const progress = Math.min(elapsed / entranceAnimationDuration, 1.0);
+            
+            // Ease-out animation (smooth deceleration)
+            const easeProgress = 1 - Math.pow(1 - progress, 3); // Cubic ease-out
+            
+            // Interpolate X position from left to center
+            droneRoot.position.x = entranceStartX + (entranceEndX - entranceStartX) * easeProgress;
+            
+            // If animation is complete, stop it
+            if (progress >= 1.0) {
+                entranceAnimationActive = false;
+                droneRoot.position.x = entranceEndX; // Ensure exact final position
+                console.log('✅ Drone entrance animation complete');
+            }
+        } else {
+            // After entrance animation, keep drone at center
+            droneRoot.position.x = entranceEndX;
+        }
+        
+        // Y movement (vertical flight)
         droneRoot.position.y += (droneTargetY - droneRoot.position.y) * 0.1;
         droneRoot.position.z = 0; // Keep drone at fixed Z position (no forward movement)
         
@@ -1502,11 +1530,17 @@ function animate() {
         camera.position.z = cameraOffsetZ; // Fixed camera position (drone stays at Z=0)
         camera.position.x = cameraOffsetX;
         
-        // Look at drone with slight downward angle (not straight down)
-        // Use actual drone position X for lookAt during entrance animation
-        const droneX = droneRoot.position.x;
-        const lookAtY = targetY - 1; // Look slightly below drone center
-        camera.lookAt(droneX * 0.5, lookAtY, 0); // Look at drone's X position (centered when at 0)
+        // Look at center during entrance animation, then follow drone after animation completes
+        if (entranceAnimationActive) {
+            // During entrance animation, keep camera focused on center
+            const lookAtY = targetY - 1; // Look slightly below drone center
+            camera.lookAt(0, lookAtY, 0); // Always look at center during entrance
+        } else {
+            // After entrance animation, follow drone normally
+            const droneX = droneRoot.position.x;
+            const lookAtY = targetY - 1; // Look slightly below drone center
+            camera.lookAt(droneX * 0.5, lookAtY, 0); // Look at drone's X position (centered when at 0)
+        }
         
         // Animate current scene using scene object's animate method
         if (scene.userData.sceneObject) {
@@ -1571,6 +1605,22 @@ function onTouchEnd(event) {
 
 // Flag to prevent multiple initializations
 let isInitialized = false;
+
+// Start drone entrance animation (called from main.js when Explore button is clicked)
+function startDroneEntrance() {
+    if (!droneRoot) {
+        console.warn('Drone not loaded yet');
+        return;
+    }
+    
+    entranceAnimationActive = true;
+    entranceAnimationStartTime = clock.getElapsedTime();
+    droneRoot.visible = true;
+    console.log('🚁 Starting drone entrance animation from left');
+}
+
+// Make function available globally (like other functions in this file)
+window.startDroneEntrance = startDroneEntrance;
 
 // Initialize when DOM is ready - start animation immediately (scene visible, drone off-screen)
 document.addEventListener('DOMContentLoaded', () => {
