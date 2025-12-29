@@ -85,8 +85,8 @@ function setCloudTexture(texturePathOrPaths) {
     }
     
     // Find sky scene (scene index 1)
-    const skySceneObj = scenes[1]?.userData.sceneObject;
-    if (!skySceneObj || !skySceneObj.group) {
+    const skyScene = scenes[1];
+    if (!skyScene || !skyScene.userData.cloudGroup) {
         console.warn('Sky scene or cloud group not found');
         return;
     }
@@ -111,10 +111,10 @@ function setCloudTexture(texturePathOrPaths) {
                 // When all textures are loaded, recreate clouds
                 if (loadedCount === texturePaths.length) {
                     const availableTextures = loadedTextures.filter(t => t !== undefined);
-                    skySceneObj.scene.userData.cloudTextures = availableTextures;
+                    skyScene.userData.cloudTextures = availableTextures;
                     
                     // Recreate clouds with new textures using the same logic as createClouds
-                    const cloudGroup = skySceneObj.group;
+                    const cloudGroup = skyScene.userData.cloudGroup;
                     cloudGroup.clear();
                     
                     if (availableTextures.length === 0) {
@@ -168,10 +168,10 @@ function setCloudTexture(texturePathOrPaths) {
                 if (loadedCount === texturePaths.length) {
                     const availableTextures = loadedTextures.filter(t => t !== undefined);
                     if (availableTextures.length > 0) {
-                        skySceneObj.scene.userData.cloudTextures = availableTextures;
+                        skyScene.userData.cloudTextures = availableTextures;
                         
                         // Recreate clouds with available textures using continuous layer - 3D effect
-                        const cloudGroup = skySceneObj.group;
+                        const cloudGroup = skyScene.userData.cloudGroup;
                         cloudGroup.clear();
                         
                         const cloudLayerHeight = 45; // Higher - clouds positioned higher
@@ -318,509 +318,246 @@ function init() {
     animate();
 }
 
-// SpaceScene class - Space scene with stars and aurora
-class SpaceScene {
-    constructor() {
-        this.scene = new THREE.Scene();
-        this.scene.background = new THREE.Color(0x000000); // Deep space black
+// Create three dummy scenes
+function createScenes() {
+    scenes = [];
+    
+    // Scene 1: Space scene
+    const scene1 = new THREE.Scene();
+    scene1.background = new THREE.Color(0x000000); // Deep space black
+    
+    // Ambient light for space - brighter for vibrant drone colors
+    scene1.add(new THREE.AmbientLight(0xffffff, 1.2));
+    
+    // Add directional light for better drone visibility and vibrant colors
+    const spaceDirLight = new THREE.DirectionalLight(0xffffff, 1.5);
+    spaceDirLight.position.set(5, 10, 5);
+    scene1.add(spaceDirLight);
+    
+    // Add additional point light for more vibrant colors
+    const pointLight = new THREE.PointLight(0xffffff, 1.0, 100);
+    pointLight.position.set(0, 0, 10);
+    scene1.add(pointLight);
+    
+    // Add stars - create tunnel effect (cylindrical distribution)
+    const starsGeometry = new THREE.BufferGeometry();
+    const starsCount = 4000; // More stars for better infinite tunnel effect
+    const starsPositions = new Float32Array(starsCount * 3);
+    
+    // Tunnel parameters - wider tunnel for more side distribution
+    const tunnelMinRadius = 8; // Minimum distance from center (inner edge of tunnel)
+    const tunnelMaxRadius = 280; // Maximum distance from center (outer edge of tunnel) - very wide for maximum side stars
+    const tunnelLength = 1200; // Longer tunnel for better initial distribution
+    
+    for (let i = 0; i < starsCount * 3; i += 3) {
+        // Create stars in cylindrical tunnel shape (not in center, more on edges)
+        const theta = Math.random() * Math.PI * 2; // Angle around Z axis
+        // Bias radius towards outer edge for tunnel effect (less stars in center)
+        const radiusFactor = Math.pow(Math.random(), 0.4); // Power < 1 biases towards larger values
+        const radius = tunnelMinRadius + radiusFactor * (tunnelMaxRadius - tunnelMinRadius);
         
-        // Ambient light for space - brighter for vibrant drone colors
-        this.scene.add(new THREE.AmbientLight(0xffffff, 1.2));
+        // Random Z position along tunnel
+        const z = -Math.random() * tunnelLength;
         
-        // Add directional light for better drone visibility and vibrant colors
-        const spaceDirLight = new THREE.DirectionalLight(0xffffff, 1.5);
-        spaceDirLight.position.set(5, 10, 5);
-        this.scene.add(spaceDirLight);
-        
-        // Add additional point light for more vibrant colors
-        const pointLight = new THREE.PointLight(0xffffff, 1.0, 100);
-        pointLight.position.set(0, 0, 10);
-        this.scene.add(pointLight);
-        
-        // Add stars - create tunnel effect (cylindrical distribution)
-        const starsGeometry = new THREE.BufferGeometry();
-        const starsCount = 2000; // More stars for better infinite tunnel effect
-        const starsPositions = new Float32Array(starsCount * 3);
-        
-        // Tunnel parameters - wider tunnel for more side distribution
-        const tunnelMinRadius = 8; // Minimum distance from center (inner edge of tunnel)
-        const tunnelMaxRadius = 280; // Maximum distance from center (outer edge of tunnel) - very wide for maximum side stars
-        const tunnelLength = 1200; // Longer tunnel for better initial distribution
-        
-        for (let i = 0; i < starsCount * 3; i += 3) {
-            // Create stars in cylindrical tunnel shape (not in center, more on edges)
-            const theta = Math.random() * Math.PI * 2; // Angle around Z axis
-            // Bias radius towards outer edge for tunnel effect (less stars in center)
-            const radiusFactor = Math.pow(Math.random(), 0.4); // Power < 1 biases towards larger values
-            const radius = tunnelMinRadius + radiusFactor * (tunnelMaxRadius - tunnelMinRadius);
-            
-            // Random Z position along tunnel
-            const z = -Math.random() * tunnelLength;
-            
-            // Calculate X and Y from radius and angle (cylindrical coordinates)
-            starsPositions[i] = radius * Math.cos(theta); // x
-            starsPositions[i + 1] = radius * Math.sin(theta); // y
-            starsPositions[i + 2] = z; // z (along tunnel)
+        // Calculate X and Y from radius and angle (cylindrical coordinates)
+        starsPositions[i] = radius * Math.cos(theta); // x
+        starsPositions[i + 1] = radius * Math.sin(theta); // y
+        starsPositions[i + 2] = z; // z (along tunnel)
+    }
+    
+    starsGeometry.setAttribute('position', new THREE.BufferAttribute(starsPositions, 3));
+    
+    // Create circular texture for stars
+    const starTextureCanvas = document.createElement('canvas');
+    starTextureCanvas.width = 64;
+    starTextureCanvas.height = 64;
+    const starTextureContext = starTextureCanvas.getContext('2d');
+    
+    // Draw circular gradient for soft circular star
+    const gradient = starTextureContext.createRadialGradient(32, 32, 0, 32, 32, 32);
+    gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
+    gradient.addColorStop(0.5, 'rgba(255, 255, 255, 0.8)');
+    gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+    
+    starTextureContext.fillStyle = gradient;
+    starTextureContext.fillRect(0, 0, 64, 64);
+    
+    const starTexture = new THREE.CanvasTexture(starTextureCanvas);
+    
+    const starsMaterial = new THREE.PointsMaterial({
+        map: starTexture,
+        color: 0xffffff,
+        size: 2.5, // Slightly smaller for more subtle effect
+        sizeAttenuation: true,
+        transparent: true,
+        alphaTest: 0.1,
+        opacity: 0.9 // Slightly transparent for softer look
+    });
+    
+    const stars = new THREE.Points(starsGeometry, starsMaterial);
+    scene1.add(stars);
+    
+    // Store stars reference for animation
+    scene1.userData.stars = stars;
+    
+    // Add aurora borealis tunnel effect (polar light)
+    createAuroraTunnel(scene1);
+    
+    // Scene 2: Sky scene with clouds - EXACT Gamiable implementation
+    const scene2 = new THREE.Scene();
+    scene2.background = new THREE.Color(0x194244); // Gamiable sky color (darker blue-gray)
+    
+    // Gamiable constants
+    const CLOUD_COUNT = 500; // Gamiable uses 500 clouds
+    const CLOUD_SPEED = 100; // Gamiable CLOUD_SPEED = 100
+    const FAR = 1000; // Far distance
+    
+    // Helper functions for random (Gamiable style)
+    const rnd = (min, max) => min + Math.random() * (max - min);
+    const rndFS = (range) => (Math.random() - 0.5) * 2 * range;
+    
+    // Create group (Gamiable style)
+    const skyGroup = new THREE.Group();
+    skyGroup.position.set(0, 200, 0); // Gamiable: group.position.set(0, 200, 0)
+    scene2.add(skyGroup);
+    scene2.userData.skyGroup = skyGroup;
+    scene2.userData.clouds = []; // Store cloud array like Gamiable
+    
+    // Sky background - try to load sky.jpg, fallback to simple material
+    const textureLoader = new THREE.TextureLoader();
+    
+    // Simple shader-like fallback for sky background (Gamiable uses ShaderMaterial)
+    const skyMaterial = new THREE.MeshBasicMaterial({
+        color: 0x194244, // Gamiable uColor default
+        side: THREE.DoubleSide,
+        depthTest: false, // Gamiable: depthTest: false
+        depthWrite: false // Gamiable: depthWrite: false
+    });
+    
+    // Try to load sky.jpg texture
+    textureLoader.load(
+        `${import.meta.env.BASE_URL}sky.jpg`,
+        (texture) => {
+            texture.flipY = true; // Gamiable: texture.flipY = true
+            skyMaterial.map = texture;
+            skyMaterial.needsUpdate = true;
+        },
+        undefined,
+        () => {
+            // Fallback: use solid color
+            console.warn('sky.jpg not found, using solid color');
         }
-        
-        starsGeometry.setAttribute('position', new THREE.BufferAttribute(starsPositions, 3));
-        
-        // Create circular texture for stars
-        const starTextureCanvas = document.createElement('canvas');
-        starTextureCanvas.width = 64;
-        starTextureCanvas.height = 64;
-        const starTextureContext = starTextureCanvas.getContext('2d');
-        
-        // Draw circular gradient for soft circular star
-        const gradient = starTextureContext.createRadialGradient(32, 32, 0, 32, 32, 32);
-        gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
-        gradient.addColorStop(0.5, 'rgba(255, 255, 255, 0.8)');
-        gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
-        
-        starTextureContext.fillStyle = gradient;
-        starTextureContext.fillRect(0, 0, 64, 64);
-        
-        const starTexture = new THREE.CanvasTexture(starTextureCanvas);
-        
-        const starsMaterial = new THREE.PointsMaterial({
-            map: starTexture,
-            color: 0xffffff,
-            size: 2.5, // Slightly smaller for more subtle effect
-            sizeAttenuation: true,
-            transparent: true,
-            alphaTest: 0.1,
-            opacity: 0.9 // Slightly transparent for softer look
-        });
-        
-        this.stars = new THREE.Points(starsGeometry, starsMaterial);
-        this.scene.add(this.stars);
-        
-        // Store stars reference for animation
-        this.scene.userData.stars = this.stars;
-        
-        // Add aurora borealis tunnel effect (polar light)
-        this.createAuroraTunnel();
-    }
+    );
     
-    createAuroraTunnel() {
-        // Create multiple wavy aurora layers for organic tunnel effect
-        const layerCount = 20;
-        this.auroraLayers = [];
-        
-        for (let i = 0; i < layerCount; i++) {
-            // Use PlaneGeometry instead of RingGeometry for more organic shapes
-            const size = 60 + i * 2;
-            const segments = 64; // More segments for smoother waves
-            const planeGeometry = new THREE.PlaneGeometry(size, size, segments, segments);
-            
-            const auroraMaterial = new THREE.ShaderMaterial({
-                uniforms: {
-                    time: { value: 0 },
-                    index: { value: i },
-                    total: { value: layerCount },
-                    dronePos: { value: new THREE.Vector3(0, 0, 0) }
-                },
-                vertexShader: `
-                    varying vec2 vUv;
-                    varying vec3 vPosition;
-                    uniform float time;
-                    uniform float index;
-                    
-                    // Simple noise function for organic deformation
-                    float noise(vec2 p) {
-                        return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453);
-                    }
-                    
-                    void main() {
-                        vUv = uv;
-                        vec3 pos = position;
-                        
-                        // Create organic wave deformation - make it wavy like aurora
-                        float waveX = sin(pos.x * 0.1 + time * 0.3 + index * 0.5) * 2.0;
-                        float waveY = cos(pos.y * 0.15 + time * 0.4 + index * 0.3) * 1.5;
-                        float waveZ = sin(pos.x * 0.08 + pos.y * 0.12 + time * 0.5) * 1.0;
-                        
-                        // Add noise for more organic variation
-                        vec2 noiseCoord = pos.xy * 0.05 + time * 0.1;
-                        float n = noise(noiseCoord) * 0.5;
-                        
-                        // Deform the plane to create wavy aurora shape
-                        pos.z += waveX + waveY + waveZ * 0.5 + n;
-                        
-                        vPosition = pos;
-                        gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
-                    }
-                `,
-                fragmentShader: `
-                    uniform float time;
-                    uniform float index;
-                    varying vec2 vUv;
-                    varying vec3 vPosition;
-                    
-                    // Simple noise function
-                    float noise(vec2 p) {
-                        return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453);
-                    }
-                    
-                    void main() {
-                        vec2 uv = vUv;
-                        vec2 pos = vPosition.xy;
-                        
-                        // Create aurora colors - more purple/violet tones
-                        vec3 color1 = vec3(0.3, 0.2, 0.6); // Purple-blue
-                        vec3 color2 = vec3(0.4, 0.25, 0.7); // Purple
-                        vec3 color3 = vec3(0.5, 0.3, 0.8); // Bright Purple
-                        
-                        // Create organic, flowing color patterns
-                        float colorWave1 = sin(pos.x * 0.1 + time * 0.4 + index * 0.3) * 0.5 + 0.5;
-                        float colorWave2 = cos(pos.y * 0.15 + time * 0.3 + index * 0.2) * 0.5 + 0.5;
-                        float colorWave3 = sin(pos.x * 0.08 + pos.y * 0.12 + time * 0.5) * 0.5 + 0.5;
-                        
-                        // Mix colors organically - more emphasis on purple
-                        vec3 baseColor = mix(color1, color2, colorWave1);
-                        baseColor = mix(baseColor, color3, colorWave2 * 0.7);
-                        baseColor = mix(baseColor, color2, colorWave3 * 0.4);
-                        
-                        // Create wavy, organic aurora pattern (not circular)
-                        float wave1 = sin(pos.x * 0.2 + time * 0.6 + index * 0.4) * 0.5 + 0.5;
-                        float wave2 = cos(pos.y * 0.25 + time * 0.5 + index * 0.3) * 0.5 + 0.5;
-                        float wave3 = sin(pos.x * 0.15 + pos.y * 0.18 + time * 0.7) * 0.5 + 0.5;
-                        
-                        // Combine waves for organic pattern
-                        float pattern = wave1 * wave2 * wave3;
-                        
-                        // Add noise for more organic variation
-                        float n = noise(pos * 0.1 + time * 0.2);
-                        pattern = mix(pattern, n, 0.3);
-                        
-                        // Distance from center (but not circular - more organic)
-                        float dist = length(pos) / 40.0;
-                        
-                        // Create organic alpha pattern - softer, more subtle
-                        float alpha = pattern * (1.0 - smoothstep(0.3, 1.0, dist)) * 0.15; // Reduced from 0.5 to 0.15
-                        
-                        // Add vertical streaks like real aurora (softer)
-                        float streaks = sin(pos.y * 0.3 + time * 0.4) * 0.5 + 0.5;
-                        alpha *= (0.6 + streaks * 0.2); // Reduced intensity
-                        
-                        // Fade out at edges organically
-                        alpha *= smoothstep(0.0, 0.3, 1.0 - dist);
-                        
-                        gl_FragColor = vec4(baseColor, alpha);
-                    }
-                `,
-                transparent: true,
-                side: THREE.DoubleSide,
-                blending: THREE.AdditiveBlending,
-                depthWrite: false
-            });
-            
-            const layer = new THREE.Mesh(planeGeometry, auroraMaterial);
-            // Position layers perpendicular to Z axis (flight direction)
-            layer.rotation.x = Math.PI / 1.5; // Rotate to be perpendicular to Z
-            layer.position.set(0, 0, -80 + i * 4); // Space layers along Z axis
-            this.scene.add(layer);
-            this.auroraLayers.push(layer);
+    const skyPlane = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), skyMaterial);
+    skyPlane.scale.set(1000, 1000, 1); // Gamiable: scale.set(1000, 1000, 1)
+    skyPlane.rotation.x = Math.PI / 2; // Gamiable: rotation.x = Math.PI / 2
+    skyPlane.position.set(0, 0, -900); // Gamiable: position.set(0, 0, -900)
+    skyPlane.renderOrder = -100; // Gamiable: renderOrder = -100
+    skyGroup.add(skyPlane);
+    scene2.userData.skyPlane = skyPlane;
+    scene2.userData.skyMaterial = skyMaterial; // Store for animation updates
+    
+    // Clouds - try to load cloud.png, fallback to simple material
+    // Simple shader-like fallback for clouds (Gamiable uses ShaderMaterial)
+    const cloudMaterial = new THREE.MeshStandardMaterial({
+        transparent: true,
+        depthWrite: false, // Gamiable: depthWrite: false
+        side: THREE.DoubleSide,
+        roughness: 1.0,
+        metalness: 0.0
+    });
+    
+    // Try to load cloud.png texture
+    textureLoader.load(
+        `${import.meta.env.BASE_URL}cloud.png`,
+        (texture) => {
+            cloudMaterial.map = texture;
+            cloudMaterial.needsUpdate = true;
+            createGamiableClouds();
+        },
+        undefined,
+        () => {
+            // Fallback: create white clouds without texture
+            console.warn('cloud.png not found, creating white clouds');
+            cloudMaterial.color = new THREE.Color(0xffffff);
+            cloudMaterial.opacity = 0.8;
+            createGamiableClouds();
         }
-        
-        // Store layers for animation
-        this.scene.userData.auroraRings = this.auroraLayers;
-    }
+    );
     
-    animate(delta, time) {
-        // Animate stars moving forward (infinite forward movement)
-        if (this.stars && droneRoot) {
-            const positions = this.stars.geometry.attributes.position;
-            const starSpeed = 120; // Speed at which stars approach (units per second) - faster movement
-            const droneZ = 0; // Drone stays at fixed Z position
-            const resetDistance = 800; // Distance behind drone to reset stars - larger for infinite effect
-            const resetStartZ = droneZ + 30; // Start resetting stars before they pass drone (earlier reset)
-            const resetEndZ = droneZ - resetDistance; // End of reset range
-            
-            // Move stars forward (towards drone) continuously
-            for (let i = 0; i < positions.count; i++) {
-                const currentZ = positions.getZ(i);
-                
-                // Move star forward (towards drone)
-                const newZ = currentZ + starSpeed * delta;
-                
-                // Reset star if it passed the drone OR if it's too far behind
-                // Reset earlier (before passing drone) for smoother continuous effect
-                if (newZ > resetStartZ || currentZ < resetEndZ) {
-                    // Reset star to tunnel position BEHIND drone (cylindrical distribution)
-                    const theta = Math.random() * Math.PI * 2; // Angle around Z axis
-                    // Bias radius towards outer edge for tunnel effect - wider distribution
-                    const radiusFactor = Math.pow(Math.random(), 0.4); // Power < 1 biases towards larger values
-                    const tunnelMinRadius = 8;
-                    const tunnelMaxRadius = 280; // Very wide tunnel for maximum side stars
-                    const radius = tunnelMinRadius + radiusFactor * (tunnelMaxRadius - tunnelMinRadius);
-                    
-                    // Calculate X and Y from radius and angle (cylindrical coordinates)
-                    const x = radius * Math.cos(theta);
-                    const y = radius * Math.sin(theta);
-                    
-                    // Distribute stars evenly along reset range to avoid gaps
-                    // Use star index to create consistent distribution pattern
-                    const resetRange = resetDistance * 0.8; // Use 80% of reset distance for distribution
-                    const baseZ = droneZ - resetDistance;
-                    // Distribute stars evenly using index to avoid clustering
-                    const zOffset = (i % 100) / 100 * resetRange; // Create pattern based on index
-                    const randomOffset = (Math.random() - 0.5) * resetRange * 0.2; // Small random variation
-                    
-                    // Place star behind drone (negative Z direction) - evenly distributed
-                    positions.setX(i, x);
-                    positions.setY(i, y);
-                    positions.setZ(i, baseZ + zOffset + randomOffset);
-                } else {
-                    positions.setZ(i, newZ);
-                }
-            }
-            
-            positions.needsUpdate = true;
-            
-            // Keep stars centered around drone's X and Y position (drone stays at origin)
-            this.stars.position.x = 0; // Drone stays at X=0
-            this.stars.position.y = droneRoot.position.y; // Follow drone's Y position
-        }
+    // Function to create Gamiable style clouds (EXACT implementation)
+    function createGamiableClouds() {
+        scene2.userData.clouds = [];
         
-        // Animate aurora layers
-        if (this.auroraLayers && droneRoot) {
-            const droneZ = 0; // Drone stays at fixed Z position
-            this.auroraLayers.forEach((layer, index) => {
-                if (layer.material.uniforms) {
-                    layer.material.uniforms.time.value = time;
-                }
-                // Make aurora follow drone - create tunnel effect around drone
-                // Layers are centered around drone's position (X, Y) and spaced along Z
-                layer.position.x = 0; // Drone stays at X=0
-                layer.position.y = droneRoot.position.y;
-                layer.position.z = droneZ - 40 + index * 4; // Space layers around fixed drone position
-            });
-        }
-    }
-    
-    enable() {
-        // Scene is always visible, no need to enable/disable
-    }
-    
-    disable() {
-        // Scene is always visible, no need to enable/disable
-    }
-}
-    
-// SkyScene class - Sky scene with clouds (Gamiable style)
-class SkyScene {
-    constructor() {
-        this.scene = new THREE.Scene();
-        this.scene.background = new THREE.Color(0x194244); // Gamiable sky color (darker blue-gray)
-        
-        // Gamiable constants
-        this.CLOUD_COUNT = 500; // Gamiable uses 500 clouds
-        this.CLOUD_SPEED = 100; // Gamiable CLOUD_SPEED = 100
-        this.FAR = 1000; // Far distance
-        
-        // Helper functions for random (Gamiable style)
-        const rnd = (min, max) => min + Math.random() * (max - min);
-        const rndFS = (range) => (Math.random() - 0.5) * 2 * range;
-        
-        // Create group (Gamiable style)
-        this.group = new THREE.Group();
-        this.group.position.set(0, 200, 0); // Gamiable: group.position.set(0, 200, 0)
-        this.scene.add(this.group);
-        this.scene.userData.skyGroup = this.group;
-        this.clouds = []; // Store cloud array like Gamiable
-        this.scene.userData.clouds = this.clouds;
-        
-        // Sky background - try to load sky.jpg, fallback to simple material
-        const textureLoader = new THREE.TextureLoader();
-        
-        // Simple shader-like fallback for sky background (Gamiable uses ShaderMaterial)
-        this.skyMaterial = new THREE.MeshBasicMaterial({
-            color: 0x194244, // Gamiable uColor default
-            side: THREE.DoubleSide,
-            depthTest: false, // Gamiable: depthTest: false
-            depthWrite: false // Gamiable: depthWrite: false
-        });
-        
-        // Try to load sky.jpg texture
-        textureLoader.load(
-            `${import.meta.env.BASE_URL}sky.jpg`,
-            (texture) => {
-                texture.flipY = true; // Gamiable: texture.flipY = true
-                this.skyMaterial.map = texture;
-                this.skyMaterial.needsUpdate = true;
-            },
-            undefined,
-            () => {
-                // Fallback: use solid color
-                console.warn('sky.jpg not found, using solid color');
-            }
-        );
-        
-        const skyPlane = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), this.skyMaterial);
-        skyPlane.scale.set(1000, 1000, 1); // Gamiable: scale.set(1000, 1000, 1)
-        skyPlane.rotation.x = Math.PI / 2; // Gamiable: rotation.x = Math.PI / 2
-        skyPlane.position.set(0, 0, -900); // Gamiable: position.set(0, 0, -900)
-        skyPlane.renderOrder = -100; // Gamiable: renderOrder = -100
-        this.group.add(skyPlane);
-        this.scene.userData.skyPlane = skyPlane;
-        this.scene.userData.skyMaterial = this.skyMaterial; // Store for animation updates
-        
-        // Clouds - try to load cloud.png, fallback to simple material
-        // Simple shader-like fallback for clouds (Gamiable uses ShaderMaterial)
-        this.cloudMaterial = new THREE.MeshStandardMaterial({
-            transparent: true,
-            depthWrite: false, // Gamiable: depthWrite: false
-            side: THREE.DoubleSide,
-            roughness: 1.0,
-            metalness: 0.0
-        });
-        
-        // Try to load cloud.png texture
-        textureLoader.load(
-            `${import.meta.env.BASE_URL}cloud.png`,
-            (texture) => {
-                this.cloudMaterial.map = texture;
-                this.cloudMaterial.needsUpdate = true;
-                this.createGamiableClouds();
-            },
-            undefined,
-            () => {
-                // Fallback: create white clouds without texture
-                console.warn('cloud.png not found, creating white clouds');
-                this.cloudMaterial.color = new THREE.Color(0xffffff);
-                this.cloudMaterial.opacity = 0.8;
-                this.createGamiableClouds();
-            }
-        );
-    }
-    
-    createGamiableClouds() {
-        const rnd = (min, max) => min + Math.random() * (max - min);
-        const rndFS = (range) => (Math.random() - 0.5) * 2 * range;
-        
-        this.clouds = [];
-        this.scene.userData.clouds = this.clouds;
-        
-        for (let i = 0; i < this.CLOUD_COUNT; i++) {
+        for (let i = 0; i < CLOUD_COUNT; i++) {
             const size = rnd(100, 175); // Gamiable: rnd(100, 175)
-            const cloud = new THREE.Mesh(new THREE.PlaneGeometry(size, size), this.cloudMaterial);
-            cloud.position.set(rndFS(1500), rndFS(50) - 100, -rndFS(this.FAR)); // Gamiable exact
-            cloud.renderOrder = this.FAR + cloud.position.z; // Gamiable: renderOrder = FAR + cloud.position.z
+            const cloud = new THREE.Mesh(new THREE.PlaneGeometry(size, size), cloudMaterial);
+            cloud.position.set(rndFS(1500), rndFS(50) - 100, -rndFS(FAR)); // Gamiable exact
+            cloud.renderOrder = FAR + cloud.position.z; // Gamiable: renderOrder = FAR + cloud.position.z
             cloud.rotation.z = rndFS(2 * Math.PI); // Gamiable: rndFS(2 * Math.PI)
-            this.clouds.push(cloud);
-            this.group.add(cloud);
+            scene2.userData.clouds.push(cloud);
+            skyGroup.add(cloud);
         }
         
-        console.log(`✅ Created ${this.CLOUD_COUNT} Gamiable-style clouds (exact implementation)`);
+        console.log(`✅ Created ${CLOUD_COUNT} Gamiable-style clouds (exact implementation)`);
     }
     
-    animate(delta, time) {
-        const speed = this.CLOUD_SPEED * delta; // Gamiable: const speed = CLOUD_SPEED * delta
-        
-        // Update sky material color (Gamiable: this.skyMaterial.uniforms.uColor.value.copy(currentClearColor))
-        const currentColor = this.scene.background;
-        if (this.skyMaterial.color) {
-            this.skyMaterial.color.copy(currentColor);
-        }
-        
-        // Animate each cloud - EXACT Gamiable style (for loop, not forEach)
-        for (let i = 0; i < this.clouds.length; i++) {
-            // Move cloud forward (Gamiable: this.clouds[i].position.z += speed)
-            this.clouds[i].position.z += speed;
-            
-            // Reset when cloud passes (Gamiable: if (this.clouds[i].position.z > 0) { this.clouds[i].position.z -= FAR; })
-            if (this.clouds[i].position.z > 0) {
-                this.clouds[i].position.z -= this.FAR;
-            }
-            
-            // Update render order for depth (Gamiable: this.clouds[i].renderOrder = FAR + this.clouds[i].position.z)
-            this.clouds[i].renderOrder = this.FAR + this.clouds[i].position.z;
-        }
-    }
+    // Scene 3: Water surface scene with gentle clouds above (inspired by gamiable.com)
+    const scene3 = new THREE.Scene();
+    scene3.background = new THREE.Color(0x87CEEB); // Sky blue
+    // Enhanced lighting for realistic water scene
+    scene3.add(new THREE.HemisphereLight(0xffffff, 0x87CEEB, 1.4)); // Brighter, more sky-like
+    const light3 = new THREE.DirectionalLight(0xffffff, 1.5);
+    light3.position.set(5, 15, 5);
+    scene3.add(light3);
     
-    enable() {
-        // Scene is always visible, no need to enable/disable
-    }
+    // Add ambient light for water scene
+    const ambientLight3 = new THREE.AmbientLight(0xffffff, 0.9);
+    scene3.add(ambientLight3);
     
-    disable() {
-        // Scene is always visible, no need to enable/disable
-    }
-}
+    // Add realistic water surface with waves (enhanced for gamiable.com style)
+    const waterGeometry = new THREE.PlaneGeometry(400, 400, 128, 128); // More segments for smoother waves
+    const waterMaterial = new THREE.MeshStandardMaterial({ 
+        color: 0x1E90FF, // Bright blue (DodgerBlue) - very visible
+        roughness: 0.05, // More reflective water
+        metalness: 0.4, // More metallic for water reflection
+        side: THREE.DoubleSide,
+        transparent: true,
+        opacity: 0.95 // Slightly transparent for depth
+    });
     
-// WaterScene class - Water surface scene with gentle clouds above
-class WaterScene {
-    constructor(skyScene) {
-        this.scene = new THREE.Scene();
-        this.scene.background = new THREE.Color(0x87CEEB); // Sky blue
-        this.skyScene = skyScene; // Reference to sky scene for cloud textures
-        
-        // Enhanced lighting for realistic water scene
-        this.scene.add(new THREE.HemisphereLight(0xffffff, 0x87CEEB, 1.4)); // Brighter, more sky-like
-        const light3 = new THREE.DirectionalLight(0xffffff, 1.5);
-        light3.position.set(5, 15, 5);
-        this.scene.add(light3);
-        
-        // Add ambient light for water scene
-        const ambientLight3 = new THREE.AmbientLight(0xffffff, 0.9);
-        this.scene.add(ambientLight3);
-        
-        // Add realistic water surface with waves (enhanced for gamiable.com style)
-        const waterGeometry = new THREE.PlaneGeometry(400, 400, 128, 128); // More segments for smoother waves
-        this.waterMaterial = new THREE.MeshStandardMaterial({ 
-            color: 0x1E90FF, // Bright blue (DodgerBlue) - very visible
-            roughness: 0.05, // More reflective water
-            metalness: 0.4, // More metallic for water reflection
-            side: THREE.DoubleSide,
-            transparent: true,
-            opacity: 0.95 // Slightly transparent for depth
-        });
-        
-        this.water = new THREE.Mesh(waterGeometry, this.waterMaterial);
-        this.water.rotation.x = -Math.PI / 2;
-        this.water.position.set(0, -3, 0); // Water below drone but visible, centered
-        this.water.receiveShadow = false;
-        this.water.castShadow = false;
-        
-        // Add water reflection effect (simple environment map simulation)
-        this.waterMaterial.envMapIntensity = 0.5;
-        
-        // Store original positions for wave animation
-        const positions = waterGeometry.attributes.position;
-        this.originalPositions = new Float32Array(positions.array.length);
-        this.originalPositions.set(positions.array);
-        this.water.userData.originalPositions = this.originalPositions;
-        this.scene.add(this.water);
-        this.scene.userData.water = this.water; // Store reference for animation
-        
-        // Create gentle clouds above drone - similar to scene 2 but lighter and higher
-        this.cloudGroup = new THREE.Group();
-        this.scene.add(this.cloudGroup);
-        this.scene.userData.cloudGroup = this.cloudGroup;
-        this.scene.userData.cloudTexture = null;
-        
-        // Create clouds when textures are available
-        this.createClouds();
-    }
+    const water = new THREE.Mesh(waterGeometry, waterMaterial);
+    water.rotation.x = -Math.PI / 2;
+    water.position.set(0, -3, 0); // Water below drone but visible, centered
+    water.receiveShadow = false;
+    water.castShadow = false;
     
-    createClouds() {
-        const availableTextures = this.skyScene?.scene.userData.cloudTextures || [];
+    // Add water reflection effect (simple environment map simulation)
+    waterMaterial.envMapIntensity = 0.5;
+    
+    // Store original positions for wave animation
+    const positions = waterGeometry.attributes.position;
+    const originalPositions = new Float32Array(positions.array.length);
+    originalPositions.set(positions.array);
+    water.userData.originalPositions = originalPositions;
+    scene3.add(water);
+    scene3.userData.water = water; // Store reference for animation
+    
+    // Create gentle clouds above drone - similar to scene 2 but lighter and higher
+    const cloudGroup3 = new THREE.Group();
+    scene3.add(cloudGroup3);
+    scene3.userData.cloudGroup = cloudGroup3;
+    scene3.userData.cloudTexture = null;
+    
+    // Function to create clouds for scene 3 (gentle clouds above)
+    function createCloudsForScene3() {
+        const availableTextures = scene2.userData.cloudTextures || [];
         if (availableTextures.length === 0) {
-            // Wait for textures to load
-            const checkTextures = setInterval(() => {
-                const textures = this.skyScene?.scene.userData.cloudTextures || [];
-                if (textures.length > 0) {
-                    this.createCloudsWithTextures(textures);
-                    clearInterval(checkTextures);
-                }
-            }, 100);
+            // If textures not loaded yet, wait for them
             return;
         }
         
-        this.createCloudsWithTextures(availableTextures);
-    }
-    
-    createCloudsWithTextures(availableTextures) {
         // Enhanced clouds for water scene (inspired by gamiable.com)
         const cloudLayerHeight = 15; // Clouds above drone (lower position)
         const cloudScaleX = 28; // Slightly larger clouds for better visibility
@@ -860,100 +597,154 @@ class WaterScene {
                     const selectedTexture = availableTextures[Math.floor(Math.random() * availableTextures.length)];
                     const cloud = createCloudForScene(xPos, layerY, zPos, cloudScaleX, cloudScaleY, selectedTexture, layerOpacity);
                     if (cloud) {
-                        this.cloudGroup.add(cloud);
+                        cloudGroup3.add(cloud);
                     }
                 }
             }
         }
     }
     
-    animate(delta, time) {
-        // Animate clouds - Gamiable style gentle clouds above
-        if (this.cloudGroup && droneRoot) {
-            const droneZ = droneRoot.position.z;
-            const cloudSpeed = 80.0; // Gamiable style speed (slightly slower for water scene)
-            const FAR = 1000; // Far distance for reset
-            
-            // Animate each cloud - Gamiable style continuous movement
-            this.cloudGroup.children.forEach((cloud, index) => {
-                if (cloud.userData.originalY !== undefined && cloud.userData.originalZ !== undefined) {
-                    // Move cloud forward (towards drone) - Gamiable style
-                    cloud.position.z += cloudSpeed * delta;
-                    
-                    // Gentle floating animation (Gamiable style)
-                    cloud.position.y = cloud.userData.originalY + Math.sin(time * 0.2 + index * 0.1) * 0.4;
-                    
-                    // Gentle rotation animation for 3D effect (Gamiable style)
-                    if (cloud.userData.originalRotationZ !== undefined) {
-                        cloud.rotation.z = cloud.userData.originalRotationZ + Math.sin(time * 0.12 + index * 0.05) * 0.08;
-                    }
-                    
-                    // Reset when cloud passes (Gamiable style)
-                    if (cloud.position.z > 0) {
-                        cloud.position.z -= FAR; // Reset to far back
-                    }
-                    
-                    // Update render order for depth (Gamiable style)
-                    cloud.renderOrder = FAR + cloud.position.z;
-                }
-            });
-        }
+    // Create clouds when textures are available (use scene2 which has the cloud textures)
+    if (scene2.userData.cloudTextures && scene2.userData.cloudTextures.length > 0) {
+        createCloudsForScene3();
+    } else {
+        // Wait for textures to load
+        const checkTextures = setInterval(() => {
+            if (scene2.userData.cloudTextures && scene2.userData.cloudTextures.length > 0) {
+                createCloudsForScene3();
+                clearInterval(checkTextures);
+            }
+        }, 100);
+    }
+    
+    scenes.push(scene1, scene2, scene3);
+}
+
+// Create aurora borealis tunnel effect - organic, wavy aurora instead of rings
+function createAuroraTunnel(scene) {
+    // Create multiple wavy aurora layers for organic tunnel effect
+    const layerCount = 20;
+    const layers = [];
+    
+    for (let i = 0; i < layerCount; i++) {
+        // Use PlaneGeometry instead of RingGeometry for more organic shapes
+        const size = 60 + i * 2;
+        const segments = 64; // More segments for smoother waves
+        const planeGeometry = new THREE.PlaneGeometry(size, size, segments, segments);
         
-        // Animate water waves
-        if (this.water) {
-            const positions = this.water.geometry.attributes.position;
-            
-            if (this.originalPositions) {
-                for (let i = 0; i < positions.count; i++) {
-                    const i3 = i * 3;
-                    const x = this.originalPositions[i3];
-                    const z = this.originalPositions[i3 + 2];
-                    
-                    // Enhanced wave animation (inspired by gamiable.com)
-                    const wave1 = Math.sin(x * 0.08 + time * 0.4) * 0.4; // Larger, slower waves
-                    const wave2 = Math.sin(z * 0.12 + time * 0.6) * 0.3;
-                    const wave3 = Math.sin((x + z) * 0.06 + time * 0.5) * 0.2;
-                    const wave4 = Math.sin((x * 0.15 + z * 0.1 + time * 0.3) * 0.5) * 0.15; // Additional wave layer
-                    
-                    positions.setY(i, this.originalPositions[i3 + 1] + wave1 + wave2 + wave3 + wave4);
+        const auroraMaterial = new THREE.ShaderMaterial({
+            uniforms: {
+                time: { value: 0 },
+                index: { value: i },
+                total: { value: layerCount },
+                dronePos: { value: new THREE.Vector3(0, 0, 0) }
+            },
+            vertexShader: `
+                varying vec2 vUv;
+                varying vec3 vPosition;
+                uniform float time;
+                uniform float index;
+                
+                // Simple noise function for organic deformation
+                float noise(vec2 p) {
+                    return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453);
                 }
-                positions.needsUpdate = true;
-            }
-        }
+                
+                void main() {
+                    vUv = uv;
+                    vec3 pos = position;
+                    
+                    // Create organic wave deformation - make it wavy like aurora
+                    float waveX = sin(pos.x * 0.1 + time * 0.3 + index * 0.5) * 2.0;
+                    float waveY = cos(pos.y * 0.15 + time * 0.4 + index * 0.3) * 1.5;
+                    float waveZ = sin(pos.x * 0.08 + pos.y * 0.12 + time * 0.5) * 1.0;
+                    
+                    // Add noise for more organic variation
+                    vec2 noiseCoord = pos.xy * 0.05 + time * 0.1;
+                    float n = noise(noiseCoord) * 0.5;
+                    
+                    // Deform the plane to create wavy aurora shape
+                    pos.z += waveX + waveY + waveZ * 0.5 + n;
+                    
+                    vPosition = pos;
+                    gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+                }
+            `,
+            fragmentShader: `
+                uniform float time;
+                uniform float index;
+                varying vec2 vUv;
+                varying vec3 vPosition;
+                
+                // Simple noise function
+                float noise(vec2 p) {
+                    return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453);
+                }
+                
+                void main() {
+                    vec2 uv = vUv;
+                    vec2 pos = vPosition.xy;
+                    
+                    // Create aurora colors (green, blue, purple) - softer, more subtle
+                    vec3 color1 = vec3(0.0, 0.6, 0.35); // Softer Green
+                    vec3 color2 = vec3(0.2, 0.5, 0.7); // Softer Blue
+                    vec3 color3 = vec3(0.4, 0.3, 0.6); // Softer Purple
+                    
+                    // Create organic, flowing color patterns
+                    float colorWave1 = sin(pos.x * 0.1 + time * 0.4 + index * 0.3) * 0.5 + 0.5;
+                    float colorWave2 = cos(pos.y * 0.15 + time * 0.3 + index * 0.2) * 0.5 + 0.5;
+                    float colorWave3 = sin(pos.x * 0.08 + pos.y * 0.12 + time * 0.5) * 0.5 + 0.5;
+                    
+                    // Mix colors organically
+                    vec3 baseColor = mix(color1, color2, colorWave1);
+                    baseColor = mix(baseColor, color3, colorWave2 * 0.5);
+                    baseColor = mix(baseColor, color1, colorWave3 * 0.3);
+                    
+                    // Create wavy, organic aurora pattern (not circular)
+                    float wave1 = sin(pos.x * 0.2 + time * 0.6 + index * 0.4) * 0.5 + 0.5;
+                    float wave2 = cos(pos.y * 0.25 + time * 0.5 + index * 0.3) * 0.5 + 0.5;
+                    float wave3 = sin(pos.x * 0.15 + pos.y * 0.18 + time * 0.7) * 0.5 + 0.5;
+                    
+                    // Combine waves for organic pattern
+                    float pattern = wave1 * wave2 * wave3;
+                    
+                    // Add noise for more organic variation
+                    float n = noise(pos * 0.1 + time * 0.2);
+                    pattern = mix(pattern, n, 0.3);
+                    
+                    // Distance from center (but not circular - more organic)
+                    float dist = length(pos) / 40.0;
+                    
+                    // Create organic alpha pattern - softer, more subtle
+                    float alpha = pattern * (1.0 - smoothstep(0.3, 1.0, dist)) * 0.15; // Reduced from 0.5 to 0.15
+                    
+                    // Add vertical streaks like real aurora (softer)
+                    float streaks = sin(pos.y * 0.3 + time * 0.4) * 0.5 + 0.5;
+                    alpha *= (0.6 + streaks * 0.2); // Reduced intensity
+                    
+                    // Fade out at edges organically
+                    alpha *= smoothstep(0.0, 0.3, 1.0 - dist);
+                    
+                    gl_FragColor = vec4(baseColor, alpha);
+                }
+            `,
+            transparent: true,
+            side: THREE.DoubleSide,
+            blending: THREE.AdditiveBlending,
+            depthWrite: false
+        });
+        
+        const layer = new THREE.Mesh(planeGeometry, auroraMaterial);
+        // Position layers perpendicular to Z axis (flight direction)
+        layer.rotation.x = Math.PI / 1.5; // Rotate to be perpendicular to Z
+        layer.position.set(0, 0, -80 + i * 4); // Space layers along Z axis
+        scene.add(layer);
+        layers.push(layer);
     }
     
-    enable() {
-        // Scene is always visible, no need to enable/disable
-    }
-    
-    disable() {
-        // Scene is always visible, no need to enable/disable
-    }
+    // Store layers for animation
+    scene.userData.auroraRings = layers;
 }
-
-// Create three scenes
-function createScenes() {
-    scenes = [];
-    
-    // Scene 1: Space scene
-    const spaceScene = new SpaceScene();
-    scenes.push(spaceScene.scene);
-    
-    // Scene 2: Sky scene with clouds - Gamiable style
-    const skyScene = new SkyScene();
-    scenes.push(skyScene.scene);
-    
-    // Scene 3: Water surface scene with gentle clouds above
-    const waterScene = new WaterScene(skyScene);
-    scenes.push(waterScene.scene);
-    
-    // Store scene objects for animation
-    scenes[0].userData.sceneObject = spaceScene;
-    scenes[1].userData.sceneObject = skyScene;
-    scenes[2].userData.sceneObject = waterScene;
-}
-
-// createAuroraTunnel function removed - now part of SpaceScene class
 
 // Load drone GLB model
 function loadDroneModel() {
@@ -1508,10 +1299,166 @@ function animate() {
         const lookAtY = targetY - 1; // Look slightly below drone center
         camera.lookAt(droneX * 0.5, lookAtY, 0); // Look at drone's X position (centered when at 0)
         
-        // Animate current scene using scene object's animate method
-        if (scene.userData.sceneObject) {
+        // Animate stars moving forward (infinite forward movement) - only in space scene
+        // Drone stays at fixed position (Z=0), stars move towards it
+        if (currentSceneIndex === 0 && scene.userData.stars && droneRoot) {
+            const stars = scene.userData.stars;
+            const positions = stars.geometry.attributes.position;
+            const starSpeed = 120; // Speed at which stars approach (units per second) - faster movement
+            const droneZ = 0; // Drone stays at fixed Z position
+            const resetDistance = 800; // Distance behind drone to reset stars - larger for infinite effect
+            const resetStartZ = droneZ + 30; // Start resetting stars before they pass drone (earlier reset)
+            const resetEndZ = droneZ - resetDistance; // End of reset range
+            
+            // Move stars forward (towards drone) continuously
+            for (let i = 0; i < positions.count; i++) {
+                const currentZ = positions.getZ(i);
+                
+                // Move star forward (towards drone)
+                const newZ = currentZ + starSpeed * dt;
+                
+                // Reset star if it passed the drone OR if it's too far behind
+                // Reset earlier (before passing drone) for smoother continuous effect
+                if (newZ > resetStartZ || currentZ < resetEndZ) {
+                    // Reset star to tunnel position BEHIND drone (cylindrical distribution)
+                    const theta = Math.random() * Math.PI * 2; // Angle around Z axis
+                    // Bias radius towards outer edge for tunnel effect - wider distribution
+                    const radiusFactor = Math.pow(Math.random(), 0.4); // Power < 1 biases towards larger values
+                    const tunnelMinRadius = 8;
+                    const tunnelMaxRadius = 280; // Very wide tunnel for maximum side stars
+                    const radius = tunnelMinRadius + radiusFactor * (tunnelMaxRadius - tunnelMinRadius);
+                    
+                    // Calculate X and Y from radius and angle (cylindrical coordinates)
+                    const x = radius * Math.cos(theta);
+                    const y = radius * Math.sin(theta);
+                    
+                    // Distribute stars evenly along reset range to avoid gaps
+                    // Use star index to create consistent distribution pattern
+                    const resetRange = resetDistance * 0.8; // Use 80% of reset distance for distribution
+                    const baseZ = droneZ - resetDistance;
+                    // Distribute stars evenly using index to avoid clustering
+                    const zOffset = (i % 100) / 100 * resetRange; // Create pattern based on index
+                    const randomOffset = (Math.random() - 0.5) * resetRange * 0.2; // Small random variation
+                    
+                    // Place star behind drone (negative Z direction) - evenly distributed
+                    positions.setX(i, x);
+                    positions.setY(i, y);
+                    positions.setZ(i, baseZ + zOffset + randomOffset);
+                } else {
+                    positions.setZ(i, newZ);
+                }
+            }
+            
+            positions.needsUpdate = true;
+            
+            // Keep stars centered around drone's X and Y position (drone stays at origin)
+            stars.position.x = 0; // Drone stays at X=0
+            stars.position.y = droneRoot.position.y; // Follow drone's Y position
+        }
+        
+        // Animate aurora layers - only in space scene
+        // Drone stays at fixed position (Z=0)
+        if (currentSceneIndex === 0 && scene.userData.auroraRings && droneRoot) {
             const time = clock.getElapsedTime();
-            scene.userData.sceneObject.animate(dt, time);
+            const droneZ = 0; // Drone stays at fixed Z position
+            scene.userData.auroraRings.forEach((layer, index) => {
+                if (layer.material.uniforms) {
+                    layer.material.uniforms.time.value = time;
+                }
+                // Make aurora follow drone - create tunnel effect around drone
+                // Layers are centered around drone's position (X, Y) and spaced along Z
+                layer.position.x = 0; // Drone stays at X=0
+                layer.position.y = droneRoot.position.y;
+                layer.position.z = droneZ - 40 + index * 4; // Space layers around fixed drone position
+            });
+        }
+        
+        // Animate clouds - only in sky scene (scene 2) - EXACT Gamiable implementation
+        if (currentSceneIndex === 1 && scene.userData.clouds && scene.userData.clouds.length > 0) {
+            const CLOUD_SPEED = 100; // Gamiable CLOUD_SPEED = 100
+            const FAR = 1000; // Gamiable FAR = 1000
+            const speed = CLOUD_SPEED * dt; // Gamiable: const speed = CLOUD_SPEED * delta
+            
+            // Update sky material color (Gamiable: this.skyMaterial.uniforms.uColor.value.copy(currentClearColor))
+            if (scene.userData.skyMaterial) {
+                // Gamiable updates uColor to match currentClearColor
+                // We'll update the material color to match scene background
+                const currentColor = scene.background;
+                if (scene.userData.skyMaterial.color) {
+                    scene.userData.skyMaterial.color.copy(currentColor);
+                }
+            }
+            
+            // Animate each cloud - EXACT Gamiable style (for loop, not forEach)
+            for (let i = 0; i < scene.userData.clouds.length; i++) {
+                // Move cloud forward (Gamiable: this.clouds[i].position.z += speed)
+                scene.userData.clouds[i].position.z += speed;
+                
+                // Reset when cloud passes (Gamiable: if (this.clouds[i].position.z > 0) { this.clouds[i].position.z -= FAR; })
+                if (scene.userData.clouds[i].position.z > 0) {
+                    scene.userData.clouds[i].position.z -= FAR;
+                }
+                
+                // Update render order for depth (Gamiable: this.clouds[i].renderOrder = FAR + this.clouds[i].position.z)
+                scene.userData.clouds[i].renderOrder = FAR + scene.userData.clouds[i].position.z;
+            }
+        }
+        
+        // Animate clouds - in water scene (scene 3) - Gamiable style gentle clouds above
+        if (currentSceneIndex === 2 && scene.userData.cloudGroup && droneRoot) {
+            const time = clock.getElapsedTime();
+            const droneZ = droneRoot.position.z;
+            const cloudSpeed = 80.0; // Gamiable style speed (slightly slower for water scene)
+            const FAR = 1000; // Far distance for reset
+            
+            // Animate each cloud - Gamiable style continuous movement
+            scene.userData.cloudGroup.children.forEach((cloud, index) => {
+                if (cloud.userData.originalY !== undefined && cloud.userData.originalZ !== undefined) {
+                    // Move cloud forward (towards drone) - Gamiable style
+                    cloud.position.z += cloudSpeed * dt;
+                    
+                    // Gentle floating animation (Gamiable style)
+                    cloud.position.y = cloud.userData.originalY + Math.sin(time * 0.2 + index * 0.1) * 0.4;
+                    
+                    // Gentle rotation animation for 3D effect (Gamiable style)
+                    if (cloud.userData.originalRotationZ !== undefined) {
+                        cloud.rotation.z = cloud.userData.originalRotationZ + Math.sin(time * 0.12 + index * 0.05) * 0.08;
+                    }
+                    
+                    // Reset when cloud passes (Gamiable style)
+                    if (cloud.position.z > 0) {
+                        cloud.position.z -= FAR; // Reset to far back
+                    }
+                    
+                    // Update render order for depth (Gamiable style)
+                    cloud.renderOrder = FAR + cloud.position.z;
+                }
+            });
+        }
+        
+        // Animate water waves - only in water scene (scene 3)
+        if (currentSceneIndex === 2 && scene.userData.water) {
+            const time = clock.getElapsedTime();
+            const water = scene.userData.water;
+            const positions = water.geometry.attributes.position;
+            const originalPositions = water.userData.originalPositions;
+            
+            if (originalPositions) {
+                for (let i = 0; i < positions.count; i++) {
+                    const i3 = i * 3;
+                    const x = originalPositions[i3];
+                    const z = originalPositions[i3 + 2];
+                    
+                    // Enhanced wave animation (inspired by gamiable.com)
+                    const wave1 = Math.sin(x * 0.08 + time * 0.4) * 0.4; // Larger, slower waves
+                    const wave2 = Math.sin(z * 0.12 + time * 0.6) * 0.3;
+                    const wave3 = Math.sin((x + z) * 0.06 + time * 0.5) * 0.2;
+                    const wave4 = Math.sin((x * 0.15 + z * 0.1 + time * 0.3) * 0.5) * 0.15; // Additional wave layer
+                    
+                    positions.setY(i, originalPositions[i3 + 1] + wave1 + wave2 + wave3 + wave4);
+                }
+                positions.needsUpdate = true;
+            }
         }
     }
     
@@ -1579,6 +1526,4 @@ document.addEventListener('DOMContentLoaded', () => {
         isInitialized = true;
     }
 });
-
-
 
