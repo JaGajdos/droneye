@@ -298,12 +298,8 @@ document.getElementById('start-animation-btn')?.addEventListener('click', functi
         hero.classList.add('hidden');
     }
     
-    // Show animation containers
-    const canvasContainer = document.getElementById('canvas-container');
+    // Show text container (canvas is already visible from start)
     const textContainer = document.getElementById('text-container');
-    if (canvasContainer) {
-        canvasContainer.classList.add('show');
-    }
     if (textContainer) {
         textContainer.classList.add('show');
     }

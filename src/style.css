@@ -117,13 +117,7 @@ button {
     height: 100%;
     z-index: 0; /* Behind hero section */
     background: var(--canvas-bg);
-    display: none; /* Hidden by default */
-}
-
-/* Show canvas when animation starts */
-#canvas-container.show {
-    display: block;
-    z-index: 0;
+    display: block; /* Visible from start */
 }
 
 /* Text container */
