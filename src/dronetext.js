@@ -26,7 +26,7 @@ let dronePositionZ = 0; // Forward position (negative = forward/away)
 const autoMoveSpeed = 0.3; // Automatic forward movement speed (increased)
 
 // Drone entrance animation
-let entranceAnimationActive = false;
+let entranceAnimationActive = true;
 let entranceAnimationStartTime = 0;
 const entranceAnimationDuration = 2.0; // 2 seconds
 const entranceStartX = -30; // Start position from left
