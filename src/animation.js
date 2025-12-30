@@ -628,10 +628,10 @@ class SpaceScene {
                     vec2 uv = vUv;
                     vec2 pos = vPosition.xy;
                     
-                        // Create aurora colors - more purple/violet tones
-                        vec3 color1 = vec3(0.3, 0.2, 0.6); // Purple-blue
-                        vec3 color2 = vec3(0.4, 0.25, 0.7); // Purple
-                        vec3 color3 = vec3(0.5, 0.3, 0.8); // Bright Purple
+                        // Create aurora colors - less purple, more blue tones
+                        vec3 color1 = vec3(0.2, 0.3, 0.5); // Blue
+                        vec3 color2 = vec3(0.25, 0.35, 0.6); // Blue-purple
+                        vec3 color3 = vec3(0.3, 0.4, 0.65); // Light blue-purple
                     
                     // Create organic, flowing color patterns
                     float colorWave1 = sin(pos.x * 0.1 + time * 0.4 + index * 0.3) * 0.5 + 0.5;
@@ -659,11 +659,11 @@ class SpaceScene {
                     float dist = length(pos) / 40.0;
                     
                     // Create organic alpha pattern - softer, more subtle
-                    float alpha = pattern * (1.0 - smoothstep(0.3, 1.0, dist)) * 0.15; // Reduced from 0.5 to 0.15
+                    float alpha = pattern * (1.0 - smoothstep(0.3, 1.0, dist)) * 0.1; // Reduced intensity
                     
                     // Add vertical streaks like real aurora (softer)
                     float streaks = sin(pos.y * 0.3 + time * 0.4) * 0.5 + 0.5;
-                    alpha *= (0.6 + streaks * 0.2); // Reduced intensity
+                    alpha *= (0.5 + streaks * 0.15); // Further reduced intensity
                     
                     // Fade out at edges organically
                     alpha *= smoothstep(0.0, 0.3, 1.0 - dist);
