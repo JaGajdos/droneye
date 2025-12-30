@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { Water } from 'three/examples/jsm/objects/Water.js';
 
 // Global variables
 let scene, camera, renderer;
@@ -17,6 +18,7 @@ let scrollY = 0;
 let prevScrollY = 0; // Track previous scroll position to detect direction
 let maxScroll = 3000; // Total scroll distance for all scenes
 let isScrolling = false;
+let animationStarted = false; // Track if Explore button was clicked
 
 // Drone flight path
 const droneStartY = 50; // Start high up
@@ -46,6 +48,146 @@ const droneColors = {
     led: 0x00ffff,       // Cyan - for LED lights
     white: 0xffffff      // White
 };
+
+// Reflector class for water reflections (from gamiable-demo)
+class Reflector extends THREE.Mesh {
+    constructor(geometry, options = {}) {
+        super(geometry);
+        this.type = 'Reflector';
+        
+        const scope = this;
+        const textureWidth = options.textureWidth || 512;
+        const textureHeight = options.textureHeight || 512;
+        const clipBias = options.clipBias || 0;
+        const exclusion = options.exclusion || null;
+        
+        const normal = new THREE.Plane();
+        const normal3 = new THREE.Vector3();
+        const cameraWorldPosition = new THREE.Vector3();
+        const lookAtPosition = new THREE.Vector3();
+        const clipPlane = new THREE.Matrix4();
+        const view = new THREE.Vector3(0, 0, -1);
+        const target = new THREE.Vector4();
+        const q = new THREE.Vector4();
+        const textureMatrix = new THREE.Matrix4();
+        const virtualCamera = new THREE.PerspectiveCamera();
+        
+        const parameters = {
+            minFilter: THREE.LinearFilter,
+            magFilter: THREE.LinearFilter,
+            format: THREE.RGBFormat
+        };
+        
+        const renderTarget = new THREE.WebGLRenderTarget(textureWidth, textureHeight, parameters);
+        
+        if (!THREE.MathUtils.isPowerOfTwo(textureWidth) || !THREE.MathUtils.isPowerOfTwo(textureHeight)) {
+            renderTarget.texture.generateMipmaps = false;
+        }
+        
+        const material = options.material;
+        material.uniforms.reflectionTexture.value = renderTarget.texture;
+        material.uniforms.reflectionMatrix.value = textureMatrix;
+        
+        this.material = material;
+        
+        this.onBeforeRender = function(renderer, scene, camera) {
+            normal3.setFromMatrixPosition(scope.matrixWorld);
+            cameraWorldPosition.setFromMatrixPosition(camera.matrixWorld);
+            
+            const rotationMatrix = new THREE.Matrix4();
+            rotationMatrix.extractRotation(scope.matrixWorld);
+            
+            normal.set(0, 1, 0);
+            normal.applyMatrix4(rotationMatrix);
+            normal.normalize();
+            
+            const viewWorldPosition = new THREE.Vector3();
+            viewWorldPosition.subVectors(normal3, cameraWorldPosition);
+            
+            if (viewWorldPosition.dot(normal) > 0) return;
+            
+            viewWorldPosition.reflect(normal).negate();
+            viewWorldPosition.add(normal3);
+            
+            rotationMatrix.extractRotation(camera.matrixWorld);
+            
+            view.set(0, 0, -1);
+            view.applyMatrix4(rotationMatrix);
+            view.add(cameraWorldPosition);
+            
+            const target = new THREE.Vector3();
+            target.subVectors(normal3, view);
+            target.reflect(normal).negate();
+            target.add(normal3);
+            
+            virtualCamera.position.copy(viewWorldPosition);
+            virtualCamera.up.set(0, 1, 0);
+            virtualCamera.up.applyMatrix4(rotationMatrix);
+            virtualCamera.up.reflect(normal);
+            virtualCamera.lookAt(target);
+            virtualCamera.far = camera.far;
+            virtualCamera.updateMatrixWorld();
+            virtualCamera.projectionMatrix.copy(camera.projectionMatrix);
+            
+            textureMatrix.set(
+                0.5, 0.0, 0.0, 0.5,
+                0.0, 0.5, 0.0, 0.5,
+                0.0, 0.0, 0.5, 0.5,
+                0.0, 0.0, 0.0, 1.0
+            );
+            textureMatrix.multiply(virtualCamera.projectionMatrix);
+            textureMatrix.multiply(virtualCamera.matrixWorldInverse);
+            textureMatrix.multiply(scope.matrixWorld);
+            
+            normal.setFromNormalAndCoplanarPoint(normal, normal3);
+            normal.applyMatrix4(virtualCamera.matrixWorldInverse);
+            
+            const clipPlane = new THREE.Vector4(normal.x, normal.y, normal.z, normal.constant);
+            const projectionMatrix = virtualCamera.projectionMatrix;
+            
+            const q = new THREE.Vector4();
+            q.x = (Math.sign(clipPlane.x) + projectionMatrix.elements[8]) / projectionMatrix.elements[0];
+            q.y = (Math.sign(clipPlane.y) + projectionMatrix.elements[9]) / projectionMatrix.elements[5];
+            q.z = -1.0;
+            q.w = (1.0 + projectionMatrix.elements[10]) / projectionMatrix.elements[14];
+            
+            clipPlane.multiplyScalar(2.0 / clipPlane.dot(q));
+            projectionMatrix.elements[2] = clipPlane.x;
+            projectionMatrix.elements[6] = clipPlane.y;
+            projectionMatrix.elements[10] = clipPlane.z + 1.0 - clipBias;
+            projectionMatrix.elements[14] = clipPlane.w;
+            
+            renderTarget.texture.encoding = renderer.outputEncoding;
+            
+            scope.visible = false;
+            const currentRenderTarget = renderer.getRenderTarget();
+            const currentXrEnabled = renderer.xr.enabled;
+            const currentShadowAutoUpdate = renderer.shadowMap.autoUpdate;
+            
+            renderer.xr.enabled = false;
+            renderer.shadowMap.autoUpdate = false;
+            renderer.setRenderTarget(renderTarget);
+            renderer.state.buffers.depth.setMask(true);
+            if (renderer.autoClear === false) renderer.clear();
+            renderer.render(scene, virtualCamera);
+            
+            renderer.xr.enabled = currentXrEnabled;
+            renderer.shadowMap.autoUpdate = currentShadowAutoUpdate;
+            renderer.setRenderTarget(currentRenderTarget);
+            
+            const viewport = camera.viewport;
+            if (viewport !== undefined) {
+                renderer.state.viewport(viewport);
+            }
+            
+            scope.visible = true;
+        };
+        
+        this.getRenderTarget = function() {
+            return renderTarget;
+        };
+    }
+}
 
 // Function to change drone color (can be called from console or UI)
 function changeDroneColor(bodyColor, rotorColor) {
@@ -687,7 +829,7 @@ class SkyScene {
         if (this.cloudTextures.length < 2 || this.clouds.length > 0) return;
         
         const rnd = (min, max) => min + Math.random() * (max - min);
-        const CLOUD_COUNT = 400; // Number of clouds
+        const CLOUD_COUNT = 300; // Number of clouds
         
         for (let i = 0; i < CLOUD_COUNT; i++) {
             // Randomly choose cloud texture (0 or 1)
@@ -832,43 +974,39 @@ class WaterScene {
         this.scene.background = new THREE.Color(0x87CEEB); // Sky blue
         this.skyScene = skyScene; // Reference to sky scene for cloud textures
         
-        // Enhanced lighting for realistic water scene
-        this.scene.add(new THREE.HemisphereLight(0xffffff, 0x87CEEB, 1.4)); // Brighter, more sky-like
-        const light3 = new THREE.DirectionalLight(0xffffff, 1.5);
-        light3.position.set(5, 15, 5);
-        this.scene.add(light3);
-        
-        // Add ambient light for water scene
-        const ambientLight3 = new THREE.AmbientLight(0xffffff, 0.9);
-        this.scene.add(ambientLight3);
-        
-        // Add realistic water surface with waves (enhanced for gamiable.com style)
-        const waterGeometry = new THREE.PlaneGeometry(400, 400, 128, 128); // More segments for smoother waves
-        this.waterMaterial = new THREE.MeshStandardMaterial({ 
-            color: 0x1E90FF, // Bright blue (DodgerBlue) - very visible
-            roughness: 0.05, // More reflective water
-            metalness: 0.4, // More metallic for water reflection
-            side: THREE.DoubleSide,
-            transparent: true,
-            opacity: 0.95 // Slightly transparent for depth
+        // Lighting - exactly as in the example
+        const ambient = new THREE.AmbientLight(0xffffff, 0.3);
+        this.scene.add(ambient);
+
+        const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+        dirLight.position.set(100, 100, 100);
+        this.scene.add(dirLight);
+
+        // Ocean (Water) - exactly as in the example
+        const waterGeometry = new THREE.PlaneGeometry(10000, 10000);
+
+        const textureLoader = new THREE.TextureLoader();
+        const waterNormals = textureLoader.load(
+            'https://threejs.org/examples/textures/waternormals.jpg',
+            (texture) => {
+                texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+            }
+        );
+
+        this.water = new Water(waterGeometry, {
+            textureWidth: 512,
+            textureHeight: 512,
+            waterNormals: waterNormals,
+            sunDirection: new THREE.Vector3(),
+            sunColor: 0xffffff,
+            waterColor: 0x001e0f,
+            distortionScale: 3.7,
+            fog: false
         });
-        
-        this.water = new THREE.Mesh(waterGeometry, this.waterMaterial);
+
         this.water.rotation.x = -Math.PI / 2;
-        this.water.position.set(0, -3, 0); // Water below drone but visible, centered
-        this.water.receiveShadow = false;
-        this.water.castShadow = false;
-        
-        // Add water reflection effect (simple environment map simulation)
-        this.waterMaterial.envMapIntensity = 0.5;
-        
-        // Store original positions for wave animation
-        const positions = waterGeometry.attributes.position;
-        this.originalPositions = new Float32Array(positions.array.length);
-        this.originalPositions.set(positions.array);
-        this.water.userData.originalPositions = this.originalPositions;
+        this.water.position.set(0, -5, 0);
         this.scene.add(this.water);
-        this.scene.userData.water = this.water; // Store reference for animation
         
         // Create clouds above drone - same system as SkyScene but above drone
         this.cloudGroup = new THREE.Group();
@@ -912,7 +1050,7 @@ class WaterScene {
         if (this.cloudTextures.length === 0 || this.clouds.length > 0) return;
         
         const rnd = (min, max) => min + Math.random() * (max - min);
-        const CLOUD_COUNT = 400; // Number of clouds
+        const CLOUD_COUNT = 300; // Number of clouds
         
         for (let i = 0; i < CLOUD_COUNT; i++) {
             // Randomly choose cloud texture
@@ -1037,26 +1175,10 @@ class WaterScene {
         this.cloudGroup.position.x = 0; // Drone stays at X=0
         this.cloudGroup.position.y = droneRoot.position.y; // Follow drone's Y position
         
-        // Animate water waves
-        if (this.water) {
-            const positions = this.water.geometry.attributes.position;
-            
-            if (this.originalPositions) {
-                for (let i = 0; i < positions.count; i++) {
-                    const i3 = i * 3;
-                    const x = this.originalPositions[i3];
-                    const z = this.originalPositions[i3 + 2];
-                    
-                    // Enhanced wave animation (inspired by gamiable.com)
-                    const wave1 = Math.sin(x * 0.08 + time * 0.4) * 0.4; // Larger, slower waves
-                    const wave2 = Math.sin(z * 0.12 + time * 0.6) * 0.3;
-                    const wave3 = Math.sin((x + z) * 0.06 + time * 0.5) * 0.2;
-                    const wave4 = Math.sin((x * 0.15 + z * 0.1 + time * 0.3) * 0.5) * 0.15; // Additional wave layer
-                    
-                    positions.setY(i, this.originalPositions[i3 + 1] + wave1 + wave2 + wave3 + wave4);
-                }
-                positions.needsUpdate = true;
-            }
+        // Update water animation - exactly as in the example
+        if (this.water && this.water.material && this.water.material.uniforms) {
+            const t = time; // Use time directly (should be in seconds)
+            this.water.material.uniforms['time'].value = t;
         }
     }
     
@@ -1534,6 +1656,9 @@ function animate() {
     // Determine current scene based on scroll progress
     const newSceneIndex = Math.min(Math.floor(scrollProgress * scenes.length), scenes.length - 1);
     if (newSceneIndex !== currentSceneIndex && newSceneIndex < scenes.length) {
+        // Store previous scene index before changing
+        const prevSceneIndex = currentSceneIndex;
+        
         // Detect scroll direction
         const scrollingDown = scrollY > prevScrollY;
         
@@ -1560,16 +1685,56 @@ function animate() {
         // Reset drone position to start of scene
         if (droneRoot) {
             dronePositionZ = 0; // Reset forward position
+            let newDroneY;
+            
             if (currentSceneIndex === 1) {
-                // Sky scene - start higher
-                droneRoot.position.y = 63;
+                // Sky scene - smooth transition from space scene
+                // If coming from space scene (index 0), keep current Y and let it fly down to clouds
+                if (prevSceneIndex === 0) {
+                    // Keep current position, will smoothly fly down to clouds
+                    newDroneY = droneRoot.position.y; // Keep current height from space
+                } else {
+                    // Coming from other scenes - start higher
+                    newDroneY = 63;
+                }
             } else if (currentSceneIndex === 2) {
                 // Water scene - start at medium height (between water and clouds)
-                droneRoot.position.y = 20;
+                newDroneY = 20;
             } else {
                 // Other scenes - start at top
-                droneRoot.position.y = droneStartY;
+                newDroneY = droneStartY;
             }
+            droneRoot.position.y = newDroneY;
+            
+            // Set droneTargetY immediately to prevent camera jump
+            if (currentSceneIndex === 1) {
+                // Sky scene - if coming from space, target is clouds (63), otherwise calculate based on scrollProgress
+                if (prevSceneIndex === 0) {
+                    // Smooth transition: target is clouds height
+                    droneTargetY = 63;
+                } else {
+                    // Calculate based on current scrollProgress
+                    droneTargetY = 63 - (scrollProgress * 5);
+                }
+            } else if (currentSceneIndex === 2) {
+                // Water scene - calculate based on current scrollProgress
+                const minY = 0;
+                const maxY = 20;
+                droneTargetY = maxY - (scrollProgress * (maxY - minY));
+                droneTargetY = Math.max(droneTargetY, minY);
+            } else {
+                droneTargetY = droneStartY - (scrollProgress * (droneStartY - droneEndY));
+            }
+            
+            // Immediately update camera to match new drone position (prevent top-down view)
+            const cameraOffsetY = 5; // Fixed vertical offset
+            const cameraOffsetZ = 15; // Horizontal distance
+            const cameraOffsetX = 1.5; // Slight side angle
+            camera.position.y = newDroneY + cameraOffsetY;
+            camera.position.z = cameraOffsetZ;
+            camera.position.x = cameraOffsetX;
+            const lookAtY = newDroneY - 1;
+            //camera.lookAt(0, lookAtY, 0);
         }
         
         // Add drone to new scene
@@ -1692,6 +1857,11 @@ function onWindowResize() {
 
 // Scroll handlers
 function onWheel(event) {
+    // Block scrolling until Explore button is clicked
+    if (!animationStarted) {
+        return;
+    }
+    
     event.preventDefault();
     isScrolling = true;
     scrollY += event.deltaY * 0.5;
@@ -1709,12 +1879,20 @@ let touchStartY = 0;
 let lastTouchY = 0;
 
 function onTouchStart(event) {
+    // Block scrolling until Explore button is clicked
+    if (!animationStarted) {
+        return;
+    }
     isScrolling = true;
     touchStartY = event.touches[0].clientY;
     lastTouchY = touchStartY;
 }
 
 function onTouchMove(event) {
+    // Block scrolling until Explore button is clicked
+    if (!animationStarted) {
+        return;
+    }
     event.preventDefault();
     isScrolling = true;
     const currentY = event.touches[0].clientY;
@@ -1744,6 +1922,7 @@ function startDroneEntrance() {
         return;
     }
     
+    animationStarted = true; // Enable scrolling after Explore button is clicked
     entranceAnimationActive = true;
     entranceAnimationStartTime = clock.getElapsedTime();
     droneRoot.visible = true;

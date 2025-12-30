@@ -126,7 +126,7 @@ button {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 0; /* Behind hero section */
+    z-index: 1; /* Above canvas */
     pointer-events: none;
     width: 100%;
     max-width: 800px;
@@ -137,7 +137,7 @@ button {
 /* Show text container when animation starts */
 #text-container.show {
     display: block;
-    z-index: 0;
+    z-index: 1000; /* Above canvas */
 }
 
 /* Scroll text styles */
@@ -169,14 +169,20 @@ button {
     text-align: center;
 }
 
+.scroll-text-cta {
+    pointer-events: auto; /* Allow clicks on CTA text */
+}
+
 .scroll-text-cta .scroll-text-title {
     font-size: 1.8rem;
     font-weight: 700;
+    pointer-events: auto;
 }
 
 .scroll-text-cta .scroll-text-subtitle {
     font-size: 1.1rem;
     font-weight: 500;
+    pointer-events: auto;
 }
 
 .scroll-text.visible {
@@ -198,8 +204,10 @@ button {
     text-decoration: none;
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
     transition: all 0.3s ease;
-    pointer-events: auto;
+    pointer-events: auto !important; /* Ensure button is clickable */
     display: inline-block;
+    position: relative;
+    z-index: 10; /* Above everything */
 }
 
 #text-container .cta-button:hover {
