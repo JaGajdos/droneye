@@ -67,7 +67,6 @@ export default defineConfig({
         tim: 'tim.html',
         'cenova-ponuka': 'cenova-ponuka.html',
         kontakt: 'kontakt.html',
-        dronetext: 'dronetext.html',
         legislativa: 'legislativa.html',
         gdpr: 'gdpr.html',
         'gamiable-demo': 'gamiable-demo.html'

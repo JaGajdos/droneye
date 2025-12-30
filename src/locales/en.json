@@ -336,12 +336,12 @@
     "services": "Our Services - DroneEye",
     "team": "Our Team - DroneEye",
     "pricing": "Pricing - DroneEye",
-    "dronetext": "Drone 3D Model - DroneEye",
+    "animation": "Drone 3D Model - DroneEye",
     "legislation": "Legislation - DroneEye",
     "gdpr": "GDPR - Privacy Policy - DroneEye"
   },
   "loading": "Loading...",
-  "dronetext": {
+  "animation": {
     "text1": {
       "title": "We are passionate drone pilots, photographers, and cameramen.",
       "subtitle": "Creating unforgettable moments for you everywhere."

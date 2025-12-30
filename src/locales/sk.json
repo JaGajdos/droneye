@@ -336,12 +336,12 @@
     "services": "Naše služby - DroneEye",
     "team": "Náš tím - DroneEye",
     "pricing": "Cenová ponuka - DroneEye",
-    "dronetext": "Drone 3D Model - DroneEye",
+    "animation": "Drone 3D Model - DroneEye",
     "legislation": "Legislatíva - DroneEye",
     "gdpr": "GDPR - Ochrana osobných údajov - DroneEye"
   },
   "loading": "Načítavam...",
-  "dronetext": {
+  "animation": {
     "text1": {
       "title": "Sme vášniví piloti dronov, fotografovia a kameramani.",
       "subtitle": "Vytvárame nezabudnuteľné momenty pre vás všade."

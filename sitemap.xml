@@ -7,6 +7,7 @@
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="sk" href="https://www.droneye.sk/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.droneye.sk/?lang=en" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.droneye.sk/?lang=de" />
   </url>
   <url>
     <loc>https://www.droneye.sk/sluzby</loc>
@@ -15,6 +16,7 @@
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="sk" href="https://www.droneye.sk/sluzby" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.droneye.sk/sluzby?lang=en" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.droneye.sk/sluzby?lang=de" />
   </url>
   <url>
     <loc>https://www.droneye.sk/projekty</loc>
@@ -23,6 +25,7 @@
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="sk" href="https://www.droneye.sk/projekty" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.droneye.sk/projekty?lang=en" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.droneye.sk/projekty?lang=de" />
   </url>
   <url>
     <loc>https://www.droneye.sk/tim</loc>
@@ -31,6 +34,7 @@
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="sk" href="https://www.droneye.sk/tim" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.droneye.sk/tim?lang=en" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.droneye.sk/tim?lang=de" />
   </url>
   <url>
     <loc>https://www.droneye.sk/cenova-ponuka</loc>
@@ -39,6 +43,7 @@
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="sk" href="https://www.droneye.sk/cenova-ponuka" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.droneye.sk/cenova-ponuka?lang=en" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.droneye.sk/cenova-ponuka?lang=de" />
   </url>
   <url>
     <loc>https://www.droneye.sk/kontakt</loc>
@@ -47,13 +52,24 @@
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="sk" href="https://www.droneye.sk/kontakt" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.droneye.sk/kontakt?lang=en" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.droneye.sk/kontakt?lang=de" />
   </url>
   <url>
-    <loc>https://www.droneye.sk/dronetext</loc>
+    <loc>https://www.droneye.sk/legislativa</loc>
+    <lastmod>2024-12-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="sk" href="https://www.droneye.sk/legislativa" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.droneye.sk/legislativa?lang=en" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.droneye.sk/legislativa?lang=de" />
+  </url>
+  <url>
+    <loc>https://www.droneye.sk/gdpr</loc>
     <lastmod>2024-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
-    <xhtml:link rel="alternate" hreflang="sk" href="https://www.droneye.sk/dronetext" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.droneye.sk/dronetext?lang=en" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://www.droneye.sk/gdpr" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.droneye.sk/gdpr?lang=en" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.droneye.sk/gdpr?lang=de" />
   </url>
 </urlset>
