@@ -1,450 +1,597 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="sk" data-theme="light">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n-title="pageTitle.projects">Naše projekty - DroneEye</title>
-    <meta name="description" content="Pozrite si naše najnovšie úspešné projekty - letecké mapovanie, monitoring poľnohospodárskych plôch a inspekcia energetických vedení.">
-    <meta name="keywords" content="drone projekty, letecké mapovanie, monitoring, inspekcia vedení, 3D mapovanie, Bratislava">
-    <meta name="author" content="DroneEye">
-    <meta name="robots" content="index, follow">
-    <meta name="language" content="sk">
-    <meta name="revisit-after" content="7 days">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="icon" type="image/png" href="/favicon.png">
-    <link rel="apple-touch-icon" href="/favicon.png">
-    
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://www.droneye.sk/projekty">
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.droneye.sk/projekty">
-    <meta property="og:title" content="Naše projekty - DroneEye">
-    <meta property="og:description" content="Pozrite si naše najnovšie úspešné projekty - letecké mapovanie, monitoring poľnohospodárskych plôch a inspekcia energetických vedení.">
-    <meta property="og:image" content="https://www.droneye.sk/assets/projects-og.jpg">
-    <meta property="og:site_name" content="DroneEye">
-    <meta property="og:locale" content="sk_SK">
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://www.droneye.sk/projekty">
-    <meta property="twitter:title" content="Naše projekty - DroneEye">
-    <meta property="twitter:description" content="Pozrite si naše najnovšie úspešné projekty - letecké mapovanie, monitoring poľnohospodárskych plôch a inspekcia energetických vedení.">
-    <meta property="twitter:image" content="https://www.droneye.sk/assets/projects-twitter.jpg">
-    
-    <!-- Additional SEO -->
-    <meta name="geo.region" content="SK">
-    <meta name="geo.placename" content="Bratislava">
-    <meta name="geo.position" content="48.1486;17.1077">
-    <meta name="ICBM" content="48.1486, 17.1077">
-    
-    <!-- Hreflang Tags -->
-    <link rel="alternate" hreflang="sk" href="https://www.droneye.sk/projekty" />
-    <link rel="alternate" hreflang="en" href="https://www.droneye.sk/projekty?lang=en" />
-    <link rel="alternate" hreflang="de" href="https://www.droneye.sk/projekty?lang=de" />
-    <link rel="alternate" hreflang="x-default" href="https://www.droneye.sk/projekty" />
-    
-    <!-- Structured Data - CollectionPage -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "CollectionPage",
-      "name": "Naše projekty",
-      "description": "Pozrite si naše najnovšie úspešné projekty - letecké mapovanie, monitoring poľnohospodárskych plôch a inspekcia energetických vedení.",
-      "url": "https://www.droneye.sk/projekty"
-    }
-    </script>
-    
-    <!-- Structured Data - BreadcrumbList -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Domov",
-          "item": "https://www.droneye.sk/"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Naše projekty",
-          "item": "https://www.droneye.sk/projekty"
-        }
-      ]
-    }
-    </script>
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="/assets/fontawesome/css/all.min.css">
-    
-    <link rel="stylesheet" href="/src/style.css">
-    <script>
-        // Hide content until translations are loaded to prevent flash of wrong language
-        (function() {
-            const savedLang = localStorage.getItem('language') || 'sk';
-            document.documentElement.setAttribute('lang', savedLang);
-            document.documentElement.style.visibility = 'hidden';
-        })();
-    </script>
-</head>
-<body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <a href="/" class="logo-link">
-                    <img src="assets/logo.svg" alt="DroneEye Logo" class="logo-img">
-                </a>
-            </div>
-            <ul class="nav-menu">
-                <li class="nav-item">
-                    <a href="/" class="nav-link" data-i18n="nav.home">Domov</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/sluzby" class="nav-link" data-i18n="nav.services">Naše služby</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/projekty" class="nav-link active" data-i18n="nav.projects">Naše projekty</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/kurzy" class="nav-link" data-i18n="nav.team">Naše kurzy</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/cenova-ponuka" class="nav-link" data-i18n="nav.pricing">Cenová ponuka</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/kontakt" class="nav-link" data-i18n="nav.contact">Kontakt</a>
-                </li>
-                <li class="nav-item mobile-language-switcher">
-                    <div class="mobile-language-buttons">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title data-i18n-title="pageTitle.projects">Naše projekty - DroneEye</title>
+        <meta
+            name="description"
+            content="Pozrite si naše najnovšie úspešné projekty - letecké mapovanie, monitoring poľnohospodárskych plôch a inspekcia energetických vedení."
+        />
+        <meta
+            name="keywords"
+            content="drone projekty, letecké mapovanie, monitoring, inspekcia vedení, 3D mapovanie, Bratislava"
+        />
+        <meta name="author" content="DroneEye" />
+        <meta name="robots" content="index, follow" />
+        <meta name="language" content="sk" />
+        <meta name="revisit-after" content="7 days" />
+
+        <!-- Favicon -->
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" href="/favicon.png" />
+        <link rel="apple-touch-icon" href="/favicon.png" />
+
+        <!-- Canonical URL -->
+        <link rel="canonical" href="https://www.droneye.sk/projekty" />
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.droneye.sk/projekty" />
+        <meta property="og:title" content="Naše projekty - DroneEye" />
+        <meta
+            property="og:description"
+            content="Pozrite si naše najnovšie úspešné projekty - letecké mapovanie, monitoring poľnohospodárskych plôch a inspekcia energetických vedení."
+        />
+        <meta property="og:image" content="https://www.droneye.sk/assets/projects-og.jpg" />
+        <meta property="og:site_name" content="DroneEye" />
+        <meta property="og:locale" content="sk_SK" />
+
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://www.droneye.sk/projekty" />
+        <meta property="twitter:title" content="Naše projekty - DroneEye" />
+        <meta
+            property="twitter:description"
+            content="Pozrite si naše najnovšie úspešné projekty - letecké mapovanie, monitoring poľnohospodárskych plôch a inspekcia energetických vedení."
+        />
+        <meta property="twitter:image" content="https://www.droneye.sk/assets/projects-twitter.jpg" />
+
+        <!-- Additional SEO -->
+        <meta name="geo.region" content="SK" />
+        <meta name="geo.placename" content="Bratislava" />
+        <meta name="geo.position" content="48.1486;17.1077" />
+        <meta name="ICBM" content="48.1486, 17.1077" />
+
+        <!-- Hreflang Tags -->
+        <link rel="alternate" hreflang="sk" href="https://www.droneye.sk/projekty" />
+        <link rel="alternate" hreflang="en" href="https://www.droneye.sk/projekty?lang=en" />
+        <link rel="alternate" hreflang="de" href="https://www.droneye.sk/projekty?lang=de" />
+        <link rel="alternate" hreflang="x-default" href="https://www.droneye.sk/projekty" />
+
+        <!-- Structured Data - CollectionPage -->
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "CollectionPage",
+                "name": "Naše projekty",
+                "description": "Pozrite si naše najnovšie úspešné projekty - letecké mapovanie, monitoring poľnohospodárskych plôch a inspekcia energetických vedení.",
+                "url": "https://www.droneye.sk/projekty"
+            }
+        </script>
+
+        <!-- Structured Data - BreadcrumbList -->
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "Domov",
+                        "item": "https://www.droneye.sk/"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "Naše projekty",
+                        "item": "https://www.droneye.sk/projekty"
+                    }
+                ]
+            }
+        </script>
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="/assets/fontawesome/css/all.min.css" />
+
+        <link rel="stylesheet" href="/src/style.css" />
+        <script>
+            // Hide content until translations are loaded to prevent flash of wrong language
+            (function () {
+                const savedLang = localStorage.getItem("language") || "sk";
+                document.documentElement.setAttribute("lang", savedLang);
+                document.documentElement.style.visibility = "hidden";
+            })();
+        </script>
+    </head>
+    <body>
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="/" class="logo-link">
+                        <img src="assets/logo.svg" alt="DroneEye Logo" class="logo-img" />
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="/" class="nav-link" data-i18n="nav.home">Domov</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/sluzby" class="nav-link" data-i18n="nav.services">Naše služby</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/projekty" class="nav-link active" data-i18n="nav.projects">Naše projekty</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/kurzy" class="nav-link" data-i18n="nav.team">Naše kurzy</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/cenova-ponuka" class="nav-link" data-i18n="nav.pricing">Cenová ponuka</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/kontakt" class="nav-link" data-i18n="nav.contact">Kontakt</a>
+                    </li>
+                    <li class="nav-item mobile-language-switcher">
+                        <div class="mobile-language-buttons">
+                            <button class="language-option active" data-lang="sk">SK</button>
+                            <button class="language-option" data-lang="en">EN</button>
+                            <button class="language-option" data-lang="de">DE</button>
+                        </div>
+                    </li>
+                </ul>
+                <div class="language-switcher">
+                    <div class="language-buttons">
                         <button class="language-option active" data-lang="sk">SK</button>
                         <button class="language-option" data-lang="en">EN</button>
                         <button class="language-option" data-lang="de">DE</button>
                     </div>
-                </li>
-            </ul>
-            <div class="language-switcher">
-                <div class="language-buttons">
-                    <button class="language-option active" data-lang="sk">SK</button>
-                    <button class="language-option" data-lang="en">EN</button>
-                    <button class="language-option" data-lang="de">DE</button>
                 </div>
-            </div>
-            <div class="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-            <button class="mobile-menu-close" aria-label="Close menu" style="display: none;">
-                <i class="fas fa-times" aria-hidden="true"></i>
-            </button>
-        </div>
-    </nav>
-
-
-    <!-- Main Content -->
-    <main class="main-content">
-        <!-- Projects Page -->
-        <section class="page active">
-            <!-- Subpage Hero -->
-            <div class="subpage-hero">
-                <div class="subpage-hero-content">
-                    <h1 data-i18n="projects.title">Naše projekty</h1>
-                    <p data-i18n="projects.subtitle">Pozrite si naše najnovšie úspešné projekty</p>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
                 </div>
+                <button class="mobile-menu-close" aria-label="Close menu" style="display: none">
+                    <i class="fas fa-times" aria-hidden="true"></i>
+                </button>
             </div>
-            
-            <!-- Subpage Content -->
-            <div class="subpage-content">
-                <!-- Videos Section -->
-                <div class="content-section">
-                    <div class="container">
-                        <h2 class="section-title" data-i18n="projects.videos.title">Prezentačné videá</h2>
-                        <p class="section-subtitle" data-i18n="projects.videos.subtitle">Pozrite si naše najnovšie videá</p>
-                        <div class="videos-grid">
-                            <div class="video-item">
-                                <div class="video-wrapper">
-                                    <iframe 
-                                        data-youtube-id="gYIQa0bft6w"
-                                        frameborder="0" 
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                        allowfullscreen
-                                        loading="lazy">
-                                    </iframe>
-                                </div>
-                                <h3 class="video-title" data-i18n="projects.videos.item1.title">Video projekt 1</h3>
-                            </div>
-                            <div class="video-item">
-                                <div class="video-wrapper">
-                                    <iframe 
-                                        data-youtube-id="gYIQa0bft6w"
-                                        frameborder="0" 
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                        allowfullscreen
-                                        loading="lazy">
-                                    </iframe>
-                                </div>
-                                <h3 class="video-title" data-i18n="projects.videos.item2.title">Video projekt 2</h3>
-                            </div>
-                            <div class="video-item">
-                                <div class="video-wrapper">
-                                    <iframe 
-                                        data-youtube-id="gYIQa0bft6w"
-                                        frameborder="0" 
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                        allowfullscreen
-                                        loading="lazy">
-                                    </iframe>
-                                </div>
-                                <h3 class="video-title" data-i18n="projects.videos.item3.title">Video projekt 3</h3>
-                            </div>
-                            <div class="video-item">
-                                <div class="video-wrapper">
-                                    <iframe 
-                                        data-youtube-id="gYIQa0bft6w"
-                                        frameborder="0" 
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                        allowfullscreen
-                                        loading="lazy">
-                                    </iframe>
-                                </div>
-                                <h3 class="video-title" data-i18n="projects.videos.item4.title">Video projekt 4</h3>
-                            </div>
-                            <div class="video-item">
-                                <div class="video-wrapper">
-                                    <iframe 
-                                        data-youtube-id="gYIQa0bft6w"
-                                        frameborder="0" 
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                        allowfullscreen
-                                        loading="lazy">
-                                    </iframe>
-                                </div>
-                                <h3 class="video-title" data-i18n="projects.videos.item5.title">Video projekt 5</h3>
-                            </div>
-                            <div class="video-item">
-                                <div class="video-wrapper">
-                                    <iframe 
-                                        data-youtube-id="gYIQa0bft6w"
-                                        frameborder="0" 
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                        allowfullscreen
-                                        loading="lazy">
-                                    </iframe>
-                                </div>
-                                <h3 class="video-title" data-i18n="projects.videos.item6.title">Video projekt 6</h3>
-                            </div>
-                        </div>
-                        <div class="videos-cta-wrapper">
-                            <a href="kontakt.html" class="cta-button" data-i18n="projects.videos.cta">Kontaktujte nás</a>
-                        </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Projects Page -->
+            <section class="page active">
+                <!-- Subpage Hero -->
+                <div class="subpage-hero">
+                    <div class="subpage-hero-content">
+                        <h1 data-i18n="projects.title">Naše projekty</h1>
+                        <p data-i18n="projects.subtitle">Pozrite si naše najnovšie úspešné projekty</p>
                     </div>
                 </div>
 
-                <!-- Photos Section -->
-                <div class="content-section-bg-image" style="background-image: url('/assets/city1.webp');">
-                    <div class="container">
-                        <h2 class="section-title" data-i18n="projects.photos.title">Fotky</h2>
-                        <p class="section-subtitle" data-i18n="projects.photos.subtitle">Pozrite si naše najnovšie fotografie</p>
-                        <div class="photos-grid">
-                            <!-- Photo Gallery 1 - Multiple photos -->
-                            <div class="photo-item" data-gallery="gallery1">
-                                <div class="photo-gallery-preview">
-                                    <img src="assets/DJI_Avata_2.webp" alt="DJI Avata 2 FPV" loading="lazy" />
-                                    <div class="photo-count-badge" data-count="3"></div>
+                <!-- Subpage Content -->
+                <div class="subpage-content">
+                    <!-- Videos Section -->
+                    <div class="content-section">
+                        <div class="container">
+                            <h2 class="section-title" data-i18n="projects.videos.title">Prezentačné videá</h2>
+                            <p class="section-subtitle" data-i18n="projects.videos.subtitle">
+                                Pozrite si naše najnovšie videá
+                            </p>
+                            <div class="videos-grid">
+                                <div class="video-item">
+                                    <div class="video-wrapper">
+                                        <iframe
+                                            data-youtube-id="gYIQa0bft6w"
+                                            frameborder="0"
+                                            allow="
+                                                accelerometer;
+                                                autoplay;
+                                                clipboard-write;
+                                                encrypted-media;
+                                                gyroscope;
+                                                picture-in-picture;
+                                            "
+                                            allowfullscreen
+                                            loading="lazy"
+                                        >
+                                        </iframe>
+                                    </div>
+                                    <h3 class="video-title" data-i18n="projects.videos.item1.title">Video projekt 1</h3>
                                 </div>
-                                <h3 class="photo-title" data-i18n="projects.photos.item1.title">Fotografia projektu 1</h3>
-                                <div class="photo-gallery-images" style="display: none;">
-                                    <img src="assets/DJI_Avata_2.webp" alt="DJI Avata 2 FPV" />
-                                    <img src="assets/DJI_Mavic_4.webp" alt="DJI Mavic 4 Pro Combo" />
-                                    <img src="assets/DJI_Avata_2.webp" alt="DJI Avata 2 FPV" />
+                                <div class="video-item">
+                                    <div class="video-wrapper">
+                                        <iframe
+                                            data-youtube-id="gYIQa0bft6w"
+                                            frameborder="0"
+                                            allow="
+                                                accelerometer;
+                                                autoplay;
+                                                clipboard-write;
+                                                encrypted-media;
+                                                gyroscope;
+                                                picture-in-picture;
+                                            "
+                                            allowfullscreen
+                                            loading="lazy"
+                                        >
+                                        </iframe>
+                                    </div>
+                                    <h3 class="video-title" data-i18n="projects.videos.item2.title">Video projekt 2</h3>
+                                </div>
+                                <div class="video-item">
+                                    <div class="video-wrapper">
+                                        <iframe
+                                            data-youtube-id="gYIQa0bft6w"
+                                            frameborder="0"
+                                            allow="
+                                                accelerometer;
+                                                autoplay;
+                                                clipboard-write;
+                                                encrypted-media;
+                                                gyroscope;
+                                                picture-in-picture;
+                                            "
+                                            allowfullscreen
+                                            loading="lazy"
+                                        >
+                                        </iframe>
+                                    </div>
+                                    <h3 class="video-title" data-i18n="projects.videos.item3.title">Video projekt 3</h3>
+                                </div>
+                                <div class="video-item">
+                                    <div class="video-wrapper">
+                                        <iframe
+                                            data-youtube-id="gYIQa0bft6w"
+                                            frameborder="0"
+                                            allow="
+                                                accelerometer;
+                                                autoplay;
+                                                clipboard-write;
+                                                encrypted-media;
+                                                gyroscope;
+                                                picture-in-picture;
+                                            "
+                                            allowfullscreen
+                                            loading="lazy"
+                                        >
+                                        </iframe>
+                                    </div>
+                                    <h3 class="video-title" data-i18n="projects.videos.item4.title">Video projekt 4</h3>
+                                </div>
+                                <div class="video-item">
+                                    <div class="video-wrapper">
+                                        <iframe
+                                            data-youtube-id="gYIQa0bft6w"
+                                            frameborder="0"
+                                            allow="
+                                                accelerometer;
+                                                autoplay;
+                                                clipboard-write;
+                                                encrypted-media;
+                                                gyroscope;
+                                                picture-in-picture;
+                                            "
+                                            allowfullscreen
+                                            loading="lazy"
+                                        >
+                                        </iframe>
+                                    </div>
+                                    <h3 class="video-title" data-i18n="projects.videos.item5.title">Video projekt 5</h3>
+                                </div>
+                                <div class="video-item">
+                                    <div class="video-wrapper">
+                                        <iframe
+                                            data-youtube-id="gYIQa0bft6w"
+                                            frameborder="0"
+                                            allow="
+                                                accelerometer;
+                                                autoplay;
+                                                clipboard-write;
+                                                encrypted-media;
+                                                gyroscope;
+                                                picture-in-picture;
+                                            "
+                                            allowfullscreen
+                                            loading="lazy"
+                                        >
+                                        </iframe>
+                                    </div>
+                                    <h3 class="video-title" data-i18n="projects.videos.item6.title">Video projekt 6</h3>
                                 </div>
                             </div>
-                            <!-- Photo Gallery 2 - Multiple photos -->
-                            <div class="photo-item" data-gallery="gallery2">
-                                <div class="photo-gallery-preview">
-                                    <img src="assets/DJI_Mavic_4.webp" alt="DJI Mavic 4 Pro Combo" loading="lazy" />
-                                    <div class="photo-count-badge" data-count="2"></div>
-                                </div>
-                                <h3 class="photo-title" data-i18n="projects.photos.item2.title">Fotografia projektu 2</h3>
-                                <div class="photo-gallery-images" style="display: none;">
-                                    <img src="assets/DJI_Mavic_4.webp" alt="DJI Mavic 4 Pro Combo" />
-                                    <img src="assets/DJI_Avata_2.webp" alt="DJI Avata 2 FPV" />
-                                </div>
+                            <div class="videos-cta-wrapper">
+                                <a href="kontakt.html" class="cta-button" data-i18n="projects.videos.cta"
+                                    >Kontaktujte nás</a
+                                >
                             </div>
-                            <!-- Photo Gallery 3 - Single photo -->
-                            <div class="photo-item" data-gallery="gallery3">
-                                <div class="photo-gallery-preview">
-                                    <img src="assets/DJI_Avata_2.webp" alt="DJI Avata 2 FPV" loading="lazy" />
-                                </div>
-                                <h3 class="photo-title" data-i18n="projects.photos.item3.title">Fotografia projektu 3</h3>
-                                <div class="photo-gallery-images" style="display: none;">
-                                    <img src="assets/DJI_Avata_2.webp" alt="DJI Avata 2 FPV" />
-                                </div>
-                            </div>
-                            <!-- Photo Gallery 4 - Multiple photos -->
-                            <div class="photo-item" data-gallery="gallery4">
-                                <div class="photo-gallery-preview">
-                                    <img src="assets/DJI_Mavic_4.webp" alt="DJI Mavic 4 Pro Combo" loading="lazy" />
-                                    <div class="photo-count-badge" data-count="4"></div>
-                                </div>
-                                <h3 class="photo-title" data-i18n="projects.photos.item4.title">Fotografia projektu 4</h3>
-                                <div class="photo-gallery-images" style="display: none;">
-                                    <img src="assets/DJI_Mavic_4.webp" alt="DJI Mavic 4 Pro Combo" />
-                                    <img src="assets/DJI_Avata_2.webp" alt="DJI Avata 2 FPV" />
-                                    <img src="assets/DJI_Mavic_4.webp" alt="DJI Mavic 4 Pro Combo" />
-                                    <img src="assets/DJI_Avata_2.webp" alt="DJI Avata 2 FPV" />
-                                </div>
-                            </div>
-                            <!-- Photo Gallery 5 - Multiple photos -->
-                            <div class="photo-item" data-gallery="gallery5">
-                                <div class="photo-gallery-preview">
-                                    <img src="assets/DJI_Avata_2.webp" alt="DJI Avata 2 FPV" loading="lazy" />
-                                    <div class="photo-count-badge" data-count="2"></div>
-                                </div>
-                                <h3 class="photo-title" data-i18n="projects.photos.item5.title">Fotografia projektu 5</h3>
-                                <div class="photo-gallery-images" style="display: none;">
-                                    <img src="assets/DJI_Avata_2.webp" alt="DJI Avata 2 FPV" />
-                                    <img src="assets/DJI_Mavic_4.webp" alt="DJI Mavic 4 Pro Combo" />
-                                </div>
-                            </div>
-                            <!-- Photo Gallery 6 - Single photo -->
-                            <div class="photo-item" data-gallery="gallery6">
-                                <div class="photo-gallery-preview">
-                                    <img src="assets/DJI_Mavic_4.webp" alt="DJI Mavic 4 Pro Combo" loading="lazy" />
-                                </div>
-                                <h3 class="photo-title" data-i18n="projects.photos.item6.title">Fotografia projektu 6</h3>
-                                <div class="photo-gallery-images" style="display: none;">
-                                    <img src="assets/DJI_Mavic_4.webp" alt="DJI Mavic 4 Pro Combo" />
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Lightbox Modal -->
-                        <div id="photo-lightbox" class="photo-lightbox">
-                            <button class="photo-lightbox-close" aria-label="Close lightbox">&times;</button>
-                            <button class="photo-lightbox-prev" aria-label="Previous photo">&#10094;</button>
-                            <button class="photo-lightbox-next" aria-label="Next photo">&#10095;</button>
-                            <div class="photo-lightbox-content">
-                                <img id="lightbox-image" src="" alt="Fotografia z galérie projektov DroneEye" />
-                                <div class="photo-lightbox-counter">
-                                    <span id="lightbox-current">1</span> / <span id="lightbox-total">1</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="photos-cta-wrapper" style="display: none;">
-                            <a href="kontakt.html" class="cta-button" data-i18n="projects.photos.cta">Kontaktujte nás</a>
                         </div>
                     </div>
-                </div>
-            </div>
-        </section>
-    </main>
 
-    <!-- Loading Screen -->
-    <div id="loading-screen">
-        <div class="loader">
-            <div class="loader-circle"></div>
-            <p data-i18n="loading">Načítavam...</p>
-        </div>
-    </div>
+                    <!-- Photos Section -->
+                    <div class="content-section-bg-image" style="background-image: url(&quot;/assets/city1.webp&quot;)">
+                        <div class="container">
+                            <h2 class="section-title" data-i18n="projects.photos.title">Fotky</h2>
+                            <p class="section-subtitle" data-i18n="projects.photos.subtitle">
+                                Pozrite si naše najnovšie fotografie
+                            </p>
+                            <div class="photos-grid">
+                                <!-- Photo Gallery 1 - Multiple photos -->
+                                <div class="photo-item" data-gallery="gallery1">
+                                    <div class="photo-gallery-preview">
+                                        <img src="assets/DJI_Avata_2.webp" alt="DJI Avata 2 FPV" loading="lazy" />
+                                        <div class="photo-count-badge" data-count="3"></div>
+                                    </div>
+                                    <h3 class="photo-title" data-i18n="projects.photos.item1.title">
+                                        Fotografia projektu 1
+                                    </h3>
+                                    <div class="photo-gallery-images" style="display: none">
+                                        <img src="assets/DJI_Avata_2.webp" alt="DJI Avata 2 FPV" />
+                                        <img src="assets/DJI_Mavic_4.webp" alt="DJI Mavic 4 Pro Combo" />
+                                        <img src="assets/DJI_Avata_2.webp" alt="DJI Avata 2 FPV" />
+                                    </div>
+                                </div>
+                                <!-- Photo Gallery 2 - Multiple photos -->
+                                <div class="photo-item" data-gallery="gallery2">
+                                    <div class="photo-gallery-preview">
+                                        <img src="assets/DJI_Mavic_4.webp" alt="DJI Mavic 4 Pro Combo" loading="lazy" />
+                                        <div class="photo-count-badge" data-count="2"></div>
+                                    </div>
+                                    <h3 class="photo-title" data-i18n="projects.photos.item2.title">
+                                        Fotografia projektu 2
+                                    </h3>
+                                    <div class="photo-gallery-images" style="display: none">
+                                        <img src="assets/DJI_Mavic_4.webp" alt="DJI Mavic 4 Pro Combo" />
+                                        <img src="assets/DJI_Avata_2.webp" alt="DJI Avata 2 FPV" />
+                                    </div>
+                                </div>
+                                <!-- Photo Gallery 3 - Single photo -->
+                                <div class="photo-item" data-gallery="gallery3">
+                                    <div class="photo-gallery-preview">
+                                        <img src="assets/DJI_Avata_2.webp" alt="DJI Avata 2 FPV" loading="lazy" />
+                                    </div>
+                                    <h3 class="photo-title" data-i18n="projects.photos.item3.title">
+                                        Fotografia projektu 3
+                                    </h3>
+                                    <div class="photo-gallery-images" style="display: none">
+                                        <img src="assets/DJI_Avata_2.webp" alt="DJI Avata 2 FPV" />
+                                    </div>
+                                </div>
+                                <!-- Photo Gallery 4 - Multiple photos -->
+                                <div class="photo-item" data-gallery="gallery4">
+                                    <div class="photo-gallery-preview">
+                                        <img src="assets/DJI_Mavic_4.webp" alt="DJI Mavic 4 Pro Combo" loading="lazy" />
+                                        <div class="photo-count-badge" data-count="4"></div>
+                                    </div>
+                                    <h3 class="photo-title" data-i18n="projects.photos.item4.title">
+                                        Fotografia projektu 4
+                                    </h3>
+                                    <div class="photo-gallery-images" style="display: none">
+                                        <img src="assets/DJI_Mavic_4.webp" alt="DJI Mavic 4 Pro Combo" />
+                                        <img src="assets/DJI_Avata_2.webp" alt="DJI Avata 2 FPV" />
+                                        <img src="assets/DJI_Mavic_4.webp" alt="DJI Mavic 4 Pro Combo" />
+                                        <img src="assets/DJI_Avata_2.webp" alt="DJI Avata 2 FPV" />
+                                    </div>
+                                </div>
+                                <!-- Photo Gallery 5 - Multiple photos -->
+                                <div class="photo-item" data-gallery="gallery5">
+                                    <div class="photo-gallery-preview">
+                                        <img src="assets/DJI_Avata_2.webp" alt="DJI Avata 2 FPV" loading="lazy" />
+                                        <div class="photo-count-badge" data-count="2"></div>
+                                    </div>
+                                    <h3 class="photo-title" data-i18n="projects.photos.item5.title">
+                                        Fotografia projektu 5
+                                    </h3>
+                                    <div class="photo-gallery-images" style="display: none">
+                                        <img src="assets/DJI_Avata_2.webp" alt="DJI Avata 2 FPV" />
+                                        <img src="assets/DJI_Mavic_4.webp" alt="DJI Mavic 4 Pro Combo" />
+                                    </div>
+                                </div>
+                                <!-- Photo Gallery 6 - Single photo -->
+                                <div class="photo-item" data-gallery="gallery6">
+                                    <div class="photo-gallery-preview">
+                                        <img src="assets/DJI_Mavic_4.webp" alt="DJI Mavic 4 Pro Combo" loading="lazy" />
+                                    </div>
+                                    <h3 class="photo-title" data-i18n="projects.photos.item6.title">
+                                        Fotografia projektu 6
+                                    </h3>
+                                    <div class="photo-gallery-images" style="display: none">
+                                        <img src="assets/DJI_Mavic_4.webp" alt="DJI Mavic 4 Pro Combo" />
+                                    </div>
+                                </div>
+                            </div>
 
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3 data-i18n="footer.contact">Kontakt</h3>
-                <ul class="footer-links">
-                    <li><a href="mailto:info@droneye.sk">📧 info@droneye.sk</a></li>
-                    <li><a href="tel:+421950614303">📞 +421 950 614 303</a></li>
-                    <li>
-                        <div class="social-links">
-                            <a href="https://www.instagram.com/dron_eyesky" target="_blank" rel="nofollow" class="social-link">
-                                <img src="assets/instagram.png" alt="Instagram Droneye" loading="lazy" />
-                            </a>
-                            <a href="https://www.facebook.com/profile.php?id=100066345406669" target="_blank" rel="nofollow" class="social-link">
-                                <img src="assets/fb.png" alt="Facebook Droneye" loading="lazy" />
-                            </a>
-                            <a href="https://www.youtube.com/@dron_eyesky" target="_blank" rel="nofollow" class="social-link">
-                                <img src="assets/yt.png" alt="YouTube Droneye" loading="lazy" />
-                            </a>
-                            <a href="#" target="_blank" rel="nofollow" class="social-link">
-                                <img src="assets/linkedin.png" alt="LinkedIn Droneye" loading="lazy" />
-                            </a>
+                            <!-- Lightbox Modal -->
+                            <div id="photo-lightbox" class="photo-lightbox">
+                                <button class="photo-lightbox-close" aria-label="Close lightbox">&times;</button>
+                                <button class="photo-lightbox-prev" aria-label="Previous photo">&#10094;</button>
+                                <button class="photo-lightbox-next" aria-label="Next photo">&#10095;</button>
+                                <div class="photo-lightbox-content">
+                                    <img id="lightbox-image" src="" alt="Fotografia z galérie projektov DroneEye" />
+                                    <div class="photo-lightbox-counter">
+                                        <span id="lightbox-current">1</span> / <span id="lightbox-total">1</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="photos-cta-wrapper" style="display: none">
+                                <a href="kontakt.html" class="cta-button" data-i18n="projects.photos.cta"
+                                    >Kontaktujte nás</a
+                                >
+                            </div>
                         </div>
-                    </li>
-                </ul>
-            </div>
-            
-            <div class="footer-section footer-form">
-                <h3 data-i18n="footer.quickContact">Kontaktný formulár</h3>
-                <form class="footer-contact-form" novalidate>
-                    <div class="footer-form-field">
-                        <input type="text" name="name" data-i18n-placeholder="footer.form.name" placeholder="Vaše meno">
-                        <span class="footer-form-field-error" id="footer-error-name"></span>
                     </div>
-                    <div class="footer-form-field">
-                        <input type="email" name="email" data-i18n-placeholder="footer.form.email" placeholder="Email">
-                        <span class="footer-form-field-error" id="footer-error-email"></span>
-                    </div>
-                    <div class="footer-form-field">
-                        <input type="tel" name="phone" data-i18n-placeholder="footer.form.phone" placeholder="Telefónne číslo">
-                        <span class="footer-form-field-error" id="footer-error-phone"></span>
-                    </div>
-                    <div class="footer-form-field">
-                        <textarea name="message" data-i18n-placeholder="footer.form.message" placeholder="Správa" rows="3"></textarea>
-                        <span class="footer-form-field-error" id="footer-error-message"></span>
-                    </div>
-                    <div class="footer-form-field">
-                        <label class="footer-form-consent">
-                            <input type="checkbox" name="consent">
-                            <span data-i18n="footer.form.consent">Súhlasím so spracovaním osobných údajov pre účely tohto formulára.</span>
-                        </label>
-                        <span class="footer-form-field-error" id="footer-error-consent"></span>
-                    </div>
-                    <div id="footer-form-success" class="footer-form-message footer-form-success" style="display: none;"></div>
-                    <div id="footer-form-error" class="footer-form-message footer-form-error" style="display: none;"></div>
-                    <button type="submit" data-i18n="footer.form.submit">Odoslať</button>
-                </form>
-            </div>
-        </div>
-        
-        <div class="footer-bottom">
-            <p>&copy; 2024 Droneye. <span data-i18n="footer.copyright">Všetky práva vyhradené.</span></p>
-            <div class="footer-bottom-right">
-                <div class="footer-theme-switcher">
-                    <button class="footer-theme-btn" data-theme="light" title="Light mode" aria-label="Switch to light mode"><i class="fas fa-sun" aria-hidden="true"></i></button>
-                    <button class="footer-theme-btn" data-theme="dark" title="Dark mode" aria-label="Switch to dark mode"><i class="fas fa-moon" aria-hidden="true"></i></button>
                 </div>
-                <div class="footer-legal">
-                    <a href="/legislativa" data-i18n="footer.legislation">Legislatíva</a>
-                    <a href="/gdpr" data-i18n="footer.privacy">GDPR</a>
-                </div>
+            </section>
+        </main>
+
+        <!-- Loading Screen -->
+        <div id="loading-screen">
+            <div class="loader">
+                <div class="loader-circle"></div>
+                <p data-i18n="loading">Načítavam...</p>
             </div>
         </div>
-    </footer>
 
-    <!-- Cookie Consent Banner -->
-    <div id="cookie-banner" class="cookie-banner" style="display: none;">
-        <div class="cookie-banner-content">
-            <div class="cookie-banner-text">
-                <h4 data-i18n="cookies.title">Používame cookies</h4>
-                <p data-i18n="cookies.description">Táto stránka používa cookies na zlepšenie vášho zážitku. Pokračovaním v prehliadaní súhlasíte s používaním cookies v súlade s našou <a href="/gdpr">politikou cookies</a>.</p>
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 data-i18n="footer.contact">Kontakt</h3>
+                    <ul class="footer-links">
+                        <li><a href="mailto:info@droneye.sk">📧 info@droneye.sk</a></li>
+                        <li><a href="tel:+421950614303">📞 +421 950 614 303</a></li>
+                        <li>
+                            <div class="social-links">
+                                <a
+                                    href="https://www.instagram.com/dron_eyesky"
+                                    target="_blank"
+                                    rel="nofollow"
+                                    class="social-link"
+                                >
+                                    <img src="assets/instagram.png" alt="Instagram Droneye" loading="lazy" />
+                                </a>
+                                <a
+                                    href="https://www.facebook.com/profile.php?id=100066345406669"
+                                    target="_blank"
+                                    rel="nofollow"
+                                    class="social-link"
+                                >
+                                    <img src="assets/fb.png" alt="Facebook Droneye" loading="lazy" />
+                                </a>
+                                <a
+                                    href="https://www.youtube.com/@dron_eyesky"
+                                    target="_blank"
+                                    rel="nofollow"
+                                    class="social-link"
+                                >
+                                    <img src="assets/yt.png" alt="YouTube Droneye" loading="lazy" />
+                                </a>
+                                <a href="#" target="_blank" rel="nofollow" class="social-link">
+                                    <img src="assets/linkedin.png" alt="LinkedIn Droneye" loading="lazy" />
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="footer-section footer-form">
+                    <h3 data-i18n="footer.quickContact">Kontaktný formulár</h3>
+                    <form class="footer-contact-form" novalidate>
+                        <div class="footer-form-field">
+                            <input
+                                type="text"
+                                name="name"
+                                data-i18n-placeholder="footer.form.name"
+                                placeholder="Vaše meno"
+                            />
+                            <span class="footer-form-field-error" id="footer-error-name"></span>
+                        </div>
+                        <div class="footer-form-field">
+                            <input
+                                type="email"
+                                name="email"
+                                data-i18n-placeholder="footer.form.email"
+                                placeholder="Email"
+                            />
+                            <span class="footer-form-field-error" id="footer-error-email"></span>
+                        </div>
+                        <div class="footer-form-field">
+                            <input
+                                type="tel"
+                                name="phone"
+                                data-i18n-placeholder="footer.form.phone"
+                                placeholder="Telefónne číslo"
+                            />
+                            <span class="footer-form-field-error" id="footer-error-phone"></span>
+                        </div>
+                        <div class="footer-form-field">
+                            <textarea
+                                name="message"
+                                data-i18n-placeholder="footer.form.message"
+                                placeholder="Správa"
+                                rows="3"
+                            ></textarea>
+                            <span class="footer-form-field-error" id="footer-error-message"></span>
+                        </div>
+                        <div class="footer-form-field">
+                            <label class="footer-form-consent">
+                                <input type="checkbox" name="consent" />
+                                <span data-i18n="footer.form.consent"
+                                    >Súhlasím so spracovaním osobných údajov pre účely tohto formulára.</span
+                                >
+                            </label>
+                            <span class="footer-form-field-error" id="footer-error-consent"></span>
+                        </div>
+                        <div
+                            id="footer-form-success"
+                            class="footer-form-message footer-form-success"
+                            style="display: none"
+                        ></div>
+                        <div
+                            id="footer-form-error"
+                            class="footer-form-message footer-form-error"
+                            style="display: none"
+                        ></div>
+                        <button type="submit" data-i18n="footer.form.submit">Odoslať</button>
+                    </form>
+                </div>
             </div>
-            <div class="cookie-banner-buttons">
-                <button id="cookie-accept" class="cookie-btn cookie-btn-accept" data-i18n="cookies.accept">Prijať všetky</button>
-                <button id="cookie-reject" class="cookie-btn cookie-btn-reject" data-i18n="cookies.reject">Odmietnuť</button>
-                <button id="cookie-settings" class="cookie-btn cookie-btn-settings" data-i18n="cookies.settings">Nastavenia</button>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 Droneye. <span data-i18n="footer.copyright">Všetky práva vyhradené.</span></p>
+                <div class="footer-bottom-right">
+                    <div class="footer-theme-switcher">
+                        <button
+                            class="footer-theme-btn"
+                            data-theme="light"
+                            title="Light mode"
+                            aria-label="Switch to light mode"
+                        >
+                            <i class="fas fa-sun" aria-hidden="true"></i>
+                        </button>
+                        <button
+                            class="footer-theme-btn"
+                            data-theme="dark"
+                            title="Dark mode"
+                            aria-label="Switch to dark mode"
+                        >
+                            <i class="fas fa-moon" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <div class="footer-legal">
+                        <a href="/legislativa" data-i18n="footer.legislation">Legislatíva</a>
+                        <a href="/gdpr" data-i18n="footer.privacy">GDPR</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Cookie Consent Banner -->
+        <div id="cookie-banner" class="cookie-banner" style="display: none">
+            <div class="cookie-banner-content">
+                <div class="cookie-banner-text">
+                    <h4 data-i18n="cookies.title">Používame cookies</h4>
+                    <p data-i18n="cookies.description">
+                        Táto stránka používa cookies na zlepšenie vášho zážitku. Pokračovaním v prehliadaní súhlasíte s
+                        používaním cookies v súlade s našou <a href="/gdpr">politikou cookies</a>.
+                    </p>
+                </div>
+                <div class="cookie-banner-buttons">
+                    <button id="cookie-accept" class="cookie-btn cookie-btn-accept" data-i18n="cookies.accept">
+                        Prijať všetky
+                    </button>
+                    <button id="cookie-reject" class="cookie-btn cookie-btn-reject" data-i18n="cookies.reject">
+                        Odmietnuť
+                    </button>
+                    <button id="cookie-settings" class="cookie-btn cookie-btn-settings" data-i18n="cookies.settings">
+                        Nastavenia
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
 
-    <script type="module" src="/src/main.js"></script>
-    <script type="module" src="/src/cookies.js"></script>
-</body>
+        <script type="module" src="/src/main.js"></script>
+        <script type="module" src="/src/cookies.js"></script>
+    </body>
 </html>

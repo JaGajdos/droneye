@@ -1,320 +1,440 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="sk" data-theme="light">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n-title="pageTitle.legislation">Legislatíva - DroneEye</title>
-    <meta name="description" content="Vykonávame dronové lietania legálne s všetkými povoleniami. Registrácia UAV, pilotná licencia, oprávnenie a poistenie.">
-    <meta name="keywords" content="drone legislatíva, povolenia, licencia, registrácia UAV, poistenie dronu, EASA, Dopravný úrad">
-    <meta name="author" content="DroneEye">
-    <meta name="robots" content="index, follow">
-    <meta name="language" content="sk">
-    <meta name="revisit-after" content="7 days">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="icon" type="image/png" href="/favicon.png">
-    <link rel="apple-touch-icon" href="/favicon.png">
-    
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://www.droneye.sk/legislativa">
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.droneye.sk/legislativa">
-    <meta property="og:title" content="Legislatíva - DroneEye">
-    <meta property="og:description" content="Vykonávame dronové lietania legálne s všetkými povoleniami. Registrácia UAV, pilotná licencia, oprávnenie a poistenie.">
-    <meta property="og:image" content="https://www.droneye.sk/assets/legislation-og.jpg">
-    <meta property="og:site_name" content="DroneEye">
-    <meta property="og:locale" content="sk_SK">
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://www.droneye.sk/legislativa">
-    <meta property="twitter:title" content="Legislatíva - DroneEye">
-    <meta property="twitter:description" content="Vykonávame dronové lietania legálne s všetkými povoleniami. Registrácia UAV, pilotná licencia, oprávnenie a poistenie.">
-    <meta property="twitter:image" content="https://www.droneye.sk/assets/legislation-twitter.jpg">
-    
-    <!-- Additional SEO -->
-    <meta name="geo.region" content="SK">
-    <meta name="geo.placename" content="Bratislava">
-    <meta name="geo.position" content="48.1486;17.1077">
-    <meta name="ICBM" content="48.1486, 17.1077">
-    
-    <!-- Hreflang Tags -->
-    <link rel="alternate" hreflang="sk" href="https://www.droneye.sk/legislativa" />
-    <link rel="alternate" hreflang="en" href="https://www.droneye.sk/legislativa?lang=en" />
-    <link rel="alternate" hreflang="de" href="https://www.droneye.sk/legislativa?lang=de" />
-    <link rel="alternate" hreflang="x-default" href="https://www.droneye.sk/legislativa" />
-    
-    <!-- Structured Data - BreadcrumbList -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Domov",
-          "item": "https://www.droneye.sk/"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Legislatíva",
-          "item": "https://www.droneye.sk/legislativa"
-        }
-      ]
-    }
-    </script>
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="/assets/fontawesome/css/all.min.css">
-    
-    <link rel="stylesheet" href="/src/style.css">
-    <script>
-        // Hide content until translations are loaded to prevent flash of wrong language
-        (function() {
-            const savedLang = localStorage.getItem('language') || 'sk';
-            document.documentElement.setAttribute('lang', savedLang);
-            document.documentElement.style.visibility = 'hidden';
-        })();
-    </script>
-</head>
-<body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <a href="/" class="logo-link">
-                    <img src="assets/logo.svg" alt="DroneEye Logo" class="logo-img">
-                </a>
-            </div>
-            <ul class="nav-menu">
-                <li class="nav-item">
-                    <a href="/" class="nav-link" data-i18n="nav.home">Domov</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/sluzby" class="nav-link" data-i18n="nav.services">Naše služby</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/projekty" class="nav-link" data-i18n="nav.projects">Naše projekty</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/kurzy" class="nav-link" data-i18n="nav.team">Naše kurzy</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/cenova-ponuka" class="nav-link" data-i18n="nav.pricing">Cenová ponuka</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/kontakt" class="nav-link" data-i18n="nav.contact">Kontakt</a>
-                </li>
-                <li class="nav-item mobile-language-switcher">
-                    <div class="mobile-language-buttons">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title data-i18n-title="pageTitle.legislation">Legislatíva - DroneEye</title>
+        <meta
+            name="description"
+            content="Vykonávame dronové lietania legálne s všetkými povoleniami. Registrácia UAV, pilotná licencia, oprávnenie a poistenie."
+        />
+        <meta
+            name="keywords"
+            content="drone legislatíva, povolenia, licencia, registrácia UAV, poistenie dronu, EASA, Dopravný úrad"
+        />
+        <meta name="author" content="DroneEye" />
+        <meta name="robots" content="index, follow" />
+        <meta name="language" content="sk" />
+        <meta name="revisit-after" content="7 days" />
+
+        <!-- Favicon -->
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" href="/favicon.png" />
+        <link rel="apple-touch-icon" href="/favicon.png" />
+
+        <!-- Canonical URL -->
+        <link rel="canonical" href="https://www.droneye.sk/legislativa" />
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.droneye.sk/legislativa" />
+        <meta property="og:title" content="Legislatíva - DroneEye" />
+        <meta
+            property="og:description"
+            content="Vykonávame dronové lietania legálne s všetkými povoleniami. Registrácia UAV, pilotná licencia, oprávnenie a poistenie."
+        />
+        <meta property="og:image" content="https://www.droneye.sk/assets/legislation-og.jpg" />
+        <meta property="og:site_name" content="DroneEye" />
+        <meta property="og:locale" content="sk_SK" />
+
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://www.droneye.sk/legislativa" />
+        <meta property="twitter:title" content="Legislatíva - DroneEye" />
+        <meta
+            property="twitter:description"
+            content="Vykonávame dronové lietania legálne s všetkými povoleniami. Registrácia UAV, pilotná licencia, oprávnenie a poistenie."
+        />
+        <meta property="twitter:image" content="https://www.droneye.sk/assets/legislation-twitter.jpg" />
+
+        <!-- Additional SEO -->
+        <meta name="geo.region" content="SK" />
+        <meta name="geo.placename" content="Bratislava" />
+        <meta name="geo.position" content="48.1486;17.1077" />
+        <meta name="ICBM" content="48.1486, 17.1077" />
+
+        <!-- Hreflang Tags -->
+        <link rel="alternate" hreflang="sk" href="https://www.droneye.sk/legislativa" />
+        <link rel="alternate" hreflang="en" href="https://www.droneye.sk/legislativa?lang=en" />
+        <link rel="alternate" hreflang="de" href="https://www.droneye.sk/legislativa?lang=de" />
+        <link rel="alternate" hreflang="x-default" href="https://www.droneye.sk/legislativa" />
+
+        <!-- Structured Data - BreadcrumbList -->
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "Domov",
+                        "item": "https://www.droneye.sk/"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "Legislatíva",
+                        "item": "https://www.droneye.sk/legislativa"
+                    }
+                ]
+            }
+        </script>
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="/assets/fontawesome/css/all.min.css" />
+
+        <link rel="stylesheet" href="/src/style.css" />
+        <script>
+            // Hide content until translations are loaded to prevent flash of wrong language
+            (function () {
+                const savedLang = localStorage.getItem("language") || "sk";
+                document.documentElement.setAttribute("lang", savedLang);
+                document.documentElement.style.visibility = "hidden";
+            })();
+        </script>
+    </head>
+    <body>
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="/" class="logo-link">
+                        <img src="assets/logo.svg" alt="DroneEye Logo" class="logo-img" />
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="/" class="nav-link" data-i18n="nav.home">Domov</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/sluzby" class="nav-link" data-i18n="nav.services">Naše služby</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/projekty" class="nav-link" data-i18n="nav.projects">Naše projekty</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/kurzy" class="nav-link" data-i18n="nav.team">Naše kurzy</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/cenova-ponuka" class="nav-link" data-i18n="nav.pricing">Cenová ponuka</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/kontakt" class="nav-link" data-i18n="nav.contact">Kontakt</a>
+                    </li>
+                    <li class="nav-item mobile-language-switcher">
+                        <div class="mobile-language-buttons">
+                            <button class="language-option active" data-lang="sk">SK</button>
+                            <button class="language-option" data-lang="en">EN</button>
+                            <button class="language-option" data-lang="de">DE</button>
+                        </div>
+                    </li>
+                </ul>
+                <div class="language-switcher">
+                    <div class="language-buttons">
                         <button class="language-option active" data-lang="sk">SK</button>
                         <button class="language-option" data-lang="en">EN</button>
                         <button class="language-option" data-lang="de">DE</button>
                     </div>
-                </li>
-            </ul>
-            <div class="language-switcher">
-                <div class="language-buttons">
-                    <button class="language-option active" data-lang="sk">SK</button>
-                    <button class="language-option" data-lang="en">EN</button>
-                    <button class="language-option" data-lang="de">DE</button>
                 </div>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+                <button class="mobile-menu-close" aria-label="Close menu" style="display: none">
+                    <i class="fas fa-times" aria-hidden="true"></i>
+                </button>
             </div>
-            <div class="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-            <button class="mobile-menu-close" aria-label="Close menu" style="display: none;">
-                <i class="fas fa-times" aria-hidden="true"></i>
-            </button>
-        </div>
-    </nav>
+        </nav>
 
-    <!-- Main Content -->
-    <main class="main-content">
-        <!-- Legislation Page -->
-        <section class="page active">
-            <!-- Subpage Hero -->
-            <div class="subpage-hero">
-                <div class="subpage-hero-content">
-                    <h1 data-i18n="legislation.title">Legislatíva</h1>
-                    <p data-i18n="legislation.subtitle">Robíme to iba legálne</p>
-                </div>
-            </div>
-            
-            <!-- Subpage Content -->
-            <div class="subpage-content">
-                <!-- Introduction Section -->
-                <div class="content-section-text">
-                    <div class="container">
-                        <p class="section-intro" data-i18n="legislation.intro">Ako jedna z mála firiem na Slovensku vykonávame dronové lietania LEGÁLNE a disponujeme všetkými povoleniami k prevádzke UAS.</p>
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Legislation Page -->
+            <section class="page active">
+                <!-- Subpage Hero -->
+                <div class="subpage-hero">
+                    <div class="subpage-hero-content">
+                        <h1 data-i18n="legislation.title">Legislatíva</h1>
+                        <p data-i18n="legislation.subtitle">Robíme to iba legálne</p>
                     </div>
                 </div>
 
-                <!-- Registration Section -->
-                <div class="content-section-text">
-                    <div class="container">
-                        <h2 class="section-title" data-i18n="legislation.registration.title">Registrácia UAV</h2>
-                        <p data-i18n="legislation.registration.description">Naše drony (UAS) od renomovanej značky DJI, sú oficiálne schválené Európskou agentúrou pre bezpečnosť letectva (EASA). Každý dron, ktorý používame, je zaregistrovaný v registri lietadiel Dopravného úradu Slovenskej republiky a pravidelne prechádza našimi kontrolami a údržbou. Týmto spôsobom garantujeme, že každý let je v súlade s najnovšími legislatívnymi normami a leteckými predpismi.</p>
+                <!-- Subpage Content -->
+                <div class="subpage-content">
+                    <!-- Introduction Section -->
+                    <div class="content-section-text">
+                        <div class="container">
+                            <p class="section-intro" data-i18n="legislation.intro">
+                                Ako jedna z mála firiem na Slovensku vykonávame dronové lietania LEGÁLNE a disponujeme
+                                všetkými povoleniami k prevádzke UAS.
+                            </p>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Pilot License Section -->
-                <div class="content-section-text">
-                    <div class="container">
-                        <h2 class="section-title" data-i18n="legislation.license.title">Pilotná licencia</h2>
-                        <p data-i18n="legislation.license.description">Úspešne sme absolvovali teoretické a praktické skúšky pre kategórie A1/A3, A2 a STS na Dopravnom úrade Slovenskej republiky v divízii civilného letectva. Sme držiteľmi prevádzkového povolenia v osobitej kategórii ‚SPECIFIC' na lietanie s dronmi spôsobilými lietať bez pilota, v súlade s Nariadením (EÚ) 2019/947.</p>
-                        
-                        <div class="license-tiles">
-                            <div class="license-tile">
-                                <p data-i18n="legislation.license.item1">Pri lietaní neohrozujeme bezpečnosť iných lietadiel, osôb alebo majetkov na zemi.</p>
-                            </div>
-                            <div class="license-tile">
-                                <p data-i18n="legislation.license.item2">Počas každého letu na základe platnej legislatívy dodržiavame neustály vizuálny kontakt s dronom.</p>
-                            </div>
-                            <div class="license-tile">
-                                <p data-i18n="legislation.license.item3">Pre lietanie v CTR zóne žiadame povolenie od letiskovej veže.</p>
-                            </div>
-                            <div class="license-tile">
-                                <p data-i18n="legislation.license.item4">Vieme zabezpečiť špeciálne povolenie pre vzlet v tesnej blízkosti letísk a vojenských oblastí.</p>
+                    <!-- Registration Section -->
+                    <div class="content-section-text">
+                        <div class="container">
+                            <h2 class="section-title" data-i18n="legislation.registration.title">Registrácia UAV</h2>
+                            <p data-i18n="legislation.registration.description">
+                                Naše drony (UAS) od renomovanej značky DJI, sú oficiálne schválené Európskou agentúrou
+                                pre bezpečnosť letectva (EASA). Každý dron, ktorý používame, je zaregistrovaný v
+                                registri lietadiel Dopravného úradu Slovenskej republiky a pravidelne prechádza našimi
+                                kontrolami a údržbou. Týmto spôsobom garantujeme, že každý let je v súlade s najnovšími
+                                legislatívnymi normami a leteckými predpismi.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Pilot License Section -->
+                    <div class="content-section-text">
+                        <div class="container">
+                            <h2 class="section-title" data-i18n="legislation.license.title">Pilotná licencia</h2>
+                            <p data-i18n="legislation.license.description">
+                                Úspešne sme absolvovali teoretické a praktické skúšky pre kategórie A1/A3, A2 a STS na
+                                Dopravnom úrade Slovenskej republiky v divízii civilného letectva. Sme držiteľmi
+                                prevádzkového povolenia v osobitej kategórii ‚SPECIFIC' na lietanie s dronmi spôsobilými
+                                lietať bez pilota, v súlade s Nariadením (EÚ) 2019/947.
+                            </p>
+
+                            <div class="license-tiles">
+                                <div class="license-tile">
+                                    <p data-i18n="legislation.license.item1">
+                                        Pri lietaní neohrozujeme bezpečnosť iných lietadiel, osôb alebo majetkov na
+                                        zemi.
+                                    </p>
+                                </div>
+                                <div class="license-tile">
+                                    <p data-i18n="legislation.license.item2">
+                                        Počas každého letu na základe platnej legislatívy dodržiavame neustály vizuálny
+                                        kontakt s dronom.
+                                    </p>
+                                </div>
+                                <div class="license-tile">
+                                    <p data-i18n="legislation.license.item3">
+                                        Pre lietanie v CTR zóne žiadame povolenie od letiskovej veže.
+                                    </p>
+                                </div>
+                                <div class="license-tile">
+                                    <p data-i18n="legislation.license.item4">
+                                        Vieme zabezpečiť špeciálne povolenie pre vzlet v tesnej blízkosti letísk a
+                                        vojenských oblastí.
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Authorization Section -->
-                <div class="content-section-text">
-                    <div class="container">
-                        <h2 class="section-title" data-i18n="legislation.authorization.title">Oprávnenie</h2>
-                        <p data-i18n="legislation.authorization.description">Prevádzkové povolenie pre „osobitnú" kategóriu, vydané a schválené Dopravným úradom na základe prísneho posúdenia analýzy rizík SORA, nás oprávňuje legálne vykonávať lety s dronom za špecifických podmienok.</p>
-                    </div>
-                </div>
-
-                <!-- Insurance Section -->
-                <div class="content-section-text">
-                    <div class="container">
-                        <h2 class="section-title" data-i18n="legislation.insurance.title">Poistenie</h2>
-                        <p data-i18n="legislation.insurance.description">Každý náš dron je riadne poistený proti zodpovednosti za škody spôsobené pádom, a to prostredníctvom uzatvoreného poistenia PZP (poistenie zodpovednosti za škodu). Poistná suma je stanovená na výšku až <strong>1 300 000 EUR</strong>, čo pokrýva prípadné riziká a zabezpečuje finančnú ochranu v prípade nepredvídaných udalostí počas prevádzky.</p>
-                    </div>
-                </div>
-
-                <!-- Management Section -->
-                <div class="content-section-text">
-                    <div class="container">
-                        <h2 class="section-title" data-i18n="legislation.management.title">Správa povolení</h2>
-                        <p data-i18n="legislation.management.description">O naše dronové povolenia a prevádzkovú dokumentáciu sa stará overená a skúsená spoločnosť, s ktorou úzko spolupracujeme. Táto spoločnosť zabezpečuje komplexnú správu našich povolení v kategórii <strong>SPECIFIC</strong>, vrátane ich pravidelnej aktualizácie a monitorovania aktuálnych predpisov, aby sme mohli zabezpečiť najvyššiu úroveň bezpečnosti počas našich letov. S ich pomocou neustále prispôsobujeme našu prevádzkovú dokumentáciu, čím garantujeme súlad s aktuálnymi leteckými normami a predpismi.</p>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-    </main>
-
-    <!-- Loading Screen -->
-    <div id="loading-screen">
-        <div class="loader">
-            <div class="loader-circle"></div>
-            <p data-i18n="loading">Načítavam...</p>
-        </div>
-    </div>
-
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3 data-i18n="footer.contact">Kontakt</h3>
-                <ul class="footer-links">
-                    <li><a href="mailto:info@droneye.sk">📧 info@droneye.sk</a></li>
-                    <li><a href="tel:+421950614303">📞 +421 950 614 303</a></li>
-                    <li>
-                        <div class="social-links">
-                            <a href="https://www.instagram.com/dron_eyesky" target="_blank" rel="nofollow" class="social-link">
-                                <img src="assets/instagram.png" alt="Instagram Droneye" loading="lazy" />
-                            </a>
-                            <a href="https://www.facebook.com/profile.php?id=100066345406669" target="_blank" rel="nofollow" class="social-link">
-                                <img src="assets/fb.png" alt="Facebook Droneye" loading="lazy" />
-                            </a>
-                            <a href="https://www.youtube.com/@dron_eyesky" target="_blank" rel="nofollow" class="social-link">
-                                <img src="assets/yt.png" alt="YouTube Droneye" loading="lazy" />
-                            </a>
-                            <a href="#" target="_blank" rel="nofollow" class="social-link">
-                                <img src="assets/linkedin.png" alt="LinkedIn Droneye" loading="lazy" />
-                            </a>
+                    <!-- Authorization Section -->
+                    <div class="content-section-text">
+                        <div class="container">
+                            <h2 class="section-title" data-i18n="legislation.authorization.title">Oprávnenie</h2>
+                            <p data-i18n="legislation.authorization.description">
+                                Prevádzkové povolenie pre „osobitnú" kategóriu, vydané a schválené Dopravným úradom na
+                                základe prísneho posúdenia analýzy rizík SORA, nás oprávňuje legálne vykonávať lety s
+                                dronom za špecifických podmienok.
+                            </p>
                         </div>
-                    </li>
-                </ul>
-            </div>
-            
-            <div class="footer-section footer-form">
-                <h3 data-i18n="footer.quickContact">Kontaktný formulár</h3>
-                <form class="footer-contact-form" novalidate>
-                    <div class="footer-form-field">
-                        <input type="text" name="name" data-i18n-placeholder="footer.form.name" placeholder="Vaše meno">
-                        <span class="footer-form-field-error" id="footer-error-name"></span>
                     </div>
-                    <div class="footer-form-field">
-                        <input type="email" name="email" data-i18n-placeholder="footer.form.email" placeholder="Email">
-                        <span class="footer-form-field-error" id="footer-error-email"></span>
-                    </div>
-                    <div class="footer-form-field">
-                        <input type="tel" name="phone" data-i18n-placeholder="footer.form.phone" placeholder="Telefónne číslo">
-                        <span class="footer-form-field-error" id="footer-error-phone"></span>
-                    </div>
-                    <div class="footer-form-field">
-                        <textarea name="message" data-i18n-placeholder="footer.form.message" placeholder="Správa" rows="3"></textarea>
-                        <span class="footer-form-field-error" id="footer-error-message"></span>
-                    </div>
-                    <div class="footer-form-field">
-                        <label class="footer-form-consent">
-                            <input type="checkbox" name="consent">
-                            <span data-i18n="footer.form.consent">Súhlasím so spracovaním osobných údajov pre účely tohto formulára.</span>
-                        </label>
-                        <span class="footer-form-field-error" id="footer-error-consent"></span>
-                    </div>
-                    <div id="footer-form-success" class="footer-form-message footer-form-success" style="display: none;"></div>
-                    <div id="footer-form-error" class="footer-form-message footer-form-error" style="display: none;"></div>
-                    <button type="submit" data-i18n="footer.form.submit">Odoslať</button>
-                </form>
-            </div>
-        </div>
-        
-        <div class="footer-bottom">
-            <p>&copy; 2024 Droneye. <span data-i18n="footer.copyright">Všetky práva vyhradené.</span></p>
-            <div class="footer-bottom-right">
-                <div class="footer-theme-switcher">
-                    <button class="footer-theme-btn" data-theme="light" title="Light mode" aria-label="Switch to light mode"><i class="fas fa-sun" aria-hidden="true"></i></button>
-                    <button class="footer-theme-btn" data-theme="dark" title="Dark mode" aria-label="Switch to dark mode"><i class="fas fa-moon" aria-hidden="true"></i></button>
-                </div>
-                <div class="footer-legal">
-                    <a href="/legislativa" data-i18n="footer.legislation">Legislatíva</a>
-                    <a href="/gdpr" data-i18n="footer.privacy">GDPR</a>
-                </div>
-            </div>
-        </div>
-    </footer>
 
-    <!-- Cookie Consent Banner -->
-    <div id="cookie-banner" class="cookie-banner" style="display: none;">
-        <div class="cookie-banner-content">
-            <div class="cookie-banner-text">
-                <h4 data-i18n="cookies.title">Používame cookies</h4>
-                <p data-i18n="cookies.description">Táto stránka používa cookies na zlepšenie vášho zážitku. Pokračovaním v prehliadaní súhlasíte s používaním cookies v súlade s našou <a href="/gdpr">politikou cookies</a>.</p>
-            </div>
-            <div class="cookie-banner-buttons">
-                <button id="cookie-accept" class="cookie-btn cookie-btn-accept" data-i18n="cookies.accept">Prijať všetky</button>
-                <button id="cookie-reject" class="cookie-btn cookie-btn-reject" data-i18n="cookies.reject">Odmietnuť</button>
-                <button id="cookie-settings" class="cookie-btn cookie-btn-settings" data-i18n="cookies.settings">Nastavenia</button>
+                    <!-- Insurance Section -->
+                    <div class="content-section-text">
+                        <div class="container">
+                            <h2 class="section-title" data-i18n="legislation.insurance.title">Poistenie</h2>
+                            <p data-i18n="legislation.insurance.description">
+                                Každý náš dron je riadne poistený proti zodpovednosti za škody spôsobené pádom, a to
+                                prostredníctvom uzatvoreného poistenia PZP (poistenie zodpovednosti za škodu). Poistná
+                                suma je stanovená na výšku až <strong>1 300 000 EUR</strong>, čo pokrýva prípadné riziká
+                                a zabezpečuje finančnú ochranu v prípade nepredvídaných udalostí počas prevádzky.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Management Section -->
+                    <div class="content-section-text">
+                        <div class="container">
+                            <h2 class="section-title" data-i18n="legislation.management.title">Správa povolení</h2>
+                            <p data-i18n="legislation.management.description">
+                                O naše dronové povolenia a prevádzkovú dokumentáciu sa stará overená a skúsená
+                                spoločnosť, s ktorou úzko spolupracujeme. Táto spoločnosť zabezpečuje komplexnú správu
+                                našich povolení v kategórii <strong>SPECIFIC</strong>, vrátane ich pravidelnej
+                                aktualizácie a monitorovania aktuálnych predpisov, aby sme mohli zabezpečiť najvyššiu
+                                úroveň bezpečnosti počas našich letov. S ich pomocou neustále prispôsobujeme našu
+                                prevádzkovú dokumentáciu, čím garantujeme súlad s aktuálnymi leteckými normami a
+                                predpismi.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Loading Screen -->
+        <div id="loading-screen">
+            <div class="loader">
+                <div class="loader-circle"></div>
+                <p data-i18n="loading">Načítavam...</p>
             </div>
         </div>
-    </div>
 
-    <script type="module" src="/src/main.js"></script>
-    <script type="module" src="/src/cookies.js"></script>
-</body>
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 data-i18n="footer.contact">Kontakt</h3>
+                    <ul class="footer-links">
+                        <li><a href="mailto:info@droneye.sk">📧 info@droneye.sk</a></li>
+                        <li><a href="tel:+421950614303">📞 +421 950 614 303</a></li>
+                        <li>
+                            <div class="social-links">
+                                <a
+                                    href="https://www.instagram.com/dron_eyesky"
+                                    target="_blank"
+                                    rel="nofollow"
+                                    class="social-link"
+                                >
+                                    <img src="assets/instagram.png" alt="Instagram Droneye" loading="lazy" />
+                                </a>
+                                <a
+                                    href="https://www.facebook.com/profile.php?id=100066345406669"
+                                    target="_blank"
+                                    rel="nofollow"
+                                    class="social-link"
+                                >
+                                    <img src="assets/fb.png" alt="Facebook Droneye" loading="lazy" />
+                                </a>
+                                <a
+                                    href="https://www.youtube.com/@dron_eyesky"
+                                    target="_blank"
+                                    rel="nofollow"
+                                    class="social-link"
+                                >
+                                    <img src="assets/yt.png" alt="YouTube Droneye" loading="lazy" />
+                                </a>
+                                <a href="#" target="_blank" rel="nofollow" class="social-link">
+                                    <img src="assets/linkedin.png" alt="LinkedIn Droneye" loading="lazy" />
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="footer-section footer-form">
+                    <h3 data-i18n="footer.quickContact">Kontaktný formulár</h3>
+                    <form class="footer-contact-form" novalidate>
+                        <div class="footer-form-field">
+                            <input
+                                type="text"
+                                name="name"
+                                data-i18n-placeholder="footer.form.name"
+                                placeholder="Vaše meno"
+                            />
+                            <span class="footer-form-field-error" id="footer-error-name"></span>
+                        </div>
+                        <div class="footer-form-field">
+                            <input
+                                type="email"
+                                name="email"
+                                data-i18n-placeholder="footer.form.email"
+                                placeholder="Email"
+                            />
+                            <span class="footer-form-field-error" id="footer-error-email"></span>
+                        </div>
+                        <div class="footer-form-field">
+                            <input
+                                type="tel"
+                                name="phone"
+                                data-i18n-placeholder="footer.form.phone"
+                                placeholder="Telefónne číslo"
+                            />
+                            <span class="footer-form-field-error" id="footer-error-phone"></span>
+                        </div>
+                        <div class="footer-form-field">
+                            <textarea
+                                name="message"
+                                data-i18n-placeholder="footer.form.message"
+                                placeholder="Správa"
+                                rows="3"
+                            ></textarea>
+                            <span class="footer-form-field-error" id="footer-error-message"></span>
+                        </div>
+                        <div class="footer-form-field">
+                            <label class="footer-form-consent">
+                                <input type="checkbox" name="consent" />
+                                <span data-i18n="footer.form.consent"
+                                    >Súhlasím so spracovaním osobných údajov pre účely tohto formulára.</span
+                                >
+                            </label>
+                            <span class="footer-form-field-error" id="footer-error-consent"></span>
+                        </div>
+                        <div
+                            id="footer-form-success"
+                            class="footer-form-message footer-form-success"
+                            style="display: none"
+                        ></div>
+                        <div
+                            id="footer-form-error"
+                            class="footer-form-message footer-form-error"
+                            style="display: none"
+                        ></div>
+                        <button type="submit" data-i18n="footer.form.submit">Odoslať</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 Droneye. <span data-i18n="footer.copyright">Všetky práva vyhradené.</span></p>
+                <div class="footer-bottom-right">
+                    <div class="footer-theme-switcher">
+                        <button
+                            class="footer-theme-btn"
+                            data-theme="light"
+                            title="Light mode"
+                            aria-label="Switch to light mode"
+                        >
+                            <i class="fas fa-sun" aria-hidden="true"></i>
+                        </button>
+                        <button
+                            class="footer-theme-btn"
+                            data-theme="dark"
+                            title="Dark mode"
+                            aria-label="Switch to dark mode"
+                        >
+                            <i class="fas fa-moon" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <div class="footer-legal">
+                        <a href="/legislativa" data-i18n="footer.legislation">Legislatíva</a>
+                        <a href="/gdpr" data-i18n="footer.privacy">GDPR</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Cookie Consent Banner -->
+        <div id="cookie-banner" class="cookie-banner" style="display: none">
+            <div class="cookie-banner-content">
+                <div class="cookie-banner-text">
+                    <h4 data-i18n="cookies.title">Používame cookies</h4>
+                    <p data-i18n="cookies.description">
+                        Táto stránka používa cookies na zlepšenie vášho zážitku. Pokračovaním v prehliadaní súhlasíte s
+                        používaním cookies v súlade s našou <a href="/gdpr">politikou cookies</a>.
+                    </p>
+                </div>
+                <div class="cookie-banner-buttons">
+                    <button id="cookie-accept" class="cookie-btn cookie-btn-accept" data-i18n="cookies.accept">
+                        Prijať všetky
+                    </button>
+                    <button id="cookie-reject" class="cookie-btn cookie-btn-reject" data-i18n="cookies.reject">
+                        Odmietnuť
+                    </button>
+                    <button id="cookie-settings" class="cookie-btn cookie-btn-settings" data-i18n="cookies.settings">
+                        Nastavenia
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <script type="module" src="/src/main.js"></script>
+        <script type="module" src="/src/cookies.js"></script>
+    </body>
 </html>
-

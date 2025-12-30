@@ -1,5 +1,5 @@
 // Internationalization module
-let currentLanguage = 'sk';
+let currentLanguage = "sk";
 let translations = {};
 
 // Get current language
@@ -15,17 +15,17 @@ export function getTranslations() {
 // Get base URL helper
 function getBaseUrl() {
     let baseUrl = import.meta.env.BASE_URL;
-    
-    if (!baseUrl || baseUrl === '/') {
+
+    if (!baseUrl || baseUrl === "/") {
         const path = window.location.pathname;
-        const pathDir = path.substring(0, path.lastIndexOf('/') + 1);
+        const pathDir = path.substring(0, path.lastIndexOf("/") + 1);
         baseUrl = pathDir;
     }
-    
-    if (!baseUrl.endsWith('/')) {
-        baseUrl += '/';
+
+    if (!baseUrl.endsWith("/")) {
+        baseUrl += "/";
     }
-    
+
     return baseUrl;
 }
 
@@ -34,22 +34,22 @@ async function loadTranslations() {
     try {
         const baseUrl = getBaseUrl();
         const translationPath = `${baseUrl}src/locales/${currentLanguage}.json`;
-        console.log('Loading translations from:', translationPath, 'Base URL:', baseUrl);
+        console.log("Loading translations from:", translationPath, "Base URL:", baseUrl);
         const response = await fetch(translationPath);
-        
+
         if (!response.ok) {
             throw new Error(`Failed to load translations: ${response.status}`);
         }
-        
+
         translations = await response.json();
-        console.log('Translations loaded successfully:', currentLanguage);
+        console.log("Translations loaded successfully:", currentLanguage);
     } catch (error) {
-        console.error('Error loading translations:', error);
+        console.error("Error loading translations:", error);
         // Fallback to Slovak if loading fails
-        if (currentLanguage !== 'sk') {
-            console.log('Falling back to Slovak translations');
-            currentLanguage = 'sk';
-            
+        if (currentLanguage !== "sk") {
+            console.log("Falling back to Slovak translations");
+            currentLanguage = "sk";
+
             const baseUrl = getBaseUrl();
             const response = await fetch(`${baseUrl}src/locales/sk.json`);
             if (response.ok) {
@@ -61,7 +61,7 @@ async function loadTranslations() {
 
 // Get nested translation value
 function getNestedTranslation(obj, path) {
-    return path.split('.').reduce((current, key) => {
+    return path.split(".").reduce((current, key) => {
         if (current && current[key] !== undefined) {
             return current[key];
         }
@@ -79,7 +79,7 @@ function replaceUrlsWithBaseUrl(text) {
     // Replace absolute URLs (starting with /) but not // (protocol-relative)
     return text.replace(/href=["'](\/[^"']+)["']/g, (match, path) => {
         // Skip if already has base URL or is external link
-        if (path.startsWith(baseUrl) || path.startsWith('http') || path.startsWith('mailto:')) {
+        if (path.startsWith(baseUrl) || path.startsWith("http") || path.startsWith("mailto:")) {
             return match;
         }
         // Add base URL to absolute paths
@@ -90,125 +90,130 @@ function replaceUrlsWithBaseUrl(text) {
 
 // Apply translations to elements
 function applyTranslations() {
-    console.log('Applying translations, current language:', currentLanguage);
+    console.log("Applying translations, current language:", currentLanguage);
     let translatedCount = 0;
     const baseUrl = getBaseUrl();
-    
+
     // Update elements with data-i18n attribute
-    document.querySelectorAll('[data-i18n]').forEach(element => {
-        const key = element.getAttribute('data-i18n');
+    document.querySelectorAll("[data-i18n]").forEach(element => {
+        const key = element.getAttribute("data-i18n");
         const translation = getNestedTranslation(translations, key);
         if (translation) {
             // Check if translation contains HTML (like links)
-            if (translation.includes('<a ') || translation.includes('<br>') || translation.includes('<strong>') || translation.includes('<em>')) {
+            if (
+                translation.includes("<a ") ||
+                translation.includes("<br>") ||
+                translation.includes("<strong>") ||
+                translation.includes("<em>")
+            ) {
                 // Replace URLs in translation with base URL
                 const processedTranslation = replaceUrlsWithBaseUrl(translation);
                 element.innerHTML = processedTranslation;
             } else {
                 element.textContent = translation;
             }
-            
+
             // Also update href attribute if element is a link and has absolute path
-            if (element.tagName === 'A' && element.hasAttribute('href')) {
-                const href = element.getAttribute('href');
-                if (href.startsWith('/') && !href.startsWith('//')) {
+            if (element.tagName === "A" && element.hasAttribute("href")) {
+                const href = element.getAttribute("href");
+                if (href.startsWith("/") && !href.startsWith("//")) {
                     // Update href to include base URL
                     const newHref = baseUrl + href.substring(1);
-                    element.setAttribute('href', newHref);
+                    element.setAttribute("href", newHref);
                 }
             }
-            
+
             translatedCount++;
         } else {
-            console.warn('Translation not found for key:', key);
+            console.warn("Translation not found for key:", key);
         }
     });
-    
+
     // Update placeholders
-    document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
-        const key = element.getAttribute('data-i18n-placeholder');
+    document.querySelectorAll("[data-i18n-placeholder]").forEach(element => {
+        const key = element.getAttribute("data-i18n-placeholder");
         const translation = getNestedTranslation(translations, key);
         if (translation) {
             element.placeholder = translation;
             translatedCount++;
         } else {
-            console.warn('Placeholder translation not found for key:', key);
+            console.warn("Placeholder translation not found for key:", key);
         }
     });
-    
+
     // Update page title
-    const titleElement = document.querySelector('title[data-i18n-title]');
+    const titleElement = document.querySelector("title[data-i18n-title]");
     if (titleElement) {
-        const key = titleElement.getAttribute('data-i18n-title');
+        const key = titleElement.getAttribute("data-i18n-title");
         const translation = getNestedTranslation(translations, key);
         if (translation) {
             titleElement.textContent = translation;
             translatedCount++;
         } else {
-            console.warn('Title translation not found for key:', key);
+            console.warn("Title translation not found for key:", key);
         }
     }
-    
-    console.log('Applied', translatedCount, 'translations');
+
+    console.log("Applied", translatedCount, "translations");
 }
 
 // Update active language option
 function updateActiveLanguageOption() {
-    const languageOptions = document.querySelectorAll('.language-option');
-    console.log('Updating active language option, currentLanguage:', currentLanguage);
+    const languageOptions = document.querySelectorAll(".language-option");
+    console.log("Updating active language option, currentLanguage:", currentLanguage);
     languageOptions.forEach(option => {
-        const lang = option.getAttribute('data-lang');
-        option.classList.remove('active');
+        const lang = option.getAttribute("data-lang");
+        option.classList.remove("active");
         if (lang === currentLanguage) {
-            option.classList.add('active');
-            console.log('Set active class on:', lang);
+            option.classList.add("active");
+            console.log("Set active class on:", lang);
         }
     });
 }
 
 // Initialize language switcher
 function initLanguageSwitcher() {
-    const languageOptions = document.querySelectorAll('.language-option');
-    console.log('Initializing language switcher, found options:', languageOptions.length);
-    
+    const languageOptions = document.querySelectorAll(".language-option");
+    console.log("Initializing language switcher, found options:", languageOptions.length);
+
     // Remove all existing listeners by cloning and replacing
     languageOptions.forEach(option => {
         const newOption = option.cloneNode(true);
         option.parentNode.replaceChild(newOption, option);
     });
-    
+
     // Get fresh references after cloning
-    const freshOptions = document.querySelectorAll('.language-option');
-    
+    const freshOptions = document.querySelectorAll(".language-option");
+
     freshOptions.forEach(option => {
-        option.addEventListener('click', async (e) => {
+        option.addEventListener("click", async e => {
             e.preventDefault();
             e.stopPropagation();
-            const newLang = option.getAttribute('data-lang');
-            console.log('Language option clicked:', newLang, 'Current:', currentLanguage);
-            
+            const newLang = option.getAttribute("data-lang");
+            console.log("Language option clicked:", newLang, "Current:", currentLanguage);
+
             if (newLang !== currentLanguage) {
-                console.log('Switching language from', currentLanguage, 'to', newLang);
+                console.log("Switching language from", currentLanguage, "to", newLang);
                 currentLanguage = newLang;
-                localStorage.setItem('language', currentLanguage);
-                
+                localStorage.setItem("language", currentLanguage);
+
                 // Update HTML lang attribute
-                document.documentElement.setAttribute('lang', currentLanguage);
-                
+                document.documentElement.setAttribute("lang", currentLanguage);
+
                 // Load new translations
                 await loadTranslations();
-                
+
                 // Apply new translations
                 applyTranslations();
-                
+
                 // Update active language option
                 updateActiveLanguageOption();
             } else {
-                console.log('Language already set to', currentLanguage);
+                console.log("Language already set to", currentLanguage);
             }
         });
     });
-    
+
     // Set initial active language
     updateActiveLanguageOption();
 }
@@ -217,27 +222,26 @@ function initLanguageSwitcher() {
 export async function initInternationalization() {
     // Check URL parameter for language first, then localStorage, then default to 'sk'
     const urlParams = new URLSearchParams(window.location.search);
-    const langParam = urlParams.get('lang');
-    if (langParam && ['sk', 'en', 'de'].includes(langParam)) {
+    const langParam = urlParams.get("lang");
+    if (langParam && ["sk", "en", "de"].includes(langParam)) {
         currentLanguage = langParam;
-        localStorage.setItem('language', currentLanguage);
+        localStorage.setItem("language", currentLanguage);
     } else {
-        currentLanguage = localStorage.getItem('language') || 'sk';
+        currentLanguage = localStorage.getItem("language") || "sk";
     }
-    
+
     // Set HTML lang attribute to current language (default: 'sk')
-    document.documentElement.setAttribute('lang', currentLanguage);
-    
+    document.documentElement.setAttribute("lang", currentLanguage);
+
     // Load translations
     await loadTranslations();
-    
+
     // Apply translations
     applyTranslations();
-    
+
     // Show content after translations are applied
-    document.documentElement.style.visibility = 'visible';
-    
+    document.documentElement.style.visibility = "visible";
+
     // Initialize language switcher
     initLanguageSwitcher();
 }
-

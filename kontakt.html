@@ -1,311 +1,423 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="sk" data-theme="light">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n-title="pageTitle.contact">Kontakt - DroneEye</title>
-    <meta name="description" content="Kontaktujte nás pre drone služby. Telefón, email a kontaktný formulár. Profesionálne riešenia pre vaše potreby.">
-    <meta name="keywords" content="kontakt, drone služby, telefón, email, formulár, Bratislava, Slovensko">
-    <meta name="author" content="DroneEye">
-    <meta name="robots" content="index, follow">
-    <meta name="language" content="sk">
-    <meta name="revisit-after" content="7 days">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="icon" type="image/png" href="/favicon.png">
-    <link rel="apple-touch-icon" href="/favicon.png">
-    
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://www.droneye.sk/kontakt">
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.droneye.sk/kontakt">
-    <meta property="og:title" content="Kontakt - DroneEye">
-    <meta property="og:description" content="Kontaktujte nás pre drone služby. Telefón, email a kontaktný formulár. Profesionálne riešenia pre vaše potreby.">
-    <meta property="og:image" content="https://www.droneye.sk/assets/contact-og.jpg">
-    <meta property="og:site_name" content="DroneEye">
-    <meta property="og:locale" content="sk_SK">
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://www.droneye.sk/kontakt">
-    <meta property="twitter:title" content="Kontakt - DroneEye">
-    <meta property="twitter:description" content="Kontaktujte nás pre drone služby. Telefón, email a kontaktný formulár. Profesionálne riešenia pre vaše potreby.">
-    <meta property="twitter:image" content="https://www.droneye.sk/assets/contact-twitter.jpg">
-    
-    <!-- Additional SEO -->
-    <meta name="geo.region" content="SK">
-    <meta name="geo.placename" content="Bratislava">
-    <meta name="geo.position" content="48.1486;17.1077">
-    <meta name="ICBM" content="48.1486, 17.1077">
-    
-    <!-- Hreflang Tags -->
-    <link rel="alternate" hreflang="sk" href="https://www.droneye.sk/kontakt" />
-    <link rel="alternate" hreflang="en" href="https://www.droneye.sk/kontakt?lang=en" />
-    <link rel="alternate" hreflang="de" href="https://www.droneye.sk/kontakt?lang=de" />
-    <link rel="alternate" hreflang="x-default" href="https://www.droneye.sk/kontakt" />
-    
-    <!-- Structured Data - ContactPage -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "ContactPage",
-      "mainEntity": {
-        "@type": "Organization",
-        "name": "DroneEye",
-        "telephone": "+421950614303",
-        "email": "info@droneye.sk"
-      }
-    }
-    </script>
-    
-    <!-- Structured Data - BreadcrumbList -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Domov",
-          "item": "https://www.droneye.sk/"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Kontakt",
-          "item": "https://www.droneye.sk/kontakt"
-        }
-      ]
-    }
-    </script>
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="/assets/fontawesome/css/all.min.css">
-    
-    <link rel="stylesheet" href="/src/style.css">
-    <script>
-        // Hide content until translations are loaded to prevent flash of wrong language
-        (function() {
-            const savedLang = localStorage.getItem('language') || 'sk';
-            document.documentElement.setAttribute('lang', savedLang);
-            document.documentElement.style.visibility = 'hidden';
-        })();
-    </script>
-</head>
-<body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <a href="/" class="logo-link">
-                    <img src="assets/logo.svg" alt="DroneEye Logo" class="logo-img">
-                </a>
-            </div>
-            <ul class="nav-menu">
-                <li class="nav-item">
-                    <a href="/" class="nav-link" data-i18n="nav.home">Domov</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/sluzby" class="nav-link" data-i18n="nav.services">Naše služby</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/projekty" class="nav-link" data-i18n="nav.projects">Naše projekty</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/kurzy" class="nav-link" data-i18n="nav.team">Naše kurzy</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/cenova-ponuka" class="nav-link" data-i18n="nav.pricing">Cenová ponuka</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/kontakt" class="nav-link active" data-i18n="nav.contact">Kontakt</a>
-                </li>
-                <li class="nav-item mobile-language-switcher">
-                    <div class="mobile-language-buttons">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title data-i18n-title="pageTitle.contact">Kontakt - DroneEye</title>
+        <meta
+            name="description"
+            content="Kontaktujte nás pre drone služby. Telefón, email a kontaktný formulár. Profesionálne riešenia pre vaše potreby."
+        />
+        <meta name="keywords" content="kontakt, drone služby, telefón, email, formulár, Bratislava, Slovensko" />
+        <meta name="author" content="DroneEye" />
+        <meta name="robots" content="index, follow" />
+        <meta name="language" content="sk" />
+        <meta name="revisit-after" content="7 days" />
+
+        <!-- Favicon -->
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" href="/favicon.png" />
+        <link rel="apple-touch-icon" href="/favicon.png" />
+
+        <!-- Canonical URL -->
+        <link rel="canonical" href="https://www.droneye.sk/kontakt" />
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.droneye.sk/kontakt" />
+        <meta property="og:title" content="Kontakt - DroneEye" />
+        <meta
+            property="og:description"
+            content="Kontaktujte nás pre drone služby. Telefón, email a kontaktný formulár. Profesionálne riešenia pre vaše potreby."
+        />
+        <meta property="og:image" content="https://www.droneye.sk/assets/contact-og.jpg" />
+        <meta property="og:site_name" content="DroneEye" />
+        <meta property="og:locale" content="sk_SK" />
+
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://www.droneye.sk/kontakt" />
+        <meta property="twitter:title" content="Kontakt - DroneEye" />
+        <meta
+            property="twitter:description"
+            content="Kontaktujte nás pre drone služby. Telefón, email a kontaktný formulár. Profesionálne riešenia pre vaše potreby."
+        />
+        <meta property="twitter:image" content="https://www.droneye.sk/assets/contact-twitter.jpg" />
+
+        <!-- Additional SEO -->
+        <meta name="geo.region" content="SK" />
+        <meta name="geo.placename" content="Bratislava" />
+        <meta name="geo.position" content="48.1486;17.1077" />
+        <meta name="ICBM" content="48.1486, 17.1077" />
+
+        <!-- Hreflang Tags -->
+        <link rel="alternate" hreflang="sk" href="https://www.droneye.sk/kontakt" />
+        <link rel="alternate" hreflang="en" href="https://www.droneye.sk/kontakt?lang=en" />
+        <link rel="alternate" hreflang="de" href="https://www.droneye.sk/kontakt?lang=de" />
+        <link rel="alternate" hreflang="x-default" href="https://www.droneye.sk/kontakt" />
+
+        <!-- Structured Data - ContactPage -->
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "ContactPage",
+                "mainEntity": {
+                    "@type": "Organization",
+                    "name": "DroneEye",
+                    "telephone": "+421950614303",
+                    "email": "info@droneye.sk"
+                }
+            }
+        </script>
+
+        <!-- Structured Data - BreadcrumbList -->
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "Domov",
+                        "item": "https://www.droneye.sk/"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "Kontakt",
+                        "item": "https://www.droneye.sk/kontakt"
+                    }
+                ]
+            }
+        </script>
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="/assets/fontawesome/css/all.min.css" />
+
+        <link rel="stylesheet" href="/src/style.css" />
+        <script>
+            // Hide content until translations are loaded to prevent flash of wrong language
+            (function () {
+                const savedLang = localStorage.getItem("language") || "sk";
+                document.documentElement.setAttribute("lang", savedLang);
+                document.documentElement.style.visibility = "hidden";
+            })();
+        </script>
+    </head>
+    <body>
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="/" class="logo-link">
+                        <img src="assets/logo.svg" alt="DroneEye Logo" class="logo-img" />
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="/" class="nav-link" data-i18n="nav.home">Domov</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/sluzby" class="nav-link" data-i18n="nav.services">Naše služby</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/projekty" class="nav-link" data-i18n="nav.projects">Naše projekty</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/kurzy" class="nav-link" data-i18n="nav.team">Naše kurzy</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/cenova-ponuka" class="nav-link" data-i18n="nav.pricing">Cenová ponuka</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/kontakt" class="nav-link active" data-i18n="nav.contact">Kontakt</a>
+                    </li>
+                    <li class="nav-item mobile-language-switcher">
+                        <div class="mobile-language-buttons">
+                            <button class="language-option active" data-lang="sk">SK</button>
+                            <button class="language-option" data-lang="en">EN</button>
+                            <button class="language-option" data-lang="de">DE</button>
+                        </div>
+                    </li>
+                </ul>
+                <div class="language-switcher">
+                    <div class="language-buttons">
                         <button class="language-option active" data-lang="sk">SK</button>
                         <button class="language-option" data-lang="en">EN</button>
                         <button class="language-option" data-lang="de">DE</button>
                     </div>
-                </li>
-            </ul>
-            <div class="language-switcher">
-                <div class="language-buttons">
-                    <button class="language-option active" data-lang="sk">SK</button>
-                    <button class="language-option" data-lang="en">EN</button>
-                    <button class="language-option" data-lang="de">DE</button>
                 </div>
-            </div>
-            <div class="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-            <button class="mobile-menu-close" aria-label="Close menu" style="display: none;">
-                <i class="fas fa-times" aria-hidden="true"></i>
-            </button>
-        </div>
-    </nav>
-
-
-    <!-- Main Content -->
-    <main class="main-content">
-        <!-- Contact Page -->
-        <section class="page active">
-            <!-- Subpage Hero -->
-            <div class="subpage-hero">
-                <div class="subpage-hero-content">
-                    <h1 data-i18n="contact.title">Kontakt</h1>
-                    <p data-i18n="contact.subtitle">Spojte sa s nami pre vaše potreby</p>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
                 </div>
+                <button class="mobile-menu-close" aria-label="Close menu" style="display: none">
+                    <i class="fas fa-times" aria-hidden="true"></i>
+                </button>
             </div>
-            
-            <!-- Subpage Content -->
-            <div class="subpage-content">
-                <div class="container">
-                <div class="contact-content">
-                    <div class="contact-info">
-                        <h3 data-i18n="contact.info.title">Kontaktné údaje</h3>
-                        <p><a href="mailto:info@droneye.sk" data-i18n="contact.info.email">📧 info@droneye.sk</a></p>
-                        <p><a href="tel:+421950614303" data-i18n="contact.info.phone">📞 +421 950 614 303</a></p>
-                        <p data-i18n="contact.info.address">📍 Bratislava, Slovensko</p>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Contact Page -->
+            <section class="page active">
+                <!-- Subpage Hero -->
+                <div class="subpage-hero">
+                    <div class="subpage-hero-content">
+                        <h1 data-i18n="contact.title">Kontakt</h1>
+                        <p data-i18n="contact.subtitle">Spojte sa s nami pre vaše potreby</p>
                     </div>
-                    <form id="contact-form" class="contact-form" novalidate>
-                        <h3 class="contact-form-title" data-i18n="contact.form.title">Napíšte nám</h3>
-                        <div class="contact-form-field">
-                            <input type="text" name="name" placeholder="Meno" data-i18n-placeholder="contact.form.name">
-                            <span class="contact-form-field-error" id="error-name"></span>
+                </div>
+
+                <!-- Subpage Content -->
+                <div class="subpage-content">
+                    <div class="container">
+                        <div class="contact-content">
+                            <div class="contact-info">
+                                <h3 data-i18n="contact.info.title">Kontaktné údaje</h3>
+                                <p>
+                                    <a href="mailto:info@droneye.sk" data-i18n="contact.info.email"
+                                        >📧 info@droneye.sk</a
+                                    >
+                                </p>
+                                <p>
+                                    <a href="tel:+421950614303" data-i18n="contact.info.phone">📞 +421 950 614 303</a>
+                                </p>
+                                <p data-i18n="contact.info.address">📍 Bratislava, Slovensko</p>
+                            </div>
+                            <form id="contact-form" class="contact-form" novalidate>
+                                <h3 class="contact-form-title" data-i18n="contact.form.title">Napíšte nám</h3>
+                                <div class="contact-form-field">
+                                    <input
+                                        type="text"
+                                        name="name"
+                                        placeholder="Meno"
+                                        data-i18n-placeholder="contact.form.name"
+                                    />
+                                    <span class="contact-form-field-error" id="error-name"></span>
+                                </div>
+                                <div class="contact-form-field">
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        placeholder="Email"
+                                        data-i18n-placeholder="contact.form.email"
+                                    />
+                                    <span class="contact-form-field-error" id="error-email"></span>
+                                </div>
+                                <div class="contact-form-field">
+                                    <input
+                                        type="tel"
+                                        name="phone"
+                                        placeholder="Telefónne číslo"
+                                        data-i18n-placeholder="contact.form.phone"
+                                    />
+                                    <span class="contact-form-field-error" id="error-phone"></span>
+                                </div>
+                                <div class="contact-form-field">
+                                    <textarea
+                                        name="message"
+                                        placeholder="Správa"
+                                        data-i18n-placeholder="contact.form.message"
+                                        rows="5"
+                                    ></textarea>
+                                    <span class="contact-form-field-error" id="error-message"></span>
+                                </div>
+                                <div class="contact-form-field">
+                                    <label class="contact-form-consent">
+                                        <input type="checkbox" name="consent" />
+                                        <span data-i18n="contact.form.consent"
+                                            >Súhlasím so spracovaním osobných údajov pre účely tohto formulára.</span
+                                        >
+                                    </label>
+                                    <span class="contact-form-field-error" id="error-consent"></span>
+                                </div>
+                                <div
+                                    id="contact-form-success"
+                                    class="contact-form-message contact-form-success"
+                                    style="display: none"
+                                ></div>
+                                <div
+                                    id="contact-form-error"
+                                    class="contact-form-message contact-form-error"
+                                    style="display: none"
+                                ></div>
+                                <button type="submit" data-i18n="contact.form.submit">Odoslať</button>
+                            </form>
                         </div>
-                        <div class="contact-form-field">
-                            <input type="email" name="email" placeholder="Email" data-i18n-placeholder="contact.form.email">
-                            <span class="contact-form-field-error" id="error-email"></span>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Loading Screen -->
+        <div id="loading-screen">
+            <div class="loader">
+                <div class="loader-circle"></div>
+                <p data-i18n="loading">Načítavam...</p>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 data-i18n="footer.contact">Kontakt</h3>
+                    <ul class="footer-links">
+                        <li><a href="mailto:info@droneye.sk">📧 info@droneye.sk</a></li>
+                        <li><a href="tel:+421950614303">📞 +421 950 614 303</a></li>
+                        <li>
+                            <div class="social-links">
+                                <a
+                                    href="https://www.instagram.com/dron_eyesky"
+                                    target="_blank"
+                                    rel="nofollow"
+                                    class="social-link"
+                                >
+                                    <img src="assets/instagram.png" alt="Instagram Droneye" loading="lazy" />
+                                </a>
+                                <a
+                                    href="https://www.facebook.com/profile.php?id=100066345406669"
+                                    target="_blank"
+                                    rel="nofollow"
+                                    class="social-link"
+                                >
+                                    <img src="assets/fb.png" alt="Facebook Droneye" loading="lazy" />
+                                </a>
+                                <a
+                                    href="https://www.youtube.com/@dron_eyesky"
+                                    target="_blank"
+                                    rel="nofollow"
+                                    class="social-link"
+                                >
+                                    <img src="assets/yt.png" alt="YouTube Droneye" loading="lazy" />
+                                </a>
+                                <a href="#" target="_blank" rel="nofollow" class="social-link">
+                                    <img src="assets/linkedin.png" alt="LinkedIn Droneye" loading="lazy" />
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="footer-section footer-form">
+                    <h3 data-i18n="footer.quickContact">Kontaktný formulár</h3>
+                    <form class="footer-contact-form" novalidate>
+                        <div class="footer-form-field">
+                            <input
+                                type="text"
+                                name="name"
+                                data-i18n-placeholder="footer.form.name"
+                                placeholder="Vaše meno"
+                            />
+                            <span class="footer-form-field-error" id="footer-error-name"></span>
                         </div>
-                        <div class="contact-form-field">
-                            <input type="tel" name="phone" placeholder="Telefónne číslo" data-i18n-placeholder="contact.form.phone">
-                            <span class="contact-form-field-error" id="error-phone"></span>
+                        <div class="footer-form-field">
+                            <input
+                                type="email"
+                                name="email"
+                                data-i18n-placeholder="footer.form.email"
+                                placeholder="Email"
+                            />
+                            <span class="footer-form-field-error" id="footer-error-email"></span>
                         </div>
-                        <div class="contact-form-field">
-                            <textarea name="message" placeholder="Správa" data-i18n-placeholder="contact.form.message" rows="5"></textarea>
-                            <span class="contact-form-field-error" id="error-message"></span>
+                        <div class="footer-form-field">
+                            <input
+                                type="tel"
+                                name="phone"
+                                data-i18n-placeholder="footer.form.phone"
+                                placeholder="Telefónne číslo"
+                            />
+                            <span class="footer-form-field-error" id="footer-error-phone"></span>
                         </div>
-                        <div class="contact-form-field">
-                            <label class="contact-form-consent">
-                                <input type="checkbox" name="consent">
-                                <span data-i18n="contact.form.consent">Súhlasím so spracovaním osobných údajov pre účely tohto formulára.</span>
+                        <div class="footer-form-field">
+                            <textarea
+                                name="message"
+                                data-i18n-placeholder="footer.form.message"
+                                placeholder="Správa"
+                                rows="3"
+                            ></textarea>
+                            <span class="footer-form-field-error" id="footer-error-message"></span>
+                        </div>
+                        <div class="footer-form-field">
+                            <label class="footer-form-consent">
+                                <input type="checkbox" name="consent" />
+                                <span data-i18n="footer.form.consent"
+                                    >Súhlasím so spracovaním osobných údajov pre účely tohto formulára.</span
+                                >
                             </label>
-                            <span class="contact-form-field-error" id="error-consent"></span>
+                            <span class="footer-form-field-error" id="footer-error-consent"></span>
                         </div>
-                        <div id="contact-form-success" class="contact-form-message contact-form-success" style="display: none;"></div>
-                        <div id="contact-form-error" class="contact-form-message contact-form-error" style="display: none;"></div>
-                        <button type="submit" data-i18n="contact.form.submit">Odoslať</button>
+                        <div
+                            id="footer-form-success"
+                            class="footer-form-message footer-form-success"
+                            style="display: none"
+                        ></div>
+                        <div
+                            id="footer-form-error"
+                            class="footer-form-message footer-form-error"
+                            style="display: none"
+                        ></div>
+                        <button type="submit" data-i18n="footer.form.submit">Odoslať</button>
                     </form>
                 </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 Droneye. <span data-i18n="footer.copyright">Všetky práva vyhradené.</span></p>
+                <div class="footer-bottom-right">
+                    <div class="footer-theme-switcher">
+                        <button
+                            class="footer-theme-btn"
+                            data-theme="light"
+                            title="Light mode"
+                            aria-label="Switch to light mode"
+                        >
+                            <i class="fas fa-sun" aria-hidden="true"></i>
+                        </button>
+                        <button
+                            class="footer-theme-btn"
+                            data-theme="dark"
+                            title="Dark mode"
+                            aria-label="Switch to dark mode"
+                        >
+                            <i class="fas fa-moon" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <div class="footer-legal">
+                        <a href="/legislativa" data-i18n="footer.legislation">Legislatíva</a>
+                        <a href="/gdpr" data-i18n="footer.privacy">GDPR</a>
+                    </div>
                 </div>
             </div>
-        </section>
-    </main>
+        </footer>
 
-    <!-- Loading Screen -->
-    <div id="loading-screen">
-        <div class="loader">
-            <div class="loader-circle"></div>
-            <p data-i18n="loading">Načítavam...</p>
-        </div>
-    </div>
-
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3 data-i18n="footer.contact">Kontakt</h3>
-                <ul class="footer-links">
-                    <li><a href="mailto:info@droneye.sk">📧 info@droneye.sk</a></li>
-                    <li><a href="tel:+421950614303">📞 +421 950 614 303</a></li>
-                    <li>
-                        <div class="social-links">
-                            <a href="https://www.instagram.com/dron_eyesky" target="_blank" rel="nofollow" class="social-link">
-                                <img src="assets/instagram.png" alt="Instagram Droneye" loading="lazy" />
-                            </a>
-                            <a href="https://www.facebook.com/profile.php?id=100066345406669" target="_blank" rel="nofollow" class="social-link">
-                                <img src="assets/fb.png" alt="Facebook Droneye" loading="lazy" />
-                            </a>
-                            <a href="https://www.youtube.com/@dron_eyesky" target="_blank" rel="nofollow" class="social-link">
-                                <img src="assets/yt.png" alt="YouTube Droneye" loading="lazy" />
-                            </a>
-                            <a href="#" target="_blank" rel="nofollow" class="social-link">
-                                <img src="assets/linkedin.png" alt="LinkedIn Droneye" loading="lazy" />
-                            </a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            
-            <div class="footer-section footer-form">
-                <h3 data-i18n="footer.quickContact">Kontaktný formulár</h3>
-                <form class="footer-contact-form" novalidate>
-                    <div class="footer-form-field">
-                        <input type="text" name="name" data-i18n-placeholder="footer.form.name" placeholder="Vaše meno">
-                        <span class="footer-form-field-error" id="footer-error-name"></span>
-                    </div>
-                    <div class="footer-form-field">
-                        <input type="email" name="email" data-i18n-placeholder="footer.form.email" placeholder="Email">
-                        <span class="footer-form-field-error" id="footer-error-email"></span>
-                    </div>
-                    <div class="footer-form-field">
-                        <input type="tel" name="phone" data-i18n-placeholder="footer.form.phone" placeholder="Telefónne číslo">
-                        <span class="footer-form-field-error" id="footer-error-phone"></span>
-                    </div>
-                    <div class="footer-form-field">
-                        <textarea name="message" data-i18n-placeholder="footer.form.message" placeholder="Správa" rows="3"></textarea>
-                        <span class="footer-form-field-error" id="footer-error-message"></span>
-                    </div>
-                    <div class="footer-form-field">
-                        <label class="footer-form-consent">
-                            <input type="checkbox" name="consent">
-                            <span data-i18n="footer.form.consent">Súhlasím so spracovaním osobných údajov pre účely tohto formulára.</span>
-                        </label>
-                        <span class="footer-form-field-error" id="footer-error-consent"></span>
-                    </div>
-                    <div id="footer-form-success" class="footer-form-message footer-form-success" style="display: none;"></div>
-                    <div id="footer-form-error" class="footer-form-message footer-form-error" style="display: none;"></div>
-                    <button type="submit" data-i18n="footer.form.submit">Odoslať</button>
-                </form>
-            </div>
-        </div>
-        
-        <div class="footer-bottom">
-            <p>&copy; 2024 Droneye. <span data-i18n="footer.copyright">Všetky práva vyhradené.</span></p>
-            <div class="footer-bottom-right">
-                <div class="footer-theme-switcher">
-                    <button class="footer-theme-btn" data-theme="light" title="Light mode" aria-label="Switch to light mode"><i class="fas fa-sun" aria-hidden="true"></i></button>
-                    <button class="footer-theme-btn" data-theme="dark" title="Dark mode" aria-label="Switch to dark mode"><i class="fas fa-moon" aria-hidden="true"></i></button>
+        <!-- Cookie Consent Banner -->
+        <div id="cookie-banner" class="cookie-banner" style="display: none">
+            <div class="cookie-banner-content">
+                <div class="cookie-banner-text">
+                    <h4 data-i18n="cookies.title">Používame cookies</h4>
+                    <p data-i18n="cookies.description">
+                        Táto stránka používa cookies na zlepšenie vášho zážitku. Pokračovaním v prehliadaní súhlasíte s
+                        používaním cookies v súlade s našou <a href="/gdpr">politikou cookies</a>.
+                    </p>
                 </div>
-                <div class="footer-legal">
-                    <a href="/legislativa" data-i18n="footer.legislation">Legislatíva</a>
-                    <a href="/gdpr" data-i18n="footer.privacy">GDPR</a>
+                <div class="cookie-banner-buttons">
+                    <button id="cookie-accept" class="cookie-btn cookie-btn-accept" data-i18n="cookies.accept">
+                        Prijať všetky
+                    </button>
+                    <button id="cookie-reject" class="cookie-btn cookie-btn-reject" data-i18n="cookies.reject">
+                        Odmietnuť
+                    </button>
+                    <button id="cookie-settings" class="cookie-btn cookie-btn-settings" data-i18n="cookies.settings">
+                        Nastavenia
+                    </button>
                 </div>
             </div>
         </div>
-    </footer>
 
-    <!-- Cookie Consent Banner -->
-    <div id="cookie-banner" class="cookie-banner" style="display: none;">
-        <div class="cookie-banner-content">
-            <div class="cookie-banner-text">
-                <h4 data-i18n="cookies.title">Používame cookies</h4>
-                <p data-i18n="cookies.description">Táto stránka používa cookies na zlepšenie vášho zážitku. Pokračovaním v prehliadaní súhlasíte s používaním cookies v súlade s našou <a href="/gdpr">politikou cookies</a>.</p>
-            </div>
-            <div class="cookie-banner-buttons">
-                <button id="cookie-accept" class="cookie-btn cookie-btn-accept" data-i18n="cookies.accept">Prijať všetky</button>
-                <button id="cookie-reject" class="cookie-btn cookie-btn-reject" data-i18n="cookies.reject">Odmietnuť</button>
-                <button id="cookie-settings" class="cookie-btn cookie-btn-settings" data-i18n="cookies.settings">Nastavenia</button>
-            </div>
-        </div>
-    </div>
-
-    <script type="module" src="/src/main.js"></script>
-    <script type="module" src="/src/cookies.js"></script>
-</body>
+        <script type="module" src="/src/main.js"></script>
+        <script type="module" src="/src/cookies.js"></script>
+    </body>
 </html>

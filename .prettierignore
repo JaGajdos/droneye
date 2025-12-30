@@ -1,0 +1,7 @@
+node_modules
+dist
+*.min.css
+*.min.js
+assets/fontawesome
+package-lock.json
+

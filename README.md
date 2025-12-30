@@ -64,49 +64,59 @@ droneye/
 ## Spustenie
 
 ### Development
+
 ```bash
 npm run dev
 ```
+
 Aplikácia sa spustí na `http://localhost:5173` s hot reload.
 
 ### Production Build
+
 ```bash
 npm run build
 ```
+
 Vytvorí optimalizovaný build v `dist/` priečinku.
 
 ### Preview Production Build
+
 ```bash
 npm run preview
 ```
+
 Spustí preview production buildu.
 
 ## Funkcionality
 
 ### Navigácia
+
 - Hlavné menu s 6 sekciami (Domov, Služby, Projekty, Kurzy, Cenová ponuka, Kontakt)
 - Mobilné hamburger menu
 - Prepínanie jazykov (SK/EN/DE)
 - Smooth scrolling medzi sekciami
 
 ### Three.js Animácie (animation.js)
+
 - **3D Dron Model** - GLTF model s animovanými vrtuľami
 - **Tri scény**:
-  - **SpaceScene** - Vesmír s hviezdami a aurorou
-  - **SkyScene** - Obloha s oblakmi (Sprite clouds)
-  - **WaterScene** - Voda s vlnami a oblakmi
+    - **SpaceScene** - Vesmír s hviezdami a aurorou
+    - **SkyScene** - Obloha s oblakmi (Sprite clouds)
+    - **WaterScene** - Voda s vlnami a oblakmi
 - **Interaktívne scrollovanie** - Plynulé prepínanie medzi scénami
 - **Vstupná animácia** - Dron doletí zľava pri kliknutí na "Explore"
 - **Responzívne prispôsobenie** - Optimalizované pre mobilné zariadenia
 - **Výkon** - Optimalizované cloud count pre mobilné zariadenia
 
 ### Internacionalizácia (i18n)
+
 - Podpora pre 3 jazyky: SK, EN, DE
 - Dynamické prepínanie jazykov
 - Ukladanie preferencie do localStorage
 - Preklady pre všetky stránky a komponenty
 
 ### UI Komponenty
+
 - Glassmorphism karty s blur efektom
 - Hover animácie a transitions
 - Loading screen s animáciou
@@ -117,16 +127,19 @@ Spustí preview production buildu.
 ## Prispôsobenie
 
 ### Zmena farieb dronu
+
 Upravte farby v `src/animation.js`:
+
 ```javascript
 const droneColors = {
-    body: 0x002366,      // Royal blue
-    rotors: 0xff6600,    // Orange
-    details: 0xffffff    // White
+    body: 0x002366, // Royal blue
+    rotors: 0xff6600, // Orange
+    details: 0xffffff // White
 };
 ```
 
 ### Pridanie nových stránok
+
 1. Vytvorte nový HTML súbor (napr. `nova-stranka.html`)
 2. Pridajte do `vite.config.js` v `rollupOptions.input`
 3. Aktualizujte navigáciu v `index.html` a ostatných stránkach
@@ -134,7 +147,9 @@ const droneColors = {
 5. Aktualizujte `sitemap.xml`
 
 ### Three.js úpravy
+
 Upravte parametre v `src/animation.js`:
+
 - **Scény**: `SpaceScene`, `SkyScene`, `WaterScene` triedy
 - **Dron**: `loadDroneModel()`, `droneColors`, `rotorSpinSpeed`
 - **Animácie**: `animate()` funkcia, `entranceAnimationDuration`
@@ -142,6 +157,7 @@ Upravte parametre v `src/animation.js`:
 - **Aurora**: Farba a intenzita v `SpaceScene.createAuroraTunnel()`
 
 ### Pridanie nového jazyka
+
 1. Vytvorte `src/locales/novy-jazyk.json`
 2. Skopírujte štruktúru z `sk.json` a preložte
 3. Pridajte jazyk do `src/i18n.js`

@@ -1,6 +1,6 @@
 @font-face {
-    font-family: 'Montserrat';
-    src: url('../assets/fonts/Montserrat-VariableFont_wght.ttf') format('truetype-variations');
+    font-family: "Montserrat";
+    src: url("../assets/fonts/Montserrat-VariableFont_wght.ttf") format("truetype-variations");
     font-weight: 100 900;
     font-style: normal;
     font-display: swap;
@@ -30,37 +30,37 @@
     --mobile-menu-body-bg: var(--primary-color);
     --footer-contact-button-color: var(--secondary-color);
     --footer-contact-button-color-hover: #0056b3;
-    
+
     /* Font Size Variables - Unified System */
     /* Headings */
     --font-size-hero-title: 3rem;
     --font-size-hero-title-tablet: 2.5rem;
     --font-size-hero-title-mobile: 2rem;
-    
+
     --font-size-section-title: 2.5rem;
     --font-size-section-title-tablet: 2rem;
     --font-size-section-title-mobile: 1.75rem;
-    
+
     --font-size-card-title: 1.5rem;
     --font-size-card-title-tablet: 1.3rem;
     --font-size-card-title-mobile: 1.2rem;
-    
+
     --font-size-small-heading: 1.3rem;
-    
+
     /* Subtitles */
     --font-size-hero-subtitle: 1.3rem;
     --font-size-hero-subtitle-mobile: 1.1rem;
-    
+
     --font-size-section-subtitle: 1.2rem;
     --font-size-section-subtitle-mobile: 1rem;
-    
+
     /* Body Text */
     --font-size-body: 1.1rem;
     --font-size-body-mobile: 1rem;
-    
+
     --font-size-small: 0.9rem;
     --font-size-small-mobile: 0.85rem;
-    
+
     /* Special Elements */
     --font-size-button: 1.1rem;
     --font-size-nav-link: 1.2rem;
@@ -69,7 +69,7 @@
     --font-size-footer: 1rem;
     --font-size-footer-link: 0.9rem;
     --font-size-ui-small: 0.9rem;
-    
+
     /* Special Cases (converted from px to rem) */
     --font-size-lightbox-close: 2.5rem; /* 40px */
     --font-size-lightbox-nav: 1.875rem; /* 30px */
@@ -87,25 +87,28 @@ html[style*="visibility: hidden"] body {
     visibility: hidden;
 }
 
-html, body {
+html,
+body {
     margin: 0;
     height: 100%;
 }
 
 body {
-    font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Montserrat", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     color: var(--text-color);
     background-color: var(--background-color);
     overflow-x: hidden;
     overflow: auto; /* Allow scroll when animation starts */
     touch-action: auto;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
 }
 
 /* Ensure buttons inherit the font family */
 button {
-    font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Montserrat", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 /* Canvas Container */
@@ -145,10 +148,18 @@ button {
     position: absolute;
     width: 100%;
     color: #fff;
-    font-family: 'Montserrat', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    font-family:
+        "Montserrat",
+        system-ui,
+        -apple-system,
+        Segoe UI,
+        Roboto,
+        sans-serif;
     opacity: 0;
     transform: translateY(100px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    transition:
+        opacity 0.5s ease,
+        transform 0.5s ease;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -199,7 +210,13 @@ button {
     color: #fff;
     border: 2px solid rgba(255, 255, 255, 0.5);
     border-radius: 30px;
-    font-family: 'Montserrat', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    font-family:
+        "Montserrat",
+        system-ui,
+        -apple-system,
+        Segoe UI,
+        Roboto,
+        sans-serif;
     font-size: 1rem;
     font-weight: 600;
     text-decoration: none;
@@ -233,7 +250,9 @@ button {
     width: 100vw;
     background: var(--navbar-bg);
     z-index: 1002;
-    transition: transform 0.3s ease, background 0.3s ease;
+    transition:
+        transform 0.3s ease,
+        background 0.3s ease;
     display: flex;
     justify-content: center;
     transform: translateY(0); /* Start visible */
@@ -254,7 +273,7 @@ button {
 }
 
 .nav-logo {
-  display: flex;
+    display: flex;
     align-items: center;
     grid-column: 1;
     justify-self: start;
@@ -309,7 +328,7 @@ button {
 }
 
 .nav-link::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: -5px;
     left: 0;
@@ -455,7 +474,7 @@ button {
     font-size: var(--font-size-small-mobile);
     font-weight: 500;
     transition: all 0.3s ease;
-  display: flex;
+    display: flex;
     align-items: center;
     justify-content: center;
     gap: 6px;
@@ -534,7 +553,7 @@ body.homepage .main-content {
     height: 400px;
     margin-top: 0; /* Start from top */
     padding-top: 70px; /* Add padding for navbar */
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/city1.webp');
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/city1.webp");
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -545,7 +564,6 @@ body.homepage .main-content {
     color: white;
     position: relative;
 }
-
 
 .subpage-hero-content {
     position: relative;
@@ -610,7 +628,7 @@ body.homepage .main-content {
 }
 
 .content-section-bg-image::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -635,13 +653,13 @@ body.homepage .main-content {
 }
 
 .content-section-bg-color::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: 
+    background:
         radial-gradient(circle at 20% 50%, var(--section-bg-radial-1) 0%, transparent 50%),
         radial-gradient(circle at 80% 80%, var(--section-bg-radial-2) 0%, transparent 50%);
     pointer-events: none;
@@ -649,14 +667,19 @@ body.homepage .main-content {
 }
 
 .content-section-bg-color::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: 
-        repeating-linear-gradient(45deg, transparent, transparent 10px, var(--section-bg-pattern) 10px, var(--section-bg-pattern) 20px);
+    background-image: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 10px,
+        var(--section-bg-pattern) 10px,
+        var(--section-bg-pattern) 20px
+    );
     pointer-events: none;
     opacity: 0.3;
     z-index: 0;
@@ -684,7 +707,9 @@ body.homepage .main-content {
     padding: 0;
     text-align: center;
     box-shadow: 0 4px 15px var(--shadow-color);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -749,7 +774,7 @@ body.homepage .main-content {
 }
 
 .equipment-specs li::before {
-    content: '•';
+    content: "•";
     color: var(--primary-color);
     font-size: var(--font-size-section-subtitle);
     font-weight: bold;
@@ -819,7 +844,9 @@ body.homepage .main-content {
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 4px 15px var(--shadow-color);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
 }
 
 .video-item:hover {
@@ -888,7 +915,7 @@ body.homepage .main-content {
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
 }
 
 .youtube-placeholder-button:hover {
@@ -935,7 +962,9 @@ body.homepage .main-content {
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 4px 15px var(--shadow-color);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
     cursor: pointer;
     display: flex;
     flex-direction: column;
@@ -969,7 +998,7 @@ body.homepage .main-content {
 }
 
 .photo-count-badge::before {
-    content: '';
+    content: "";
     position: absolute;
     width: 16px;
     height: 16px;
@@ -981,7 +1010,7 @@ body.homepage .main-content {
 }
 
 .photo-count-badge::after {
-    content: '';
+    content: "";
     position: absolute;
     width: 16px;
     height: 16px;
@@ -1097,7 +1126,9 @@ body.homepage .main-content {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background 0.3s ease, transform 0.3s ease;
+    transition:
+        background 0.3s ease,
+        transform 0.3s ease;
     z-index: 10000;
 }
 
@@ -1123,11 +1154,7 @@ body.homepage .main-content {
     font-weight: 600;
 }
 
-
 /* Responsive Design for Projects */
-
-
-
 
 /* Footer */
 .footer {
@@ -1138,7 +1165,7 @@ body.homepage .main-content {
 
 .footer-content {
     max-width: 1200px;
-  margin: 0 auto;
+    margin: 0 auto;
     padding: 0 2rem;
     display: grid;
     grid-template-columns: 1fr 1.5fr;
@@ -1247,14 +1274,14 @@ body.homepage .main-content {
     background: rgba(255, 255, 255, 0.1);
     color: white;
     font-size: var(--font-size-footer-link);
-    font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Montserrat", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     transition: all 0.3s ease;
 }
 
 .footer-contact-form input::placeholder,
 .footer-contact-form textarea::placeholder {
     color: rgba(255, 255, 255, 0.6);
-    font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Montserrat", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     font-size: var(--font-size-footer-link);
 }
 
@@ -1268,13 +1295,17 @@ body.homepage .main-content {
 .footer-form-input-error,
 .footer-contact-form textarea.footer-form-input-error {
     border-color: #ff6b6b !important;
-    box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.15), 0 2px 8px rgba(255, 107, 107, 0.1) !important;
+    box-shadow:
+        0 0 0 3px rgba(255, 107, 107, 0.15),
+        0 2px 8px rgba(255, 107, 107, 0.1) !important;
 }
 
 .footer-form-input-error:focus,
 .footer-contact-form textarea.footer-form-input-error:focus {
     border-color: #ff6b6b !important;
-    box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.25), 0 2px 8px rgba(255, 107, 107, 0.15) !important;
+    box-shadow:
+        0 0 0 3px rgba(255, 107, 107, 0.25),
+        0 2px 8px rgba(255, 107, 107, 0.15) !important;
 }
 
 .footer-form-field-error {
@@ -1294,7 +1325,9 @@ body.homepage .main-content {
     white-space: pre-line;
     opacity: 1;
     transform: translateY(0);
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    transition:
+        opacity 0.5s ease,
+        transform 0.5s ease;
 }
 
 .footer-form-message.hiding {
@@ -1409,7 +1442,6 @@ body.homepage .main-content {
     height: 36px;
 }
 
-
 .footer-theme-btn:hover {
     background: rgba(255, 255, 255, 0.2);
     border-color: rgba(255, 255, 255, 0.4);
@@ -1444,7 +1476,7 @@ body.homepage .main-content {
 
 .container {
     max-width: 1200px;
-  margin: 0 auto;
+    margin: 0 auto;
     padding: 0 20px;
 }
 
@@ -1460,7 +1492,9 @@ body.homepage .main-content {
     padding: calc(70px + 2rem) 2rem 2rem 2rem; /* Navbar height + padding */
     background: transparent;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    transition:
+        opacity 0.5s ease,
+        transform 0.5s ease;
     position: relative;
     z-index: 10; /* Above animation */
 }
@@ -1510,8 +1544,8 @@ body.homepage .main-content {
     text-decoration: none;
     display: inline-block;
     min-width: 150px;
-  text-align: center;
-    font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    font-family: "Montserrat", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     box-sizing: border-box;
     margin: 0;
@@ -1539,7 +1573,7 @@ body.homepage .main-content {
     display: inline-block;
     min-width: 150px;
     text-align: center;
-    font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Montserrat", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     box-sizing: border-box;
     margin: 0;
@@ -1575,7 +1609,7 @@ body.homepage .main-content {
     animation: fadeInUp 1s ease-out 0.5s both;
     min-width: 150px;
     text-align: center;
-    font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Montserrat", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     box-sizing: border-box;
     margin: 0;
@@ -1621,14 +1655,15 @@ h2 {
     margin-right: auto;
 }
 
-
 .license-tile {
     background: var(--card-background);
     border: 1px solid var(--border-color);
     border-radius: 16px;
     padding: 2rem;
     box-shadow: 0 4px 15px var(--shadow-color);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1638,7 +1673,7 @@ h2 {
 }
 
 .license-tile::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -1682,7 +1717,7 @@ h2 {
 }
 
 .gdpr-list li::before {
-    content: '•';
+    content: "•";
     position: absolute;
     left: 0;
     color: var(--primary-color);
@@ -1723,7 +1758,6 @@ h2 {
     color: var(--text-color);
 }
 
-
 /* Team Cards */
 .team-grid {
     display: grid;
@@ -1740,7 +1774,9 @@ h2 {
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 4px 15px var(--shadow-color);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
     display: flex;
     flex-direction: column;
 }
@@ -1780,11 +1816,12 @@ h2 {
     padding: 2rem;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
+    transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease;
 }
 
 /* Desktop: hover effect */
-
 
 /* Mobile and active state: click to show */
 .team-card.active .team-card-overlay {
@@ -1836,7 +1873,6 @@ h2 {
     gap: 1.5rem;
 }
 
-
 /* Services Carousel */
 .services-carousel {
     position: relative;
@@ -1864,7 +1900,7 @@ h2 {
     font-weight: 500;
     transition: all 0.3s ease;
     white-space: nowrap;
-    font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Montserrat", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     position: relative;
     text-decoration: none;
     text-align: center;
@@ -1905,7 +1941,9 @@ h2 {
     width: 100%;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.5s ease, visibility 0.5s ease;
+    transition:
+        opacity 0.5s ease,
+        visibility 0.5s ease;
     position: absolute;
     top: 0;
     left: 0;
@@ -1923,7 +1961,9 @@ h2 {
     border: 1px solid var(--border-color);
     border-radius: 16px;
     padding: 3rem;
-    box-shadow: 0 8px 30px var(--shadow-color), 0 2px 8px var(--shadow-color);
+    box-shadow:
+        0 8px 30px var(--shadow-color),
+        0 2px 8px var(--shadow-color);
     text-align: center;
     min-height: 300px;
     display: flex;
@@ -1931,11 +1971,13 @@ h2 {
     justify-content: center;
     position: relative;
     overflow: visible;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
 }
 
 .service-card-carousel::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -1952,7 +1994,9 @@ h2 {
 
 .service-card-carousel:hover {
     transform: translateY(-3px);
-    box-shadow: 0 12px 40px var(--shadow-hover), 0 4px 12px var(--shadow-color);
+    box-shadow:
+        0 12px 40px var(--shadow-hover),
+        0 4px 12px var(--shadow-color);
 }
 
 .carousel-arrows-in-card {
@@ -1977,7 +2021,9 @@ h2 {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background 0.3s ease, transform 0.3s ease;
+    transition:
+        background 0.3s ease,
+        transform 0.3s ease;
     padding: 0;
     margin: 0;
     box-shadow: 0 2px 8px rgba(0, 35, 102, 0.3);
@@ -2027,7 +2073,9 @@ h2 {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background 0.3s ease, transform 0.3s ease;
+    transition:
+        background 0.3s ease,
+        transform 0.3s ease;
     z-index: 10;
     box-shadow: 0 4px 15px var(--shadow-color);
 }
@@ -2070,10 +2118,15 @@ h2 {
     border: 1px solid var(--border-color);
     border-radius: 16px;
     padding: 2rem;
-    box-shadow: 0 6px 25px var(--shadow-color), 0 2px 10px var(--shadow-color);
+    box-shadow:
+        0 6px 25px var(--shadow-color),
+        0 2px 10px var(--shadow-color);
     text-align: center;
     position: relative;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -2081,7 +2134,7 @@ h2 {
 }
 
 .process-step::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -2099,7 +2152,9 @@ h2 {
 
 .process-step:hover {
     transform: translateY(-8px);
-    box-shadow: 0 12px 35px var(--shadow-hover), 0 4px 15px var(--shadow-color);
+    box-shadow:
+        0 12px 35px var(--shadow-hover),
+        0 4px 15px var(--shadow-color);
     border-color: var(--primary-color);
 }
 
@@ -2109,7 +2164,6 @@ h2 {
 }
 
 /* Auto-hover effect on mobile when in viewport */
-
 
 .process-step-number {
     width: 60px;
@@ -2128,7 +2182,7 @@ h2 {
 }
 
 .process-step-number::after {
-    content: '';
+    content: "";
     position: absolute;
     top: -2px;
     left: -2px;
@@ -2215,7 +2269,9 @@ h2 {
 .contact-info a {
     color: var(--primary-color);
     text-decoration: none;
-    transition: color 0.3s ease, text-decoration 0.3s ease;
+    transition:
+        color 0.3s ease,
+        text-decoration 0.3s ease;
 }
 
 .contact-info a:hover {
@@ -2249,8 +2305,10 @@ h2 {
     background: white;
     color: var(--text-color);
     font-size: var(--font-size-form-input);
-    font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    font-family: "Montserrat", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    transition:
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
@@ -2258,19 +2316,25 @@ h2 {
 .contact-form textarea:focus {
     outline: none;
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(0, 35, 102, 0.15), 0 2px 8px rgba(0, 35, 102, 0.1);
+    box-shadow:
+        0 0 0 3px rgba(0, 35, 102, 0.15),
+        0 2px 8px rgba(0, 35, 102, 0.1);
 }
 
 .contact-form-input-error,
 .contact-form textarea.contact-form-input-error {
     border-color: #dc3545 !important;
-    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.15), 0 2px 8px rgba(220, 53, 69, 0.1) !important;
+    box-shadow:
+        0 0 0 3px rgba(220, 53, 69, 0.15),
+        0 2px 8px rgba(220, 53, 69, 0.1) !important;
 }
 
 .contact-form-input-error:focus,
 .contact-form textarea.contact-form-input-error:focus {
     border-color: #dc3545 !important;
-    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.25), 0 2px 8px rgba(220, 53, 69, 0.15) !important;
+    box-shadow:
+        0 0 0 3px rgba(220, 53, 69, 0.25),
+        0 2px 8px rgba(220, 53, 69, 0.15) !important;
 }
 
 .contact-form-field-error {
@@ -2284,7 +2348,7 @@ h2 {
 .contact-form input::placeholder,
 .contact-form textarea::placeholder {
     color: rgba(0, 0, 0, 0.5);
-    font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Montserrat", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     font-size: var(--font-size-form-input);
 }
 
@@ -2339,8 +2403,8 @@ h2 {
     color: white;
     border: none;
     padding: 12px 30px;
-  border-radius: 8px;
-  cursor: pointer;
+    border-radius: 8px;
+    cursor: pointer;
     font-size: var(--font-size-button);
     font-weight: 600;
     transition: all 0.3s ease;
@@ -2367,7 +2431,9 @@ h2 {
     white-space: pre-line;
     opacity: 1;
     transform: translateY(0);
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    transition:
+        opacity 0.5s ease,
+        transform 0.5s ease;
 }
 
 .contact-form-message.hiding {
@@ -2449,25 +2515,19 @@ body:not(.homepage) #loading-screen {
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 /* Responsive Design */
 
 /* Responsive Design */
 
-
-
-
-
-
-
-
 /* Extra small devices - carousel responsive fixes */
-
-
-
 
 /* Pricing Custom Card */
 .pricing-main-section {
@@ -2485,7 +2545,9 @@ body:not(.homepage) #loading-screen {
     border-radius: 16px;
     padding: 3rem 2rem;
     box-shadow: 0 8px 30px rgba(0, 35, 102, 0.15);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -2535,7 +2597,10 @@ body:not(.homepage) #loading-screen {
     border-radius: 12px;
     padding: 2.5rem 2rem;
     box-shadow: 0 4px 15px var(--shadow-color);
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
     text-align: center;
 }
 
@@ -2558,8 +2623,6 @@ body:not(.homepage) #loading-screen {
     line-height: 1.6;
     margin: 0;
 }
-
-
 
 .pricing-quote-section {
     text-align: center;
@@ -2588,7 +2651,7 @@ body:not(.homepage) #loading-screen {
 }
 
 .pricing-quote-list li::before {
-    content: '•';
+    content: "•";
     position: absolute;
     left: 0;
     color: var(--primary-color);
@@ -2630,19 +2693,21 @@ body:not(.homepage) #loading-screen {
 @media (max-width: 1024px) {
     .process-step.in-view {
         transform: translateY(-8px);
-        box-shadow: 0 12px 35px var(--shadow-hover), 0 4px 15px var(--shadow-color);
+        box-shadow:
+            0 12px 35px var(--shadow-hover),
+            0 4px 15px var(--shadow-color);
         border-color: var(--primary-color);
     }
-    
+
     .process-step.in-view::before {
         transform: scaleX(1);
     }
-    
+
     .process-step.in-view .process-step-number {
         transform: scale(1.1);
         box-shadow: 0 6px 20px rgba(0, 35, 102, 0.4);
     }
-    
+
     .pricing-diagram-image {
         width: 100%;
         max-width: 100%;
@@ -2695,17 +2760,17 @@ body:not(.homepage) #loading-screen {
         box-sizing: border-box;
         gap: 1rem;
     }
-    
+
     .nav-menu.active {
         top: 70px;
         z-index: 1000;
     }
-    
+
     /* Hide mobile-menu-header */
     .nav-menu .mobile-menu-header {
         display: none !important;
     }
-    
+
     /* Show close button in nav-container when menu is active */
     .nav-container .mobile-menu-close {
         display: none;
@@ -2726,21 +2791,20 @@ body:not(.homepage) #loading-screen {
         transform: translateY(-50%);
         z-index: 1001;
     }
-    
+
     .nav-container:has(.nav-menu.active) .hamburger {
         display: none;
     }
-    
+
     .nav-container:has(.nav-menu.active) .mobile-menu-close {
         display: flex !important;
     }
-    
+
     .nav-container .mobile-menu-close:hover {
         background: rgba(255, 255, 255, 0.1);
     }
-    
+
     /* Tablet menu - not full width, with side margins */
-    
 
     /* Ensure menu content is above overlay */
     .nav-menu > * {
@@ -2957,14 +3021,13 @@ body:not(.homepage) #loading-screen {
         font-size: var(--font-size-hero-subtitle-mobile);
     }
 
-    
     /* Process title inherits from section-title */
-    
+
     .process-steps {
         grid-template-columns: 1fr;
         gap: 2rem;
     }
-    
+
     .process-step {
         max-width: 100%;
         width: 100%;
@@ -2986,16 +3049,16 @@ body:not(.homepage) #loading-screen {
     .hero-title {
         font-size: var(--font-size-hero-title-tablet);
     }
-    
+
     .hero-subtitle {
         font-size: var(--font-size-hero-subtitle-mobile);
     }
-    
+
     .hero-buttons {
         flex-direction: column;
         gap: 1rem;
     }
-    
+
     .cta-button,
     .hero-button-secondary {
         width: 100%;
@@ -3032,104 +3095,104 @@ body:not(.homepage) #loading-screen {
     .contact-form {
         padding: 1.5rem;
     }
-    
+
     .services-carousel-wrapper {
         grid-template-columns: 1fr;
         gap: 2rem;
     }
-    
+
     .services-carousel-text {
         text-align: center;
     }
-    
+
     /* Services carousel title and subtitle inherit from section-title and section-subtitle */
-    
+
     .carousel-tabs {
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: center;
         gap: 0.75rem;
     }
-    
+
     .carousel-tab {
         text-align: center;
         padding: 0.5rem 0.75rem;
         font-size: var(--font-size-small-mobile);
         white-space: nowrap;
     }
-    
+
     .carousel-tab:hover,
     .carousel-tab.active {
         padding-left: 0.75rem;
     }
-    
+
     .carousel-tab.active::after {
         display: none;
     }
-    
+
     .services-carousel {
         padding: 0 20px;
     }
-    
+
     .service-card-carousel {
         padding: 2rem 1.5rem;
     }
-    
+
     .service-card-carousel h3 {
         font-size: var(--font-size-card-title);
         padding-right: 80px;
     }
-    
+
     .carousel-arrows-in-card {
         top: 0.75rem;
         right: 0.75rem;
     }
-    
+
     .carousel-arrows-in-card .carousel-arrow {
         width: 32px;
         height: 32px;
     }
-    
+
     .carousel-arrows-in-card .carousel-arrow svg {
         width: 16px;
         height: 16px;
     }
-    
+
     .service-card-carousel {
         padding: 2rem;
         min-height: 250px;
     }
-    
+
     .service-card-carousel h3 {
         font-size: var(--font-size-card-title);
     }
-    
+
     .service-card-carousel p {
         font-size: var(--font-size-form-input);
     }
-    
+
     .carousel-arrow {
         width: 40px;
         height: 40px;
     }
-    
+
     .services-carousel {
         padding: 0 50px;
     }
-    
+
     .service-card-carousel {
         padding: 2rem;
         min-height: 250px;
     }
-    
+
     .service-card-carousel h3 {
         font-size: var(--font-size-card-title);
     }
-    
+
     .service-card-carousel p {
         font-size: var(--font-size-form-input);
     }
-    
+
     .carousel-arrow {
         width: 40px;
         height: 40px;
@@ -3142,95 +3205,94 @@ body:not(.homepage) #loading-screen {
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
-        .nav-menu .nav-item {
-            width: calc(100vw - 3rem);
-            left: 1.5rem;
-        }
-        
-        .nav-menu {
-            width: calc(100vw - 3rem);
-            left: 1.5rem;
-        }
+    .nav-menu .nav-item {
+        width: calc(100vw - 3rem);
+        left: 1.5rem;
     }
 
+    .nav-menu {
+        width: calc(100vw - 3rem);
+        left: 1.5rem;
+    }
+}
+
 @media (max-width: 320px) {
-    
     .equipment-card h3 {
         font-size: var(--font-size-body);
         margin: 0.75rem 0.75rem 0.5rem;
     }
-    
+
     .equipment-feature {
         font-size: var(--font-size-small);
         margin: 0 0.75rem 0.5rem;
     }
-    
+
     .equipment-specs {
         padding: 0 0.75rem 0.75rem;
     }
-    
+
     .equipment-specs li {
         font-size: var(--font-size-small-mobile);
         padding-left: 1rem;
     }
-    
+
     .services-carousel-wrapper {
         gap: 1rem;
     }
-    
+
     /* Services carousel title and subtitle inherit from section-title and section-subtitle */
-    
+
     .carousel-tabs {
         flex-direction: column;
         gap: 0.5rem;
         align-items: stretch;
     }
-    
+
     .carousel-tab {
         padding: 0.5rem;
         font-size: var(--font-size-small-mobile);
         white-space: normal;
         text-align: center;
     }
-    
+
     .carousel-tab:hover,
     .carousel-tab.active {
         padding-left: 0.5rem;
     }
-    
+
     .carousel-tab.active::after {
         display: none;
     }
-    
+
     .services-carousel {
         padding: 0 10px;
     }
-    
+
     .service-card-carousel {
         padding: 1.25rem 0.75rem;
     }
-    
+
     .service-card-carousel h3 {
         font-size: var(--font-size-body);
         padding-right: 60px;
         line-height: 1.3;
     }
-    
+
     .service-card-carousel p {
         font-size: var(--font-size-footer-link);
     }
-    
+
     .carousel-arrows-in-card {
         top: 0.5rem;
         right: 0.5rem;
         gap: 0.15rem;
     }
-    
+
     .carousel-arrows-in-card .carousel-arrow {
         width: 28px;
         height: 28px;
     }
-    
+
     .carousel-arrows-in-card .carousel-arrow svg {
         width: 12px;
         height: 12px;
@@ -3245,64 +3307,64 @@ body:not(.homepage) #loading-screen {
     .photos-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .equipment-card h3 {
         font-size: var(--font-size-card-title-mobile);
         margin: 1rem 1rem 0.5rem;
     }
-    
+
     .equipment-feature {
         font-size: var(--font-size-form-input);
         margin: 0 1rem 0.75rem;
     }
-    
+
     .equipment-specs {
         padding: 0 1rem 1rem;
     }
-    
+
     .equipment-specs li {
         font-size: var(--font-size-small);
         padding-left: 1.25rem;
     }
-    
+
     .services-carousel-wrapper {
         gap: 1.5rem;
     }
-    
+
     /* Services carousel title and subtitle inherit from section-title and section-subtitle */
-    
+
     .carousel-tabs {
         gap: 0.5rem;
     }
-    
+
     .carousel-tab {
         padding: 0.5rem 0.6rem;
         font-size: var(--font-size-small-mobile);
     }
-    
+
     .services-carousel {
         padding: 0 15px;
     }
-    
+
     .service-card-carousel {
         padding: 1.5rem 1rem;
     }
-    
+
     .service-card-carousel h3 {
         font-size: var(--font-size-card-title-tablet);
         padding-right: 70px;
     }
-    
+
     .carousel-arrows-in-card {
         top: 0.5rem;
         right: 0.5rem;
     }
-    
+
     .carousel-arrows-in-card .carousel-arrow {
         width: 30px;
         height: 30px;
     }
-    
+
     .carousel-arrows-in-card .carousel-arrow svg {
         width: 14px;
         height: 14px;
@@ -3310,36 +3372,32 @@ body:not(.homepage) #loading-screen {
 }
 
 @media (max-width: 480px) {
-    
     .equipment-image {
         margin: 0;
     }
-    
+
     .equipment-card h3 {
         font-size: var(--font-size-card-title-mobile);
         margin: 1rem 1rem 0.5rem;
     }
-    
+
     .equipment-feature {
         font-size: var(--font-size-form-input);
         margin: 0 1rem 0.75rem;
     }
-    
+
     .equipment-specs {
         padding: 0 1rem 1rem;
     }
-    
+
     .equipment-specs li {
         font-size: var(--font-size-small);
         padding-left: 1.25rem;
     }
-    
 }
-
 
 /* Mobile: Move first text higher */
 @media (max-width: 768px) {
-   
     .scroll-text[data-index="0"].visible {
         transform: translateY(-250px) !important; /* Move first text even higher when visible */
     }
@@ -3350,21 +3408,21 @@ body:not(.homepage) #loading-screen {
         font-size: var(--font-size-lightbox-nav-tablet);
         padding: 12px;
     }
-    
+
     .photo-lightbox-prev {
         left: 10px;
     }
-    
+
     .photo-lightbox-next {
         right: 10px;
     }
-    
+
     .photo-lightbox-close {
         top: 10px;
         right: 20px;
         font-size: var(--font-size-lightbox-nav);
     }
-    
+
     .photo-lightbox-content img {
         max-height: 75vh;
     }
@@ -3394,7 +3452,7 @@ body:not(.homepage) #loading-screen {
         grid-template-columns: 1fr;
         gap: 1.5rem;
     }
-    
+
     .license-tile {
         padding: 1.5rem;
     }
@@ -3404,20 +3462,20 @@ body:not(.homepage) #loading-screen {
     .content-section-bg-color {
         padding: 3rem 0;
     }
-    
+
     .content-section-bg-image {
         background-attachment: scroll; /* Better performance on mobile */
     }
-    
+
     .pricing-custom-card {
         padding: 2rem 1.5rem;
         max-width: 100%;
     }
-    
+
     .pricing-factors-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .pricing-quote-list {
         text-align: left;
     }
@@ -3611,7 +3669,7 @@ body:not(.homepage) #loading-screen {
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     white-space: nowrap;
 }
 
@@ -3648,7 +3706,6 @@ body:not(.homepage) #loading-screen {
     color: white;
     border-color: var(--text-color);
 }
-
 
 /* Cookie Settings Modal */
 .cookie-settings-modal {
@@ -3786,4 +3843,3 @@ body:not(.homepage) #loading-screen {
     border-top: 2px solid var(--border-color);
     justify-content: flex-end;
 }
-

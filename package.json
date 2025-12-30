@@ -1,21 +1,24 @@
 {
-  "name": "droneye",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
-    "deploy": "npm run build && gh-pages -d dist"
-  },
-  "dependencies": {
-    "@emailjs/browser": "^4.4.1",
-    "@fortawesome/fontawesome-free": "^7.1.0",
-    "three": "^0.169.0"
-  },
-  "devDependencies": {
-    "gh-pages": "^6.3.0",
-    "vite": "^7.1.7"
-  }
+    "name": "droneye",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview",
+        "deploy": "npm run build && gh-pages -d dist",
+        "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,html,md}\" --ignore-unknown",
+        "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,css,html,md}\" --ignore-unknown"
+    },
+    "dependencies": {
+        "@emailjs/browser": "^4.4.1",
+        "@fortawesome/fontawesome-free": "^7.1.0",
+        "three": "^0.169.0"
+    },
+    "devDependencies": {
+        "gh-pages": "^6.3.0",
+        "prettier": "^3.7.4",
+        "vite": "^7.1.7"
+    }
 }

@@ -1,15 +1,15 @@
 // Cookie Consent Management
-(function() {
-    'use strict';
+(function () {
+    "use strict";
 
-    const COOKIE_CONSENT_KEY = 'cookie_consent';
+    const COOKIE_CONSENT_KEY = "cookie_consent";
     const COOKIE_CONSENT_EXPIRY_DAYS = 365;
 
     // Cookie categories
     const COOKIE_CATEGORIES = {
-        necessary: 'necessary',
-        analytics: 'analytics',
-        marketing: 'marketing'
+        necessary: "necessary",
+        analytics: "analytics",
+        marketing: "marketing"
     };
 
     // Check if user has already given consent
@@ -40,39 +40,39 @@
 
     // Show cookie banner
     function showCookieBanner() {
-        const banner = document.getElementById('cookie-banner');
+        const banner = document.getElementById("cookie-banner");
         if (banner) {
-            banner.style.display = 'block';
+            banner.style.display = "block";
             setTimeout(() => {
-                banner.classList.add('show');
+                banner.classList.add("show");
             }, 100);
         }
     }
 
     // Hide cookie banner
     function hideCookieBanner() {
-        const banner = document.getElementById('cookie-banner');
+        const banner = document.getElementById("cookie-banner");
         if (banner) {
-            banner.classList.remove('show');
+            banner.classList.remove("show");
             setTimeout(() => {
-                banner.style.display = 'none';
+                banner.style.display = "none";
             }, 300);
         }
     }
 
     // Show cookie settings modal
     function showCookieSettings() {
-        const modal = document.getElementById('cookie-settings-modal');
+        const modal = document.getElementById("cookie-settings-modal");
         if (!modal) {
             createCookieSettingsModal();
         }
-        const modalElement = document.getElementById('cookie-settings-modal');
+        const modalElement = document.getElementById("cookie-settings-modal");
         if (modalElement) {
-            modalElement.style.display = 'flex';
+            modalElement.style.display = "flex";
             setTimeout(() => {
-                modalElement.classList.add('show');
+                modalElement.classList.add("show");
             }, 10);
-            
+
             // Load current settings
             loadCookieSettings();
         }
@@ -80,20 +80,20 @@
 
     // Hide cookie settings modal
     function hideCookieSettings() {
-        const modal = document.getElementById('cookie-settings-modal');
+        const modal = document.getElementById("cookie-settings-modal");
         if (modal) {
-            modal.classList.remove('show');
+            modal.classList.remove("show");
             setTimeout(() => {
-                modal.style.display = 'none';
+                modal.style.display = "none";
             }, 300);
         }
     }
 
     // Create cookie settings modal HTML
     function createCookieSettingsModal() {
-        const modal = document.createElement('div');
-        modal.id = 'cookie-settings-modal';
-        modal.className = 'cookie-settings-modal';
+        const modal = document.createElement("div");
+        modal.id = "cookie-settings-modal";
+        modal.className = "cookie-settings-modal";
         modal.innerHTML = `
             <div class="cookie-settings-content">
                 <div class="cookie-settings-header">
@@ -142,7 +142,7 @@
             </div>
         `;
         document.body.appendChild(modal);
-        
+
         // Apply translations
         if (window.applyTranslations) {
             window.applyTranslations();
@@ -153,14 +153,14 @@
     function loadCookieSettings() {
         const consentData = getConsentData();
         if (consentData) {
-            document.getElementById('cookie-necessary').checked = true; // Always checked
-            document.getElementById('cookie-analytics').checked = consentData.analytics === true;
-            document.getElementById('cookie-marketing').checked = consentData.marketing === true;
+            document.getElementById("cookie-necessary").checked = true; // Always checked
+            document.getElementById("cookie-analytics").checked = consentData.analytics === true;
+            document.getElementById("cookie-marketing").checked = consentData.marketing === true;
         } else {
             // Default: only necessary
-            document.getElementById('cookie-necessary').checked = true;
-            document.getElementById('cookie-analytics').checked = false;
-            document.getElementById('cookie-marketing').checked = false;
+            document.getElementById("cookie-necessary").checked = true;
+            document.getElementById("cookie-analytics").checked = false;
+            document.getElementById("cookie-marketing").checked = false;
         }
     }
 
@@ -168,15 +168,15 @@
     function saveCookieSettings() {
         const consentData = {
             necessary: true, // Always true
-            analytics: document.getElementById('cookie-analytics').checked,
-            marketing: document.getElementById('cookie-marketing').checked,
+            analytics: document.getElementById("cookie-analytics").checked,
+            marketing: document.getElementById("cookie-marketing").checked,
             accepted: true // User has made a choice
         };
         saveConsent(consentData);
         hideCookieSettings();
         hideCookieBanner();
         initAnalytics();
-        
+
         // Reload YouTube videos based on new consent
         loadYouTubeVideos();
     }
@@ -215,30 +215,33 @@
     // Load YouTube videos - use nocookie version if analytics not allowed
     function loadYouTubeVideos() {
         const useNoCookie = !hasAnalyticsConsent();
-        const domain = useNoCookie ? 'www.youtube-nocookie.com' : 'www.youtube.com';
+        const domain = useNoCookie ? "www.youtube-nocookie.com" : "www.youtube.com";
 
         // Find all YouTube iframe placeholders and load them
-        const placeholders = document.querySelectorAll('.youtube-placeholder[data-youtube-id]');
+        const placeholders = document.querySelectorAll(".youtube-placeholder[data-youtube-id]");
         placeholders.forEach(placeholder => {
-            const videoId = placeholder.getAttribute('data-youtube-id');
-            const iframe = document.createElement('iframe');
+            const videoId = placeholder.getAttribute("data-youtube-id");
+            const iframe = document.createElement("iframe");
             iframe.src = `https://${domain}/embed/${videoId}`;
-            iframe.setAttribute('frameborder', '0');
-            iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
-            iframe.setAttribute('allowfullscreen', '');
-            iframe.setAttribute('loading', 'lazy');
-            iframe.className = 'youtube-iframe';
-            
+            iframe.setAttribute("frameborder", "0");
+            iframe.setAttribute(
+                "allow",
+                "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            );
+            iframe.setAttribute("allowfullscreen", "");
+            iframe.setAttribute("loading", "lazy");
+            iframe.className = "youtube-iframe";
+
             placeholder.replaceWith(iframe);
         });
 
         // Also load/update iframes that have data-youtube-id
-        const iframesWithDataId = document.querySelectorAll('iframe[data-youtube-id]');
+        const iframesWithDataId = document.querySelectorAll("iframe[data-youtube-id]");
         iframesWithDataId.forEach(iframe => {
-            const videoId = iframe.getAttribute('data-youtube-id');
-            const currentSrc = iframe.getAttribute('src');
+            const videoId = iframe.getAttribute("data-youtube-id");
+            const currentSrc = iframe.getAttribute("src");
             const newSrc = `https://${domain}/embed/${videoId}`;
-            
+
             // Only update if src is different or missing
             if (!currentSrc || !currentSrc.includes(domain)) {
                 iframe.src = newSrc;
@@ -285,7 +288,7 @@
                 const consentData = getConsentData();
                 if (consentData) {
                     const expiryDate = new Date(consentData.expiry);
-                    
+
                     // Check if consent expired
                     if (new Date() > expiryDate) {
                         localStorage.removeItem(COOKIE_CONSENT_KEY);
@@ -303,26 +306,26 @@
             }
 
             // Add event listeners (use event delegation to handle multiple banners)
-            document.addEventListener('click', (e) => {
-                if (e.target.id === 'cookie-accept' || e.target.closest('#cookie-accept')) {
+            document.addEventListener("click", e => {
+                if (e.target.id === "cookie-accept" || e.target.closest("#cookie-accept")) {
                     e.preventDefault();
                     acceptCookies();
-                } else if (e.target.id === 'cookie-reject' || e.target.closest('#cookie-reject')) {
+                } else if (e.target.id === "cookie-reject" || e.target.closest("#cookie-reject")) {
                     e.preventDefault();
                     rejectCookies();
-                } else if (e.target.id === 'cookie-settings' || e.target.closest('#cookie-settings')) {
+                } else if (e.target.id === "cookie-settings" || e.target.closest("#cookie-settings")) {
                     e.preventDefault();
                     showCookieSettings();
-                } else if (e.target.id === 'cookie-settings-close' || e.target.closest('#cookie-settings-close')) {
+                } else if (e.target.id === "cookie-settings-close" || e.target.closest("#cookie-settings-close")) {
                     e.preventDefault();
                     hideCookieSettings();
-                } else if (e.target.id === 'cookie-settings-cancel' || e.target.closest('#cookie-settings-cancel')) {
+                } else if (e.target.id === "cookie-settings-cancel" || e.target.closest("#cookie-settings-cancel")) {
                     e.preventDefault();
                     hideCookieSettings();
-                } else if (e.target.id === 'cookie-settings-save' || e.target.closest('#cookie-settings-save')) {
+                } else if (e.target.id === "cookie-settings-save" || e.target.closest("#cookie-settings-save")) {
                     e.preventDefault();
                     saveCookieSettings();
-                } else if (e.target.closest('#cookie-settings-modal') && e.target.id === 'cookie-settings-modal') {
+                } else if (e.target.closest("#cookie-settings-modal") && e.target.id === "cookie-settings-modal") {
                     // Close modal when clicking on backdrop
                     hideCookieSettings();
                 }
@@ -331,8 +334,8 @@
     }
 
     // Wait for DOM to be ready
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => {
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", () => {
             initCookieConsent();
             // Check YouTube videos after a short delay to ensure DOM is fully loaded
             setTimeout(() => {
