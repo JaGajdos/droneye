@@ -20,9 +20,12 @@ let maxScroll = 3000; // Total scroll distance for all scenes
 let isScrolling = false;
 let animationStarted = false; // Track if Explore button was clicked
 
-// Drone flight path
-const droneStartY = 50; // Start high up
-const droneEndY = -10; // End low
+// Vertical offset for drone and water - adjust this single value to move everything up/down
+const VERTICAL_OFFSET = -650; // Negative = lower, Positive = higher
+
+// Drone flight path (base values + offset)
+const droneStartY = 50 + VERTICAL_OFFSET; // Start high up
+const droneEndY = -10 + VERTICAL_OFFSET; // End low
 let droneTargetY = droneStartY;
 let dronePositionZ = 0; // Forward position (negative = forward/away)
 const autoMoveSpeed = 0.3; // Automatic forward movement speed (increased)
@@ -48,141 +51,6 @@ const droneColors = {
     led: 0x00ffff, // Cyan - for LED lights
     white: 0xffffff // White
 };
-
-// Reflector class for water reflections (from gamiable-demo)
-class Reflector extends THREE.Mesh {
-    constructor(geometry, options = {}) {
-        super(geometry);
-        this.type = "Reflector";
-
-        const scope = this;
-        const textureWidth = options.textureWidth || 512;
-        const textureHeight = options.textureHeight || 512;
-        const clipBias = options.clipBias || 0;
-        const exclusion = options.exclusion || null;
-
-        const normal = new THREE.Plane();
-        const normal3 = new THREE.Vector3();
-        const cameraWorldPosition = new THREE.Vector3();
-        const lookAtPosition = new THREE.Vector3();
-        const clipPlane = new THREE.Matrix4();
-        const view = new THREE.Vector3(0, 0, -1);
-        const target = new THREE.Vector4();
-        const q = new THREE.Vector4();
-        const textureMatrix = new THREE.Matrix4();
-        const virtualCamera = new THREE.PerspectiveCamera();
-
-        const parameters = {
-            minFilter: THREE.LinearFilter,
-            magFilter: THREE.LinearFilter,
-            format: THREE.RGBFormat
-        };
-
-        const renderTarget = new THREE.WebGLRenderTarget(textureWidth, textureHeight, parameters);
-
-        if (!THREE.MathUtils.isPowerOfTwo(textureWidth) || !THREE.MathUtils.isPowerOfTwo(textureHeight)) {
-            renderTarget.texture.generateMipmaps = false;
-        }
-
-        const material = options.material;
-        material.uniforms.reflectionTexture.value = renderTarget.texture;
-        material.uniforms.reflectionMatrix.value = textureMatrix;
-
-        this.material = material;
-
-        this.onBeforeRender = function (renderer, scene, camera) {
-            normal3.setFromMatrixPosition(scope.matrixWorld);
-            cameraWorldPosition.setFromMatrixPosition(camera.matrixWorld);
-
-            const rotationMatrix = new THREE.Matrix4();
-            rotationMatrix.extractRotation(scope.matrixWorld);
-
-            normal.set(0, 1, 0);
-            normal.applyMatrix4(rotationMatrix);
-            normal.normalize();
-
-            const viewWorldPosition = new THREE.Vector3();
-            viewWorldPosition.subVectors(normal3, cameraWorldPosition);
-
-            if (viewWorldPosition.dot(normal) > 0) return;
-
-            viewWorldPosition.reflect(normal).negate();
-            viewWorldPosition.add(normal3);
-
-            rotationMatrix.extractRotation(camera.matrixWorld);
-
-            view.set(0, 0, -1);
-            view.applyMatrix4(rotationMatrix);
-            view.add(cameraWorldPosition);
-
-            const target = new THREE.Vector3();
-            target.subVectors(normal3, view);
-            target.reflect(normal).negate();
-            target.add(normal3);
-
-            virtualCamera.position.copy(viewWorldPosition);
-            virtualCamera.up.set(0, 1, 0);
-            virtualCamera.up.applyMatrix4(rotationMatrix);
-            virtualCamera.up.reflect(normal);
-            virtualCamera.lookAt(target);
-            virtualCamera.far = camera.far;
-            virtualCamera.updateMatrixWorld();
-            virtualCamera.projectionMatrix.copy(camera.projectionMatrix);
-
-            textureMatrix.set(0.5, 0.0, 0.0, 0.5, 0.0, 0.5, 0.0, 0.5, 0.0, 0.0, 0.5, 0.5, 0.0, 0.0, 0.0, 1.0);
-            textureMatrix.multiply(virtualCamera.projectionMatrix);
-            textureMatrix.multiply(virtualCamera.matrixWorldInverse);
-            textureMatrix.multiply(scope.matrixWorld);
-
-            normal.setFromNormalAndCoplanarPoint(normal, normal3);
-            normal.applyMatrix4(virtualCamera.matrixWorldInverse);
-
-            const clipPlane = new THREE.Vector4(normal.x, normal.y, normal.z, normal.constant);
-            const projectionMatrix = virtualCamera.projectionMatrix;
-
-            const q = new THREE.Vector4();
-            q.x = (Math.sign(clipPlane.x) + projectionMatrix.elements[8]) / projectionMatrix.elements[0];
-            q.y = (Math.sign(clipPlane.y) + projectionMatrix.elements[9]) / projectionMatrix.elements[5];
-            q.z = -1.0;
-            q.w = (1.0 + projectionMatrix.elements[10]) / projectionMatrix.elements[14];
-
-            clipPlane.multiplyScalar(2.0 / clipPlane.dot(q));
-            projectionMatrix.elements[2] = clipPlane.x;
-            projectionMatrix.elements[6] = clipPlane.y;
-            projectionMatrix.elements[10] = clipPlane.z + 1.0 - clipBias;
-            projectionMatrix.elements[14] = clipPlane.w;
-
-            renderTarget.texture.encoding = renderer.outputEncoding;
-
-            scope.visible = false;
-            const currentRenderTarget = renderer.getRenderTarget();
-            const currentXrEnabled = renderer.xr.enabled;
-            const currentShadowAutoUpdate = renderer.shadowMap.autoUpdate;
-
-            renderer.xr.enabled = false;
-            renderer.shadowMap.autoUpdate = false;
-            renderer.setRenderTarget(renderTarget);
-            renderer.state.buffers.depth.setMask(true);
-            if (renderer.autoClear === false) renderer.clear();
-            renderer.render(scene, virtualCamera);
-
-            renderer.xr.enabled = currentXrEnabled;
-            renderer.shadowMap.autoUpdate = currentShadowAutoUpdate;
-            renderer.setRenderTarget(currentRenderTarget);
-
-            const viewport = camera.viewport;
-            if (viewport !== undefined) {
-                renderer.state.viewport(viewport);
-            }
-
-            scope.visible = true;
-        };
-
-        this.getRenderTarget = function () {
-            return renderTarget;
-        };
-    }
-}
 
 // Function to change drone color (can be called from console or UI)
 function changeDroneColor(bodyColor, rotorColor) {
@@ -1031,7 +899,7 @@ class WaterScene {
         });
 
         this.water.rotation.x = -Math.PI / 2;
-        this.water.position.set(0, -5, 0);
+        this.water.position.set(0, -5 + VERTICAL_OFFSET, 0); // Water surface position
         this.scene.add(this.water);
 
         // Create clouds above drone - same system as SkyScene but above drone
@@ -1466,15 +1334,6 @@ function loadDroneModel() {
 }
 
 // Find objects by name contains
-function findByNameContains(root, contains) {
-    const c = contains.toLowerCase();
-    const out = [];
-    root.traverse(o => {
-        if ((o.name || "").toLowerCase().includes(c)) out.push(o);
-    });
-    return out;
-}
-
 // Fit and center object
 function fitAndCenter(object3d) {
     const box = new THREE.Box3().setFromObject(object3d);
@@ -1540,7 +1399,7 @@ function updateTexts() {
             } else {
                 // CTA hasn't appeared yet
                 opacity = 0;
-                translateY = 50;
+                translateY = 1150;
             }
         }
         // First text - visible at start, much higher up, scrolls up
@@ -1552,7 +1411,7 @@ function updateTexts() {
                     opacity = 1;
                     // Start much higher (-200px), move up gradually
                     const localProgress = scrollProgress / textFadeOutStart;
-                    translateY = -200 - localProgress * 100; // From -200px to -300px (moving up)
+                    translateY = -250 - localProgress * 100; // From -200px to -300px (moving up)
                 } else {
                     // Fade out and continue moving up
                     const localProgress = (scrollProgress - textFadeOutStart) / (textEnd - textFadeOutStart);
@@ -1591,7 +1450,7 @@ function updateTexts() {
             } else if (scrollProgress < textStart) {
                 // Text hasn't appeared yet - below screen
                 opacity = 0;
-                translateY = 150;
+                translateY = 1150;
             } else {
                 // Text has passed - above screen (same height as first text)
                 opacity = 0;
@@ -1666,11 +1525,11 @@ function animate() {
                     newDroneY = droneRoot.position.y; // Keep current height from space
                 } else {
                     // Coming from other scenes - start higher
-                    newDroneY = 63;
+                    newDroneY = 63 + VERTICAL_OFFSET; // Sky scene start height
                 }
             } else if (currentSceneIndex === 2) {
                 // Water scene - start at medium height (between water and clouds)
-                newDroneY = 20;
+                newDroneY = 20 + VERTICAL_OFFSET; // Water scene start height
             } else {
                 // Other scenes - start at top
                 newDroneY = droneStartY;
@@ -1679,18 +1538,18 @@ function animate() {
 
             // Set droneTargetY immediately to prevent camera jump
             if (currentSceneIndex === 1) {
-                // Sky scene - if coming from space, target is clouds (63), otherwise calculate based on scrollProgress
+                // Sky scene - if coming from space, target is clouds, otherwise calculate based on scrollProgress
                 if (prevSceneIndex === 0) {
                     // Smooth transition: target is clouds height
-                    droneTargetY = 63;
+                    droneTargetY = 63 + VERTICAL_OFFSET; // Sky scene target height
                 } else {
                     // Calculate based on current scrollProgress
-                    droneTargetY = 63 - scrollProgress * 5;
+                    droneTargetY = 63 + VERTICAL_OFFSET - scrollProgress * 5; // Sky scene target height
                 }
             } else if (currentSceneIndex === 2) {
                 // Water scene - calculate based on current scrollProgress
-                const minY = 0;
-                const maxY = 20;
+                const minY = 0 + VERTICAL_OFFSET; // Minimum height above water
+                const maxY = 20 + VERTICAL_OFFSET; // Starting height
                 droneTargetY = maxY - scrollProgress * (maxY - minY);
                 droneTargetY = Math.max(droneTargetY, minY);
             } else {
@@ -1720,13 +1579,13 @@ function animate() {
     // Calculate drone Y position based on scroll progress
     // Adjust height for sky scene (scene 1) - drone should fly just above clouds
     if (currentSceneIndex === 1) {
-        // In sky scene, drone flies just above clouds (clouds at ~50-56, drone at 58-63)
-        droneTargetY = 63 - scrollProgress * 5; // Fly at 63-58 height, just above clouds at 50-56
+        // In sky scene, drone flies just above clouds
+        droneTargetY = 63 + VERTICAL_OFFSET - scrollProgress * 5; // Fly at sky height, just above clouds
     } else if (currentSceneIndex === 2) {
-        // In water scene (scene 3), drone should stay above water surface (water at y = -3)
-        // Drone starts at y = 20 and can descend but not below y = 0 (above water)
-        const minY = 0; // Minimum height above water
-        const maxY = 20; // Starting height
+        // In water scene (scene 3), drone should stay above water surface
+        // Drone starts at maxY and can descend but not below minY (above water)
+        const minY = 0 + VERTICAL_OFFSET; // Minimum height above water
+        const maxY = 20 + VERTICAL_OFFSET; // Starting height
         droneTargetY = maxY - scrollProgress * (maxY - minY);
         droneTargetY = Math.max(droneTargetY, minY); // Ensure drone doesn't go below water
     } else {

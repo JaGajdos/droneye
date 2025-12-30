@@ -156,7 +156,7 @@ button {
         Roboto,
         sans-serif;
     opacity: 0;
-    transform: translateY(100px);
+    transform: translateY(0px);
     transition:
         opacity 0.5s ease,
         transform 0.5s ease;
@@ -3399,7 +3399,7 @@ body:not(.homepage) #loading-screen {
 /* Mobile: Move first text higher */
 @media (max-width: 768px) {
     .scroll-text[data-index="0"].visible {
-        transform: translateY(-250px) !important; /* Move first text even higher when visible */
+        transform: translateY(-300px) !important; /* Move first text even higher when visible */
     }
     .photo-lightbox-prev,
     .photo-lightbox-next {
