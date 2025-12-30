@@ -1670,6 +1670,9 @@ function animate() {
         currentSceneIndex = newSceneIndex;
         scene = scenes[currentSceneIndex];
         
+        // Update navbar color based on scene
+        updateNavbarColor(currentSceneIndex);
+        
         // Reset scroll based on scroll direction
         const sceneScrollRange = maxScroll / scenes.length;
         if (scrollingDown) {
@@ -1848,6 +1851,57 @@ function animate() {
     renderer.render(scene, camera);
 }
 
+// Update navbar color based on current scene
+function updateNavbarColor(sceneIndex) {
+    const navbar = document.querySelector('.navbar');
+    if (!navbar) return;
+    
+    // Scene 1 (index 0) = Space scene - keep white
+    // Scene 2 (index 1) = Sky scene - change to darker color
+    // Scene 3 (index 2) = Water scene - change to darker color
+    if (sceneIndex === 1 || sceneIndex === 2) {
+        // Sky or Water scene - use darker color for better visibility
+        navbar.style.setProperty('--navbar-text', '#002366'); // Dark blue
+        // Also update nav links directly
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.style.color = '#002366';
+        });
+        // Update hamburger bars
+        const bars = document.querySelectorAll('.bar');
+        bars.forEach(bar => {
+            bar.style.background = '#002366';
+        });
+        // Update language switcher buttons
+        const languageOptions = document.querySelectorAll('.language-option');
+        languageOptions.forEach(option => {
+            if (!option.classList.contains('active')) {
+                option.style.color = '#002366';
+                option.style.borderColor = '#002366';
+            }
+        });
+    } else {
+        // Space scene or other - use white (default)
+        navbar.style.setProperty('--navbar-text', 'var(--footer-text)'); // Reset to default
+        // Reset nav links
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.style.color = '';
+        });
+        // Reset hamburger bars
+        const bars = document.querySelectorAll('.bar');
+        bars.forEach(bar => {
+            bar.style.background = '';
+        });
+        // Reset language switcher buttons
+        const languageOptions = document.querySelectorAll('.language-option');
+        languageOptions.forEach(option => {
+            option.style.color = '';
+            option.style.borderColor = '';
+        });
+    }
+}
+
 // Window resize handler
 function onWindowResize() {
     camera.aspect = window.innerWidth / window.innerHeight;
@@ -1937,6 +1991,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!isInitialized) {
         init(); // Start animation immediately, but drone will be off-screen until "Explore" is clicked
         isInitialized = true;
+        // Set initial navbar color for scene 0 (Space scene)
+        updateNavbarColor(0);
     }
 });
 
