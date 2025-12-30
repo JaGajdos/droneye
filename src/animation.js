@@ -17,7 +17,6 @@ let scrollProgress = 0; // 0 to 1
 let scrollY = 0;
 let prevScrollY = 0; // Track previous scroll position to detect direction
 let maxScroll = 3000; // Total scroll distance for all scenes
-let isScrolling = false;
 let animationStarted = false; // Track if Explore button was clicked
 
 // Vertical offset for drone and water - adjust this single value to move everything up/down
@@ -28,7 +27,6 @@ const droneStartY = 50 + VERTICAL_OFFSET; // Start high up
 const droneEndY = -10 + VERTICAL_OFFSET; // End low
 let droneTargetY = droneStartY;
 let dronePositionZ = 0; // Forward position (negative = forward/away)
-const autoMoveSpeed = 0.3; // Automatic forward movement speed (increased)
 
 // Drone entrance animation
 let entranceAnimationActive = true;
@@ -40,16 +38,8 @@ const entranceEndX = 0; // End position (center)
 // Color configuration - Royal blue theme from project with detailed parts
 const droneColors = {
     body: 0x002366, // Royal blue (#002366) - primary color from project - for Body
-    bodyAccent: 0x003d99, // Secondary blue (#003d99) - for body accents
     rotors: 0xff6600, // Vibrant orange (very visible and lively) - for Rotors
-    camera: 0x1a1a1a, // Dark gray/black - for camera
-    lens: 0x000000, // Black - for camera lens
-    sensors: 0x4a9eff, // Light blue - for sensors
-    frame: 0x001a4d, // Darker blue - for frame/arms
-    details: 0xffffff, // Bright white - for Cube002 and other details
-    accent: 0x003d99, // Secondary blue (#003d99) from project
-    led: 0x00ffff, // Cyan - for LED lights
-    white: 0xffffff // White
+    details: 0xffffff // Bright white - for Cube002 and other details
 };
 
 // Function to change drone color (can be called from console or UI)
@@ -575,10 +565,6 @@ class SkyScene {
 
         const rnd = (min, max) => min + Math.random() * (max - min);
         const cloudSpeed = 80; // Speed at which clouds approach (units per second)
-        const droneZ = 0; // Drone stays at fixed Z position
-        const resetDistance = 2500; // Distance behind drone - much further away so clouds don't appear close
-        const resetStartZ = droneZ + 50; // Start resetting clouds before they pass drone
-        const resetEndZ = droneZ - resetDistance; // End of reset range
 
         // Move clouds forward (towards drone) continuously, just like stars
         this.clouds.forEach((cloud, i) => {
@@ -798,7 +784,6 @@ class WaterScene {
 
         const rnd = (min, max) => min + Math.random() * (max - min);
         const cloudSpeed = 80; // Speed at which clouds approach (units per second)
-        const droneZ = 0; // Drone stays at fixed Z position
 
         // Move clouds forward (towards drone) continuously, just like SkyScene
         this.clouds.forEach((cloud, i) => {
@@ -1391,13 +1376,6 @@ function animate() {
         droneTargetY = droneStartY - scrollProgress * (droneStartY - droneEndY);
     }
 
-    // Automatic forward movement when not scrolling - DISABLED to keep drone in scene
-    // Faster movement in space scene
-    // if (!isScrolling) {
-    //     const speedMultiplier = currentSceneIndex === 0 ? 2.5 : 1.0; // Much faster in space
-    //     dronePositionZ -= autoMoveSpeed * dt * 30 * speedMultiplier; // Move forward faster (negative Z = away from camera)
-    // }
-
     // Smoothly move drone (Y movement and entrance animation)
     if (droneRoot && droneRoot.visible) {
         // Handle entrance animation (flying in from left)
@@ -1572,15 +1550,8 @@ function onWheel(event) {
     }
 
     event.preventDefault();
-    isScrolling = true;
     scrollY += event.deltaY * 0.5;
     scrollY = Math.max(0, Math.min(maxScroll, scrollY));
-
-    // Reset scrolling flag after a delay
-    clearTimeout(window.scrollTimeout);
-    window.scrollTimeout = setTimeout(() => {
-        isScrolling = false;
-    }, 150);
 }
 
 // Touch handlers for mobile
@@ -1592,7 +1563,6 @@ function onTouchStart(event) {
     if (!animationStarted) {
         return;
     }
-    isScrolling = true;
     touchStartY = event.touches[0].clientY;
     lastTouchY = touchStartY;
 }
@@ -1603,7 +1573,6 @@ function onTouchMove(event) {
         return;
     }
     event.preventDefault();
-    isScrolling = true;
     const currentY = event.touches[0].clientY;
     const deltaY = lastTouchY - currentY;
     scrollY += deltaY * 2;
@@ -1612,11 +1581,7 @@ function onTouchMove(event) {
 }
 
 function onTouchEnd(event) {
-    // Reset scrolling flag after a delay
-    clearTimeout(window.scrollTimeout);
-    window.scrollTimeout = setTimeout(() => {
-        isScrolling = false;
-    }, 150);
+    // Touch end handler
 }
 
 // Flag to prevent multiple initializations
