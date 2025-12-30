@@ -829,7 +829,9 @@ class SkyScene {
         if (this.cloudTextures.length < 2 || this.clouds.length > 0) return;
         
         const rnd = (min, max) => min + Math.random() * (max - min);
-        const CLOUD_COUNT = 300; // Number of clouds
+        // Reduce cloud count on mobile devices for better performance
+        const isMobile = window.innerWidth <= 768;
+        const CLOUD_COUNT = isMobile ? 100 : 300; // Fewer clouds on mobile
         
         for (let i = 0; i < CLOUD_COUNT; i++) {
             // Randomly choose cloud texture (0 or 1)
@@ -859,7 +861,7 @@ class SkyScene {
             sprite.scale.set(scaleX, scaleY, 1);
             
             // Get viewport width for X spread
-            const viewportWidth = window.innerWidth-400;
+            const viewportWidth = window.innerWidth;
             const xSpread = viewportWidth * 0.5; // Use half viewport width for each side
             
             // Set initial position - from Z drone + 50 (in front) to Z drone - 1500 (behind)
@@ -1050,7 +1052,9 @@ class WaterScene {
         if (this.cloudTextures.length === 0 || this.clouds.length > 0) return;
         
         const rnd = (min, max) => min + Math.random() * (max - min);
-        const CLOUD_COUNT = 300; // Number of clouds
+        // Reduce cloud count on mobile devices for better performance
+        const isMobile = window.innerWidth <= 768;
+        const CLOUD_COUNT = isMobile ? 100 : 300; // Fewer clouds on mobile
         
         for (let i = 0; i < CLOUD_COUNT; i++) {
             // Randomly choose cloud texture
@@ -1796,8 +1800,9 @@ function animate() {
             droneRoot.position.x = entranceEndX;
         }
         
-        // Y movement (vertical flight)
-        droneRoot.position.y += (droneTargetY - droneRoot.position.y) * 0.1;
+        // Y movement (vertical flight) - faster on water scene
+        const movementSpeed = currentSceneIndex === 2 ? 0.2 : 0.1; // Faster on water scene (index 2)
+        droneRoot.position.y += (droneTargetY - droneRoot.position.y) * movementSpeed;
         droneRoot.position.z = 0; // Keep drone at fixed Z position (no forward movement)
         
         // Spin rotors
@@ -1856,10 +1861,38 @@ function updateNavbarColor(sceneIndex) {
     const navbar = document.querySelector('.navbar');
     if (!navbar) return;
     
-    // Scene 1 (index 0) = Space scene - keep white
-    // Scene 2 (index 1) = Sky scene - change to darker color
-    // Scene 3 (index 2) = Water scene - change to darker color
-    if (sceneIndex === 1 || sceneIndex === 2) {
+    // Only change colors on screens wider than 1024px
+    const isWideScreen = window.innerWidth > 1024;
+    if (!isWideScreen) {
+        // On smaller screens, keep default colors
+        return;
+    }
+    
+    // Scene 0 = Space scene (vesmír) - use white
+    // Scene 1 (index 1) = Sky scene - change to darker color
+    // Scene 2 (index 2) = Water scene - change to darker color
+    if (sceneIndex === 0 || sceneIndex === 1) {
+        // Space scene (vesmír) - use white
+        navbar.style.setProperty('--navbar-text', '#ffffff'); // White
+        // Also update nav links directly
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.style.color = '#ffffff';
+        });
+        // Update hamburger bars
+        const bars = document.querySelectorAll('.bar');
+        bars.forEach(bar => {
+            bar.style.background = '#ffffff';
+        });
+        // Update language switcher buttons
+        const languageOptions = document.querySelectorAll('.language-option');
+        languageOptions.forEach(option => {
+            if (!option.classList.contains('active')) {
+                option.style.color = '#ffffff';
+                option.style.borderColor = 'rgba(255, 255, 255, 0.3)';
+            }
+        });
+    } else if (sceneIndex === 2) {
         // Sky or Water scene - use darker color for better visibility
         navbar.style.setProperty('--navbar-text', '#003d99'); // Dark blue
         // Also update nav links directly
@@ -1881,7 +1914,7 @@ function updateNavbarColor(sceneIndex) {
             }
         });
     } else {
-        // Space scene or other - use white (default)
+        // Other scenes - use default
         navbar.style.setProperty('--navbar-text', 'var(--footer-text)'); // Reset to default
         // Reset nav links
         const navLinks = document.querySelectorAll('.nav-link');

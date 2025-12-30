@@ -137,7 +137,7 @@ button {
 /* Show text container when animation starts */
 #text-container.show {
     display: block;
-    z-index: 1000; /* Above canvas */
+    z-index: 100; /* Above canvas */
 }
 
 /* Scroll text styles */
@@ -153,6 +153,7 @@ button {
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
+    padding: 0 5px; /* Padding left and right */
 }
 
 .scroll-text-title {
@@ -3336,7 +3337,12 @@ body:not(.homepage) #loading-screen {
 }
 
 
+/* Mobile: Move first text higher */
 @media (max-width: 768px) {
+   
+    .scroll-text[data-index="0"].visible {
+        transform: translateY(-250px) !important; /* Move first text even higher when visible */
+    }
     .photo-lightbox-prev,
     .photo-lightbox-next {
         width: 40px;
