@@ -1,510 +1,501 @@
 {
-  "nav": {
-    "home": "Domov",
-    "services": "Naše služby",
-    "projects": "Naše projekty",
-    "team": "Naše kurzy",
-    "pricing": "Cenová ponuka",
-    "contact": "Kontakt"
-  },
-  "hero": {
-    "title": "Vitajte v Droneye",
-    "subtitle": "Vidíme to, čo chcete vidieť",
-    "cta": "Preskúmať"
-  },
-  "projects": {
-    "title": "Naše projekty",
-    "subtitle": "Pozrite si naše najnovšie úspešné projekty",
-    "videos": {
-      "title": "Videá",
-      "subtitle": "Pozrite si, čo dokážeme vytvoriť s našimi profesionálnymi dronmi",
-      "item1": {
-        "title": "Video projekt 1"
-      },
-      "item2": {
-        "title": "Video projekt 2"
-      },
-      "item3": {
-        "title": "Video projekt 3"
-      },
-      "item4": {
-        "title": "Video projekt 4"
-      },
-      "item5": {
-        "title": "Video projekt 5"
-      },
-      "item6": {
-        "title": "Video projekt 6"
-      },
-      "cta": "Kontaktujte nás"
+    "nav": {
+        "home": "Domov",
+        "services": "Naše služby",
+        "projects": "Naše projekty",
+        "team": "Naše kurzy",
+        "pricing": "Cenová ponuka",
+        "contact": "Kontakt"
     },
-    "photos": {
-      "title": "Fotografie",
-      "subtitle": "Objavte kvalitu našich leteckých snímok zachytených z výšky",
-      "cta": "Kontaktujte nás",
-      "item1": {
-        "title": "Fotografia projektu 1"
-      },
-      "item2": {
-        "title": "Fotografia projektu 2"
-      },
-      "item3": {
-        "title": "Fotografia projektu 3"
-      },
-      "item4": {
-        "title": "Fotografia projektu 4"
-      },
-      "item5": {
-        "title": "Fotografia projektu 5"
-      },
-      "item6": {
-        "title": "Fotografia projektu 6"
-      }
+    "hero": {
+        "title": "Vitajte v Droneye",
+        "subtitle": "Vidíme to, čo chcete vidieť",
+        "cta": "Preskúmať"
+    },
+    "projects": {
+        "title": "Naše projekty",
+        "subtitle": "Pozrite si naše najnovšie úspešné projekty",
+        "videos": {
+            "title": "Videá",
+            "subtitle": "Pozrite si, čo dokážeme vytvoriť s našimi profesionálnymi dronmi",
+            "item1": {
+                "title": "Video projekt 1"
+            },
+            "item2": {
+                "title": "Video projekt 2"
+            },
+            "item3": {
+                "title": "Video projekt 3"
+            },
+            "item4": {
+                "title": "Video projekt 4"
+            },
+            "item5": {
+                "title": "Video projekt 5"
+            },
+            "item6": {
+                "title": "Video projekt 6"
+            },
+            "cta": "Kontaktujte nás"
+        },
+        "photos": {
+            "title": "Fotografie",
+            "subtitle": "Objavte kvalitu našich leteckých snímok zachytených z výšky",
+            "cta": "Kontaktujte nás",
+            "item1": {
+                "title": "Fotografia projektu 1"
+            },
+            "item2": {
+                "title": "Fotografia projektu 2"
+            },
+            "item3": {
+                "title": "Fotografia projektu 3"
+            },
+            "item4": {
+                "title": "Fotografia projektu 4"
+            },
+            "item5": {
+                "title": "Fotografia projektu 5"
+            },
+            "item6": {
+                "title": "Fotografia projektu 6"
+            }
+        }
+    },
+    "team": {
+        "title": "Náš tím",
+        "subtitle": "Poznajte našich odborníkov",
+        "description": "Sme tím profesionálov, ktorí sa venujú dronovým službám s vášňou a dôrazom na detail. Špecializujeme sa na videá, fotografie, letecké zábery s dronom a ďalšie dronové služby. Každý člen nášho tímu prispieva svojou odbornosťou k vytvoreniu výnimočných výsledkov pre našich klientov.",
+        "member1": {
+            "name": "Ján Novák",
+            "position": "Hlavný pilot a technický riaditeľ",
+            "description": "S viac ako 10-ročnou skúsenosťou v dronovom lietaní je Ján naším hlavným pilotom. Špecializuje sa na technické lety, mapovanie a bezpečnostné operácie. Je certifikovaný pilot s licenciou pre komerčné lety."
+        },
+        "member2": {
+            "name": "Mária Kováčová",
+            "position": "Videograf a kreatívny riaditeľ",
+            "description": "Mária je naša kreatívna duša, ktorá transformuje surové zábery do pútavých príbehov. S bohatými skúsenosťami v produkcii a post-produkcii vytvára videá, ktoré zachytávajú emócie a krásu každého projektu."
+        },
+        "member3": {
+            "name": "Peter Horváth",
+            "position": "Fotograf a post-produkčný špecialista",
+            "description": "Peter je expert na fotografiu a post-produkciu. S dokonalým zmyslom pre detail a kompozíciu vytvára snímky, ktoré zachytávajú jedinečnú perspektívu z neba. Jeho práca bola ocenená na viacerých medzinárodných súťažiach."
+        }
+    },
+    "pricing": {
+        "title": "Cenová ponuka",
+        "subtitle": "Individuálne riešenia pre každý projekt",
+        "main": {
+            "title": "Cena našich služieb"
+        },
+        "factors": {
+            "title": "Čo ovplyvňuje cenu?",
+            "item1": {
+                "label": "Typ dronu a technika",
+                "value": "Používame špičkové stroje od DJI"
+            },
+            "item2": {
+                "label": "Náročnosť a lokalita",
+                "value": "Počet natáčacích hodín, dostupnosť terénu, potrebné povolenia."
+            },
+            "item3": {
+                "label": "Postprodukcia",
+                "value": "Záleží, či potrebujete len surový materiál alebo kompletný výstup (strih, farebné korekcie, hudba, titulky)."
+            }
+        },
+        "quote": {
+            "title": "Ako získať cenovú ponuku?",
+            "description": "Radi sa vám ozveme s návrhom, ktorý bude zodpovedať presne vašim predstavám.",
+            "item1": "Kde a kedy chcete natáčať",
+            "item2": "Na aký účel bude materiál slúžiť",
+            "item3": "Približný rozsah a vaše očakávania",
+            "cta": "Kontaktujte nás"
+        },
+        "basic": {
+            "title": "Basic",
+            "label": "Základný balík",
+            "price": "250",
+            "cta": "Kontakt"
+        },
+        "professional": {
+            "title": "Professional",
+            "label": "Profesionálny balík",
+            "price": "500",
+            "cta": "Kontakt"
+        },
+        "custom": {
+            "label": "Individuálne",
+            "description": "Každý projekt je jedinečný a vyžaduje individuálny prístup. Kontaktujte nás a pripravíme vám cenovú ponuku presne podľa vašich potrieb.",
+            "cta": "Kontakt"
+        },
+        "included": {
+            "title": "Aké služby sú zahrnuté v cene?",
+            "description": "Cenník sa vzťahuje na produkciu surových leteckých záberov a fotografií z dronu, teda na čas, ktorý strávime priamo na pľaci."
+        },
+        "postproduction": {
+            "title": "A úprava videa alebo fotografií?",
+            "description": "Po dohode s klientom každá naša letecká fotografia alebo videozáber prechádza profesionálnou postprodukciou v našom štúdiu. Ako celý proces prebieha?",
+            "step1": {
+                "title": "Výber hudby",
+                "description": "Vhodne zvolený hudobný podmaz pri videách predstavuje polovicu úspechu. Vytvorí základný pilier a emóciu, od ktorých sa odvíja následná postprodukcia. Preto vám pred samotnou postprodukciou videa odošleme na výber 5 vhodných hudobných ukážok z audiobanky."
+            },
+            "step2": {
+                "title": "Strih",
+                "description": "Na základe vybranej hudby podľa námetu vytvoríme hrubý strih, ktorý vám odošleme na odsúhlasenie. Následne video obohatíme o ďalšie vychytávky a zvukové efekty."
+            },
+            "step3": {
+                "title": "Colorgrading",
+                "description": "Po odsúhlasení hrubého strihu pracujeme na colorgradingu. Obraz dostane farby, tiene, teplotu – skrátka tú správnu šťavu. Colorgrading tvoríme na profesionálnych kalibrovaných 4K monitoroch."
+            },
+            "step4": {
+                "title": "2D / 3D animácie",
+                "description": "Podľa požiadavky vytvoríme aj 2D animácie – originálne animované logo na začiatok videa, natrackované texty pripnuté v 3D priestore videa alebo menovky zobrazujúce sa v rohu videa. Tvoríme aj 3D vizualizácie – animácie prostredí a budov."
+            },
+            "step5": {
+                "title": "Final render",
+                "description": "Po odsúhlasení celého projektu samotné video vyexportujeme v najvyšších formátoch vhodných pre TV, online priestor a socials ako Instagram, Facebook, Youtube. Na záver ho hodíme na cloud, odkiaľ už poputuje k vám."
+            }
+        },
+        "diagram": {
+            "lietanie": {
+                "title": "Lietanie",
+                "items": ["Predpríprava letu", "Analýza počasia", "Lietanie"]
+            },
+            "povolenia": {
+                "title": "Povolenia",
+                "items": [
+                    "Prevádzkové povolenie",
+                    "Specific",
+                    "Predletové povolenie",
+                    "Dronové právne služby a CAMO povinnosti"
+                ]
+            },
+            "bezpecnost": {
+                "title": "Bezpečnosť",
+                "items": ["Padák a ochrana vrtúľ", "Poistenie dronu", "Náhradné drony", "FTS Systém"]
+            },
+            "spolupraca": {
+                "title": "Spolupráca",
+                "items": [
+                    "10r Know How",
+                    "Konzultácia s klientom",
+                    "Obhliadky",
+                    "Cenová ponuka",
+                    "Odovzdanie materiálov pomocou cloudu",
+                    "Archivácia materiálu"
+                ]
+            }
+        }
+    },
+    "services": {
+        "title": "Naše služby",
+        "subtitle": "Profesionálne drone služby pre vaše potreby",
+        "carousel": {
+            "title": "Naše služby",
+            "subtitle": "Ponúkame široký rozsah profesionálnych dronových služieb pre vaše potreby",
+            "cta": "Kontaktujte nás",
+            "tab1": "Video produkcia",
+            "tab2": "Fotografovanie",
+            "tab3": "Zábery dronom",
+            "tab4": "Postprodukcia",
+            "card1": {
+                "title": "Video produkcia a tvorba videí",
+                "description": "Kompletná produkcia videí od scenára, cez natáčanie až po postprodukciu. Vytvárame reklamné, prezentačné a promo videá na mieru pre firmy, realitné kancelárie, hotely, eventy aj sociálne siete."
+            },
+            "card2": {
+                "title": "Fotografovanie",
+                "description": "Ponúkame profesionálne fotografovanie nehnuteľností, eventov, produktov a ďalších objektov s dôrazom na detail, kompozíciu a postprodukciu. Výsledné fotografie sú vhodné pre web, tlač aj sociálne siete."
+            },
+            "card3": {
+                "title": "Letecké zábery dronom",
+                "description": "Zachytíme vašu nehnuteľnosť, areál, podujatie či krajinu z výšky v špičkovej kvalite. Letecké zábery sú ideálne pre prezentácie, marketing, monitoring aj dokumentáciu."
+            },
+            "card4": {
+                "title": "Máte zábery a chýba vám postprodukcia?",
+                "description": "Práve postprodukcia je to, čo z obyčajného videa urobí obsah, ktorý zaujme a zostane v pamäti. Pošlite nám vaše materiály a my im vdýchneme život. Postaráme sa o precízny strih, vyvážené farby, správnu hudbu aj jemné efekty, ktoré podčiarknu atmosféru a príbeh vášho videa."
+            }
+        },
+        "equipment": {
+            "title": "S čím lietame",
+            "subtitle": "Používame profesionálne drony a vybavenie pre najlepšie výsledky",
+            "flightTime": "Čas letu:",
+            "range": "Dolet:",
+            "resolution": "Rozlíšenie videa:",
+            "format": "Formát:",
+            "item1": {
+                "title": "DJI Avata 2 FPV (2x)",
+                "feature": "Ultraširoký 155° FOV",
+                "flightTime": "23 minút",
+                "range": "13 km",
+                "resolution": "4K/60fps",
+                "format": "H.265 / H.264"
+            },
+            "item2": {
+                "title": "DJI Mavic 4 Pro Combo",
+                "feature": "100 MP Hasselblad kamera",
+                "flightTime": "51 minút",
+                "range": "30 km",
+                "resolution": "6K/60fps HDR",
+                "format": "ProRes 4444XQ / H.265 / H.264"
+            }
+        },
+        "process": {
+            "title": "Ako To celé prebieha?",
+            "cta": "Kontaktujte nás",
+            "step1": {
+                "title": "Napíšte nám",
+                "description": "Pošlite nám e-mail na <a href=\"mailto:info@droneye.sk\">info@droneye.sk</a> s Vašou predstavou, nápadom o ktorý máte záujem, miestom a termínom predpokladaného lietania."
+            },
+            "step2": {
+                "title": "Konzultácia, poradenstvo",
+                "description": "Spoločne si dohodneme termín, detailne prejdeme vašu predstavu a ciele videa a následne ju prepojíme s našou kreativitou a skúsenosťami."
+            },
+            "step3": {
+                "title": "Povolenie",
+                "description": "Následne za vás zabezpečíme vybavenie všetkých potrebných predletových povolení a administratívy v súlade s platnými pravidlami danej krajiny."
+            },
+            "step4": {
+                "title": "Lietanie",
+                "description": "V stanovenom termíne dorazíme na miesto a zrealizujeme nakrúcanie podľa vopred dohodnutého konceptu."
+            },
+            "step5": {
+                "title": "Postprodukcia",
+                "description": "Postaráme sa o profesionálnu úpravu fotografií aj strih videa do licencovanej hudby, pričom na požiadanie obsah ďalej upravíme podľa vašich predstáv."
+            }
+        }
+    },
+    "contact": {
+        "title": "Kontakt",
+        "subtitle": "Spojte sa s nami pre vaše potreby",
+        "info": {
+            "title": "Kontaktné údaje",
+            "email": "📧 info@droneye.sk",
+            "phone": "📞 +421 950 614 303",
+            "address": "📍 Bratislava, Slovensko"
+        },
+        "form": {
+            "title": "Napíšte nám",
+            "name": "Meno",
+            "email": "Email",
+            "phone": "Telefónne číslo",
+            "message": "Správa",
+            "consent": "Súhlasím so spracovaním osobných údajov pre účely tohto formulára.",
+            "submit": "Odoslať",
+            "sending": "Odosielam...",
+            "success": "Ďakujeme za vašu správu! Čoskoro vás budeme kontaktovať.",
+            "errors": {
+                "name": "Meno je povinné pole.",
+                "email": "Email je povinné pole.",
+                "emailInvalid": "Email má nesprávny formát.",
+                "phone": "Telefónne číslo je povinné pole.",
+                "message": "Správa je povinné pole.",
+                "consent": "Musíte súhlasiť so spracovaním osobných údajov.",
+                "submit": "Nastala chyba pri odosielaní formulára. Skúste to prosím znova."
+            }
+        }
+    },
+    "footer": {
+        "contact": "Kontakt",
+        "quickContact": "Kontaktný formulár",
+        "form": {
+            "name": "Vaše meno",
+            "email": "Email",
+            "phone": "Telefónne číslo",
+            "message": "Správa",
+            "consent": "Súhlasím so spracovaním osobných údajov pre účely tohto formulára.",
+            "submit": "Odoslať",
+            "sending": "Odosielam...",
+            "success": "Ďakujeme za vašu správu! Čoskoro vás budeme kontaktovať.",
+            "errors": {
+                "name": "Meno je povinné pole.",
+                "email": "Email je povinné pole.",
+                "emailInvalid": "Email má nesprávny formát.",
+                "phone": "Telefónne číslo je povinné pole.",
+                "message": "Správa je povinné pole.",
+                "consent": "Musíte súhlasiť so spracovaním osobných údajov.",
+                "submit": "Nastala chyba pri odosielaní formulára. Skúste to prosím znova."
+            }
+        },
+        "copyright": "Všetky práva vyhradené.",
+        "legislation": "Legislatíva",
+        "privacy": "GDPR"
+    },
+    "pageTitle": {
+        "home": "DroneEye - Moderné drone služby a 3D mapovanie",
+        "contact": "Kontakt - DroneEye",
+        "projects": "Naše projekty - DroneEye",
+        "services": "Naše služby - DroneEye",
+        "team": "Náš tím - DroneEye",
+        "pricing": "Cenová ponuka - DroneEye",
+        "animation": "Drone 3D Model - DroneEye",
+        "legislation": "Legislatíva - DroneEye",
+        "gdpr": "GDPR - Ochrana osobných údajov - DroneEye"
+    },
+    "loading": "Načítavam...",
+    "animation": {
+        "text1": {
+            "title": "Sme vášniví piloti dronov, fotografovia a kameramani.",
+            "subtitle": "Vytvárame nezabudnuteľné momenty pre vás všade."
+        },
+        "text2": {
+            "title": "Ceníme si kreativitu a inovácie.",
+            "subtitle": "Posúvame hranice a predefinujeme to, čo je možné."
+        },
+        "text3": {
+            "title": "Počúvame vašich klientov.",
+            "subtitle": "Vždy hľadáme spätnú väzbu a používame ju na posúvanie našich hraníc."
+        },
+        "text4": {
+            "title": "Spolupráca je kľúč.",
+            "subtitle": "Začnite svoju cestu dnes a pozrite svet ako nikdy predtým."
+        },
+        "cta": {
+            "title": "Začnime spolu",
+            "subtitle": "Kontaktujte nás a vytvorme niečo výnimočné.",
+            "button": "Naše projekty"
+        }
+    },
+    "legislation": {
+        "title": "Legislatíva",
+        "subtitle": "Robíme to iba legálne",
+        "intro": "Ako jedna z mála firiem na Slovensku vykonávame dronové lietania LEGÁLNE a disponujeme všetkými povoleniami k prevádzke UAS.",
+        "registration": {
+            "title": "Registrácia UAV",
+            "description": "Naše drony (UAS) od renomovanej značky DJI, sú oficiálne schválené Európskou agentúrou pre bezpečnosť letectva (EASA). Každý dron, ktorý používame, je zaregistrovaný v registri lietadiel Dopravného úradu Slovenskej republiky a pravidelne prechádza našimi kontrolami a údržbou. Týmto spôsobom garantujeme, že každý let je v súlade s najnovšími legislatívnymi normami a leteckými predpismi."
+        },
+        "license": {
+            "title": "Pilotná licencia",
+            "description": "Úspešne sme absolvovali teoretické a praktické skúšky pre kategórie A1/A3, A2 a STS na Dopravnom úrade Slovenskej republiky v divízii civilného letectva. Sme držiteľmi prevádzkového povolenia v osobitej kategórii ‚SPECIFIC' na lietanie s dronmi spôsobilými lietať bez pilota, v súlade s Nariadením (EÚ) 2019/947.",
+            "item1": "Pri lietaní neohrozujeme bezpečnosť iných lietadiel, osôb alebo majetkov na zemi.",
+            "item2": "Počas každého letu na základe platnej legislatívy dodržiavame neustály vizuálny kontakt s dronom.",
+            "item3": "Pre lietanie v CTR zóne žiadame povolenie od letiskovej veže.",
+            "item4": "Vieme zabezpečiť špeciálne povolenie pre vzlet v tesnej blízkosti letísk a vojenských oblastí."
+        },
+        "authorization": {
+            "title": "Oprávnenie",
+            "description": "Prevádzkové povolenie pre \"osobitnú\" kategóriu, vydané a schválené Dopravným úradom na základe prísneho posúdenia analýzy rizík SORA, nás oprávňuje legálne vykonávať lety s dronom za špecifických podmienok."
+        },
+        "insurance": {
+            "title": "Poistenie",
+            "description": "Každý náš dron je riadne poistený proti zodpovednosti za škody spôsobené pádom, a to prostredníctvom uzatvoreného poistenia PZP (poistenie zodpovednosti za škodu). Poistná suma je stanovená na výšku až <strong>1 300 000 EUR</strong>, čo pokrýva prípadné riziká a zabezpečuje finančnú ochranu v prípade nepredvídaných udalostí počas prevádzky."
+        },
+        "management": {
+            "title": "Správa povolení",
+            "description": "O naše dronové povolenia a prevádzkovú dokumentáciu sa stará overená a skúsená spoločnosť, s ktorou úzko spolupracujeme. Táto spoločnosť zabezpečuje komplexnú správu našich povolení v kategórii <strong>SPECIFIC</strong>, vrátane ich pravidelnej aktualizácie a monitorovania aktuálnych predpisov, aby sme mohli zabezpečiť najvyššiu úroveň bezpečnosti počas našich letov. S ich pomocou neustále prispôsobujeme našu prevádzkovú dokumentáciu, čím garantujeme súlad s aktuálnymi leteckými normami a predpismi."
+        }
+    },
+    "cookies": {
+        "title": "Používame cookies",
+        "description": "Táto stránka používa cookies na zlepšenie vášho zážitku. Pokračovaním v prehliadaní súhlasíte s používaním cookies v súlade s našou <a href=\"/gdpr\">politikou cookies</a>.",
+        "accept": "Prijať všetky",
+        "reject": "Odmietnuť",
+        "settings": "Nastavenia",
+        "settingsTitle": "Nastavenia cookies",
+        "settingsDescription": "Vyberte, ktoré cookies chcete povoliť. Nevyhnutné cookies sú vždy aktívne, pretože sú potrebné pre základnú funkčnosť stránky.",
+        "necessary": "Nevyhnutné cookies",
+        "necessaryDesc": "Tieto cookies sú nevyhnutné pre fungovanie webovej stránky a nemôžu byť vypnuté.",
+        "analytics": "Analytické cookies",
+        "analyticsDesc": "Pomáhajú nám pochopiť, ako návštevníci používajú našu stránku.",
+        "marketing": "Marketingové cookies",
+        "marketingDesc": "Používame ich na personalizáciu reklám a meranie ich účinnosti.",
+        "save": "Uložiť nastavenia",
+        "close": "Zavrieť",
+        "youtubePlaceholder": "Pre zobrazenie tohto videa potrebujeme váš súhlas s analytickými cookies.",
+        "enableAnalytics": "Povoliť analytické cookies"
+    },
+    "gdpr": {
+        "title": "GDPR",
+        "subtitle": "Memorandum na Ochranu osobných údajov",
+        "intro": "Ochrana súkromia našich zákazníkov pri spracúvaní osobných údajov je pre nás veľmi dôležitá. Pri spracúvaní vašich osobných údajov postupujeme v súlade s platnými právnymi predpismi a zabezpečujeme ich ochranu v maximálnej možnej miere. Všetci návštevníci našej stránky, ktorí sú s nami v kontakte ako zákazníci, nám poskytli v tejto súvislosti svoje osobné údaje. Na tejto web stránke nájdete všetky potrebné informácie týkajúce sa spracúvania osobných údajov.",
+        "intro2": "Toto Memorandum na Ochranu osobných údajov (ďalej len ako \"Memorandum\"), vám poskytne informácie o tom, ako nakladáme s vašimi osobnými údajmi, ako nás môžete kontaktovať v prípade uplatňovania si práv alebo, ak máte otázky ohľadom spracúvania vašich osobných údajov. Memorandum je súčasťou Všeobecných obchodných podmienok spoločnosti DroneEye.",
+        "intro3": "Odporúčame vám, aby ste si informácie obsiahnuté v tomto Memorande dôkladne prečítali. Zmeny týkajúce sa podmienok ochrany osobných údajov sú zverejnené na našej internetovej stránke www.droneye.sk, formou aktualizácie. Týmto spôsobom zabezpečíme, aby ste vždy mali k dispozícii aktuálne informácie o tom, za akých podmienok spracúvame vaše osobné údaje.",
+        "section1": {
+            "title": "1. O nás",
+            "description1": "Prostredníctvom našej webstránky www.droneye.sk, vám umožňujeme ako našim zákazníkom objednať letecké práce. V súvislosti s objednaním naších služieb sme povinní spracúvať vaše osobné údaje.",
+            "description2": "Pri spracúvaní vašich osobných údajov sa riadime právnymi predpismi Slovenskej republiky, Nariadením Európskeho parlamentu a Rady (EÚ) č. 2016/679 o ochrane fyzických osôb pri spracúvaní osobných údajov a o voľnom pohybe takýchto údajov (všeobecné nariadenie o ochrane údajov alebo GDPR), zákonom č. 18/2018 Z. z o ochrane osobných údajov a ako aj ďalšími právnymi predpismi.",
+            "description3": "Prevádzkovateľom informačných systémov, v ktorých sú spracúvané vaše osobné údaje je spoločnosť DroneEye, so sídlom Bratislava, Slovensko."
+        },
+        "section2": {
+            "title": "2. Aké údaje o vás spracúvame?",
+            "description1": "Za osobný údaj sa považuje taký údaj, na základe ktorého je možné identifikovať konkrétnu fyzickú osobu. To znamená, že nejde len o známe identifikátory ako meno, priezvisko, či dátum narodenia. GDPR definuje osobný údaj ako akékoľvek informácie, ktoré vedú k určeniu fyzickej osoby. Každá fyzická osoba, ktorej sa osobné údaje týkajú, sa považuje za dotknutú osobu s príslušnými právami k osobným údajom.",
+            "description2": "V DroneEye spracúvame len také osobné údaje, aby sme vám poskytovali profesionálne služby, pričom rozsah týchto osobných údajov je určený všeobecne záväznými právnymi predpismi. V prípade, ak vaše osobné údaje spracúvame na základe súhlasu, zoznam, resp. rozsah údajov je presne uvedený priamo v súhlase, a to v miere potrebnej na splnenie účelu, na ktorý sú osobné údaje spracúvané.",
+            "description3": "Medzi spracúvané údaje patria predovšetkým nasledujúce kategórie osobných údajov:",
+            "item1": "Fakturačné údaje: meno, priezvisko, fakturačná adresa, emailová adresa, telefónny kontakt, adresa doručenia.",
+            "item2": "Registračné údaje: údaje získané pri odoslaní kontaktného formulára www.droneye.sk/kontakt",
+            "item3": "Marketingové údaje: meno a priezvisko, dátum narodenia, adresa, IP adresa, emailová adresa, telefónne číslo."
+        },
+        "section3": {
+            "title": "3. Prečo potrebujeme vaše osobné údaje?",
+            "description": "Vaše údaje spracúvame v nevyhnutnom rozsahu, pričom väčšina spracúvaní je odôvodnená tým, že tieto údaje potrebujeme na poskytnutie zakúpeného produktu.",
+            "subtitle1": "3.1. Plníme si povinnosti vyplývajúce nám z príslušných právnych predpisov",
+            "item1": "Sme povinní identifikovať vás pri objednaní služieb a vystavení objednávky na vaše meno",
+            "item2": "Pri našej činnosti sme povinní postupovať obozretne a rešpektovať vaše práva ako spotrebiteľa v súlade so zákonom č. 102/2014 Z. z. o ochrane spotrebiteľa pri predaji tovaru alebo poskytovaní služieb na diaľku",
+            "item3": "Sme povinní vystaviť faktúru a evidovať ju v súlade so zákonom o DPH"
+        },
+        "section4": {
+            "title": "4. Doba uchovávania osobných údajov",
+            "description1": "Vaše osobné údaje uchovávame len po dobu, ktorá je nevyhnutná na splnenie účelu, na ktorý boli osobné údaje spracúvané, alebo po dobu, ktorú vyžadujú právne predpisy.",
+            "description2": "V prípade, ak vaše osobné údaje spracúvame na základe súhlasu, uchovávame ich do doby odvolania súhlasu, alebo do doby, ktorá je potrebná na splnenie účelu spracúvania osobných údajov.",
+            "description3": "Po uplynutí doby uchovávania osobných údajov budú vaše osobné údaje vymazané alebo anonymizované v súlade s platnými právnymi predpismi."
+        },
+        "section5": {
+            "title": "5. Vaše práva",
+            "description": "V súlade s GDPR máte nasledujúce práva týkajúce sa vašich osobných údajov:",
+            "item1": "Právo na prístup k osobným údajom - máte právo získať informácie o tom, aké osobné údaje o vás spracúvame",
+            "item2": "Právo na opravu - máte právo požadovať opravu nepresných alebo neúplných osobných údajov",
+            "item3": "Právo na vymazanie - máte právo požadovať vymazanie vašich osobných údajov za určitých podmienok",
+            "item4": "Právo na obmedzenie spracúvania - máte právo požadovať obmedzenie spracúvania vašich osobných údajov",
+            "item5": "Právo na prenosnosť údajov - máte právo získať vaše osobné údaje v štruktúrovanom formáte",
+            "item6": "Právo namietať - máte právo namietať proti spracúvaniu vašich osobných údajov",
+            "item7": "Právo odvolať súhlas - ak spracúvame vaše osobné údaje na základe súhlasu, máte právo tento súhlas kedykoľvek odvolať"
+        },
+        "section6": {
+            "title": "6. Ako môžete uplatniť svoje práva",
+            "description1": "Ak chcete uplatniť niektoré z vašich práv uvedených vyššie, môžete nás kontaktovať prostredníctvom emailu na adrese info@droneye.sk alebo písomne na našu adresu.",
+            "description2": "Vašu žiadosť vybavíme bez zbytočného odkladu, najneskôr do 30 dní od jej doručenia. V prípade zložitých žiadostí alebo veľkého počtu žiadostí si vyhradzujeme právo predĺžiť túto lehotu o ďalších 60 dní, o čom vás budeme informovať."
+        },
+        "section7": {
+            "title": "7. Zabezpečenie osobných údajov",
+            "description1": "Pri spracúvaní vašich osobných údajov používame vhodné technické a organizačné opatrenia na zabezpečenie ochrany vašich osobných údajov pred neoprávneným prístupom, stratou, zničením alebo zmenou.",
+            "description2": "Naše systémy sú pravidelne aktualizované a monitorované, aby sme zabezpečili maximálnu bezpečnosť vašich osobných údajov."
+        },
+        "section8": {
+            "title": "8. Prenos osobných údajov do tretích krajín",
+            "description": "Vaše osobné údaje spracúvame výlučne v rámci Európskej únie. V prípade, ak by bolo potrebné preniesť vaše osobné údaje do tretích krajín, zabezpečíme, aby takéto prenosy boli v súlade s platnými právnymi predpismi a aby boli zabezpečené vhodné záruky ochrany vašich osobných údajov."
+        },
+        "section9": {
+            "title": "9. Automatizované rozhodovanie a profilovanie",
+            "description": "Vaše osobné údaje nepoužívame na automatizované rozhodovanie alebo profilovanie v zmysle GDPR. Všetky rozhodnutia týkajúce sa spracúvania vašich osobných údajov sú vykonávané ľudskými zamestnancami."
+        },
+        "section10": {
+            "title": "10. Spracúvanie vašich osobných údajov prostredníctvom našich internetových stránok",
+            "description": "Pri používaní našej internetovej stránky: www.droneye.sk (ďalej len ako \"Internetová stránka\"), môže byť prístup do niektorých častí Internetovej stránky podmienený poskytnutím vašich osobných údajov. Toto poskytnutie podmieňuje prístup alebo správnu funkčnosť Internetových stránok a z tohto dôvodu je potrebné, aby ste nám udelili súhlas na spracúvanie vami poskytnutých osobných údajov."
+        },
+        "section11": {
+            "title": "11. Spracúvanie údajov prostredníctvom cookies",
+            "description1": "O návštevníkoch a používateľoch našej Internetovej stránke sme oprávnení zhromažďovať a iným spôsobom spracúvať údaje prostredníctvom nástrojov slúžiacich na automatizované zhromažďovanie údajov, najmä súborov cookies, protokolov a iných bežne používaných nástrojov na získavanie informácií prostredníctvom internetovej stránky.",
+            "description2": "Pod pojmom cookie je možné predstaviť si malé množstvo údajov, ktoré sú ako súbor odoslané do vášho počítača (tabletu, smartfónu) z internetovej stránky, ktorú práve navštevujete. V počítači sa súbor údajov uloží a pri každej ďalšej návšteve rovnakej webovej stránky odošle počítač informáciu nášmu serveru.",
+            "description3": "Väčšina internetových stránok, vrátane tej našej, využíva cookies. Zmyslom cookies je uľahčiť a spríjemniť vám používanie našich Internetových stránok. Súbor cookie totiž umožní webovej stránke rozpoznať, či ste ju už v minulosti navštívili a o ktorú sekciu ste mali záujem. Zároveň sú to práve cookies, vďaka ktorým si môžete uložiť svoje užívateľské nastavenia ako rozpoznanie jazyka či zapamätanie vášho prihlasovacieho mena. Pomocou cookies uchovávame údaje, ktoré nespájame s vašou osobou a prostredníctvom získaných údajov nerealizujeme identifikáciu zákazníka.",
+            "description4": "Použitie súborov cookies nie je pre vás nebezpečné, cookies nemôžu prenášať vírusy ani čítať údaje z harddisku zariadenia.",
+            "description5": "Návštevou našej internetovej stránke automaticky vyjadrujete svoj súhlas s použitím tejto technológie. Tento postup vyplýva z § 55 ods. 5 zákona č. 355/2011 Z. z. o elektronických komunikáciách, podľa ktorého sa za súhlas na tento účel považuje aj použitie príslušného nastavenia webového prehliadača alebo iného počítačového programu.",
+            "description6": "Používanie cookies a ich povolenie vo webovom prehliadači je na slobodnej vôli každého používateľa webovej stránky. Súbory cookies môžete slobodne vymazať alebo vopred nastaviť váš internetový prehliadač tak, aby prijímanie súborov cookies buď odmietal, alebo vás upozorňoval, keď sa server snaží zaslať vám cookie. Potom sa však môže stať, že webové stránky, ktoré sú na podpore cookies závislé, nebudú fungovať tak, ako by ste si predstavovali, alebo že časti stránok pre vás nebudú dostupné.",
+            "description7": "Využívame trvalé súbory cookies, ktoré nám pomáhajú identifikovať vaše zariadenie pri opätovnej návšteve Internetových stránok a umožňujú tak poskytovať služby v súlade s vašimi očakávaniami. Súbory Cookies uchovávame po dobu 1 roka."
+        },
+        "section12": {
+            "title": "12. Okruh príjemcov",
+            "description1": "Vaše osobné údaje nesprístupňujeme bezdôvodne žiadnym subjektom. Je však potrebné, aby niektoré osobné údaje boli sprístupnené vopred určenému okruhu príjemcov osobných údajov. V prípade zasielania tovaru (napr. vytlačená dronová fotografia) Vám ako konečnému zákazníkovi, poskytujeme Vaše osobné údaje poštovým doručovateľom alebo kuriérskym firmám. V prípade správy a údržby našej webovej stránky dochádza k sprístupneniu Vašich osobných údajov správcovi webovej stránky. V neposlednom rade sú to osoby ako účtovník a daňový poradca.",
+            "description2": "Okruh príjemcov:",
+            "item1": "Poštový doručovatelia v zmysle zákona 324/2011 Z. z. o poštových službách",
+            "item2": "Kurierska spoločnosť",
+            "item3": "Správca servera",
+            "item4": "Správca webovej stránky",
+            "item5": "Emailový poskytovateľ",
+            "item6": "Daňový a účtovný poradca",
+            "item7": "Subdodávatelia"
+        },
+        "section13": {
+            "title": "13. Záverečné ustanovenia",
+            "description": "Prevádzkovateľ je spoločnosť DroneEye, so sídlom Bratislava, Slovensko. Spoločnosť prevádzkuje internetovú stránku www.droneye.sk. V prípade otázok týkajúcich sa ochrany osobných údajov, na ktoré ste nenašli odpoveď v tomto dokumente, prosím napíšte na info@droneye.sk."
+        }
     }
-  },
-  "team": {
-    "title": "Náš tím",
-    "subtitle": "Poznajte našich odborníkov",
-    "description": "Sme tím profesionálov, ktorí sa venujú dronovým službám s vášňou a dôrazom na detail. Špecializujeme sa na videá, fotografie, letecké zábery s dronom a ďalšie dronové služby. Každý člen nášho tímu prispieva svojou odbornosťou k vytvoreniu výnimočných výsledkov pre našich klientov.",
-    "member1": {
-      "name": "Ján Novák",
-      "position": "Hlavný pilot a technický riaditeľ",
-      "description": "S viac ako 10-ročnou skúsenosťou v dronovom lietaní je Ján naším hlavným pilotom. Špecializuje sa na technické lety, mapovanie a bezpečnostné operácie. Je certifikovaný pilot s licenciou pre komerčné lety."
-    },
-    "member2": {
-      "name": "Mária Kováčová",
-      "position": "Videograf a kreatívny riaditeľ",
-      "description": "Mária je naša kreatívna duša, ktorá transformuje surové zábery do pútavých príbehov. S bohatými skúsenosťami v produkcii a post-produkcii vytvára videá, ktoré zachytávajú emócie a krásu každého projektu."
-    },
-    "member3": {
-      "name": "Peter Horváth",
-      "position": "Fotograf a post-produkčný špecialista",
-      "description": "Peter je expert na fotografiu a post-produkciu. S dokonalým zmyslom pre detail a kompozíciu vytvára snímky, ktoré zachytávajú jedinečnú perspektívu z neba. Jeho práca bola ocenená na viacerých medzinárodných súťažiach."
-    }
-  },
-  "pricing": {
-    "title": "Cenová ponuka",
-    "subtitle": "Individuálne riešenia pre každý projekt",
-    "main": {
-      "title": "Cena našich služieb"
-    },
-    "factors": {
-      "title": "Čo ovplyvňuje cenu?",
-      "item1": {
-        "label": "Typ dronu a technika",
-        "value": "Používame špičkové stroje od DJI"
-      },
-      "item2": {
-        "label": "Náročnosť a lokalita",
-        "value": "Počet natáčacích hodín, dostupnosť terénu, potrebné povolenia."
-      },
-      "item3": {
-        "label": "Postprodukcia",
-        "value": "Záleží, či potrebujete len surový materiál alebo kompletný výstup (strih, farebné korekcie, hudba, titulky)."
-      }
-    },
-    "quote": {
-      "title": "Ako získať cenovú ponuku?",
-      "description": "Radi sa vám ozveme s návrhom, ktorý bude zodpovedať presne vašim predstavám.",
-      "item1": "Kde a kedy chcete natáčať",
-      "item2": "Na aký účel bude materiál slúžiť",
-      "item3": "Približný rozsah a vaše očakávania",
-      "cta": "Kontaktujte nás"
-    },
-    "basic": {
-      "title": "Basic",
-      "label": "Základný balík",
-      "price": "250",
-      "cta": "Kontakt"
-    },
-    "professional": {
-      "title": "Professional",
-      "label": "Profesionálny balík",
-      "price": "500",
-      "cta": "Kontakt"
-    },
-    "custom": {
-      "label": "Individuálne",
-      "description": "Každý projekt je jedinečný a vyžaduje individuálny prístup. Kontaktujte nás a pripravíme vám cenovú ponuku presne podľa vašich potrieb.",
-      "cta": "Kontakt"
-    },
-    "included": {
-      "title": "Aké služby sú zahrnuté v cene?",
-      "description": "Cenník sa vzťahuje na produkciu surových leteckých záberov a fotografií z dronu, teda na čas, ktorý strávime priamo na pľaci."
-    },
-    "postproduction": {
-      "title": "A úprava videa alebo fotografií?",
-      "description": "Po dohode s klientom každá naša letecká fotografia alebo videozáber prechádza profesionálnou postprodukciou v našom štúdiu. Ako celý proces prebieha?",
-      "step1": {
-        "title": "Výber hudby",
-        "description": "Vhodne zvolený hudobný podmaz pri videách predstavuje polovicu úspechu. Vytvorí základný pilier a emóciu, od ktorých sa odvíja následná postprodukcia. Preto vám pred samotnou postprodukciou videa odošleme na výber 5 vhodných hudobných ukážok z audiobanky."
-      },
-      "step2": {
-        "title": "Strih",
-        "description": "Na základe vybranej hudby podľa námetu vytvoríme hrubý strih, ktorý vám odošleme na odsúhlasenie. Následne video obohatíme o ďalšie vychytávky a zvukové efekty."
-      },
-      "step3": {
-        "title": "Colorgrading",
-        "description": "Po odsúhlasení hrubého strihu pracujeme na colorgradingu. Obraz dostane farby, tiene, teplotu – skrátka tú správnu šťavu. Colorgrading tvoríme na profesionálnych kalibrovaných 4K monitoroch."
-      },
-      "step4": {
-        "title": "2D / 3D animácie",
-        "description": "Podľa požiadavky vytvoríme aj 2D animácie – originálne animované logo na začiatok videa, natrackované texty pripnuté v 3D priestore videa alebo menovky zobrazujúce sa v rohu videa. Tvoríme aj 3D vizualizácie – animácie prostredí a budov."
-      },
-      "step5": {
-        "title": "Final render",
-        "description": "Po odsúhlasení celého projektu samotné video vyexportujeme v najvyšších formátoch vhodných pre TV, online priestor a socials ako Instagram, Facebook, Youtube. Na záver ho hodíme na cloud, odkiaľ už poputuje k vám."
-      }
-    },
-    "diagram": {
-      "lietanie": {
-        "title": "Lietanie",
-        "items": [
-          "Predpríprava letu",
-          "Analýza počasia",
-          "Lietanie"
-        ]
-      },
-      "povolenia": {
-        "title": "Povolenia",
-        "items": [
-          "Prevádzkové povolenie",
-          "Specific",
-          "Predletové povolenie",
-          "Dronové právne služby a CAMO povinnosti"
-        ]
-      },
-      "bezpecnost": {
-        "title": "Bezpečnosť",
-        "items": [
-          "Padák a ochrana vrtúľ",
-          "Poistenie dronu",
-          "Náhradné drony",
-          "FTS Systém"
-        ]
-      },
-      "spolupraca": {
-        "title": "Spolupráca",
-        "items": [
-          "10r Know How",
-          "Konzultácia s klientom",
-          "Obhliadky",
-          "Cenová ponuka",
-          "Odovzdanie materiálov pomocou cloudu",
-          "Archivácia materiálu"
-        ]
-      }
-    }
-  },
-  "services": {
-    "title": "Naše služby",
-    "subtitle": "Profesionálne drone služby pre vaše potreby",
-    "carousel": {
-      "title": "Naše služby",
-      "subtitle": "Ponúkame široký rozsah profesionálnych dronových služieb pre vaše potreby",
-      "cta": "Kontaktujte nás",
-      "tab1": "Video produkcia",
-      "tab2": "Fotografovanie",
-      "tab3": "Zábery dronom",
-      "tab4": "Postprodukcia",
-      "card1": {
-        "title": "Video produkcia a tvorba videí",
-        "description": "Kompletná produkcia videí od scenára, cez natáčanie až po postprodukciu. Vytvárame reklamné, prezentačné a promo videá na mieru pre firmy, realitné kancelárie, hotely, eventy aj sociálne siete."
-      },
-      "card2": {
-        "title": "Fotografovanie",
-        "description": "Ponúkame profesionálne fotografovanie nehnuteľností, eventov, produktov a ďalších objektov s dôrazom na detail, kompozíciu a postprodukciu. Výsledné fotografie sú vhodné pre web, tlač aj sociálne siete."
-      },
-      "card3": {
-        "title": "Letecké zábery dronom",
-        "description": "Zachytíme vašu nehnuteľnosť, areál, podujatie či krajinu z výšky v špičkovej kvalite. Letecké zábery sú ideálne pre prezentácie, marketing, monitoring aj dokumentáciu."
-      },
-      "card4": {
-        "title": "Máte zábery a chýba vám postprodukcia?",
-        "description": "Práve postprodukcia je to, čo z obyčajného videa urobí obsah, ktorý zaujme a zostane v pamäti. Pošlite nám vaše materiály a my im vdýchneme život. Postaráme sa o precízny strih, vyvážené farby, správnu hudbu aj jemné efekty, ktoré podčiarknu atmosféru a príbeh vášho videa."
-      }
-    },
-    "equipment": {
-      "title": "S čím lietame",
-      "subtitle": "Používame profesionálne drony a vybavenie pre najlepšie výsledky",
-      "flightTime": "Čas letu:",
-      "range": "Dolet:",
-      "resolution": "Rozlíšenie videa:",
-      "format": "Formát:",
-      "item1": {
-        "title": "DJI Avata 2 FPV (2x)",
-        "feature": "Ultraširoký 155° FOV",
-        "flightTime": "23 minút",
-        "range": "13 km",
-        "resolution": "4K/60fps",
-        "format": "H.265 / H.264"
-      },
-      "item2": {
-        "title": "DJI Mavic 4 Pro Combo",
-        "feature": "100 MP Hasselblad kamera",
-        "flightTime": "51 minút",
-        "range": "30 km",
-        "resolution": "6K/60fps HDR",
-        "format": "ProRes 4444XQ / H.265 / H.264"
-      }
-    },
-    "process": {
-      "title": "Ako To celé prebieha?",
-      "cta": "Kontaktujte nás",
-      "step1": {
-        "title": "Napíšte nám",
-        "description": "Pošlite nám e-mail na <a href=\"mailto:info@droneye.sk\">info@droneye.sk</a> s Vašou predstavou, nápadom o ktorý máte záujem, miestom a termínom predpokladaného lietania."
-      },
-      "step2": {
-        "title": "Konzultácia, poradenstvo",
-        "description": "Spoločne si dohodneme termín, detailne prejdeme vašu predstavu a ciele videa a následne ju prepojíme s našou kreativitou a skúsenosťami."
-      },
-      "step3": {
-        "title": "Povolenie",
-        "description": "Následne za vás zabezpečíme vybavenie všetkých potrebných predletových povolení a administratívy v súlade s platnými pravidlami danej krajiny."
-      },
-      "step4": {
-        "title": "Lietanie",
-        "description": "V stanovenom termíne dorazíme na miesto a zrealizujeme nakrúcanie podľa vopred dohodnutého konceptu."
-      },
-      "step5": {
-        "title": "Postprodukcia",
-        "description": "Postaráme sa o profesionálnu úpravu fotografií aj strih videa do licencovanej hudby, pričom na požiadanie obsah ďalej upravíme podľa vašich predstáv."
-      }
-    }
-  },
-  "contact": {
-    "title": "Kontakt",
-    "subtitle": "Spojte sa s nami pre vaše potreby",
-    "info": {
-      "title": "Kontaktné údaje",
-      "email": "📧 info@droneye.sk",
-      "phone": "📞 +421 950 614 303",
-      "address": "📍 Bratislava, Slovensko"
-    },
-    "form": {
-      "title": "Napíšte nám",
-      "name": "Meno",
-      "email": "Email",
-      "phone": "Telefónne číslo",
-      "message": "Správa",
-      "consent": "Súhlasím so spracovaním osobných údajov pre účely tohto formulára.",
-      "submit": "Odoslať",
-      "sending": "Odosielam...",
-      "success": "Ďakujeme za vašu správu! Čoskoro vás budeme kontaktovať.",
-      "errors": {
-        "name": "Meno je povinné pole.",
-        "email": "Email je povinné pole.",
-        "emailInvalid": "Email má nesprávny formát.",
-        "phone": "Telefónne číslo je povinné pole.",
-        "message": "Správa je povinné pole.",
-        "consent": "Musíte súhlasiť so spracovaním osobných údajov.",
-        "submit": "Nastala chyba pri odosielaní formulára. Skúste to prosím znova."
-      }
-    }
-  },
-  "footer": {
-    "contact": "Kontakt",
-    "quickContact": "Kontaktný formulár",
-    "form": {
-      "name": "Vaše meno",
-      "email": "Email",
-      "phone": "Telefónne číslo",
-      "message": "Správa",
-      "consent": "Súhlasím so spracovaním osobných údajov pre účely tohto formulára.",
-      "submit": "Odoslať",
-      "sending": "Odosielam...",
-      "success": "Ďakujeme za vašu správu! Čoskoro vás budeme kontaktovať.",
-      "errors": {
-        "name": "Meno je povinné pole.",
-        "email": "Email je povinné pole.",
-        "emailInvalid": "Email má nesprávny formát.",
-        "phone": "Telefónne číslo je povinné pole.",
-        "message": "Správa je povinné pole.",
-        "consent": "Musíte súhlasiť so spracovaním osobných údajov.",
-        "submit": "Nastala chyba pri odosielaní formulára. Skúste to prosím znova."
-      }
-    },
-    "copyright": "Všetky práva vyhradené.",
-    "legislation": "Legislatíva",
-    "privacy": "GDPR"
-  },
-  "pageTitle": {
-    "home": "DroneEye - Moderné drone služby a 3D mapovanie",
-    "contact": "Kontakt - DroneEye",
-    "projects": "Naše projekty - DroneEye",
-    "services": "Naše služby - DroneEye",
-    "team": "Náš tím - DroneEye",
-    "pricing": "Cenová ponuka - DroneEye",
-    "dronetext": "Drone 3D Model - DroneEye",
-    "legislation": "Legislatíva - DroneEye",
-    "gdpr": "GDPR - Ochrana osobných údajov - DroneEye"
-  },
-  "loading": "Načítavam...",
-  "dronetext": {
-    "text1": {
-      "title": "Sme vášniví piloti dronov, fotografovia a kameramani.",
-      "subtitle": "Vytvárame nezabudnuteľné momenty pre vás všade."
-    },
-    "text2": {
-      "title": "Ceníme si kreativitu a inovácie.",
-      "subtitle": "Posúvame hranice a predefinujeme to, čo je možné."
-    },
-    "text3": {
-      "title": "Počúvame vašich klientov.",
-      "subtitle": "Vždy hľadáme spätnú väzbu a používame ju na posúvanie našich hraníc."
-    },
-    "text4": {
-      "title": "Spolupráca je kľúč.",
-      "subtitle": "Začnite svoju cestu dnes a pozrite svet ako nikdy predtým."
-    },
-    "cta": {
-      "title": "Začnime spolu",
-      "subtitle": "Kontaktujte nás a vytvorme niečo výnimočné.",
-      "button": "Naše projekty"
-    }
-  },
-  "legislation": {
-    "title": "Legislatíva",
-    "subtitle": "Robíme to iba legálne",
-    "intro": "Ako jedna z mála firiem na Slovensku vykonávame dronové lietania LEGÁLNE a disponujeme všetkými povoleniami k prevádzke UAS.",
-    "registration": {
-      "title": "Registrácia UAV",
-      "description": "Naše drony (UAS) od renomovanej značky DJI, sú oficiálne schválené Európskou agentúrou pre bezpečnosť letectva (EASA). Každý dron, ktorý používame, je zaregistrovaný v registri lietadiel Dopravného úradu Slovenskej republiky a pravidelne prechádza našimi kontrolami a údržbou. Týmto spôsobom garantujeme, že každý let je v súlade s najnovšími legislatívnymi normami a leteckými predpismi."
-    },
-    "license": {
-      "title": "Pilotná licencia",
-      "description": "Úspešne sme absolvovali teoretické a praktické skúšky pre kategórie A1/A3, A2 a STS na Dopravnom úrade Slovenskej republiky v divízii civilného letectva. Sme držiteľmi prevádzkového povolenia v osobitej kategórii ‚SPECIFIC' na lietanie s dronmi spôsobilými lietať bez pilota, v súlade s Nariadením (EÚ) 2019/947.",
-      "item1": "Pri lietaní neohrozujeme bezpečnosť iných lietadiel, osôb alebo majetkov na zemi.",
-      "item2": "Počas každého letu na základe platnej legislatívy dodržiavame neustály vizuálny kontakt s dronom.",
-      "item3": "Pre lietanie v CTR zóne žiadame povolenie od letiskovej veže.",
-      "item4": "Vieme zabezpečiť špeciálne povolenie pre vzlet v tesnej blízkosti letísk a vojenských oblastí."
-    },
-    "authorization": {
-      "title": "Oprávnenie",
-      "description": "Prevádzkové povolenie pre \"osobitnú\" kategóriu, vydané a schválené Dopravným úradom na základe prísneho posúdenia analýzy rizík SORA, nás oprávňuje legálne vykonávať lety s dronom za špecifických podmienok."
-    },
-    "insurance": {
-      "title": "Poistenie",
-      "description": "Každý náš dron je riadne poistený proti zodpovednosti za škody spôsobené pádom, a to prostredníctvom uzatvoreného poistenia PZP (poistenie zodpovednosti za škodu). Poistná suma je stanovená na výšku až <strong>1 300 000 EUR</strong>, čo pokrýva prípadné riziká a zabezpečuje finančnú ochranu v prípade nepredvídaných udalostí počas prevádzky."
-    },
-    "management": {
-      "title": "Správa povolení",
-      "description": "O naše dronové povolenia a prevádzkovú dokumentáciu sa stará overená a skúsená spoločnosť, s ktorou úzko spolupracujeme. Táto spoločnosť zabezpečuje komplexnú správu našich povolení v kategórii <strong>SPECIFIC</strong>, vrátane ich pravidelnej aktualizácie a monitorovania aktuálnych predpisov, aby sme mohli zabezpečiť najvyššiu úroveň bezpečnosti počas našich letov. S ich pomocou neustále prispôsobujeme našu prevádzkovú dokumentáciu, čím garantujeme súlad s aktuálnymi leteckými normami a predpismi."
-    }
-  },
-  "cookies": {
-    "title": "Používame cookies",
-    "description": "Táto stránka používa cookies na zlepšenie vášho zážitku. Pokračovaním v prehliadaní súhlasíte s používaním cookies v súlade s našou <a href=\"/gdpr\">politikou cookies</a>.",
-    "accept": "Prijať všetky",
-    "reject": "Odmietnuť",
-    "settings": "Nastavenia",
-    "settingsTitle": "Nastavenia cookies",
-    "settingsDescription": "Vyberte, ktoré cookies chcete povoliť. Nevyhnutné cookies sú vždy aktívne, pretože sú potrebné pre základnú funkčnosť stránky.",
-    "necessary": "Nevyhnutné cookies",
-    "necessaryDesc": "Tieto cookies sú nevyhnutné pre fungovanie webovej stránky a nemôžu byť vypnuté.",
-    "analytics": "Analytické cookies",
-    "analyticsDesc": "Pomáhajú nám pochopiť, ako návštevníci používajú našu stránku.",
-    "marketing": "Marketingové cookies",
-    "marketingDesc": "Používame ich na personalizáciu reklám a meranie ich účinnosti.",
-    "save": "Uložiť nastavenia",
-    "close": "Zavrieť",
-    "youtubePlaceholder": "Pre zobrazenie tohto videa potrebujeme váš súhlas s analytickými cookies.",
-    "enableAnalytics": "Povoliť analytické cookies"
-  },
-  "gdpr": {
-    "title": "GDPR",
-    "subtitle": "Memorandum na Ochranu osobných údajov",
-    "intro": "Ochrana súkromia našich zákazníkov pri spracúvaní osobných údajov je pre nás veľmi dôležitá. Pri spracúvaní vašich osobných údajov postupujeme v súlade s platnými právnymi predpismi a zabezpečujeme ich ochranu v maximálnej možnej miere. Všetci návštevníci našej stránky, ktorí sú s nami v kontakte ako zákazníci, nám poskytli v tejto súvislosti svoje osobné údaje. Na tejto web stránke nájdete všetky potrebné informácie týkajúce sa spracúvania osobných údajov.",
-    "intro2": "Toto Memorandum na Ochranu osobných údajov (ďalej len ako \"Memorandum\"), vám poskytne informácie o tom, ako nakladáme s vašimi osobnými údajmi, ako nás môžete kontaktovať v prípade uplatňovania si práv alebo, ak máte otázky ohľadom spracúvania vašich osobných údajov. Memorandum je súčasťou Všeobecných obchodných podmienok spoločnosti DroneEye.",
-    "intro3": "Odporúčame vám, aby ste si informácie obsiahnuté v tomto Memorande dôkladne prečítali. Zmeny týkajúce sa podmienok ochrany osobných údajov sú zverejnené na našej internetovej stránke www.droneye.sk, formou aktualizácie. Týmto spôsobom zabezpečíme, aby ste vždy mali k dispozícii aktuálne informácie o tom, za akých podmienok spracúvame vaše osobné údaje.",
-    "section1": {
-      "title": "1. O nás",
-      "description1": "Prostredníctvom našej webstránky www.droneye.sk, vám umožňujeme ako našim zákazníkom objednať letecké práce. V súvislosti s objednaním naších služieb sme povinní spracúvať vaše osobné údaje.",
-      "description2": "Pri spracúvaní vašich osobných údajov sa riadime právnymi predpismi Slovenskej republiky, Nariadením Európskeho parlamentu a Rady (EÚ) č. 2016/679 o ochrane fyzických osôb pri spracúvaní osobných údajov a o voľnom pohybe takýchto údajov (všeobecné nariadenie o ochrane údajov alebo GDPR), zákonom č. 18/2018 Z. z o ochrane osobných údajov a ako aj ďalšími právnymi predpismi.",
-      "description3": "Prevádzkovateľom informačných systémov, v ktorých sú spracúvané vaše osobné údaje je spoločnosť DroneEye, so sídlom Bratislava, Slovensko."
-    },
-    "section2": {
-      "title": "2. Aké údaje o vás spracúvame?",
-      "description1": "Za osobný údaj sa považuje taký údaj, na základe ktorého je možné identifikovať konkrétnu fyzickú osobu. To znamená, že nejde len o známe identifikátory ako meno, priezvisko, či dátum narodenia. GDPR definuje osobný údaj ako akékoľvek informácie, ktoré vedú k určeniu fyzickej osoby. Každá fyzická osoba, ktorej sa osobné údaje týkajú, sa považuje za dotknutú osobu s príslušnými právami k osobným údajom.",
-      "description2": "V DroneEye spracúvame len také osobné údaje, aby sme vám poskytovali profesionálne služby, pričom rozsah týchto osobných údajov je určený všeobecne záväznými právnymi predpismi. V prípade, ak vaše osobné údaje spracúvame na základe súhlasu, zoznam, resp. rozsah údajov je presne uvedený priamo v súhlase, a to v miere potrebnej na splnenie účelu, na ktorý sú osobné údaje spracúvané.",
-      "description3": "Medzi spracúvané údaje patria predovšetkým nasledujúce kategórie osobných údajov:",
-      "item1": "Fakturačné údaje: meno, priezvisko, fakturačná adresa, emailová adresa, telefónny kontakt, adresa doručenia.",
-      "item2": "Registračné údaje: údaje získané pri odoslaní kontaktného formulára www.droneye.sk/kontakt",
-      "item3": "Marketingové údaje: meno a priezvisko, dátum narodenia, adresa, IP adresa, emailová adresa, telefónne číslo."
-    },
-    "section3": {
-      "title": "3. Prečo potrebujeme vaše osobné údaje?",
-      "description": "Vaše údaje spracúvame v nevyhnutnom rozsahu, pričom väčšina spracúvaní je odôvodnená tým, že tieto údaje potrebujeme na poskytnutie zakúpeného produktu.",
-      "subtitle1": "3.1. Plníme si povinnosti vyplývajúce nám z príslušných právnych predpisov",
-      "item1": "Sme povinní identifikovať vás pri objednaní služieb a vystavení objednávky na vaše meno",
-      "item2": "Pri našej činnosti sme povinní postupovať obozretne a rešpektovať vaše práva ako spotrebiteľa v súlade so zákonom č. 102/2014 Z. z. o ochrane spotrebiteľa pri predaji tovaru alebo poskytovaní služieb na diaľku",
-      "item3": "Sme povinní vystaviť faktúru a evidovať ju v súlade so zákonom o DPH"
-    },
-    "section4": {
-      "title": "4. Doba uchovávania osobných údajov",
-      "description1": "Vaše osobné údaje uchovávame len po dobu, ktorá je nevyhnutná na splnenie účelu, na ktorý boli osobné údaje spracúvané, alebo po dobu, ktorú vyžadujú právne predpisy.",
-      "description2": "V prípade, ak vaše osobné údaje spracúvame na základe súhlasu, uchovávame ich do doby odvolania súhlasu, alebo do doby, ktorá je potrebná na splnenie účelu spracúvania osobných údajov.",
-      "description3": "Po uplynutí doby uchovávania osobných údajov budú vaše osobné údaje vymazané alebo anonymizované v súlade s platnými právnymi predpismi."
-    },
-    "section5": {
-      "title": "5. Vaše práva",
-      "description": "V súlade s GDPR máte nasledujúce práva týkajúce sa vašich osobných údajov:",
-      "item1": "Právo na prístup k osobným údajom - máte právo získať informácie o tom, aké osobné údaje o vás spracúvame",
-      "item2": "Právo na opravu - máte právo požadovať opravu nepresných alebo neúplných osobných údajov",
-      "item3": "Právo na vymazanie - máte právo požadovať vymazanie vašich osobných údajov za určitých podmienok",
-      "item4": "Právo na obmedzenie spracúvania - máte právo požadovať obmedzenie spracúvania vašich osobných údajov",
-      "item5": "Právo na prenosnosť údajov - máte právo získať vaše osobné údaje v štruktúrovanom formáte",
-      "item6": "Právo namietať - máte právo namietať proti spracúvaniu vašich osobných údajov",
-      "item7": "Právo odvolať súhlas - ak spracúvame vaše osobné údaje na základe súhlasu, máte právo tento súhlas kedykoľvek odvolať"
-    },
-    "section6": {
-      "title": "6. Ako môžete uplatniť svoje práva",
-      "description1": "Ak chcete uplatniť niektoré z vašich práv uvedených vyššie, môžete nás kontaktovať prostredníctvom emailu na adrese info@droneye.sk alebo písomne na našu adresu.",
-      "description2": "Vašu žiadosť vybavíme bez zbytočného odkladu, najneskôr do 30 dní od jej doručenia. V prípade zložitých žiadostí alebo veľkého počtu žiadostí si vyhradzujeme právo predĺžiť túto lehotu o ďalších 60 dní, o čom vás budeme informovať."
-    },
-    "section7": {
-      "title": "7. Zabezpečenie osobných údajov",
-      "description1": "Pri spracúvaní vašich osobných údajov používame vhodné technické a organizačné opatrenia na zabezpečenie ochrany vašich osobných údajov pred neoprávneným prístupom, stratou, zničením alebo zmenou.",
-      "description2": "Naše systémy sú pravidelne aktualizované a monitorované, aby sme zabezpečili maximálnu bezpečnosť vašich osobných údajov."
-    },
-    "section8": {
-      "title": "8. Prenos osobných údajov do tretích krajín",
-      "description": "Vaše osobné údaje spracúvame výlučne v rámci Európskej únie. V prípade, ak by bolo potrebné preniesť vaše osobné údaje do tretích krajín, zabezpečíme, aby takéto prenosy boli v súlade s platnými právnymi predpismi a aby boli zabezpečené vhodné záruky ochrany vašich osobných údajov."
-    },
-    "section9": {
-      "title": "9. Automatizované rozhodovanie a profilovanie",
-      "description": "Vaše osobné údaje nepoužívame na automatizované rozhodovanie alebo profilovanie v zmysle GDPR. Všetky rozhodnutia týkajúce sa spracúvania vašich osobných údajov sú vykonávané ľudskými zamestnancami."
-    },
-    "section10": {
-      "title": "10. Spracúvanie vašich osobných údajov prostredníctvom našich internetových stránok",
-      "description": "Pri používaní našej internetovej stránky: www.droneye.sk (ďalej len ako \"Internetová stránka\"), môže byť prístup do niektorých častí Internetovej stránky podmienený poskytnutím vašich osobných údajov. Toto poskytnutie podmieňuje prístup alebo správnu funkčnosť Internetových stránok a z tohto dôvodu je potrebné, aby ste nám udelili súhlas na spracúvanie vami poskytnutých osobných údajov."
-    },
-    "section11": {
-      "title": "11. Spracúvanie údajov prostredníctvom cookies",
-      "description1": "O návštevníkoch a používateľoch našej Internetovej stránke sme oprávnení zhromažďovať a iným spôsobom spracúvať údaje prostredníctvom nástrojov slúžiacich na automatizované zhromažďovanie údajov, najmä súborov cookies, protokolov a iných bežne používaných nástrojov na získavanie informácií prostredníctvom internetovej stránky.",
-      "description2": "Pod pojmom cookie je možné predstaviť si malé množstvo údajov, ktoré sú ako súbor odoslané do vášho počítača (tabletu, smartfónu) z internetovej stránky, ktorú práve navštevujete. V počítači sa súbor údajov uloží a pri každej ďalšej návšteve rovnakej webovej stránky odošle počítač informáciu nášmu serveru.",
-      "description3": "Väčšina internetových stránok, vrátane tej našej, využíva cookies. Zmyslom cookies je uľahčiť a spríjemniť vám používanie našich Internetových stránok. Súbor cookie totiž umožní webovej stránke rozpoznať, či ste ju už v minulosti navštívili a o ktorú sekciu ste mali záujem. Zároveň sú to práve cookies, vďaka ktorým si môžete uložiť svoje užívateľské nastavenia ako rozpoznanie jazyka či zapamätanie vášho prihlasovacieho mena. Pomocou cookies uchovávame údaje, ktoré nespájame s vašou osobou a prostredníctvom získaných údajov nerealizujeme identifikáciu zákazníka.",
-      "description4": "Použitie súborov cookies nie je pre vás nebezpečné, cookies nemôžu prenášať vírusy ani čítať údaje z harddisku zariadenia.",
-      "description5": "Návštevou našej internetovej stránke automaticky vyjadrujete svoj súhlas s použitím tejto technológie. Tento postup vyplýva z § 55 ods. 5 zákona č. 355/2011 Z. z. o elektronických komunikáciách, podľa ktorého sa za súhlas na tento účel považuje aj použitie príslušného nastavenia webového prehliadača alebo iného počítačového programu.",
-      "description6": "Používanie cookies a ich povolenie vo webovom prehliadači je na slobodnej vôli každého používateľa webovej stránky. Súbory cookies môžete slobodne vymazať alebo vopred nastaviť váš internetový prehliadač tak, aby prijímanie súborov cookies buď odmietal, alebo vás upozorňoval, keď sa server snaží zaslať vám cookie. Potom sa však môže stať, že webové stránky, ktoré sú na podpore cookies závislé, nebudú fungovať tak, ako by ste si predstavovali, alebo že časti stránok pre vás nebudú dostupné.",
-      "description7": "Využívame trvalé súbory cookies, ktoré nám pomáhajú identifikovať vaše zariadenie pri opätovnej návšteve Internetových stránok a umožňujú tak poskytovať služby v súlade s vašimi očakávaniami. Súbory Cookies uchovávame po dobu 1 roka."
-    },
-    "section12": {
-      "title": "12. Okruh príjemcov",
-      "description1": "Vaše osobné údaje nesprístupňujeme bezdôvodne žiadnym subjektom. Je však potrebné, aby niektoré osobné údaje boli sprístupnené vopred určenému okruhu príjemcov osobných údajov. V prípade zasielania tovaru (napr. vytlačená dronová fotografia) Vám ako konečnému zákazníkovi, poskytujeme Vaše osobné údaje poštovým doručovateľom alebo kuriérskym firmám. V prípade správy a údržby našej webovej stránky dochádza k sprístupneniu Vašich osobných údajov správcovi webovej stránky. V neposlednom rade sú to osoby ako účtovník a daňový poradca.",
-      "description2": "Okruh príjemcov:",
-      "item1": "Poštový doručovatelia v zmysle zákona 324/2011 Z. z. o poštových službách",
-      "item2": "Kurierska spoločnosť",
-      "item3": "Správca servera",
-      "item4": "Správca webovej stránky",
-      "item5": "Emailový poskytovateľ",
-      "item6": "Daňový a účtovný poradca",
-      "item7": "Subdodávatelia"
-    },
-    "section13": {
-      "title": "13. Záverečné ustanovenia",
-      "description": "Prevádzkovateľ je spoločnosť DroneEye, so sídlom Bratislava, Slovensko. Spoločnosť prevádzkuje internetovú stránku www.droneye.sk. V prípade otázok týkajúcich sa ochrany osobných údajov, na ktoré ste nenašli odpoveď v tomto dokumente, prosím napíšte na info@droneye.sk."
-    }
-  }
 }
