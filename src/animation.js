@@ -42,47 +42,6 @@ const droneColors = {
     details: 0xffffff // Bright white - for Cube002 and other details
 };
 
-// Function to change drone color (can be called from console or UI)
-function changeDroneColor(bodyColor, rotorColor) {
-    if (!droneRoot) {
-        console.warn("Drone model not loaded yet");
-        return;
-    }
-
-    if (bodyColor)
-        droneColors.body = typeof bodyColor === "string" ? parseInt(bodyColor.replace("#", ""), 16) : bodyColor;
-    if (rotorColor)
-        droneColors.rotors = typeof rotorColor === "string" ? parseInt(rotorColor.replace("#", ""), 16) : rotorColor;
-
-    droneRoot.traverse(o => {
-        if (o.isMesh && o.material) {
-            const materials = Array.isArray(o.material) ? o.material : [o.material];
-
-            materials.forEach(mat => {
-                if (mat.isMeshStandardMaterial || mat.isMeshPhongMaterial || mat.isMeshLambertMaterial) {
-                    // Change body color
-                    if (o.name && /body/i.test(o.name)) {
-                        mat.color.setHex(droneColors.body);
-                    }
-                    // Change rotor color
-                    else if (o.name && /rotor/i.test(o.name)) {
-                        mat.color.setHex(droneColors.rotors);
-                    }
-                    mat.needsUpdate = true;
-                }
-            });
-        }
-    });
-
-    console.log("✅ Colors updated:", {
-        body: `#${droneColors.body.toString(16)}`,
-        rotors: `#${droneColors.rotors.toString(16)}`
-    });
-}
-
-// Make function available globally for console access
-window.changeDroneColor = changeDroneColor;
-
 // Initialize Three.js
 function init() {
     // Prevent multiple initializations
@@ -1461,78 +1420,11 @@ function updateNavbarColor(sceneIndex) {
     const navbar = document.querySelector(".navbar");
     if (!navbar) return;
 
-    // Only change colors on screens wider than 1024px
-    const isWideScreen = window.innerWidth > 1024;
-    if (!isWideScreen) {
-        // On smaller screens, keep default colors
-        return;
-    }
+    // Remove all scene classes
+    navbar.classList.remove("scene-0", "scene-1", "scene-2");
 
-    // Scene 0 = Space scene (vesmír) - use white
-    // Scene 1 (index 1) = Sky scene - change to darker color
-    // Scene 2 (index 2) = Water scene - change to darker color
-    if (sceneIndex === 0 || sceneIndex === 1) {
-        // Space scene (vesmír) - use white
-        navbar.style.setProperty("--navbar-text", "#ffffff"); // White
-        // Also update nav links directly
-        const navLinks = document.querySelectorAll(".nav-link");
-        navLinks.forEach(link => {
-            link.style.color = "#ffffff";
-        });
-        // Update hamburger bars
-        const bars = document.querySelectorAll(".bar");
-        bars.forEach(bar => {
-            bar.style.background = "#ffffff";
-        });
-        // Update language switcher buttons
-        const languageOptions = document.querySelectorAll(".language-option");
-        languageOptions.forEach(option => {
-            if (!option.classList.contains("active")) {
-                option.style.color = "#ffffff";
-                option.style.borderColor = "rgba(255, 255, 255, 0.3)";
-            }
-        });
-    } else if (sceneIndex === 2) {
-        // Sky or Water scene - use darker color for better visibility
-        navbar.style.setProperty("--navbar-text", "#003d99"); // Dark blue
-        // Also update nav links directly
-        const navLinks = document.querySelectorAll(".nav-link");
-        navLinks.forEach(link => {
-            link.style.color = "#003d99";
-        });
-        // Update hamburger bars
-        const bars = document.querySelectorAll(".bar");
-        bars.forEach(bar => {
-            bar.style.background = "#003d99";
-        });
-        // Update language switcher buttons
-        const languageOptions = document.querySelectorAll(".language-option");
-        languageOptions.forEach(option => {
-            if (!option.classList.contains("active")) {
-                option.style.color = "#003d99";
-                option.style.borderColor = "#003d99";
-            }
-        });
-    } else {
-        // Other scenes - use default
-        navbar.style.setProperty("--navbar-text", "var(--footer-text)"); // Reset to default
-        // Reset nav links
-        const navLinks = document.querySelectorAll(".nav-link");
-        navLinks.forEach(link => {
-            link.style.color = "";
-        });
-        // Reset hamburger bars
-        const bars = document.querySelectorAll(".bar");
-        bars.forEach(bar => {
-            bar.style.background = "";
-        });
-        // Reset language switcher buttons
-        const languageOptions = document.querySelectorAll(".language-option");
-        languageOptions.forEach(option => {
-            option.style.color = "";
-            option.style.borderColor = "";
-        });
-    }
+    // Add class for current scene
+    navbar.classList.add(`scene-${sceneIndex}`);
 }
 
 // Window resize handler

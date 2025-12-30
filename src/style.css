@@ -535,6 +535,49 @@ body.homepage .navbar {
     z-index: 1000;
 }
 
+/* Navbar scene colors - only for desktop (width > 1024px) */
+@media (min-width: 1025px) {
+    /* Scene 0 and 1 (Space and Sky) - white text */
+    .navbar.scene-0 .nav-link,
+    .navbar.scene-1 .nav-link {
+        color: #ffffff;
+    }
+
+    .navbar.scene-0 .nav-link::after,
+    .navbar.scene-1 .nav-link::after {
+        background: #ffffff;
+    }
+
+    .navbar.scene-0 .bar,
+    .navbar.scene-1 .bar {
+        background: #ffffff;
+    }
+
+    .navbar.scene-0 .language-option:not(.active),
+    .navbar.scene-1 .language-option:not(.active) {
+        color: #ffffff;
+        border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    /* Scene 2 (Water) - dark blue text */
+    .navbar.scene-2 .nav-link {
+        color: #003d99;
+    }
+
+    .navbar.scene-2 .nav-link::after {
+        background: #003d99;
+    }
+
+    .navbar.scene-2 .bar {
+        background: #003d99;
+    }
+
+    .navbar.scene-2 .language-option:not(.active) {
+        color: #003d99;
+        border-color: #003d99;
+    }
+}
+
 body.homepage .main-content {
     height: 100vh; /* Full height - hero starts from top */
     margin-top: 0; /* No margin - starts from top */
