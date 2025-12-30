@@ -779,6 +779,17 @@ class SkyScene {
         const texture = new THREE.CanvasTexture(canvas);
         this.scene.background = texture;
         
+        // Lighting - same as SpaceScene for consistent drone appearance
+        this.scene.add(new THREE.AmbientLight(0xffffff, 1.2));
+        
+        const skyDirLight = new THREE.DirectionalLight(0xffffff, 1.5);
+        skyDirLight.position.set(5, 10, 5);
+        this.scene.add(skyDirLight);
+        
+        const skyPointLight = new THREE.PointLight(0xffffff, 1.0, 100);
+        skyPointLight.position.set(0, 0, 10);
+        this.scene.add(skyPointLight);
+        
         // Create group for clouds that will follow drone's Y position
         this.cloudGroup = new THREE.Group();
         this.scene.add(this.cloudGroup);
@@ -976,13 +987,16 @@ class WaterScene {
         this.scene.background = new THREE.Color(0x87CEEB); // Sky blue
         this.skyScene = skyScene; // Reference to sky scene for cloud textures
         
-        // Lighting - exactly as in the example
-        const ambient = new THREE.AmbientLight(0xffffff, 0.3);
-        this.scene.add(ambient);
-
-        const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
-        dirLight.position.set(100, 100, 100);
-        this.scene.add(dirLight);
+        // Lighting - same as SpaceScene for consistent drone appearance
+        this.scene.add(new THREE.AmbientLight(0xffffff, 1.2));
+        
+        const waterDirLight = new THREE.DirectionalLight(0xffffff, 1.5);
+        waterDirLight.position.set(5, 10, 5);
+        this.scene.add(waterDirLight);
+        
+        const waterPointLight = new THREE.PointLight(0xffffff, 1.0, 100);
+        waterPointLight.position.set(0, 0, 10);
+        this.scene.add(waterPointLight);
 
         // Ocean (Water) - exactly as in the example
         const waterGeometry = new THREE.PlaneGeometry(10000, 10000);
@@ -1304,113 +1318,42 @@ function loadDroneModel() {
                         const materials = Array.isArray(o.material) ? o.material : [o.material];
                         
                         materials.forEach((mat, idx) => {
-                        // Detect different parts of the drone
-                        const isRotor = /rotor|prop|fan|blade/i.test(name);
-                        const isCamera = /camera|cam/i.test(name);
-                        const isLens = /lens/i.test(name);
-                        const isSensor = /sensor|detector|scanner/i.test(name);
-                        const isFrame = /frame|arm|leg|support/i.test(name);
-                        const isLED = /led|light|indicator/i.test(name);
-                        const isBody = /body|main|center|core/i.test(name);
-                        const isDetail = /cube|detail|part|component/i.test(name);
+                        // Detect different parts of the drone by exact name matching first
+                        const isBody = name === 'body';
+                        const isRotor = /rotor/i.test(name);
+                        const isCube002 = name === 'cube002';
                                 
                                 let colorToApply;
                                 let emissiveColor;
                         let emissiveIntensity;
                                 
-                                if (isRotor) {
-                            // Rotors - vibrant orange
-                                    colorToApply = droneColors.rotors;
-                                    emissiveColor = droneColors.rotors;
-                            emissiveIntensity = 2.0;
-                            console.log(`Applied rotor color to ${name}:`, colorToApply.toString(16));
-                        } else if (isLens) {
-                            // Camera lens - black
-                            colorToApply = droneColors.lens;
-                            emissiveColor = 0x000000;
-                            emissiveIntensity = 0.0;
-                            console.log(`Applied lens color to ${name}:`, colorToApply.toString(16));
-                        } else if (isCamera) {
-                            // Camera body - black
-                            colorToApply = 0x000000;
-                            emissiveColor = 0x000000;
-                            emissiveIntensity = 0.0;
-                            console.log(`Applied camera color to ${name}:`, colorToApply.toString(16));
-                        } else if (isSensor) {
-                            // Sensors - light blue
-                            colorToApply = droneColors.sensors;
-                            emissiveColor = droneColors.sensors;
-                            emissiveIntensity = 1.2;
-                            console.log(`Applied sensor color to ${name}:`, colorToApply.toString(16));
-                        } else if (isLED) {
-                            // LED lights - cyan
-                            colorToApply = droneColors.led;
-                            emissiveColor = droneColors.led;
-                            emissiveIntensity = 2.5;
-                            console.log(`Applied LED color to ${name}:`, colorToApply.toString(16));
-                        } else if (isFrame) {
-                            // Frame/arms - darker blue
-                            colorToApply = droneColors.frame;
-                            emissiveColor = droneColors.frame;
-                            emissiveIntensity = 0.8;
-                            console.log(`Applied frame color to ${name}:`, colorToApply.toString(16));
-                        } else if (isDetail || isSmall) {
-                            // Small parts and details - white or secondary blue
-                            const useAccent = (index % 3) === 0; // Every 3rd uses accent
-                            colorToApply = useAccent ? droneColors.bodyAccent : droneColors.details;
-                            emissiveColor = useAccent ? droneColors.bodyAccent : droneColors.details;
-                            emissiveIntensity = useAccent ? 1.0 : 0.8;
-                            console.log(`Applied detail/small color to ${name}:`, colorToApply.toString(16));
-                        } else if (isMedium) {
-                            // Medium parts - alternate between royal blue and secondary blue
-                            const useAccent = (index % 2) === 0; // Alternate
-                            colorToApply = useAccent ? droneColors.bodyAccent : droneColors.body;
-                            emissiveColor = useAccent ? droneColors.bodyAccent : droneColors.body;
-                            emissiveIntensity = useAccent ? 1.2 : 1.5;
-                            console.log(`Applied medium part color to ${name}:`, colorToApply.toString(16));
-                        } else if (isLarge || isBody) {
-                            // Large parts/body - royal blue with some accent parts
-                            const useAccent = (index % 5) === 0 || (index % 5) === 2; // Some parts use accent
-                            colorToApply = useAccent ? droneColors.bodyAccent : droneColors.body;
-                            emissiveColor = useAccent ? droneColors.bodyAccent : droneColors.body;
-                            emissiveIntensity = useAccent ? 1.2 : 1.5;
-                            console.log(`Applied large/body color to ${name}:`, colorToApply.toString(16));
-                        } else {
-                            // Default - use index for consistent coloring pattern
-                            const pattern = index % 6;
-                            if (pattern === 0 || pattern === 3) {
+                                if (isBody) {
+                            // Body - main royal blue color
                                     colorToApply = droneColors.body;
                                     emissiveColor = droneColors.body;
-                                emissiveIntensity = 1.5;
-                            } else if (pattern === 1 || pattern === 4) {
-                                colorToApply = droneColors.bodyAccent;
-                                emissiveColor = droneColors.bodyAccent;
-                                emissiveIntensity = 1.2;
-                            } else {
+                            emissiveIntensity = 1.5;
+                            console.log(`Applied body color to ${name}:`, colorToApply.toString(16));
+                        } else if (isRotor) {
+                            // Rotors - vibrant orange
+                            colorToApply = droneColors.rotors;
+                            emissiveColor = droneColors.rotors;
+                            emissiveIntensity = 2.0;
+                            console.log(`Applied rotor color to ${name}:`, colorToApply.toString(16));
+                        } else if (isCube002) {
+                            // Cube002 - white detail
                                     colorToApply = droneColors.details;
                                     emissiveColor = droneColors.details;
-                                emissiveIntensity = 0.8;
-                            }
-                            console.log(`Applied default pattern color to ${name || 'unnamed'}:`, colorToApply.toString(16));
+                            emissiveIntensity = 0.8;
+                            console.log(`Applied detail color to ${name}:`, colorToApply.toString(16));
+                                } else {
+                            // Default - use body color for unknown parts
+                                    colorToApply = droneColors.body;
+                                    emissiveColor = droneColors.body;
+                            emissiveIntensity = 1.5;
+                            console.log(`Applied default body color to ${name || 'unnamed'}:`, colorToApply.toString(16));
                         }
-                        
-                        // Create new MeshStandardMaterial with vibrant colors and very high emissive
-                        // Using MeshStandardMaterial with high emissive for self-illuminated vibrant colors
-                        const newMaterial = new THREE.MeshStandardMaterial({
-                            color: colorToApply,
-                            emissive: emissiveColor,
-                            emissiveIntensity: emissiveIntensity,
-                            metalness: isLens ? 0.8 : (isFrame ? 0.2 : 0.0), // Lens and frame slightly metallic
-                            roughness: isLens ? 0.05 : (isFrame ? 0.3 : 0.1), // Lens very smooth, frame rougher
                         });
                         
-                        // Replace material
-                        if (Array.isArray(o.material)) {
-                            o.material[idx] = newMaterial;
-                            } else {
-                            o.material = newMaterial;
-                            }
-                        });
                     }
             });
             
