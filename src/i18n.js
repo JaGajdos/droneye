@@ -73,10 +73,26 @@ function getNestedTranslation(obj, path) {
     }, obj);
 }
 
+// Helper function to replace absolute URLs with base URL
+function replaceUrlsWithBaseUrl(text) {
+    const baseUrl = getBaseUrl();
+    // Replace absolute URLs (starting with /) but not // (protocol-relative)
+    return text.replace(/href=["'](\/[^"']+)["']/g, (match, path) => {
+        // Skip if already has base URL or is external link
+        if (path.startsWith(baseUrl) || path.startsWith('http') || path.startsWith('mailto:')) {
+            return match;
+        }
+        // Add base URL to absolute paths
+        const newPath = baseUrl + path.substring(1); // Remove leading /
+        return `href="${newPath}"`;
+    });
+}
+
 // Apply translations to elements
 function applyTranslations() {
     console.log('Applying translations, current language:', currentLanguage);
     let translatedCount = 0;
+    const baseUrl = getBaseUrl();
     
     // Update elements with data-i18n attribute
     document.querySelectorAll('[data-i18n]').forEach(element => {
@@ -85,10 +101,23 @@ function applyTranslations() {
         if (translation) {
             // Check if translation contains HTML (like links)
             if (translation.includes('<a ') || translation.includes('<br>') || translation.includes('<strong>') || translation.includes('<em>')) {
-                element.innerHTML = translation;
+                // Replace URLs in translation with base URL
+                const processedTranslation = replaceUrlsWithBaseUrl(translation);
+                element.innerHTML = processedTranslation;
             } else {
                 element.textContent = translation;
             }
+            
+            // Also update href attribute if element is a link and has absolute path
+            if (element.tagName === 'A' && element.hasAttribute('href')) {
+                const href = element.getAttribute('href');
+                if (href.startsWith('/') && !href.startsWith('//')) {
+                    // Update href to include base URL
+                    const newHref = baseUrl + href.substring(1);
+                    element.setAttribute('href', newHref);
+                }
+            }
+            
             translatedCount++;
         } else {
             console.warn('Translation not found for key:', key);

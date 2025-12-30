@@ -62,6 +62,10 @@ function initNavigation() {
         fixLinkPath(heroButton);
     }
     
+    // Fix CTA button links
+    const ctaButtons = document.querySelectorAll('.cta-button[href^="/"]');
+    ctaButtons.forEach(fixLinkPath);
+    
     // Fix footer links (if any)
     const footerLinks = document.querySelectorAll('footer a[href^="/"]');
     footerLinks.forEach(fixLinkPath);
