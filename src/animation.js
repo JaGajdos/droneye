@@ -508,7 +508,7 @@ class SkyScene {
             // droneZ = 0, so range is from +50 to -1500
             const x = rnd(-xSpread, xSpread);
             const y = rnd(-70, -60); // Y: random position in range -70 to -90
-            const z = rnd(-2500, 50); // Z: from -1500 to +50
+            const z = rnd(-1500, 50); // Z: from -1500 to +50
 
             sprite.position.set(x, y, z);
 
