@@ -1861,23 +1861,23 @@ function updateNavbarColor(sceneIndex) {
     // Scene 3 (index 2) = Water scene - change to darker color
     if (sceneIndex === 1 || sceneIndex === 2) {
         // Sky or Water scene - use darker color for better visibility
-        navbar.style.setProperty('--navbar-text', '#002366'); // Dark blue
+        navbar.style.setProperty('--navbar-text', '#003d99'); // Dark blue
         // Also update nav links directly
         const navLinks = document.querySelectorAll('.nav-link');
         navLinks.forEach(link => {
-            link.style.color = '#002366';
+            link.style.color = '#003d99';
         });
         // Update hamburger bars
         const bars = document.querySelectorAll('.bar');
         bars.forEach(bar => {
-            bar.style.background = '#002366';
+            bar.style.background = '#003d99';
         });
         // Update language switcher buttons
         const languageOptions = document.querySelectorAll('.language-option');
         languageOptions.forEach(option => {
             if (!option.classList.contains('active')) {
-                option.style.color = '#002366';
-                option.style.borderColor = '#002366';
+                option.style.color = '#003d99';
+                option.style.borderColor = '#003d99';
             }
         });
     } else {
