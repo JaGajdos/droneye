@@ -8,7 +8,6 @@ RewriteRule ^cenova-ponuka/?$ cenova-ponuka.html [L]
 RewriteRule ^kontakt/?$ kontakt.html [L]
 RewriteRule ^legislativa/?$ legislativa.html [L]
 RewriteRule ^gdpr/?$ gdpr.html [L]
-RewriteRule ^gamiable-demo/?$ gamiable-demo.html [L]
 
 # Remove .html extension from URLs
 RewriteCond %{REQUEST_FILENAME} !-d

@@ -68,8 +68,7 @@ export default defineConfig({
                 "cenova-ponuka": "cenova-ponuka.html",
                 kontakt: "kontakt.html",
                 legislativa: "legislativa.html",
-                gdpr: "gdpr.html",
-                "gamiable-demo": "gamiable-demo.html"
+                gdpr: "gdpr.html"
             },
             output: {
                 manualChunks: {

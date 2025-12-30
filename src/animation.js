@@ -250,15 +250,15 @@ function setCloudTexture(texturePathOrPaths) {
     });
 }
 
-// Helper function to create cloud (Gamiable style - Mesh with PlaneGeometry)
+// Helper function to create cloud (Mesh with PlaneGeometry)
 function createCloudForScene(x, y, z, scaleX, scaleY, cloudTexture, opacity = 0.5) {
     if (!cloudTexture) return null;
 
-    // Gamiable style: Use Mesh with PlaneGeometry instead of Sprite for better 3D effect
+    // Use Mesh with PlaneGeometry instead of Sprite for better 3D effect
     const cloudSize = Math.max(scaleX, scaleY); // Use average size for plane geometry
     const cloudGeometry = new THREE.PlaneGeometry(cloudSize, cloudSize);
 
-    // Create material similar to Gamiable style
+    // Create material for clouds
     const cloudMaterial = new THREE.MeshStandardMaterial({
         map: cloudTexture,
         transparent: true,
@@ -274,11 +274,11 @@ function createCloudForScene(x, y, z, scaleX, scaleY, cloudTexture, opacity = 0.
     cloudTexture.wrapT = THREE.ClampToEdgeWrapping;
     cloudTexture.flipY = false;
 
-    // Create mesh (Gamiable style)
+    // Create mesh
     const cloud = new THREE.Mesh(cloudGeometry, cloudMaterial);
     cloud.position.set(x, y, z);
 
-    // Random rotation for 3D effect (like Gamiable)
+    // Random rotation for 3D effect
     cloud.rotation.z = (Math.random() - 0.5) * Math.PI * 0.3; // Slight random rotation
     cloud.rotation.x = (Math.random() - 0.5) * Math.PI * 0.1;
     cloud.rotation.y = (Math.random() - 0.5) * Math.PI * 0.1;
@@ -1095,7 +1095,7 @@ function createScenes() {
     const spaceScene = new SpaceScene();
     scenes.push(spaceScene.scene);
 
-    // Scene 2: Sky scene with clouds - Gamiable style
+    // Scene 2: Sky scene with clouds
     const skyScene = new SkyScene();
     scenes.push(skyScene.scene);
 
