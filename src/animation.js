@@ -1200,9 +1200,9 @@ function updateTexts() {
                 if (scrollProgress <= textFadeOutStart) {
                     // Stay fully visible and move up slowly
                     opacity = 1;
-                    // Start much higher (-200px), move up gradually
+                    // Start lower (-180px), move up gradually
                     const localProgress = scrollProgress / textFadeOutStart;
-                    translateY = -250 - localProgress * 100; // From -200px to -300px (moving up)
+                    translateY = -240 - localProgress * 100; // From -180px to -280px (moving up)
                 } else {
                     // Fade out and continue moving up
                     const localProgress = (scrollProgress - textFadeOutStart) / (textEnd - textFadeOutStart);
@@ -1425,7 +1425,6 @@ function animate() {
     // Update camera to follow drone - move forward with drone
     if (droneRoot) {
         const targetY = droneRoot.position.y;
-        const targetZ = droneRoot.position.z;
 
         // Calculate camera position based on drone height
         // Higher drone = more side view, lower drone = slightly more angled but still side view
@@ -1440,16 +1439,15 @@ function animate() {
         camera.position.y += (targetY + cameraOffsetY - camera.position.y) * 0.05;
         camera.position.z = cameraOffsetZ; // Fixed camera position (drone stays at Z=0)
         camera.position.x = cameraOffsetX;
+        const lookAtY = targetY - 0.3;
 
         // Look at center during entrance animation, then follow drone after animation completes
         if (entranceAnimationActive) {
             // During entrance animation, keep camera focused on center
-            const lookAtY = targetY - 1; // Look slightly below drone center
             camera.lookAt(0, lookAtY, 0); // Always look at center during entrance
         } else {
             // After entrance animation, follow drone normally
             const droneX = droneRoot.position.x;
-            const lookAtY = targetY - 1; // Look slightly below drone center
             camera.lookAt(droneX * 0.5, lookAtY, 0); // Look at drone's X position (centered when at 0)
         }
 
