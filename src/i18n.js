@@ -141,6 +141,15 @@ function applyTranslations() {
         }
     });
 
+    // Update image sources based on language
+    document.querySelectorAll("[data-i18n-image]").forEach(element => {
+        // Construct image path from current language
+        const lang = currentLanguage === "sk" ? "sk" : currentLanguage === "en" ? "en" : "de";
+        const imagePath = baseUrl + `assets/basegraph-${lang}-desktop2.webp`;
+        element.src = imagePath;
+        translatedCount++;
+    });
+
     // Update page title
     const titleElement = document.querySelector("title[data-i18n-title]");
     if (titleElement) {
