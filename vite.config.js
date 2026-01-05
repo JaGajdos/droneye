@@ -47,6 +47,40 @@ function copyHtaccessPlugin() {
     };
 }
 
+// Plugin to copy basegraph images to dist/assets
+function copyBasegraphImagesPlugin() {
+    return {
+        name: "copy-basegraph-images",
+        writeBundle() {
+            const assetsDir = join(process.cwd(), "assets");
+            const distAssetsDir = join(process.cwd(), "dist", "assets");
+
+            // Create dist/assets directory if it doesn't exist
+            if (!existsSync(distAssetsDir)) {
+                mkdirSync(distAssetsDir, { recursive: true });
+            }
+
+            // Copy basegraph images
+            const basegraphFiles = [
+                "basegraph-sk-desktop2.webp",
+                "basegraph-en-desktop2.webp",
+                "basegraph-de-desktop2.webp"
+            ];
+
+            basegraphFiles.forEach(file => {
+                const srcFile = join(assetsDir, file);
+                const distFile = join(distAssetsDir, file);
+                if (existsSync(srcFile)) {
+                    copyFileSync(srcFile, distFile);
+                    console.log(`Copied ${file} to dist/assets/`);
+                } else {
+                    console.warn(`Warning: ${file} not found in assets/`);
+                }
+            });
+        }
+    };
+}
+
 export default defineConfig({
     base: "/droneye/",
     server: {
@@ -54,7 +88,7 @@ export default defineConfig({
         open: true,
         historyApiFallback: true
     },
-    plugins: [copyLocalesPlugin(), copyHtaccessPlugin()],
+    plugins: [copyLocalesPlugin(), copyHtaccessPlugin(), copyBasegraphImagesPlugin()],
     build: {
         outDir: "dist",
         assetsDir: "assets",
