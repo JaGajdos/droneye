@@ -334,24 +334,24 @@
     "loading": "Loading...",
     "animation": {
         "text1": {
-            "title": "We are passionate drone pilots, photographers, and cameramen.",
-            "subtitle": "Creating unforgettable moments for you everywhere."
+            "title": "We are passionate drone pilots, photographers, and cameramen",
+            "subtitle": "Creating unforgettable moments for you everywhere"
         },
         "text2": {
-            "title": "We value creativity and innovation.",
-            "subtitle": "Pushing boundaries and redefining what's possible."
+            "title": "We value creativity and innovation",
+            "subtitle": "Pushing boundaries and redefining what's possible"
         },
         "text3": {
-            "title": "We listen to your clients.",
-            "subtitle": "Always seeking feedback and using it to push our boundaries."
+            "title": "We listen to your clients",
+            "subtitle": "Always seeking feedback and using it to push our boundaries"
         },
         "text4": {
-            "title": "Collaboration is the key.",
-            "subtitle": "Start your journey today and see the world like never before."
+            "title": "Collaboration is the key",
+            "subtitle": "Start your journey today and see the world like never before"
         },
         "cta": {
             "title": "Let's start together",
-            "subtitle": "Contact us and let's create something extraordinary.",
+            "subtitle": "Contact us and let's create something extraordinary",
             "button": "Our Projects"
         }
     },
