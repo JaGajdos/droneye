@@ -116,61 +116,110 @@ class SpaceScene {
         this.scene.add(pointLight);
 
         // Add stars - create tunnel effect (cylindrical distribution)
-        const starsGeometry = new THREE.BufferGeometry();
-        const starsCount = 800; // More stars for better infinite tunnel effect
-        const starsPositions = new Float32Array(starsCount * 3);
+        // Create multiple star groups with different sizes for realistic star field
+        const starsGroup = new THREE.Group();
+
+        // Small stars (most common)
+        const smallStarsGeometry = new THREE.BufferGeometry();
+        const smallStarsCount = 1000;
+        const smallStarsPositions = new Float32Array(smallStarsCount * 3);
+
+        // Medium stars (less common)
+        const mediumStarsGeometry = new THREE.BufferGeometry();
+        const mediumStarsCount = 250;
+        const mediumStarsPositions = new Float32Array(mediumStarsCount * 3);
+
+        // Large/bright stars (rare)
+        const largeStarsGeometry = new THREE.BufferGeometry();
+        const largeStarsCount = 50;
+        const largeStarsPositions = new Float32Array(largeStarsCount * 3);
 
         // Tunnel parameters - wider tunnel for more side distribution
-        const tunnelMinRadius = 8; // Minimum distance from center (inner edge of tunnel)
-        const tunnelMaxRadius = 280; // Maximum distance from center (outer edge of tunnel) - very wide for maximum side stars
-        const tunnelLength = 1200; // Longer tunnel for better initial distribution
+        const tunnelMinRadius = 8;
+        const tunnelMaxRadius = 280;
+        const tunnelLength = 1200;
 
-        for (let i = 0; i < starsCount * 3; i += 3) {
-            // Create stars in cylindrical tunnel shape (not in center, more on edges)
-            const theta = Math.random() * Math.PI * 2; // Angle around Z axis
-            // Bias radius towards outer edge for tunnel effect (less stars in center)
-            const radiusFactor = Math.pow(Math.random(), 0.4); // Power < 1 biases towards larger values
-            const radius = tunnelMinRadius + radiusFactor * (tunnelMaxRadius - tunnelMinRadius);
+        // Helper function to create star positions
+        const createStarPositions = (positions, count) => {
+            for (let i = 0; i < count * 3; i += 3) {
+                const theta = Math.random() * Math.PI * 2;
+                const radiusFactor = Math.pow(Math.random(), 0.4);
+                const radius = tunnelMinRadius + radiusFactor * (tunnelMaxRadius - tunnelMinRadius);
+                const z = -Math.random() * tunnelLength;
+                positions[i] = radius * Math.cos(theta);
+                positions[i + 1] = radius * Math.sin(theta);
+                positions[i + 2] = z;
+            }
+        };
 
-            // Random Z position along tunnel
-            const z = -Math.random() * tunnelLength;
+        createStarPositions(smallStarsPositions, smallStarsCount);
+        createStarPositions(mediumStarsPositions, mediumStarsCount);
+        createStarPositions(largeStarsPositions, largeStarsCount);
 
-            // Calculate X and Y from radius and angle (cylindrical coordinates)
-            starsPositions[i] = radius * Math.cos(theta); // x
-            starsPositions[i + 1] = radius * Math.sin(theta); // y
-            starsPositions[i + 2] = z; // z (along tunnel)
-        }
+        smallStarsGeometry.setAttribute("position", new THREE.BufferAttribute(smallStarsPositions, 3));
+        mediumStarsGeometry.setAttribute("position", new THREE.BufferAttribute(mediumStarsPositions, 3));
+        largeStarsGeometry.setAttribute("position", new THREE.BufferAttribute(largeStarsPositions, 3));
 
-        starsGeometry.setAttribute("position", new THREE.BufferAttribute(starsPositions, 3));
-
-        // Create circular texture for stars
+        // Create sharper, more point-like star texture
         const starTextureCanvas = document.createElement("canvas");
-        starTextureCanvas.width = 64;
-        starTextureCanvas.height = 64;
+        starTextureCanvas.width = 16; // Very small canvas for sharp point-like stars
+        starTextureCanvas.height = 16;
         const starTextureContext = starTextureCanvas.getContext("2d");
 
-        // Draw circular gradient for soft circular star
-        const gradient = starTextureContext.createRadialGradient(32, 32, 0, 32, 32, 32);
+        // Draw sharp star - small bright center with quick fade
+        const gradient = starTextureContext.createRadialGradient(8, 8, 0, 8, 8, 6);
         gradient.addColorStop(0, "rgba(255, 255, 255, 1)");
-        gradient.addColorStop(0.5, "rgba(255, 255, 255, 0.8)");
+        gradient.addColorStop(0.2, "rgba(255, 255, 255, 0.95)");
+        gradient.addColorStop(0.5, "rgba(255, 255, 255, 0.4)");
         gradient.addColorStop(1, "rgba(255, 255, 255, 0)");
 
         starTextureContext.fillStyle = gradient;
-        starTextureContext.fillRect(0, 0, 64, 64);
+        starTextureContext.fillRect(0, 0, 16, 16);
 
         const starTexture = new THREE.CanvasTexture(starTextureCanvas);
 
-        const starsMaterial = new THREE.PointsMaterial({
+        // Small stars material
+        const smallStarsMaterial = new THREE.PointsMaterial({
             map: starTexture,
-            color: 0xffffff,
-            size: 2.5, // Slightly smaller for more subtle effect
+            color: 0xffaaaa,
+            size: 1.8, // Very small for realistic stars
             sizeAttenuation: true,
             transparent: true,
             alphaTest: 0.1,
-            opacity: 0.9 // Slightly transparent for softer look
+            opacity: 1.0
         });
 
-        this.stars = new THREE.Points(starsGeometry, starsMaterial);
+        // Medium stars material
+        const mediumStarsMaterial = new THREE.PointsMaterial({
+            map: starTexture,
+            color: 0xffffff,
+            size: 3, // Medium size
+            sizeAttenuation: true,
+            transparent: true,
+            alphaTest: 0.1,
+            opacity: 1.0
+        });
+
+        // Large/bright stars material
+        const largeStarsMaterial = new THREE.PointsMaterial({
+            map: starTexture,
+            color: 0xaaaaaa,
+            size: 5.0, // Larger bright stars
+            sizeAttenuation: true,
+            transparent: true,
+            alphaTest: 0.1,
+            opacity: 1.0
+        });
+
+        const smallStars = new THREE.Points(smallStarsGeometry, smallStarsMaterial);
+        const mediumStars = new THREE.Points(mediumStarsGeometry, mediumStarsMaterial);
+        const largeStars = new THREE.Points(largeStarsGeometry, largeStarsMaterial);
+
+        starsGroup.add(smallStars);
+        starsGroup.add(mediumStars);
+        starsGroup.add(largeStars);
+
+        this.stars = starsGroup;
         this.scene.add(this.stars);
 
         // Store stars reference for animation
@@ -308,53 +357,52 @@ class SpaceScene {
     animate(delta, time) {
         // Animate stars moving forward (infinite forward movement)
         if (this.stars && droneRoot) {
-            const positions = this.stars.geometry.attributes.position;
-            const starSpeed = 120; // Speed at which stars approach (units per second) - faster movement
+            const starSpeed = 220; // Speed at which stars approach (units per second)
             const droneZ = 0; // Drone stays at fixed Z position
-            const resetDistance = 800; // Distance behind drone to reset stars - larger for infinite effect
-            const resetStartZ = droneZ + 30; // Start resetting stars before they pass drone (earlier reset)
+            const resetDistance = 2000; // Distance behind drone to reset stars
+            const resetStartZ = droneZ + 30; // Start resetting stars before they pass drone
             const resetEndZ = droneZ - resetDistance; // End of reset range
 
-            // Move stars forward (towards drone) continuously
-            for (let i = 0; i < positions.count; i++) {
-                const currentZ = positions.getZ(i);
+            // Helper function to animate a star group
+            const animateStarGroup = starPoints => {
+                const positions = starPoints.geometry.attributes.position;
 
-                // Move star forward (towards drone)
-                const newZ = currentZ + starSpeed * delta;
+                for (let i = 0; i < positions.count; i++) {
+                    const currentZ = positions.getZ(i);
 
-                // Reset star if it passed the drone OR if it's too far behind
-                // Reset earlier (before passing drone) for smoother continuous effect
-                if (newZ > resetStartZ || currentZ < resetEndZ) {
-                    // Reset star to tunnel position BEHIND drone (cylindrical distribution)
-                    const theta = Math.random() * Math.PI * 2; // Angle around Z axis
-                    // Bias radius towards outer edge for tunnel effect - wider distribution
-                    const radiusFactor = Math.pow(Math.random(), 0.4); // Power < 1 biases towards larger values
-                    const tunnelMinRadius = 8;
-                    const tunnelMaxRadius = 280; // Very wide tunnel for maximum side stars
-                    const radius = tunnelMinRadius + radiusFactor * (tunnelMaxRadius - tunnelMinRadius);
+                    // Move star forward (towards drone)
+                    const newZ = currentZ + starSpeed * delta;
 
-                    // Calculate X and Y from radius and angle (cylindrical coordinates)
-                    const x = radius * Math.cos(theta);
-                    const y = radius * Math.sin(theta);
+                    // Reset star if it passed the drone OR if it's too far behind
+                    if (newZ > resetStartZ || currentZ < resetEndZ) {
+                        // Reset star to tunnel position BEHIND drone (cylindrical distribution)
+                        const theta = Math.random() * Math.PI * 2;
+                        const radiusFactor = Math.pow(Math.random(), 0.4);
+                        const tunnelMinRadius = 8;
+                        const tunnelMaxRadius = 280;
+                        const radius = tunnelMinRadius + radiusFactor * (tunnelMaxRadius - tunnelMinRadius);
 
-                    // Distribute stars evenly along reset range to avoid gaps
-                    // Use star index to create consistent distribution pattern
-                    const resetRange = resetDistance * 0.8; // Use 80% of reset distance for distribution
-                    const baseZ = droneZ - resetDistance;
-                    // Distribute stars evenly using index to avoid clustering
-                    const zOffset = ((i % 100) / 100) * resetRange; // Create pattern based on index
-                    const randomOffset = (Math.random() - 0.5) * resetRange * 0.2; // Small random variation
+                        const x = radius * Math.cos(theta);
+                        const y = radius * Math.sin(theta);
 
-                    // Place star behind drone (negative Z direction) - evenly distributed
-                    positions.setX(i, x);
-                    positions.setY(i, y);
-                    positions.setZ(i, baseZ + zOffset + randomOffset);
-                } else {
-                    positions.setZ(i, newZ);
+                        const resetRange = resetDistance * 0.8;
+                        const baseZ = droneZ - resetDistance;
+                        const zOffset = ((i % 100) / 100) * resetRange;
+                        const randomOffset = (Math.random() - 0.5) * resetRange * 0.2;
+
+                        positions.setX(i, x);
+                        positions.setY(i, y);
+                        positions.setZ(i, baseZ + zOffset + randomOffset);
+                    } else {
+                        positions.setZ(i, newZ);
+                    }
                 }
-            }
 
-            positions.needsUpdate = true;
+                positions.needsUpdate = true;
+            };
+
+            // Animate all star groups (small, medium, large)
+            this.stars.children.forEach(animateStarGroup);
 
             // Keep stars centered around drone's X and Y position (drone stays at origin)
             this.stars.position.x = 0; // Drone stays at X=0
