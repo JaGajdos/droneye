@@ -18,11 +18,11 @@ jobs:
             contents: write
 
         steps:
-            - name: Checkout repository
+            - name: Checkout master branch
               uses: actions/checkout@v4
               with:
                   token: ${{ secrets.GITHUB_TOKEN }}
-                  ref: gh-pages
+                  ref: master
                   fetch-depth: 0
 
             - name: Setup PHP
@@ -39,16 +39,45 @@ jobs:
               #   CONTENTFUL_SPACE_ID: ${{ secrets.CONTENTFUL_SPACE_ID }}
               #   CONTENTFUL_ACCESS_TOKEN: ${{ secrets.CONTENTFUL_ACCESS_TOKEN }}
 
-            - name: Commit and push changes
+            - name: Commit changes to master
               run: |
                   git config --local user.email "action@github.com"
                   git config --local user.name "GitHub Action"
                   git add assets/contentful/
                   if git diff --staged --quiet; then
-                    echo "No changes to commit"
+                    echo "No changes to commit on master"
                   else
                     git commit -m "🔄 Auto-sync Contentful content [skip ci]"
-                    git push
+                    git push origin master
+                  fi
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Checkout gh-pages branch
+              uses: actions/checkout@v4
+              with:
+                  token: ${{ secrets.GITHUB_TOKEN }}
+                  ref: gh-pages
+                  fetch-depth: 0
+                  path: gh-pages
+
+            - name: Copy Contentful files to gh-pages
+              run: |
+                  mkdir -p gh-pages/assets/contentful/images
+                  cp -r assets/contentful/*.json gh-pages/assets/contentful/ 2>/dev/null || true
+                  cp -r assets/contentful/images/* gh-pages/assets/contentful/images/ 2>/dev/null || true
+
+            - name: Commit and push to gh-pages
+              run: |
+                  cd gh-pages
+                  git config --local user.email "action@github.com"
+                  git config --local user.name "GitHub Action"
+                  git add assets/contentful/
+                  if git diff --staged --quiet; then
+                    echo "No changes to commit on gh-pages"
+                  else
+                    git commit -m "🔄 Auto-sync Contentful content [skip ci]"
+                    git push origin gh-pages
                   fi
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
