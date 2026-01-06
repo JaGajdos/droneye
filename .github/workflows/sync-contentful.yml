@@ -29,10 +29,11 @@ jobs:
 
             - name: Run Contentful synchronization
               run: php sync-contentful.php
-              env:
-                  # These are already in sync-contentful.php, but you can override if needed
-                  # CONTENTFUL_SPACE_ID: ${{ secrets.CONTENTFUL_SPACE_ID }}
-                  # CONTENTFUL_ACCESS_TOKEN: ${{ secrets.CONTENTFUL_ACCESS_TOKEN }}
+              # Credentials are already in sync-contentful.php
+              # To use GitHub Secrets instead, uncomment and set secrets:
+              # env:
+              #   CONTENTFUL_SPACE_ID: ${{ secrets.CONTENTFUL_SPACE_ID }}
+              #   CONTENTFUL_ACCESS_TOKEN: ${{ secrets.CONTENTFUL_ACCESS_TOKEN }}
 
             - name: Commit and push changes
               run: |
