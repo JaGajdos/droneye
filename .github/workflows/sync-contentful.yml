@@ -61,9 +61,33 @@ jobs:
                   fetch-depth: 0
                   path: gh-pages
 
-            - name: Copy Contentful files to gh-pages
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: "20"
+                  cache: "npm"
+
+            - name: Install dependencies
+              run: npm ci
+
+            - name: Build project
+              run: npm run build
+
+            - name: Checkout gh-pages branch
+              uses: actions/checkout@v4
+              with:
+                  token: ${{ secrets.GITHUB_TOKEN }}
+                  ref: gh-pages
+                  fetch-depth: 0
+                  path: gh-pages
+
+            - name: Copy build and Contentful files to gh-pages
               run: |
+                  # Copy build output
+                  cp -r dist/* gh-pages/
+                  # Ensure Contentful directory exists
                   mkdir -p gh-pages/assets/contentful/images
+                  # Copy Contentful JSON files and images
                   cp -r assets/contentful/*.json gh-pages/assets/contentful/ 2>/dev/null || true
                   cp -r assets/contentful/images/* gh-pages/assets/contentful/images/ 2>/dev/null || true
 
@@ -72,11 +96,11 @@ jobs:
                   cd gh-pages
                   git config --local user.email "action@github.com"
                   git config --local user.name "GitHub Action"
-                  git add assets/contentful/
+                  git add .
                   if git diff --staged --quiet; then
                     echo "No changes to commit on gh-pages"
                   else
-                    git commit -m "🔄 Auto-sync Contentful content [skip ci]"
+                    git commit -m "🔄 Auto-sync Contentful content and rebuild [skip ci]"
                     git push origin gh-pages
                   fi
               env:
