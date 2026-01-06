@@ -79,7 +79,12 @@ function replaceUrlsWithBaseUrl(text) {
     // Replace absolute URLs (starting with /) but not // (protocol-relative)
     return text.replace(/href=["'](\/[^"']+)["']/g, (match, path) => {
         // Skip if already has base URL or is external link
-        if (path.startsWith(baseUrl) || path.startsWith("http") || path.startsWith("mailto:")) {
+        if (
+            path.startsWith(baseUrl) ||
+            path.startsWith("//") ||
+            path.startsWith("http") ||
+            path.startsWith("mailto:")
+        ) {
             return match;
         }
         // Add base URL to absolute paths
@@ -116,7 +121,15 @@ function applyTranslations() {
             // Also update href attribute if element is a link and has absolute path
             if (element.tagName === "A" && element.hasAttribute("href")) {
                 const href = element.getAttribute("href");
-                if (href.startsWith("/") && !href.startsWith("//")) {
+                // Skip if already has base URL or is external link
+                if (
+                    href &&
+                    href.startsWith("/") &&
+                    !href.startsWith(baseUrl) &&
+                    !href.startsWith("//") &&
+                    !href.startsWith("http") &&
+                    !href.startsWith("mailto:")
+                ) {
                     // Update href to include base URL
                     const newHref = baseUrl + href.substring(1);
                     element.setAttribute("href", newHref);
@@ -217,6 +230,13 @@ function initLanguageSwitcher() {
 
                 // Update active language option
                 updateActiveLanguageOption();
+
+                // Dispatch custom event for language change
+                window.dispatchEvent(
+                    new CustomEvent("languageChanged", {
+                        detail: { language: currentLanguage }
+                    })
+                );
             } else {
                 console.log("Language already set to", currentLanguage);
             }

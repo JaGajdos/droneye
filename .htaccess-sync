@@ -1,0 +1,19 @@
+# Security: Protect sync endpoint
+# Add this to your .htaccess or create separate .htaccess in root
+
+# Optional: Restrict access to sync endpoint by IP
+# <Files "sync-contentful-web.php">
+#     Order Deny,Allow
+#     Deny from all
+#     Allow from YOUR_SERVER_IP
+#     Allow from YOUR_OFFICE_IP
+# </Files>
+
+# Optional: Require authentication
+# <Files "sync-contentful-web.php">
+#     AuthType Basic
+#     AuthName "Contentful Sync"
+#     AuthUserFile /path/to/.htpasswd
+#     Require valid-user
+# </Files>
+

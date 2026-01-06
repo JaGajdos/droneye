@@ -1,6 +1,7 @@
 // Global variables
 import { initContactForm } from "./contact-form.js";
 import { initInternationalization, getTranslations } from "./i18n.js";
+import { initProjects } from "./projects.js";
 
 // Animation state
 let animationStarted = false;
@@ -13,6 +14,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     initTeamCards();
     initServicesCarousel();
     initContactForm(getTranslations());
+    initProjects(); // Initialize projects page (videos and photos from Contentful)
 
     // Only show loading screen on homepage (CSS handles hiding on subpages)
     const isHomepage =
@@ -36,7 +38,15 @@ function initNavigation() {
     // Fix all links starting with '/' to use base path
     function fixLinkPath(link) {
         const href = link.getAttribute("href");
-        if (href && href.startsWith("/") && !href.startsWith(basePath) && !href.startsWith("//")) {
+        if (!href) return;
+        
+        // Skip if already has base path or is external link
+        if (href.startsWith(basePath) || href.startsWith("//") || href.startsWith("http") || href.startsWith("mailto:")) {
+            return;
+        }
+        
+        // Only fix absolute paths (starting with /)
+        if (href.startsWith("/")) {
             // Remove leading slash and add base path
             const newHref = basePath + href.substring(1);
             link.setAttribute("href", newHref);
