@@ -139,7 +139,23 @@ Skript používa **GraphQL API** a očakáva nasledujúcu štruktúru v Contentf
 
 ## Spustenie na serveri
 
-### 1. Web Endpoint (odporúčané)
+### 1. GitHub Actions (pre GitHub Pages - odporúčané)
+
+Pre projekty hostované na GitHub Pages je najlepšie použiť GitHub Actions pre automatickú synchronizáciu.
+
+**Ako to funguje:**
+- GitHub Actions workflow (`.github/workflows/sync-contentful.yml`) automaticky spúšťa synchronizáciu
+- Môže bežať na plánovanom rozvrhu (napr. každý deň) alebo manuálne
+- Po synchronizácii automaticky commitne a pushne zmeny do repozitára
+
+**Nastavenie:**
+1. Workflow je už vytvorený v `.github/workflows/sync-contentful.yml`
+2. Synchronizácia sa spustí automaticky každý deň o 2:00 UTC
+3. Môžete ju spustiť manuálne cez GitHub Actions tab → "Sync Contentful" → "Run workflow"
+
+**Poznámka:** GitHub Actions má PHP vstavaný, takže nie je potrebné nič inštalovať. Skript použije credentials, ktoré sú už v `sync-contentful.php`.
+
+### 2. Web Endpoint (pre vlastný server)
 
 Vytvorte web endpoint pre spustenie synchronizácie cez HTTP request:
 
