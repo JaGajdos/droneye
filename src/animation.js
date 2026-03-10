@@ -35,12 +35,18 @@ const entranceAnimationDuration = 2.0; // 2 seconds
 const entranceStartX = -30; // Start position from left
 const entranceEndX = 0; // End position (center)
 
-// Color configuration - Royal blue theme from project with detailed parts
+// Color configuration - Realistic drone colors (lighter version, inspired by DJI drones)
 const droneColors = {
-    body: 0x002366, // Royal blue (#002366) - primary color from project - for Body
-    rotors: 0xff6600, // Vibrant orange (very visible and lively) - for Rotors
-    details: 0xffffff // Bright white - for Cube002 and other details
+    body: 0x666666, // Light gray (#D3D3D3) - like DJI Mavic/Phantom body color - for Body (primary)
+    rotors: 0xD3D3D3, // Vibrant orange (very visible and lively) - for Rotors
+    details: 0xD3D3D3 // Off-white (#F5F5F5) - light gray-white for details - for Cube002 and other details
 };
+
+const enableDroneColors = false;
+
+// Drone brightness control (when enableDroneColors is false)
+// Range: 0.0 (darkest) to 2.0 (brightest), default: 1.0 (original brightness)
+const droneBrightness = 1.2;
 
 // Initialize Three.js
 function init() {
@@ -997,11 +1003,20 @@ function loadDroneModel() {
                         let emissiveIntensity;
 
                         if (isBody) {
-                            // Body - main royal blue color
-                            colorToApply = droneColors.body;
-                            emissiveColor = droneColors.body;
+                            // Body - if multiple materials, use different colors for each
+                            // First material gets primary body color, second gets secondary
+                            if (materials.length > 1 && idx === 1) {
+                                // Second material of body gets secondary color
+                                colorToApply = droneColors.bodySecondary;
+                                emissiveColor = droneColors.bodySecondary;
+                                console.log(`Applied body secondary color to ${name} (material ${idx + 1}):`, colorToApply.toString(16));
+                            } else {
+                                // First material or single material gets primary body color
+                                colorToApply = droneColors.body;
+                                emissiveColor = droneColors.body;
+                                console.log(`Applied body primary color to ${name} (material ${idx + 1}):`, colorToApply.toString(16));
+                            }
                             emissiveIntensity = 1.5;
-                            console.log(`Applied body color to ${name}:`, colorToApply.toString(16));
                         } else if (isRotor) {
                             // Rotors - vibrant orange
                             colorToApply = droneColors.rotors;
@@ -1023,6 +1038,68 @@ function loadDroneModel() {
                                 `Applied default body color to ${name || "unnamed"}:`,
                                 colorToApply.toString(16)
                             );
+                        }
+
+                        // Actually apply the colors to the material
+                        if (mat) {
+                            if (enableDroneColors) {
+                                // Create a new MeshStandardMaterial with our colors
+                                const newMaterial = new THREE.MeshStandardMaterial({
+                                    color: colorToApply,
+                                    emissive: isRotor ? emissiveColor : 0x000000,
+                                    emissiveIntensity: isRotor ? 0.5 : 0,
+                                    roughness: 0.6,
+                                    metalness: 0.2
+                                });
+                                
+                                // Replace the material
+                                if (Array.isArray(o.material)) {
+                                    o.material[idx] = newMaterial;
+                                } else {
+                                    o.material = newMaterial;
+                                }
+                                
+                                console.log(`✅ Created new material for ${name}: color=${colorToApply.toString(16)}`);
+                            } else {
+                                // When colors are disabled, adjust brightness of existing materials
+                                if (mat.color) {
+                                    // Get current color
+                                    const currentColor = mat.color.clone();
+                                    
+                                    // Adjust brightness by multiplying RGB values
+                                    // Brightness > 1.0 makes it brighter, < 1.0 makes it darker
+                                    // Allow values above 1.0 for very bright materials
+                                    currentColor.r = Math.min(10.0, currentColor.r * droneBrightness);
+                                    currentColor.g = Math.min(10.0, currentColor.g * droneBrightness);
+                                    currentColor.b = Math.min(10.0, currentColor.b * droneBrightness);
+                                    
+                                    mat.color.copy(currentColor);
+                                    
+                                    // For very bright values (> 1.0), also use emissive to enhance brightness
+                                    if (droneBrightness > 1.0) {
+                                        // Add emissive glow based on brightness
+                                        const emissiveBoost = Math.min(1.0, (droneBrightness - 1.0) * 0.5);
+                                        if (mat.emissive) {
+                                            const emissiveColor = currentColor.clone();
+                                            emissiveColor.multiplyScalar(emissiveBoost);
+                                            mat.emissive.copy(emissiveColor);
+                                            mat.emissiveIntensity = emissiveBoost;
+                                        } else {
+                                            mat.emissive = currentColor.clone().multiplyScalar(emissiveBoost);
+                                            mat.emissiveIntensity = emissiveBoost;
+                                        }
+                                    }
+                                    
+                                    mat.needsUpdate = true;
+                                } else if (droneBrightness > 1.0) {
+                                    // If no color, create emissive for brightness
+                                    const brightColor = new THREE.Color(0xffffff);
+                                    const emissiveBoost = Math.min(1.0, (droneBrightness - 1.0) * 0.3);
+                                    mat.emissive = brightColor;
+                                    mat.emissiveIntensity = emissiveBoost;
+                                    mat.needsUpdate = true;
+                                }
+                            }
                         }
                     });
                 }
