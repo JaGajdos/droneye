@@ -602,7 +602,7 @@
                 constructor() {
                     ((this.assets = {}),
                         (this.ready = new Promise((resolve, reject) => {
-                            fetch(new URL("gamiable/assets.bin", document.baseURI).href)
+                            fetch(new URL("droneye/assets.bin", document.baseURI).href)
                                 .then(res => res.arrayBuffer())
                                 .then(arrayBuffer => {
                                     let loadedCount = 0;

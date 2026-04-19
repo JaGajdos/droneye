@@ -241,7 +241,7 @@ button {
     pointer-events: none; /* Allow clicks to pass through canvas to navbar */
 }
 
-/* index2 Gamiable demo: nav must stay visible over scroll */
+/* index2 3D demo: nav must stay visible over scroll */
 body.navbar-always-visible .navbar {
     transform: translateY(0) !important;
 }
@@ -605,7 +605,7 @@ body.homepage .main-content {
     overflow: hidden;
 }
 
-/* index3 (Gamiable): allow document scroll for section / wheel scene logic */
+/* index3 (3D scene): allow document scroll for section / wheel scene logic */
 body.homepage.homepage-index3 {
     overflow-x: hidden;
     overflow-y: auto;

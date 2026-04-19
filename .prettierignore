@@ -5,6 +5,6 @@ dist
 assets/fontawesome
 package-lock.json
 
-# Gamiable bundle (THREE r128); do not Prettier-format
-public/gamiable/gamiable-inline.js
+# Droneye 3D scene bundle (THREE r128); do not Prettier-format
+public/droneye/droneye-inline.js
 
