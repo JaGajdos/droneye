@@ -97,6 +97,7 @@ export default defineConfig({
             input: {
                 main: "index.html",
                 index2: "index2.html",
+                index3: "index3.html",
                 sluzby: "sluzby.html",
                 projekty: "projekty.html",
                 tim: "tim.html",

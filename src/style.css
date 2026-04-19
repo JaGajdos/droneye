@@ -241,6 +241,27 @@ button {
     pointer-events: none; /* Allow clicks to pass through canvas to navbar */
 }
 
+/* index2 Gamiable demo: nav must stay visible over scroll */
+body.navbar-always-visible .navbar {
+    transform: translateY(0) !important;
+}
+
+body.page-index2 main {
+    padding-top: 70px;
+}
+
+body.page-index2 main .sub-section h2 {
+    color: #fff;
+}
+
+body.page-index2 main .cta-button {
+    margin: 10px;
+}
+
+body.page-index2 .navbar {
+    background: transparent !important;
+}
+
 /* Navigation */
 .navbar {
     position: fixed;
@@ -582,6 +603,20 @@ body.homepage .main-content {
     height: 100vh; /* Full height - hero starts from top */
     margin-top: 0; /* No margin - starts from top */
     overflow: hidden;
+}
+
+/* index3 (Gamiable): allow document scroll for section / wheel scene logic */
+body.homepage.homepage-index3 {
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: auto;
+    min-height: 100vh;
+}
+
+body.homepage.homepage-index3 .main-content {
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
 }
 
 /* White background only for subpages (not homepage) */

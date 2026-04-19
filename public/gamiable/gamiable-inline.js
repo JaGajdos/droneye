@@ -1,0 +1,803 @@
+
+            class Reflector extends THREE.Mesh {
+                constructor(e, t = {}) {
+                    (super(e), (this.type = "Reflector"));
+                    let i = this,
+                        n = t.textureWidth || 512,
+                        s = t.textureHeight || 512,
+                        a = t.clipBias || 0,
+                        r = t.exclusion || null,
+                        o = new THREE.Plane(),
+                        l = new THREE.Vector3(),
+                        u = new THREE.Vector3(),
+                        h = new THREE.Vector3(),
+                        d = new THREE.Matrix4(),
+                        $ = new THREE.Vector3(0, 0, -1),
+                        c = new THREE.Vector4(),
+                        p = new THREE.Vector3(),
+                        f = new THREE.Vector3(),
+                        g = new THREE.Vector4(),
+                        m = new THREE.Matrix4(),
+                        _ = new THREE.PerspectiveCamera(),
+                        v = { minFilter: THREE.LinearFilter, magFilter: THREE.LinearFilter, format: THREE.RGBFormat },
+                        w = new THREE.WebGLRenderTarget(n, s, v);
+                    (THREE.MathUtils.isPowerOfTwo(n) && THREE.MathUtils.isPowerOfTwo(s)) ||
+                        (w.texture.generateMipmaps = !1);
+                    let x = t.material;
+                    ((x.uniforms.reflectionTexture.value = w.texture),
+                        (x.uniforms.reflectionMatrix.value = m),
+                        (this.material = x),
+                        (this.onBeforeRender = function (e, t, n) {
+                            if (
+                                (u.setFromMatrixPosition(i.matrixWorld),
+                                h.setFromMatrixPosition(n.matrixWorld),
+                                d.extractRotation(i.matrixWorld),
+                                l.set(0, 1, 0),
+                                l.applyMatrix4(d),
+                                p.subVectors(u, h),
+                                p.dot(l) > 0)
+                            )
+                                return;
+                            (p.reflect(l).negate(),
+                                p.add(u),
+                                d.extractRotation(n.matrixWorld),
+                                $.set(0, 0, -1),
+                                $.applyMatrix4(d),
+                                $.add(h),
+                                f.subVectors(u, $),
+                                f.reflect(l).negate(),
+                                f.add(u),
+                                _.position.copy(p),
+                                _.up.set(0, 1, 0),
+                                _.up.applyMatrix4(d),
+                                _.up.reflect(l),
+                                _.lookAt(f),
+                                (_.far = n.far),
+                                _.updateMatrixWorld(),
+                                _.projectionMatrix.copy(n.projectionMatrix),
+                                m.set(0.5, 0, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0, 0.5, 0.5, 0, 0, 0, 1),
+                                m.multiply(_.projectionMatrix),
+                                m.multiply(_.matrixWorldInverse),
+                                m.multiply(i.matrixWorld),
+                                o.setFromNormalAndCoplanarPoint(l, u),
+                                o.applyMatrix4(_.matrixWorldInverse),
+                                c.set(o.normal.x, o.normal.y, o.normal.z, o.constant));
+                            let s = _.projectionMatrix;
+                            ((g.x = (Math.sign(c.x) + s.elements[8]) / s.elements[0]),
+                                (g.y = (Math.sign(c.y) + s.elements[9]) / s.elements[5]),
+                                (g.z = -1),
+                                (g.w = (1 + s.elements[10]) / s.elements[14]),
+                                c.multiplyScalar(2 / c.dot(g)),
+                                (s.elements[2] = c.x),
+                                (s.elements[6] = c.y),
+                                (s.elements[10] = c.z + 1 - a),
+                                (s.elements[14] = c.w),
+                                (w.texture.encoding = e.outputEncoding),
+                                (i.visible = !1));
+                            let v = null;
+                            r && ((v = r.visible), (r.visible = !1));
+                            let x = e.getRenderTarget(),
+                                S = e.xr.enabled,
+                                y = e.shadowMap.autoUpdate;
+                            ((e.xr.enabled = !1),
+                                (e.shadowMap.autoUpdate = !1),
+                                e.setRenderTarget(w),
+                                e.state.buffers.depth.setMask(!0),
+                                !1 === e.autoClear && e.clear(),
+                                e.render(t, _),
+                                (e.xr.enabled = S),
+                                (e.shadowMap.autoUpdate = y),
+                                e.setRenderTarget(x));
+                            let M = n.viewport;
+                            (void 0 !== M && e.state.viewport(M), (i.visible = !0), r && (r.visible = v));
+                        }),
+                        (this.getRenderTarget = function () {
+                            return w;
+                        }));
+                }
+            }
+            ((Reflector.prototype.isReflector = !0), (THREE.Reflector = Reflector));
+            const FOG_COLOR = 9091836,
+                MOVE_SPEED = 50;
+            class OceanScene {
+                constructor() {
+                    ((this.group = null),
+                        (this.reflectionExclusion = null),
+                        (this.cloud = null),
+                        (this.ocean = null),
+                        (this.clearColor = new THREE.Color(9091836)));
+                }
+                init(e, t) {
+                    let i = new THREE.Group();
+                    ((i.visible = !1), scene.add(i));
+                    let n = new THREE.Group();
+                    i.add(n);
+                    let s = new THREE.RawShaderMaterial({
+                        vertexShader: assetManager.load("ocean_cloud.vs"),
+                        fragmentShader: assetManager.load("ocean_cloud.fs"),
+                        uniforms: {
+                            fogColor: { value: new THREE.Color(9091836) },
+                            fogNear: { value: FOG_NEAR },
+                            fogFar: { value: FOG_FAR },
+                            cloudTex: { value: null },
+                            vShift1: { value: 0 },
+                            vShift2: { value: 0 }
+                        },
+                        fog: !0,
+                        transparent: !0
+                    });
+                    (assetManager.load("cloud.jpg", function (e) {
+                        s.uniforms.cloudTex.value = e;
+                    }),
+                        (t.material = s),
+                        t.updateMatrix(),
+                        n.add(t),
+                        i.add(t),
+                        (this.cloud = t));
+                    let a = new THREE.RawShaderMaterial({
+                        vertexShader: assetManager.load("ocean.vs"),
+                        fragmentShader: assetManager.load("ocean.fs"),
+                        uniforms: {
+                            fogColor: { value: new THREE.Color(9091836) },
+                            fogNear: { value: FOG_NEAR },
+                            fogFar: { value: FOG_FAR },
+                            time: { value: 0 },
+                            lightDirection: { value: new THREE.Vector3(-1, 3, 1).normalize() },
+                            waterColor: { value: new THREE.Color(4748249) },
+                            foamColor: { value: new THREE.Color(16777215) },
+                            sunColor: { value: new THREE.Color(16772753) },
+                            reflectionTexture: { value: null },
+                            reflectionMatrix: { value: new THREE.Matrix4() },
+                            noiseTex: { value: null }
+                        },
+                        side: THREE.DoubleSide,
+                        fog: !0,
+                        transparent: !0
+                    });
+                    (assetManager.load("ocean.jpg", function (e) {
+                        a.uniforms.noiseTex.value = e;
+                    }),
+                        (this.ocean = new THREE.Reflector(e.geometry, {
+                            clipBias: 0.003,
+                            exclusion: this.reflectionExclusion,
+                            material: a,
+                            textureWidth: window.innerWidth * window.devicePixelRatio * 0.5,
+                            textureHeight: window.innerHeight * window.devicePixelRatio * 0.5
+                        })),
+                        this.ocean.position.set(0, -5, 20),
+                        i.add(this.ocean),
+                        (this.group = i));
+                }
+                animate(e, t) {
+                    if (this.group) {
+                        {
+                            let i = this.cloud.material.uniforms.vShift1.value + 0.05 * e;
+                            (i > 1 && (i -= 1), (this.cloud.material.uniforms.vShift1.value = i));
+                            let n = this.cloud.material.uniforms.vShift2.value + 0.1 * e;
+                            (n > 1 && (n -= 1), (this.cloud.material.uniforms.vShift2.value = n));
+                        }
+                        {
+                            let s = this.ocean.material.uniforms.time.value + ((50 * e) / 1e3) * 160;
+                            (s > 200 && (s -= 200), (this.ocean.material.uniforms.time.value = s));
+                        }
+                    }
+                }
+                enable() {
+                    this.group && (this.group.visible = !0);
+                }
+                disable() {
+                    this.group && (this.group.visible = !1);
+                }
+                containsShip() {
+                    return ship.positionY < 100;
+                }
+            }
+            const starCount = 2e3;
+            class UniverseScene {
+                constructor() {
+                    ((this.stars = null),
+                        (this.nova = null),
+                        (this.group = null),
+                        (this.clearColor = new THREE.Color(0)),
+                        (this.group = new THREE.Group()),
+                        (this.group.visible = !1),
+                        this.group.position.set(0, 800, 0),
+                        scene.add(this.group));
+                    let e = new Float32Array(6e3),
+                        t = new Float32Array(8e3),
+                        i = new Float32Array(2e3),
+                        n = new Float32Array(2e3),
+                        s = new THREE.Vector3();
+                    for (let a = 0; a < 2e3; a++)
+                        (s.set(rndFS(1e3), rndFS(1e3), -rnd(0, FAR)),
+                            s.toArray(e, 3 * a),
+                            (t[4 * a] = rnd(0.5, 1)),
+                            (t[4 * a + 1] = rnd(0.5, 1)),
+                            (t[4 * a + 2] = rnd(0.5, 1)),
+                            (t[4 * a + 3] = rnd(0.2, 1.5)),
+                            (i[a] = 0.2 * rnd(5, 100)),
+                            (n[a] = rnd(40, 400)));
+                    let r = new THREE.BufferGeometry();
+                    (r.setAttribute("position", new THREE.BufferAttribute(e, 3)),
+                        r.setAttribute("size", new THREE.BufferAttribute(i, 1)),
+                        r.setAttribute("speed", new THREE.BufferAttribute(n, 1)),
+                        r.setAttribute("color", new THREE.BufferAttribute(t, 4)));
+                    let o = new THREE.ShaderMaterial({
+                        uniforms: { uTime: { value: 0 }, uTexture: { value: null } },
+                        vertexShader: assetManager.load("starfield.vs"),
+                        fragmentShader: assetManager.load("starfield.fs"),
+                        transparent: !0,
+                        depthWrite: !1
+                    });
+                    assetManager.load("star.png", e => {
+                        o.uniforms.uTexture.value = e;
+                    });
+                    let l = new THREE.Points(r, o);
+                    ((l.renderOrder = 2), this.group.add(l), (this.stars = l));
+                    let u = new THREE.CylinderGeometry(1e3, 100, 600, 128, 1, !0),
+                        h = new THREE.ShaderMaterial({
+                            uniforms: { vShift: { value: 0 }, uTexture: { value: null } },
+                            vertexShader: assetManager.load("nova.vs"),
+                            fragmentShader: assetManager.load("nova.fs"),
+                            depthTest: !1,
+                            depthWrite: !1,
+                            side: THREE.BackSide,
+                            transparent: !0
+                        });
+                    assetManager.load("nova.jpg", e => {
+                        h.uniforms.uTexture.value = e;
+                    });
+                    let d = new THREE.Mesh(u, h);
+                    ((d.position.z = camera.position.z - 700),
+                        (d.rotation.x = Math.PI / 2),
+                        (d.renderOrder = -10),
+                        this.group.add(d),
+                        (this.nova = d));
+                }
+                animate(e, t) {
+                    this.group &&
+                        ((this.stars.material.uniforms.uTime.value = t),
+                        (this.nova.material.uniforms.vShift.value = 0.2 * t));
+                }
+                enable() {
+                    this.group && (this.group.visible = !0);
+                }
+                disable() {
+                    this.group && (this.group.visible = !1);
+                }
+                containsShip() {
+                    return ship.positionY >= this.group.position.y - 500;
+                }
+            }
+            const CLOUD_COUNT = 500,
+                CLOUD_SPEED = 100;
+            class SkyScene {
+                constructor() {
+                    ((this.group = null), (this.clouds = []), (this.clearColor = new THREE.Color(1655940)));
+                    let e = new THREE.Group();
+                    ((e.visible = !1),
+                        e.position.set(0, 200, 0),
+                        scene.add(e),
+                        (this.skyMaterial = new THREE.ShaderMaterial({
+                            uniforms: { uTexture: { value: null }, uColor: { value: new THREE.Color(1655940) } },
+                            vertexShader: assetManager.load("sky_bg.vs"),
+                            fragmentShader: assetManager.load("sky_bg.fs"),
+                            depthTest: !1,
+                            depthWrite: !1
+                        })),
+                        assetManager.load("sky.jpg", e => {
+                            ((e.flipY = !0), (this.skyMaterial.uniforms.uTexture.value = e));
+                        }));
+                    let t = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), this.skyMaterial);
+                    (t.scale.set(1e3, 1e3, 1),
+                        (t.rotation.x = Math.PI / 2),
+                        t.position.set(0, 0, -900),
+                        (t.renderOrder = -100),
+                        e.add(t));
+                    let i = new THREE.ShaderMaterial({
+                        uniforms: { uTexture: { value: null } },
+                        vertexShader: assetManager.load("sky_cloud.vs"),
+                        fragmentShader: assetManager.load("sky_cloud.fs"),
+                        transparent: !0,
+                        depthWrite: !1
+                    });
+                    assetManager.load("cloud.png", e => {
+                        i.uniforms.uTexture.value = e;
+                    });
+                    for (let n = 0; n < 500; n++) {
+                        let s = rnd(100, 175),
+                            a = new THREE.Mesh(new THREE.PlaneGeometry(s, s), i);
+                        (a.position.set(rndFS(1500), rndFS(50) - 100, -rndFS(FAR)),
+                            (a.renderOrder = FAR + a.position.z),
+                            (a.rotation.z = rndFS(2 * Math.PI)),
+                            this.clouds.push(a),
+                            e.add(a));
+                    }
+                    this.group = e;
+                }
+                animate(e, t) {
+                    let i = 100 * e;
+                    this.skyMaterial.uniforms.uColor.value.copy(currentClearColor);
+                    for (let n = 0; n < this.clouds.length; n++)
+                        ((this.clouds[n].position.z += i),
+                            this.clouds[n].position.z > 0 && (this.clouds[n].position.z -= FAR),
+                            (this.clouds[n].renderOrder = FAR + this.clouds[n].position.z));
+                }
+                enable() {
+                    this.group && (this.group.visible = !0);
+                }
+                disable() {
+                    this.group && (this.group.visible = !1);
+                }
+                containsShip() {
+                    let e = ship.positionY,
+                        t = this.group.position.y;
+                    return e >= t - 100 && e < t + 300;
+                }
+            }
+            let nitroMaterial = null;
+            function updateNitro(e) {
+                nitroMaterial.uniforms.uTime.value = e;
+            }
+            class NitroEffect {
+                constructor(e = 20) {
+                    ((this.particleCount = e), (this.geometry = new THREE.BufferGeometry()));
+                    let t = new Float32Array(3 * e),
+                        i = new Float32Array(e),
+                        n = new Float32Array(e),
+                        s = new Float32Array(e),
+                        a = new Float32Array(3 * e);
+                    for (let r = 0; r < e; r++) {
+                        let o = 3 * r;
+                        ((t[o] = rndFS(0.2)),
+                            (t[o + 1] = rndFS(0.2)),
+                            (t[o + 2] = 0),
+                            (i[r] = rnd(50, 70)),
+                            (n[r] = rnd(1, 1.2)),
+                            (s[r] = rnd(2, 2.4)),
+                            (a[o] = rnd(-0.5, 0.5)),
+                            (a[o + 1] = rnd(-0.5, 0.5)),
+                            (a[o + 2] = rnd(-0.5, 0.5)));
+                    }
+                    (this.geometry.setAttribute("position", new THREE.Float32BufferAttribute(t, 3)),
+                        this.geometry.setAttribute("aSize", new THREE.Float32BufferAttribute(i, 1)),
+                        this.geometry.setAttribute("aSpeed", new THREE.Float32BufferAttribute(n, 1)),
+                        this.geometry.setAttribute("aRange", new THREE.Float32BufferAttribute(s, 1)),
+                        this.geometry.setAttribute("color", new THREE.Float32BufferAttribute(a, 3)));
+                    let l = assetManager.load("nitro.vs"),
+                        u = assetManager.load("nitro.fs");
+                    (nitroMaterial ||
+                        (nitroMaterial = new THREE.RawShaderMaterial({
+                            vertexShader: l,
+                            fragmentShader: u,
+                            uniforms: { uTime: { value: 0 } },
+                            blending: THREE.AdditiveBlending,
+                            transparent: !0,
+                            depthWrite: !1
+                        })),
+                        (this.points = new THREE.Points(this.geometry, nitroMaterial)),
+                        (this.points.renderOrder = 1e4));
+                }
+                attachToShip(e) {
+                    e.model.add(this.points);
+                }
+                setPosition(e, t, i) {
+                    this.points.position.set(e, t, i);
+                }
+            }
+            const SHIP_STRAFE_RANGE = 6,
+                SHIP_STRAFE_SPEED_X = 5,
+                SHIP_STRAFE_SPEED_Y = 5,
+                SHIP_STRAFE_SPEED_Z = 1,
+                TOUCH_SENSITIVITY = 0.1;
+            function clampShipX(e) {
+                return Math.max(-6, Math.min(6, e));
+            }
+            class Ship {
+                constructor() {
+                    ((this.positionX = 2e3),
+                        (this.positionY = -3),
+                        (this.positionZ = 20),
+                        (this.targetX = 0),
+                        (this.targetY = -3),
+                        (this.targetZ = -20),
+                        (this.material = null),
+                        (this.nitros = []));
+                }
+                init(e) {
+                    let t = assetManager.load("ship.vs"),
+                        i = assetManager.load("ship.fs"),
+                        n = new THREE.RawShaderMaterial({
+                            vertexShader: t,
+                            fragmentShader: i,
+                            uniforms: {
+                                shipTex: { value: null },
+                                fogColor: { value: new THREE.Color(scene.fog.color) },
+                                fogNear: { value: scene.fog.near },
+                                fogFar: { value: scene.fog.far },
+                                uLightDirection: { value: new THREE.Vector3(-1, -2, -1).normalize() },
+                                uLightColor: { value: new THREE.Color(9474192) },
+                                uAmbientColor: { value: new THREE.Color(11184810) },
+                                uShininess: { value: 32 },
+                                uRimColor: { value: new THREE.Color(43263) },
+                                uRimPower: { value: 2 },
+                                uRimIntensity: { value: 0.7 }
+                            }
+                        });
+                    (assetManager.load("ship.png", function (e) {
+                        ((e.needsUpdate = !0), (n.uniforms.shipTex.value = e));
+                    }),
+                        e.traverse(e => {
+                            e.isMesh && (e.material = n);
+                        }),
+                        e.position.set(this.positionX, this.positionY, this.positionZ),
+                        e.scale.set(1.2, 1.2, 1.2),
+                        (e.renderOrder = 1),
+                        scene.add(e),
+                        (this.material = n),
+                        (this.model = e));
+                    for (let s = 0; s < 2; s++)
+                        (this.nitros.push(new NitroEffect()), this.nitros[s].attachToShip(this));
+                    (this.nitros[0].setPosition(-2.5, 0, 0.8), this.nitros[1].setPosition(2.5, 0, 0.8));
+                }
+                animate(e, t) {
+                    if (!this.model) return;
+                    let i = THREE.MathUtils.lerp(this.positionX, this.targetX, 5 * e),
+                        n = THREE.MathUtils.lerp(this.positionY, this.targetY, 5 * e),
+                        s = THREE.MathUtils.lerp(this.positionZ, this.targetZ, 1 * e),
+                        a = i - this.positionX,
+                        r = n - this.positionY;
+                    ((this.positionX = i),
+                        (this.positionY = n),
+                        (this.positionZ = s),
+                        (this.model.position.x = this.positionX + 0.3 * Math.cos(2 * t)),
+                        (this.model.position.y = this.positionY + 0.2 * Math.sin(t)),
+                        (this.model.position.z = this.positionZ),
+                        (this.model.rotation.x = 0.1 * Math.sin(t) - 0.05 * a),
+                        (this.model.rotation.z = 0.1 * Math.cos(0.8 * t) - 0.3 * r),
+                        updateNitro(t));
+                }
+                setTargetY(e) {
+                    this.targetY = Math.max(-2, e);
+                }
+            }
+            let touchStartX = 0,
+                isTouching = !1;
+            (document.addEventListener("mousemove", e => {
+                ship && !isTouching && (ship.targetX = clampShipX(((e.clientX - window.innerWidth / 2) / 300) * 5));
+            }),
+                document.addEventListener(
+                    "touchstart",
+                    e => {
+                        e.touches.length <= 0 || ((isTouching = !0), (touchStartX = e.touches[0].clientX));
+                    },
+                    { passive: !0 }
+                ),
+                document.addEventListener(
+                    "touchmove",
+                    e => {
+                        if (e.touches.length <= 0 || !isTouching || !ship) return;
+                        let t = e.touches[0].clientX,
+                            i = (t - touchStartX) * 0.1;
+                        ((ship.targetX = clampShipX(ship.targetX + i)), (touchStartX = t));
+                    },
+                    { passive: !1 }
+                ),
+                document.addEventListener("touchend", () => {
+                    isTouching = !1;
+                }));
+            let assets = [
+                { name: "adventure.glb", offset: 0, size: 77236 },
+                { name: "ship.png", offset: 77236, size: 130, width: 8, height: 8 },
+                { name: "cloud.jpg", offset: 77366, size: 22637, wrap: THREE.RepeatWrapping, width: 512, height: 512 },
+                {
+                    name: "ocean.jpg",
+                    offset: 100003,
+                    size: 101768,
+                    wrap: THREE.RepeatWrapping,
+                    width: 1024,
+                    height: 1024
+                },
+                { name: "sky.jpg", offset: 201771, size: 369, width: 32, height: 32 },
+                {
+                    name: "cloud.png",
+                    offset: 202140,
+                    size: 58580,
+                    wrap: THREE.ClampToEdgeWrapping,
+                    width: 256,
+                    height: 256
+                },
+                {
+                    name: "nova.jpg",
+                    offset: 260720,
+                    size: 40589,
+                    wrap: THREE.RepeatWrapping,
+                    width: 1024,
+                    height: 1024
+                },
+                { name: "star.png", offset: 301309, size: 2181, width: 64, height: 64 },
+                { name: "ship.vs", offset: 303490, size: 578 },
+                { name: "ship.fs", offset: 304068, size: 1681 },
+                { name: "nitro.vs", offset: 305749, size: 1054 },
+                { name: "nitro.fs", offset: 306803, size: 500 },
+                { name: "ocean.vs", offset: 307303, size: 617 },
+                { name: "ocean.fs", offset: 307920, size: 2121 },
+                { name: "ocean_cloud.vs", offset: 310041, size: 464 },
+                { name: "ocean_cloud.fs", offset: 310505, size: 443 },
+                { name: "sky_bg.vs", offset: 310948, size: 79 },
+                { name: "sky_bg.fs", offset: 311027, size: 148 },
+                { name: "sky_cloud.vs", offset: 311175, size: 321 },
+                { name: "sky_cloud.fs", offset: 311496, size: 133 },
+                { name: "nova.vs", offset: 311629, size: 282 },
+                { name: "nova.fs", offset: 311911, size: 324 },
+                { name: "starfield.vs", offset: 312235, size: 517 },
+                { name: "starfield.fs", offset: 312752, size: 125 }
+            ];
+            const isOffscreenCanvasSupported = (function () {
+                try {
+                    return "undefined" != typeof OffscreenCanvas && null !== new OffscreenCanvas(1, 1).getContext("2d");
+                } catch (e) {
+                    return !1;
+                }
+            })();
+            async function createTexture(e, t) {
+                try {
+                    let i = await createImageBitmap(e),
+                        n,
+                        s;
+                    (isOffscreenCanvasSupported
+                        ? (s = (n = new OffscreenCanvas(t.width, t.height)).getContext("2d"))
+                        : (((n = document.createElement("canvas")).width = t.width),
+                          (n.height = t.height),
+                          (s = n.getContext("2d")).clearRect(0, 0, t.width, t.height)),
+                        s.drawImage(i, 0, 0, t.width, t.height));
+                    let a = s.getImageData(0, 0, t.width, t.height),
+                        r = "image/jpeg" === t.type ? THREE.RGBFormat : THREE.RGBAFormat,
+                        o = t.wrap || THREE.ClampToEdgeWrapping,
+                        l = t.filter || THREE.LinearFilter,
+                        u = new THREE.DataTexture(
+                            a.data,
+                            a.width,
+                            a.height,
+                            r,
+                            THREE.UnsignedByteType,
+                            THREE.Texture.DEFAULT_MAPPING,
+                            o,
+                            o,
+                            l,
+                            l
+                        );
+                    if (((u.flipY = t.flipY || !1), (u.needsUpdate = !0), i.close(), e.arrayBuffer)) {
+                        let h = await e.arrayBuffer();
+                        new Uint8Array(h).fill(0);
+                    } else {
+                        let d = new FileReader();
+                        await new Promise(t => {
+                            ((d.onloadend = () => {
+                                let e = d.result;
+                                (new Uint8Array(e).fill(0), t());
+                            }),
+                                d.readAsArrayBuffer(e));
+                        });
+                    }
+                    return u;
+                } catch ($) {
+                    throw (console.error("Error creating texture:", $), $);
+                }
+            }
+            class AssetManager {
+                constructor() {
+                    ((this.assets = {}),
+                        (this.ready = new Promise((e, t) => {
+                            fetch(new URL("gamiable/assets.bin", document.baseURI).href)
+                                .then(e => e.arrayBuffer())
+                                .then(t => {
+                                    let i = 0;
+                                    for (let n of assets) {
+                                        let s = t.slice(n.offset, n.offset + n.size);
+                                        if (
+                                            n.name.endsWith(".jpg") ||
+                                            n.name.endsWith(".jpeg") ||
+                                            n.name.endsWith(".png")
+                                        ) {
+                                            let a =
+                                                n.name.endsWith(".jpg") || n.name.endsWith(".jpeg")
+                                                    ? "image/jpeg"
+                                                    : "image/png";
+                                            createTexture(new Blob([s], { type: a }), n).then(t => {
+                                                ((this.assets[n.name] = t), ++i === assets.length && e());
+                                            });
+                                        } else if (n.name.endsWith(".vs") || n.name.endsWith(".fs"))
+                                            ((this.assets[n.name] = new TextDecoder().decode(s)),
+                                                ++i === assets.length && e());
+                                        else if (n.name.endsWith(".glb"))
+                                            new THREE.GLTFLoader().parse(s, "", t => {
+                                                ((this.assets[n.name] = t), ++i === assets.length && e());
+                                            });
+                                        else throw Error("Unsupported asset type: " + n.name);
+                                    }
+                                })
+                                .catch(e => {
+                                    (console.error("Failed to load assets:", e), t(e));
+                                });
+                        })));
+                }
+                waitUntilReady() {
+                    return this.ready;
+                }
+                load(e, t) {
+                    let i = this.assets[e];
+                    if (!i) throw Error("Asset not found: " + e);
+                    return (t && t(i), i);
+                }
+            }
+            let renderer,
+                scene,
+                camera,
+                isWebGL2 = !1,
+                scenes = [],
+                visibleScene = null,
+                nextScene = null,
+                ship = null;
+            const NEAR = 0.1,
+                FAR = 1e3,
+                FOG_NEAR = 100,
+                FOG_FAR = 1e3,
+                clock = new THREE.Clock();
+            let currentClearColor = new THREE.Color(0);
+            const { randFloat: rnd, randFloatSpread: rndFS, clamp: clamp } = THREE.MathUtils;
+            let assetManager = new AssetManager();
+            (initRenderer(),
+                assetManager
+                    .waitUntilReady()
+                    .then(() => {
+                        (console.log("Assets loaded, initializing application..."), initScene());
+                    })
+                    .catch(e => {
+                        (console.error("Failed to load assets:", e),
+                            (document.body.innerHTML = `
+			<div style="color: white; font-family: Arial, sans-serif; text-align: center; margin-top: 100px; padding: 20px;"><h2>Error Loading Assets</h2><p>Failed to load required game assets. Please refresh the page to try again.</p><p>If the problem persists, please check your internet connection.</p></div>
+		`));
+                    }));
+            const canvasWrapper = document.getElementById("canvas-wrapper");
+            function showWelcome() {
+                let e = document.getElementById("section1");
+                e && ((e.style.opacity = 1), (e.style.transition = "opacity 2s ease-in-out"));
+            }
+            function initRenderer() {
+                let e = document.getElementById("webgl"),
+                    t = e.getContext("webgl2");
+                if (!(isWebGL2 = !!t) && !(t = e.getContext("webgl") || e.getContext("experimental-webgl"))) {
+                    showWelcome();
+                    return;
+                }
+                (window.devicePixelRatio,
+                    (e.style.width = "100%"),
+                    (e.style.height = "100%"),
+                    (renderer = new THREE.WebGLRenderer(
+                        isWebGL2
+                            ? {
+                                  canvas: e,
+                                  context: t,
+                                  antialias: !1,
+                                  powerPreference: "low-power",
+                                  alpha: !1,
+                                  stencil: !1,
+                                  depth: !0
+                              }
+                            : {
+                                  canvas: e,
+                                  antialias: !1,
+                                  powerPreference: "low-power",
+                                  alpha: !1,
+                                  stencil: !1,
+                                  depth: !0
+                              }
+                    )).setPixelRatio(Math.min(window.devicePixelRatio, 2)),
+                    updateSize(),
+                    renderer.setClearColor(9091836));
+            }
+            function initScene() {
+                (((scene = new THREE.Scene()).fog = new THREE.Fog(0, FOG_NEAR, FOG_FAR)),
+                    (camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, FAR)));
+                let e = new THREE.AmbientLight(4210752);
+                scene.add(e);
+                let t = new THREE.DirectionalLight(16777215, 1);
+                (t.position.set(-1, 3, 1),
+                    scene.add(t),
+                    scenes.push(new UniverseScene()),
+                    scenes.push(new SkyScene()),
+                    assetManager.load("adventure.glb", e => {
+                        let t, i, n;
+                        (e.scene.traverse(e => {
+                            "ship" === e.name
+                                ? (t = e)
+                                : "ocean" === e.name
+                                  ? e.traverse(e => {
+                                        e.isMesh && (i = e);
+                                    })
+                                  : "cloud1" === e.name &&
+                                    e.traverse(e => {
+                                        e.isMesh && (n = e);
+                                    });
+                        }),
+                            scenes.push(new OceanScene()),
+                            scenes[scenes.length - 1].init(i, n),
+                            (ship = new Ship()).init(t),
+                            updateSize(),
+                            onScrolled(),
+                            (visibleScene = nextScene),
+                            currentClearColor.copy(visibleScene.clearColor),
+                            visibleScene.enable(),
+                            (ship.positionY = visibleScene.group.position.y));
+                    }),
+                    showWelcome(),
+                    animate());
+            }
+            function animate() {
+                let e = clock.getDelta(),
+                    t = clock.getElapsedTime();
+                if (
+                    (requestAnimationFrame(animate),
+                    visibleScene &&
+                        (currentClearColor.lerp(visibleScene.clearColor, 2 * e),
+                        renderer.setClearColor(currentClearColor),
+                        scene.fog.color.set(currentClearColor),
+                        visibleScene.animate(e, t)),
+                    ship)
+                ) {
+                    ship.animate(e, t);
+                    let i = ship.positionY;
+                    ((camera.position.y = i),
+                        visibleScene != nextScene &&
+                            nextScene.containsShip() &&
+                            (visibleScene.disable(), (visibleScene = nextScene).enable()));
+                }
+                renderer.render(scene, camera);
+            }
+            function toggleMobileMenu(e) {
+                e.classList.toggle("open");
+            }
+            function updateSize() {
+                let e = renderer.domElement,
+                    t = e.clientWidth,
+                    i = e.clientHeight,
+                    n = window.devicePixelRatio || 1;
+                (e.width !== t * n || e.height !== i * n) &&
+                    ((e.width = t * n),
+                    (e.height = i * n),
+                    renderer.setSize(t, i, !1),
+                    camera && ((camera.aspect = t / i), camera.updateProjectionMatrix()));
+            }
+            function onScrolled() {
+                let e = ["section1", "section2", "section3"],
+                    t = renderer.domElement.clientHeight,
+                    i = 2,
+                    n = !1;
+                for (let s = 0; s < e.length; s++) {
+                    let a = document.getElementById(e[s]);
+                    if (!a) continue;
+                    n = !0;
+                    let r = a.getBoundingClientRect(),
+                        o = r.top,
+                        l = r.height;
+                    if (o < t && o + l > t) {
+                        i = s;
+                        break;
+                    }
+                }
+                n || (i = 0);
+                if (i < 0 || i >= scenes.length || !scenes[i] || ((nextScene = scenes[i]), !ship)) return;
+                if (!n) return void ship.setTargetY(nextScene.group.position.y);
+                let u = document.getElementById(e[i]);
+                if (!u) return void ship.setTargetY(nextScene.group.position.y);
+                let h = u.getBoundingClientRect(),
+                    d = h.top + h.height - t,
+                    c = nextScene.group.position.y + (20 * d) / t - 2;
+                ship.setTargetY(c);
+            }
+            (window.addEventListener("resize", updateSize),
+                window.addEventListener("scroll", onScrolled),
+                window.addEventListener("wheel", e => {
+                    requestAnimationFrame(onScrolled);
+                }));

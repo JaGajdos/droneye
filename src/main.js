@@ -6,6 +6,10 @@ import { initProjects } from "./projects.js";
 // Animation state
 let animationStarted = false;
 
+function isIndex2DemoPage() {
+    return document.body.classList.contains("page-index2");
+}
+
 // Initialize the application
 document.addEventListener("DOMContentLoaded", async function () {
     await initInternationalization();
@@ -17,10 +21,12 @@ document.addEventListener("DOMContentLoaded", async function () {
     initProjects(); // Initialize projects page (videos and photos from Contentful)
 
     // Only show loading screen on homepage (CSS handles hiding on subpages)
+    const path = window.location.pathname;
     const isHomepage =
-        window.location.pathname === "/" ||
-        window.location.pathname.endsWith("index.html") ||
-        window.location.pathname.endsWith("/");
+        path === "/" ||
+        path.endsWith("index.html") ||
+        path.endsWith("index3.html") ||
+        path.endsWith("/");
     if (isHomepage) {
         hideLoadingScreen();
     }
@@ -116,19 +122,11 @@ function initNavigation() {
         // CSS handles showing/hiding close button and hamburger via :has() selector
         // No need to manually set display here
 
-        // Update navbar background when menu opens/closes
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        if (!isActive) {
-            // Menu opening - set background like when scrolled
-            const currentTheme = document.documentElement.getAttribute("data-theme");
-            if (currentTheme === "dark") {
-                navbar.style.background = "var(--footer-bg)";
-            } else {
-                navbar.style.background = "var(--primary-color)";
-            }
-        } else {
-            // Menu closing - restore background based on scroll position
-            if (scrollTop > 50) {
+        // Update navbar background when menu opens/closes (not on index2 demo)
+        if (!isIndex2DemoPage()) {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (!isActive) {
+                // Menu opening - set background like when scrolled
                 const currentTheme = document.documentElement.getAttribute("data-theme");
                 if (currentTheme === "dark") {
                     navbar.style.background = "var(--footer-bg)";
@@ -136,7 +134,17 @@ function initNavigation() {
                     navbar.style.background = "var(--primary-color)";
                 }
             } else {
-                navbar.style.background = "var(--navbar-bg)";
+                // Menu closing - restore background based on scroll position
+                if (scrollTop > 50) {
+                    const currentTheme = document.documentElement.getAttribute("data-theme");
+                    if (currentTheme === "dark") {
+                        navbar.style.background = "var(--footer-bg)";
+                    } else {
+                        navbar.style.background = "var(--primary-color)";
+                    }
+                } else {
+                    navbar.style.background = "var(--navbar-bg)";
+                }
             }
         }
 
@@ -191,17 +199,18 @@ function initNavigation() {
             hamburger.setAttribute("aria-expanded", "false");
 
             // CSS handles hiding close button via :has() selector when menu is closed
-            // Restore navbar background based on scroll position
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            if (scrollTop > 50) {
-                const currentTheme = document.documentElement.getAttribute("data-theme");
-                if (currentTheme === "dark") {
-                    navbar.style.background = "var(--footer-bg)";
+            if (!isIndex2DemoPage()) {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                if (scrollTop > 50) {
+                    const currentTheme = document.documentElement.getAttribute("data-theme");
+                    if (currentTheme === "dark") {
+                        navbar.style.background = "var(--footer-bg)";
+                    } else {
+                        navbar.style.background = "var(--primary-color)";
+                    }
                 } else {
-                    navbar.style.background = "var(--primary-color)";
+                    navbar.style.background = "var(--navbar-bg)";
                 }
-            } else {
-                navbar.style.background = "var(--navbar-bg)";
             }
 
             hamburger.focus(); // Return focus to hamburger
@@ -303,11 +312,16 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 // CTA Button handler - only on homepage
 document.getElementById("start-animation-btn")?.addEventListener("click", function () {
-    // Check if we're on homepage
+    const path = window.location.pathname;
+    const isIndex3Entry =
+        path.endsWith("index3.html") || document.body.classList.contains("homepage-index3");
+    if (isIndex3Entry) {
+        window.location.href = new URL("index2.html", window.location.href).href;
+        return;
+    }
+
     const isHomepage =
-        window.location.pathname === "/" ||
-        window.location.pathname.endsWith("index.html") ||
-        window.location.pathname.endsWith("/");
+        path === "/" || path.endsWith("index.html") || path.endsWith("/");
 
     if (!isHomepage) {
         return; // Don't work on subpages
@@ -396,8 +410,8 @@ function setTheme(themeName) {
         btn.classList.toggle("active", btnTheme === validTheme);
     });
 
-    // Update navbar background if scrolled
-    if (navbar) {
+    // Update navbar background if scrolled (not on index2 demo)
+    if (navbar && !isIndex2DemoPage()) {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         if (scrollTop > 50) {
             navbar.style.background = "var(--footer-bg)";
@@ -804,6 +818,8 @@ function initNavbarScroll() {
     navbar = document.querySelector(".navbar");
     if (!navbar) return;
 
+    const lockNavVisible = document.body.classList.contains("navbar-always-visible");
+
     let scrollTimeout;
 
     window.addEventListener(
@@ -815,28 +831,27 @@ function initNavbarScroll() {
             // Clear timeout
             clearTimeout(scrollTimeout);
 
-            // Update navbar background based on scroll position
-            // If mobile menu is open, always show background
             const navMenu = document.querySelector(".nav-menu");
             const isMenuOpen = navMenu && navMenu.classList.contains("active");
 
-            if (scrollTop > 50 || isMenuOpen) {
-                // Scrolled down or menu is open - use footer background color
-                const currentTheme = document.documentElement.getAttribute("data-theme");
-                if (currentTheme === "dark") {
-                    // In dark mode, use footer background color when scrolled
-                    navbar.style.background = "var(--footer-bg)";
+            if (!isIndex2DemoPage()) {
+                if (scrollTop > 50 || isMenuOpen) {
+                    const currentTheme = document.documentElement.getAttribute("data-theme");
+                    if (currentTheme === "dark") {
+                        navbar.style.background = "var(--footer-bg)";
+                    } else {
+                        navbar.style.background = "var(--primary-color)";
+                    }
                 } else {
-                    navbar.style.background = "var(--primary-color)";
+                    navbar.style.background = "var(--navbar-bg)";
                 }
-            } else {
-                // At top and menu closed - use navbar-bg variable (transparent for both themes)
-                navbar.style.background = "var(--navbar-bg)";
             }
 
             // Handle navbar visibility based on scroll direction
-            // Don't hide navbar if mobile menu is open
-            if (!isMenuOpen && Math.abs(scrollDelta) > 5) {
+            if (lockNavVisible) {
+                navbar.style.transform = "translateY(0)";
+            } else if (!isMenuOpen && Math.abs(scrollDelta) > 5) {
+                // Don't hide navbar if mobile menu is open
                 // Only react to significant scroll
                 if (scrollDelta > 0 && scrollTop > scrollThreshold) {
                     // Scrolling down and past threshold - hide navbar

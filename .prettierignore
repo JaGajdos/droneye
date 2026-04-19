@@ -5,3 +5,7 @@ dist
 assets/fontawesome
 package-lock.json
 
+# Gamiable: index2 keeps huge inline script; bundle file must stay as-is for THREE r128
+index2.html
+public/gamiable/gamiable-inline.js
+
