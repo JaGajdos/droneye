@@ -39,12 +39,17 @@ function initNavigation() {
     function fixLinkPath(link) {
         const href = link.getAttribute("href");
         if (!href) return;
-        
+
         // Skip if already has base path or is external link
-        if (href.startsWith(basePath) || href.startsWith("//") || href.startsWith("http") || href.startsWith("mailto:")) {
+        if (
+            href.startsWith(basePath) ||
+            href.startsWith("//") ||
+            href.startsWith("http") ||
+            href.startsWith("mailto:")
+        ) {
             return;
         }
-        
+
         // Only fix absolute paths (starting with /)
         if (href.startsWith("/")) {
             // Remove leading slash and add base path
