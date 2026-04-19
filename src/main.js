@@ -25,7 +25,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     const isHomepage =
         path === "/" ||
         path.endsWith("index.html") ||
-        path.endsWith("index3.html") ||
         path.endsWith("/");
     if (isHomepage) {
         hideLoadingScreen();
@@ -313,9 +312,9 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // CTA Button handler - only on homepage
 document.getElementById("start-animation-btn")?.addEventListener("click", function () {
     const path = window.location.pathname;
-    const isIndex3Entry =
-        path.endsWith("index3.html") || document.body.classList.contains("homepage-index3");
-    if (isIndex3Entry) {
+    const isDroneyeSceneHome =
+        document.body.classList.contains("homepage-index3");
+    if (isDroneyeSceneHome) {
         window.location.href = new URL("index2.html", window.location.href).href;
         return;
     }

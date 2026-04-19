@@ -605,7 +605,7 @@ body.homepage .main-content {
     overflow: hidden;
 }
 
-/* index3 (3D scene): allow document scroll for section / wheel scene logic */
+/* Main index (3D scene, body.homepage-index3): allow document scroll for wheel scene logic */
 body.homepage.homepage-index3 {
     overflow-x: hidden;
     overflow-y: auto;
