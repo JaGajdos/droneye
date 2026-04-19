@@ -1,98 +1,109 @@
 
             class Reflector extends THREE.Mesh {
-                constructor(e, t = {}) {
-                    (super(e), (this.type = "Reflector"));
-                    let i = this,
-                        n = t.textureWidth || 512,
-                        s = t.textureHeight || 512,
-                        a = t.clipBias || 0,
-                        r = t.exclusion || null,
-                        o = new THREE.Plane(),
-                        l = new THREE.Vector3(),
-                        u = new THREE.Vector3(),
-                        h = new THREE.Vector3(),
-                        d = new THREE.Matrix4(),
-                        $ = new THREE.Vector3(0, 0, -1),
-                        c = new THREE.Vector4(),
-                        p = new THREE.Vector3(),
-                        f = new THREE.Vector3(),
-                        g = new THREE.Vector4(),
-                        m = new THREE.Matrix4(),
-                        _ = new THREE.PerspectiveCamera(),
-                        v = { minFilter: THREE.LinearFilter, magFilter: THREE.LinearFilter, format: THREE.RGBFormat },
-                        w = new THREE.WebGLRenderTarget(n, s, v);
-                    (THREE.MathUtils.isPowerOfTwo(n) && THREE.MathUtils.isPowerOfTwo(s)) ||
-                        (w.texture.generateMipmaps = !1);
-                    let x = t.material;
-                    ((x.uniforms.reflectionTexture.value = w.texture),
-                        (x.uniforms.reflectionMatrix.value = m),
-                        (this.material = x),
-                        (this.onBeforeRender = function (e, t, n) {
+                constructor(geometry, options = {}) {
+                    (super(geometry), (this.type = "Reflector"));
+                    const reflector = this,
+                        textureWidth = options.textureWidth || 512,
+                        textureHeight = options.textureHeight || 512,
+                        clipBias = options.clipBias || 0,
+                        exclusion = options.exclusion || null,
+                        clipPlane = new THREE.Plane(),
+                        normal = new THREE.Vector3(),
+                        reflectorWorldPos = new THREE.Vector3(),
+                        cameraWorldPos = new THREE.Vector3(),
+                        rotationMatrix = new THREE.Matrix4(),
+                        lookAtPosition = new THREE.Vector3(0, 0, -1),
+                        clipPlaneParams = new THREE.Vector4(),
+                        view = new THREE.Vector3(),
+                        target = new THREE.Vector3(),
+                        q = new THREE.Vector4(),
+                        textureMatrix = new THREE.Matrix4(),
+                        virtualCamera = new THREE.PerspectiveCamera(),
+                        renderTargetParams = {
+                            minFilter: THREE.LinearFilter,
+                            magFilter: THREE.LinearFilter,
+                            format: THREE.RGBFormat
+                        },
+                        renderTarget = new THREE.WebGLRenderTarget(textureWidth, textureHeight, renderTargetParams);
+                    (THREE.MathUtils.isPowerOfTwo(textureWidth) && THREE.MathUtils.isPowerOfTwo(textureHeight)) ||
+                        (renderTarget.texture.generateMipmaps = !1);
+                    const shaderMaterial = options.material;
+                    ((shaderMaterial.uniforms.reflectionTexture.value = renderTarget.texture),
+                        (shaderMaterial.uniforms.reflectionMatrix.value = textureMatrix),
+                        (this.material = shaderMaterial),
+                        (this.onBeforeRender = function (renderRenderer, renderScene, renderCamera) {
                             if (
-                                (u.setFromMatrixPosition(i.matrixWorld),
-                                h.setFromMatrixPosition(n.matrixWorld),
-                                d.extractRotation(i.matrixWorld),
-                                l.set(0, 1, 0),
-                                l.applyMatrix4(d),
-                                p.subVectors(u, h),
-                                p.dot(l) > 0)
+                                (reflectorWorldPos.setFromMatrixPosition(reflector.matrixWorld),
+                                cameraWorldPos.setFromMatrixPosition(renderCamera.matrixWorld),
+                                rotationMatrix.extractRotation(reflector.matrixWorld),
+                                normal.set(0, 1, 0),
+                                normal.applyMatrix4(rotationMatrix),
+                                view.subVectors(reflectorWorldPos, cameraWorldPos),
+                                view.dot(normal) > 0)
                             )
                                 return;
-                            (p.reflect(l).negate(),
-                                p.add(u),
-                                d.extractRotation(n.matrixWorld),
-                                $.set(0, 0, -1),
-                                $.applyMatrix4(d),
-                                $.add(h),
-                                f.subVectors(u, $),
-                                f.reflect(l).negate(),
-                                f.add(u),
-                                _.position.copy(p),
-                                _.up.set(0, 1, 0),
-                                _.up.applyMatrix4(d),
-                                _.up.reflect(l),
-                                _.lookAt(f),
-                                (_.far = n.far),
-                                _.updateMatrixWorld(),
-                                _.projectionMatrix.copy(n.projectionMatrix),
-                                m.set(0.5, 0, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0, 0.5, 0.5, 0, 0, 0, 1),
-                                m.multiply(_.projectionMatrix),
-                                m.multiply(_.matrixWorldInverse),
-                                m.multiply(i.matrixWorld),
-                                o.setFromNormalAndCoplanarPoint(l, u),
-                                o.applyMatrix4(_.matrixWorldInverse),
-                                c.set(o.normal.x, o.normal.y, o.normal.z, o.constant));
-                            let s = _.projectionMatrix;
-                            ((g.x = (Math.sign(c.x) + s.elements[8]) / s.elements[0]),
-                                (g.y = (Math.sign(c.y) + s.elements[9]) / s.elements[5]),
-                                (g.z = -1),
-                                (g.w = (1 + s.elements[10]) / s.elements[14]),
-                                c.multiplyScalar(2 / c.dot(g)),
-                                (s.elements[2] = c.x),
-                                (s.elements[6] = c.y),
-                                (s.elements[10] = c.z + 1 - a),
-                                (s.elements[14] = c.w),
-                                (w.texture.encoding = e.outputEncoding),
-                                (i.visible = !1));
-                            let v = null;
-                            r && ((v = r.visible), (r.visible = !1));
-                            let x = e.getRenderTarget(),
-                                S = e.xr.enabled,
-                                y = e.shadowMap.autoUpdate;
-                            ((e.xr.enabled = !1),
-                                (e.shadowMap.autoUpdate = !1),
-                                e.setRenderTarget(w),
-                                e.state.buffers.depth.setMask(!0),
-                                !1 === e.autoClear && e.clear(),
-                                e.render(t, _),
-                                (e.xr.enabled = S),
-                                (e.shadowMap.autoUpdate = y),
-                                e.setRenderTarget(x));
-                            let M = n.viewport;
-                            (void 0 !== M && e.state.viewport(M), (i.visible = !0), r && (r.visible = v));
+                            (view.reflect(normal).negate(),
+                                view.add(reflectorWorldPos),
+                                rotationMatrix.extractRotation(renderCamera.matrixWorld),
+                                lookAtPosition.set(0, 0, -1),
+                                lookAtPosition.applyMatrix4(rotationMatrix),
+                                lookAtPosition.add(cameraWorldPos),
+                                target.subVectors(reflectorWorldPos, lookAtPosition),
+                                target.reflect(normal).negate(),
+                                target.add(reflectorWorldPos),
+                                virtualCamera.position.copy(view),
+                                virtualCamera.up.set(0, 1, 0),
+                                virtualCamera.up.applyMatrix4(rotationMatrix),
+                                virtualCamera.up.reflect(normal),
+                                virtualCamera.lookAt(target),
+                                (virtualCamera.far = renderCamera.far),
+                                virtualCamera.updateMatrixWorld(),
+                                virtualCamera.projectionMatrix.copy(renderCamera.projectionMatrix),
+                                textureMatrix.set(0.5, 0, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0, 0.5, 0.5, 0, 0, 0, 1),
+                                textureMatrix.multiply(virtualCamera.projectionMatrix),
+                                textureMatrix.multiply(virtualCamera.matrixWorldInverse),
+                                textureMatrix.multiply(reflector.matrixWorld),
+                                clipPlane.setFromNormalAndCoplanarPoint(normal, reflectorWorldPos),
+                                clipPlane.applyMatrix4(virtualCamera.matrixWorldInverse),
+                                clipPlaneParams.set(
+                                    clipPlane.normal.x,
+                                    clipPlane.normal.y,
+                                    clipPlane.normal.z,
+                                    clipPlane.constant
+                                ));
+                            const projMatrix = virtualCamera.projectionMatrix;
+                            ((q.x = (Math.sign(clipPlaneParams.x) + projMatrix.elements[8]) / projMatrix.elements[0]),
+                                (q.y = (Math.sign(clipPlaneParams.y) + projMatrix.elements[9]) / projMatrix.elements[5]),
+                                (q.z = -1),
+                                (q.w = (1 + projMatrix.elements[10]) / projMatrix.elements[14]),
+                                clipPlaneParams.multiplyScalar(2 / clipPlaneParams.dot(q)),
+                                (projMatrix.elements[2] = clipPlaneParams.x),
+                                (projMatrix.elements[6] = clipPlaneParams.y),
+                                (projMatrix.elements[10] = clipPlaneParams.z + 1 - clipBias),
+                                (projMatrix.elements[14] = clipPlaneParams.w),
+                                (renderTarget.texture.encoding = renderRenderer.outputEncoding),
+                                (reflector.visible = !1));
+                            let exclusionVisibleBackup = null;
+                            exclusion && ((exclusionVisibleBackup = exclusion.visible), (exclusion.visible = !1));
+                            const prevTarget = renderRenderer.getRenderTarget(),
+                                prevXr = renderRenderer.xr.enabled,
+                                prevShadowAuto = renderRenderer.shadowMap.autoUpdate;
+                            ((renderRenderer.xr.enabled = !1),
+                                (renderRenderer.shadowMap.autoUpdate = !1),
+                                renderRenderer.setRenderTarget(renderTarget),
+                                renderRenderer.state.buffers.depth.setMask(!0),
+                                !1 === renderRenderer.autoClear && renderRenderer.clear(),
+                                renderRenderer.render(renderScene, virtualCamera),
+                                (renderRenderer.xr.enabled = prevXr),
+                                (renderRenderer.shadowMap.autoUpdate = prevShadowAuto),
+                                renderRenderer.setRenderTarget(prevTarget));
+                            const vp = renderCamera.viewport;
+                            (void 0 !== vp && renderRenderer.state.viewport(vp),
+                                (reflector.visible = !0),
+                                exclusion && (exclusion.visible = exclusionVisibleBackup));
                         }),
                         (this.getRenderTarget = function () {
-                            return w;
+                            return renderTarget;
                         }));
                 }
             }
@@ -107,12 +118,12 @@
                         (this.ocean = null),
                         (this.clearColor = new THREE.Color(9091836)));
                 }
-                init(e, t) {
-                    let i = new THREE.Group();
-                    ((i.visible = !1), scene.add(i));
-                    let n = new THREE.Group();
-                    i.add(n);
-                    let s = new THREE.RawShaderMaterial({
+                init(oceanGeometrySource, cloudObject) {
+                    const root = new THREE.Group();
+                    ((root.visible = !1), scene.add(root));
+                    const cloudHolder = new THREE.Group();
+                    root.add(cloudHolder);
+                    const cloudMaterial = new THREE.RawShaderMaterial({
                         vertexShader: assetManager.load("ocean_cloud.vs"),
                         fragmentShader: assetManager.load("ocean_cloud.fs"),
                         uniforms: {
@@ -126,15 +137,15 @@
                         fog: !0,
                         transparent: !0
                     });
-                    (assetManager.load("cloud.jpg", function (e) {
-                        s.uniforms.cloudTex.value = e;
+                    (assetManager.load("cloud.jpg", function (tex) {
+                        cloudMaterial.uniforms.cloudTex.value = tex;
                     }),
-                        (t.material = s),
-                        t.updateMatrix(),
-                        n.add(t),
-                        i.add(t),
-                        (this.cloud = t));
-                    let a = new THREE.RawShaderMaterial({
+                        (cloudObject.material = cloudMaterial),
+                        cloudObject.updateMatrix(),
+                        cloudHolder.add(cloudObject),
+                        root.add(cloudObject),
+                        (this.cloud = cloudObject));
+                    const waterMaterial = new THREE.RawShaderMaterial({
                         vertexShader: assetManager.load("ocean.vs"),
                         fragmentShader: assetManager.load("ocean.fs"),
                         uniforms: {
@@ -154,31 +165,31 @@
                         fog: !0,
                         transparent: !0
                     });
-                    (assetManager.load("ocean.jpg", function (e) {
-                        a.uniforms.noiseTex.value = e;
+                    (assetManager.load("ocean.jpg", function (tex) {
+                        waterMaterial.uniforms.noiseTex.value = tex;
                     }),
-                        (this.ocean = new THREE.Reflector(e.geometry, {
+                        (this.ocean = new THREE.Reflector(oceanGeometrySource.geometry, {
                             clipBias: 0.003,
                             exclusion: this.reflectionExclusion,
-                            material: a,
+                            material: waterMaterial,
                             textureWidth: window.innerWidth * window.devicePixelRatio * 0.5,
                             textureHeight: window.innerHeight * window.devicePixelRatio * 0.5
                         })),
                         this.ocean.position.set(0, -5, 20),
-                        i.add(this.ocean),
-                        (this.group = i));
+                        root.add(this.ocean),
+                        (this.group = root));
                 }
-                animate(e, t) {
+                animate(delta) {
                     if (this.group) {
                         {
-                            let i = this.cloud.material.uniforms.vShift1.value + 0.05 * e;
-                            (i > 1 && (i -= 1), (this.cloud.material.uniforms.vShift1.value = i));
-                            let n = this.cloud.material.uniforms.vShift2.value + 0.1 * e;
-                            (n > 1 && (n -= 1), (this.cloud.material.uniforms.vShift2.value = n));
+                            let v1 = this.cloud.material.uniforms.vShift1.value + 0.05 * delta;
+                            (v1 > 1 && (v1 -= 1), (this.cloud.material.uniforms.vShift1.value = v1));
+                            let v2 = this.cloud.material.uniforms.vShift2.value + 0.1 * delta;
+                            (v2 > 1 && (v2 -= 1), (this.cloud.material.uniforms.vShift2.value = v2));
                         }
                         {
-                            let s = this.ocean.material.uniforms.time.value + ((50 * e) / 1e3) * 160;
-                            (s > 200 && (s -= 200), (this.ocean.material.uniforms.time.value = s));
+                            let waveTime = this.ocean.material.uniforms.time.value + ((50 * delta) / 1e3) * 160;
+                            (waveTime > 200 && (waveTime -= 200), (this.ocean.material.uniforms.time.value = waveTime));
                         }
                     }
                 }
@@ -203,39 +214,39 @@
                         (this.group.visible = !1),
                         this.group.position.set(0, 800, 0),
                         scene.add(this.group));
-                    let e = new Float32Array(6e3),
-                        t = new Float32Array(8e3),
-                        i = new Float32Array(2e3),
-                        n = new Float32Array(2e3),
-                        s = new THREE.Vector3();
-                    for (let a = 0; a < 2e3; a++)
-                        (s.set(rndFS(1e3), rndFS(1e3), -rnd(0, FAR)),
-                            s.toArray(e, 3 * a),
-                            (t[4 * a] = rnd(0.5, 1)),
-                            (t[4 * a + 1] = rnd(0.5, 1)),
-                            (t[4 * a + 2] = rnd(0.5, 1)),
-                            (t[4 * a + 3] = rnd(0.2, 1.5)),
-                            (i[a] = 0.2 * rnd(5, 100)),
-                            (n[a] = rnd(40, 400)));
-                    let r = new THREE.BufferGeometry();
-                    (r.setAttribute("position", new THREE.BufferAttribute(e, 3)),
-                        r.setAttribute("size", new THREE.BufferAttribute(i, 1)),
-                        r.setAttribute("speed", new THREE.BufferAttribute(n, 1)),
-                        r.setAttribute("color", new THREE.BufferAttribute(t, 4)));
-                    let o = new THREE.ShaderMaterial({
+                    const positions = new Float32Array(6e3),
+                        colors = new Float32Array(8e3),
+                        sizes = new Float32Array(2e3),
+                        speeds = new Float32Array(2e3),
+                        scratch = new THREE.Vector3();
+                    for (let star = 0; star < 2e3; star++)
+                        (scratch.set(rndFS(1e3), rndFS(1e3), -rnd(0, FAR)),
+                            scratch.toArray(positions, 3 * star),
+                            (colors[4 * star] = rnd(0.5, 1)),
+                            (colors[4 * star + 1] = rnd(0.5, 1)),
+                            (colors[4 * star + 2] = rnd(0.5, 1)),
+                            (colors[4 * star + 3] = rnd(0.2, 1.5)),
+                            (sizes[star] = 0.2 * rnd(5, 100)),
+                            (speeds[star] = rnd(40, 400)));
+                    const starGeometry = new THREE.BufferGeometry();
+                    (starGeometry.setAttribute("position", new THREE.BufferAttribute(positions, 3)),
+                        starGeometry.setAttribute("size", new THREE.BufferAttribute(sizes, 1)),
+                        starGeometry.setAttribute("speed", new THREE.BufferAttribute(speeds, 1)),
+                        starGeometry.setAttribute("color", new THREE.BufferAttribute(colors, 4)));
+                    const starMaterial = new THREE.ShaderMaterial({
                         uniforms: { uTime: { value: 0 }, uTexture: { value: null } },
                         vertexShader: assetManager.load("starfield.vs"),
                         fragmentShader: assetManager.load("starfield.fs"),
                         transparent: !0,
                         depthWrite: !1
                     });
-                    assetManager.load("star.png", e => {
-                        o.uniforms.uTexture.value = e;
+                    assetManager.load("star.png", tex => {
+                        starMaterial.uniforms.uTexture.value = tex;
                     });
-                    let l = new THREE.Points(r, o);
-                    ((l.renderOrder = 2), this.group.add(l), (this.stars = l));
-                    let u = new THREE.CylinderGeometry(1e3, 100, 600, 128, 1, !0),
-                        h = new THREE.ShaderMaterial({
+                    const starPoints = new THREE.Points(starGeometry, starMaterial);
+                    ((starPoints.renderOrder = 2), this.group.add(starPoints), (this.stars = starPoints));
+                    const novaGeo = new THREE.CylinderGeometry(1e3, 100, 600, 128, 1, !0),
+                        novaMat = new THREE.ShaderMaterial({
                             uniforms: { vShift: { value: 0 }, uTexture: { value: null } },
                             vertexShader: assetManager.load("nova.vs"),
                             fragmentShader: assetManager.load("nova.fs"),
@@ -244,20 +255,20 @@
                             side: THREE.BackSide,
                             transparent: !0
                         });
-                    assetManager.load("nova.jpg", e => {
-                        h.uniforms.uTexture.value = e;
+                    assetManager.load("nova.jpg", tex => {
+                        novaMat.uniforms.uTexture.value = tex;
                     });
-                    let d = new THREE.Mesh(u, h);
-                    ((d.position.z = camera.position.z - 700),
-                        (d.rotation.x = Math.PI / 2),
-                        (d.renderOrder = -10),
-                        this.group.add(d),
-                        (this.nova = d));
+                    const novaMesh = new THREE.Mesh(novaGeo, novaMat);
+                    ((novaMesh.position.z = camera.position.z - 700),
+                        (novaMesh.rotation.x = Math.PI / 2),
+                        (novaMesh.renderOrder = -10),
+                        this.group.add(novaMesh),
+                        (this.nova = novaMesh));
                 }
-                animate(e, t) {
+                animate(delta, elapsed) {
                     this.group &&
-                        ((this.stars.material.uniforms.uTime.value = t),
-                        (this.nova.material.uniforms.vShift.value = 0.2 * t));
+                        ((this.stars.material.uniforms.uTime.value = elapsed),
+                        (this.nova.material.uniforms.vShift.value = 0.2 * elapsed));
                 }
                 enable() {
                     this.group && (this.group.visible = !0);
@@ -274,10 +285,10 @@
             class SkyScene {
                 constructor() {
                     ((this.group = null), (this.clouds = []), (this.clearColor = new THREE.Color(1655940)));
-                    let e = new THREE.Group();
-                    ((e.visible = !1),
-                        e.position.set(0, 200, 0),
-                        scene.add(e),
+                    const root = new THREE.Group();
+                    ((root.visible = !1),
+                        root.position.set(0, 200, 0),
+                        scene.add(root),
                         (this.skyMaterial = new THREE.ShaderMaterial({
                             uniforms: { uTexture: { value: null }, uColor: { value: new THREE.Color(1655940) } },
                             vertexShader: assetManager.load("sky_bg.vs"),
@@ -285,43 +296,43 @@
                             depthTest: !1,
                             depthWrite: !1
                         })),
-                        assetManager.load("sky.jpg", e => {
-                            ((e.flipY = !0), (this.skyMaterial.uniforms.uTexture.value = e));
+                        assetManager.load("sky.jpg", tex => {
+                            ((tex.flipY = !0), (this.skyMaterial.uniforms.uTexture.value = tex));
                         }));
-                    let t = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), this.skyMaterial);
-                    (t.scale.set(1e3, 1e3, 1),
-                        (t.rotation.x = Math.PI / 2),
-                        t.position.set(0, 0, -900),
-                        (t.renderOrder = -100),
-                        e.add(t));
-                    let i = new THREE.ShaderMaterial({
+                    const skyBackdrop = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), this.skyMaterial);
+                    (skyBackdrop.scale.set(1e3, 1e3, 1),
+                        (skyBackdrop.rotation.x = Math.PI / 2),
+                        skyBackdrop.position.set(0, 0, -900),
+                        (skyBackdrop.renderOrder = -100),
+                        root.add(skyBackdrop));
+                    const cloudBillboardMat = new THREE.ShaderMaterial({
                         uniforms: { uTexture: { value: null } },
                         vertexShader: assetManager.load("sky_cloud.vs"),
                         fragmentShader: assetManager.load("sky_cloud.fs"),
                         transparent: !0,
                         depthWrite: !1
                     });
-                    assetManager.load("cloud.png", e => {
-                        i.uniforms.uTexture.value = e;
+                    assetManager.load("cloud.png", tex => {
+                        cloudBillboardMat.uniforms.uTexture.value = tex;
                     });
-                    for (let n = 0; n < 500; n++) {
-                        let s = rnd(100, 175),
-                            a = new THREE.Mesh(new THREE.PlaneGeometry(s, s), i);
-                        (a.position.set(rndFS(1500), rndFS(50) - 100, -rndFS(FAR)),
-                            (a.renderOrder = FAR + a.position.z),
-                            (a.rotation.z = rndFS(2 * Math.PI)),
-                            this.clouds.push(a),
-                            e.add(a));
+                    for (let cloudIndex = 0; cloudIndex < 500; cloudIndex++) {
+                        const size = rnd(100, 175),
+                            cloudMesh = new THREE.Mesh(new THREE.PlaneGeometry(size, size), cloudBillboardMat);
+                        (cloudMesh.position.set(rndFS(1500), rndFS(50) - 100, -rndFS(FAR)),
+                            (cloudMesh.renderOrder = FAR + cloudMesh.position.z),
+                            (cloudMesh.rotation.z = rndFS(2 * Math.PI)),
+                            this.clouds.push(cloudMesh),
+                            root.add(cloudMesh));
                     }
-                    this.group = e;
+                    this.group = root;
                 }
-                animate(e, t) {
-                    let i = 100 * e;
+                animate(delta) {
+                    const speed = 100 * delta;
                     this.skyMaterial.uniforms.uColor.value.copy(currentClearColor);
-                    for (let n = 0; n < this.clouds.length; n++)
-                        ((this.clouds[n].position.z += i),
-                            this.clouds[n].position.z > 0 && (this.clouds[n].position.z -= FAR),
-                            (this.clouds[n].renderOrder = FAR + this.clouds[n].position.z));
+                    for (let idx = 0; idx < this.clouds.length; idx++)
+                        ((this.clouds[idx].position.z += speed),
+                            this.clouds[idx].position.z > 0 && (this.clouds[idx].position.z -= FAR),
+                            (this.clouds[idx].renderOrder = FAR + this.clouds[idx].position.z));
                 }
                 enable() {
                     this.group && (this.group.visible = !0);
@@ -330,46 +341,46 @@
                     this.group && (this.group.visible = !1);
                 }
                 containsShip() {
-                    let e = ship.positionY,
-                        t = this.group.position.y;
-                    return e >= t - 100 && e < t + 300;
+                    const shipY = ship.positionY,
+                        layerY = this.group.position.y;
+                    return shipY >= layerY - 100 && shipY < layerY + 300;
                 }
             }
             let nitroMaterial = null;
-            function updateNitro(e) {
-                nitroMaterial.uniforms.uTime.value = e;
+            function updateNitro(time) {
+                nitroMaterial.uniforms.uTime.value = time;
             }
             class NitroEffect {
-                constructor(e = 20) {
-                    ((this.particleCount = e), (this.geometry = new THREE.BufferGeometry()));
-                    let t = new Float32Array(3 * e),
-                        i = new Float32Array(e),
-                        n = new Float32Array(e),
-                        s = new Float32Array(e),
-                        a = new Float32Array(3 * e);
-                    for (let r = 0; r < e; r++) {
-                        let o = 3 * r;
-                        ((t[o] = rndFS(0.2)),
-                            (t[o + 1] = rndFS(0.2)),
-                            (t[o + 2] = 0),
-                            (i[r] = rnd(50, 70)),
-                            (n[r] = rnd(1, 1.2)),
-                            (s[r] = rnd(2, 2.4)),
-                            (a[o] = rnd(-0.5, 0.5)),
-                            (a[o + 1] = rnd(-0.5, 0.5)),
-                            (a[o + 2] = rnd(-0.5, 0.5)));
+                constructor(particleCount = 20) {
+                    ((this.particleCount = particleCount), (this.geometry = new THREE.BufferGeometry()));
+                    const positions = new Float32Array(3 * particleCount),
+                        sizes = new Float32Array(particleCount),
+                        speeds = new Float32Array(particleCount),
+                        ranges = new Float32Array(particleCount),
+                        colors = new Float32Array(3 * particleCount);
+                    for (let particleIndex = 0; particleIndex < particleCount; particleIndex++) {
+                        const base = 3 * particleIndex;
+                        ((positions[base] = rndFS(0.2)),
+                            (positions[base + 1] = rndFS(0.2)),
+                            (positions[base + 2] = 0),
+                            (sizes[particleIndex] = rnd(50, 70)),
+                            (speeds[particleIndex] = rnd(1, 1.2)),
+                            (ranges[particleIndex] = rnd(2, 2.4)),
+                            (colors[base] = rnd(-0.5, 0.5)),
+                            (colors[base + 1] = rnd(-0.5, 0.5)),
+                            (colors[base + 2] = rnd(-0.5, 0.5)));
                     }
-                    (this.geometry.setAttribute("position", new THREE.Float32BufferAttribute(t, 3)),
-                        this.geometry.setAttribute("aSize", new THREE.Float32BufferAttribute(i, 1)),
-                        this.geometry.setAttribute("aSpeed", new THREE.Float32BufferAttribute(n, 1)),
-                        this.geometry.setAttribute("aRange", new THREE.Float32BufferAttribute(s, 1)),
-                        this.geometry.setAttribute("color", new THREE.Float32BufferAttribute(a, 3)));
-                    let l = assetManager.load("nitro.vs"),
-                        u = assetManager.load("nitro.fs");
+                    (this.geometry.setAttribute("position", new THREE.Float32BufferAttribute(positions, 3)),
+                        this.geometry.setAttribute("aSize", new THREE.Float32BufferAttribute(sizes, 1)),
+                        this.geometry.setAttribute("aSpeed", new THREE.Float32BufferAttribute(speeds, 1)),
+                        this.geometry.setAttribute("aRange", new THREE.Float32BufferAttribute(ranges, 1)),
+                        this.geometry.setAttribute("color", new THREE.Float32BufferAttribute(colors, 3)));
+                    const vs = assetManager.load("nitro.vs"),
+                        fs = assetManager.load("nitro.fs");
                     (nitroMaterial ||
                         (nitroMaterial = new THREE.RawShaderMaterial({
-                            vertexShader: l,
-                            fragmentShader: u,
+                            vertexShader: vs,
+                            fragmentShader: fs,
                             uniforms: { uTime: { value: 0 } },
                             blending: THREE.AdditiveBlending,
                             transparent: !0,
@@ -378,11 +389,11 @@
                         (this.points = new THREE.Points(this.geometry, nitroMaterial)),
                         (this.points.renderOrder = 1e4));
                 }
-                attachToShip(e) {
-                    e.model.add(this.points);
+                attachToShip(shipInstance) {
+                    shipInstance.model.add(this.points);
                 }
-                setPosition(e, t, i) {
-                    this.points.position.set(e, t, i);
+                setPosition(x, y, z) {
+                    this.points.position.set(x, y, z);
                 }
             }
             const SHIP_STRAFE_RANGE = 6,
@@ -390,8 +401,8 @@
                 SHIP_STRAFE_SPEED_Y = 5,
                 SHIP_STRAFE_SPEED_Z = 1,
                 TOUCH_SENSITIVITY = 0.1;
-            function clampShipX(e) {
-                return Math.max(-6, Math.min(6, e));
+            function clampShipX(x) {
+                return Math.max(-6, Math.min(6, x));
             }
             class Ship {
                 constructor() {
@@ -404,12 +415,12 @@
                         (this.material = null),
                         (this.nitros = []));
                 }
-                init(e) {
-                    let t = assetManager.load("ship.vs"),
-                        i = assetManager.load("ship.fs"),
-                        n = new THREE.RawShaderMaterial({
-                            vertexShader: t,
-                            fragmentShader: i,
+                init(shipRoot) {
+                    const vs = assetManager.load("ship.vs"),
+                        fs = assetManager.load("ship.fs"),
+                        hullMaterial = new THREE.RawShaderMaterial({
+                            vertexShader: vs,
+                            fragmentShader: fs,
                             uniforms: {
                                 shipTex: { value: null },
                                 fogColor: { value: new THREE.Color(scene.fog.color) },
@@ -424,62 +435,65 @@
                                 uRimIntensity: { value: 0.7 }
                             }
                         });
-                    (assetManager.load("ship.png", function (e) {
-                        ((e.needsUpdate = !0), (n.uniforms.shipTex.value = e));
+                    (assetManager.load("ship.png", function (tex) {
+                        ((tex.needsUpdate = !0), (hullMaterial.uniforms.shipTex.value = tex));
                     }),
-                        e.traverse(e => {
-                            e.isMesh && (e.material = n);
+                        shipRoot.traverse(child => {
+                            child.isMesh && (child.material = hullMaterial);
                         }),
-                        e.position.set(this.positionX, this.positionY, this.positionZ),
-                        e.scale.set(1.2, 1.2, 1.2),
-                        (e.renderOrder = 1),
-                        scene.add(e),
-                        (this.material = n),
-                        (this.model = e));
-                    for (let s = 0; s < 2; s++)
-                        (this.nitros.push(new NitroEffect()), this.nitros[s].attachToShip(this));
+                        shipRoot.position.set(this.positionX, this.positionY, this.positionZ),
+                        shipRoot.scale.set(1.2, 1.2, 1.2),
+                        (shipRoot.renderOrder = 1),
+                        scene.add(shipRoot),
+                        (this.material = hullMaterial),
+                        (this.model = shipRoot));
+                    for (let slot = 0; slot < 2; slot++)
+                        (this.nitros.push(new NitroEffect()), this.nitros[slot].attachToShip(this));
                     (this.nitros[0].setPosition(-2.5, 0, 0.8), this.nitros[1].setPosition(2.5, 0, 0.8));
                 }
-                animate(e, t) {
+                animate(delta, elapsed) {
                     if (!this.model) return;
-                    let i = THREE.MathUtils.lerp(this.positionX, this.targetX, 5 * e),
-                        n = THREE.MathUtils.lerp(this.positionY, this.targetY, 5 * e),
-                        s = THREE.MathUtils.lerp(this.positionZ, this.targetZ, 1 * e),
-                        a = i - this.positionX,
-                        r = n - this.positionY;
-                    ((this.positionX = i),
-                        (this.positionY = n),
-                        (this.positionZ = s),
-                        (this.model.position.x = this.positionX + 0.3 * Math.cos(2 * t)),
-                        (this.model.position.y = this.positionY + 0.2 * Math.sin(t)),
+                    const nextX = THREE.MathUtils.lerp(this.positionX, this.targetX, 5 * delta),
+                        nextY = THREE.MathUtils.lerp(this.positionY, this.targetY, 5 * delta),
+                        nextZ = THREE.MathUtils.lerp(this.positionZ, this.targetZ, 1 * delta),
+                        velX = nextX - this.positionX,
+                        velY = nextY - this.positionY;
+                    ((this.positionX = nextX),
+                        (this.positionY = nextY),
+                        (this.positionZ = nextZ),
+                        (this.model.position.x = this.positionX + 0.3 * Math.cos(2 * elapsed)),
+                        (this.model.position.y = this.positionY + 0.2 * Math.sin(elapsed)),
                         (this.model.position.z = this.positionZ),
-                        (this.model.rotation.x = 0.1 * Math.sin(t) - 0.05 * a),
-                        (this.model.rotation.z = 0.1 * Math.cos(0.8 * t) - 0.3 * r),
-                        updateNitro(t));
+                        (this.model.rotation.x = 0.1 * Math.sin(elapsed) - 0.05 * velX),
+                        (this.model.rotation.z = 0.1 * Math.cos(0.8 * elapsed) - 0.3 * velY),
+                        updateNitro(elapsed));
                 }
-                setTargetY(e) {
-                    this.targetY = Math.max(-2, e);
+                setTargetY(y) {
+                    this.targetY = Math.max(-2, y);
                 }
             }
             let touchStartX = 0,
                 isTouching = !1;
-            (document.addEventListener("mousemove", e => {
-                ship && !isTouching && (ship.targetX = clampShipX(((e.clientX - window.innerWidth / 2) / 300) * 5));
+            (document.addEventListener("mousemove", event => {
+                ship &&
+                    !isTouching &&
+                    (ship.targetX = clampShipX(((event.clientX - window.innerWidth / 2) / 300) * 5));
             }),
                 document.addEventListener(
                     "touchstart",
-                    e => {
-                        e.touches.length <= 0 || ((isTouching = !0), (touchStartX = e.touches[0].clientX));
+                    event => {
+                        event.touches.length <= 0 ||
+                            ((isTouching = !0), (touchStartX = event.touches[0].clientX));
                     },
                     { passive: !0 }
                 ),
                 document.addEventListener(
                     "touchmove",
-                    e => {
-                        if (e.touches.length <= 0 || !isTouching || !ship) return;
-                        let t = e.touches[0].clientX,
-                            i = (t - touchStartX) * 0.1;
-                        ((ship.targetX = clampShipX(ship.targetX + i)), (touchStartX = t));
+                    event => {
+                        if (event.touches.length <= 0 || !isTouching || !ship) return;
+                        const touchX = event.touches[0].clientX,
+                            deltaX = (touchX - touchStartX) * 0.1;
+                        ((ship.targetX = clampShipX(ship.targetX + deltaX)), (touchStartX = touchX));
                     },
                     { passive: !1 }
                 ),
@@ -536,99 +550,100 @@
             const isOffscreenCanvasSupported = (function () {
                 try {
                     return "undefined" != typeof OffscreenCanvas && null !== new OffscreenCanvas(1, 1).getContext("2d");
-                } catch (e) {
+                } catch {
                     return !1;
                 }
             })();
-            async function createTexture(e, t) {
+            async function createTexture(blob, meta) {
                 try {
-                    let i = await createImageBitmap(e),
-                        n,
-                        s;
+                    const bitmap = await createImageBitmap(blob);
+                    let canvasEl, ctx2d;
                     (isOffscreenCanvasSupported
-                        ? (s = (n = new OffscreenCanvas(t.width, t.height)).getContext("2d"))
-                        : (((n = document.createElement("canvas")).width = t.width),
-                          (n.height = t.height),
-                          (s = n.getContext("2d")).clearRect(0, 0, t.width, t.height)),
-                        s.drawImage(i, 0, 0, t.width, t.height));
-                    let a = s.getImageData(0, 0, t.width, t.height),
-                        r = "image/jpeg" === t.type ? THREE.RGBFormat : THREE.RGBAFormat,
-                        o = t.wrap || THREE.ClampToEdgeWrapping,
-                        l = t.filter || THREE.LinearFilter,
-                        u = new THREE.DataTexture(
-                            a.data,
-                            a.width,
-                            a.height,
-                            r,
+                        ? (ctx2d = (canvasEl = new OffscreenCanvas(meta.width, meta.height)).getContext("2d"))
+                        : (((canvasEl = document.createElement("canvas")).width = meta.width),
+                          (canvasEl.height = meta.height),
+                          (ctx2d = canvasEl.getContext("2d")).clearRect(0, 0, meta.width, meta.height)),
+                        ctx2d.drawImage(bitmap, 0, 0, meta.width, meta.height));
+                    const imageData = ctx2d.getImageData(0, 0, meta.width, meta.height),
+                        format = "image/jpeg" === meta.type ? THREE.RGBFormat : THREE.RGBAFormat,
+                        wrap = meta.wrap || THREE.ClampToEdgeWrapping,
+                        filter = meta.filter || THREE.LinearFilter,
+                        texture = new THREE.DataTexture(
+                            imageData.data,
+                            imageData.width,
+                            imageData.height,
+                            format,
                             THREE.UnsignedByteType,
                             THREE.Texture.DEFAULT_MAPPING,
-                            o,
-                            o,
-                            l,
-                            l
+                            wrap,
+                            wrap,
+                            filter,
+                            filter
                         );
-                    if (((u.flipY = t.flipY || !1), (u.needsUpdate = !0), i.close(), e.arrayBuffer)) {
-                        let h = await e.arrayBuffer();
-                        new Uint8Array(h).fill(0);
+                    if (((texture.flipY = meta.flipY || !1), (texture.needsUpdate = !0), bitmap.close(), blob.arrayBuffer)) {
+                        const buf = await blob.arrayBuffer();
+                        new Uint8Array(buf).fill(0);
                     } else {
-                        let d = new FileReader();
-                        await new Promise(t => {
-                            ((d.onloadend = () => {
-                                let e = d.result;
-                                (new Uint8Array(e).fill(0), t());
+                        const reader = new FileReader();
+                        await new Promise(resolve => {
+                            ((reader.onloadend = () => {
+                                const result = reader.result;
+                                (new Uint8Array(result).fill(0), resolve());
                             }),
-                                d.readAsArrayBuffer(e));
+                                reader.readAsArrayBuffer(blob));
                         });
                     }
-                    return u;
-                } catch ($) {
-                    throw (console.error("Error creating texture:", $), $);
+                    return texture;
+                } catch (err) {
+                    throw (console.error("Error creating texture:", err), err);
                 }
             }
             class AssetManager {
                 constructor() {
                     ((this.assets = {}),
-                        (this.ready = new Promise((e, t) => {
+                        (this.ready = new Promise((resolve, reject) => {
                             fetch(new URL("gamiable/assets.bin", document.baseURI).href)
-                                .then(e => e.arrayBuffer())
-                                .then(t => {
-                                    let i = 0;
-                                    for (let n of assets) {
-                                        let s = t.slice(n.offset, n.offset + n.size);
+                                .then(res => res.arrayBuffer())
+                                .then(arrayBuffer => {
+                                    let loadedCount = 0;
+                                    for (const assetEntry of assets) {
+                                        const bytes = arrayBuffer.slice(assetEntry.offset, assetEntry.offset + assetEntry.size);
                                         if (
-                                            n.name.endsWith(".jpg") ||
-                                            n.name.endsWith(".jpeg") ||
-                                            n.name.endsWith(".png")
+                                            assetEntry.name.endsWith(".jpg") ||
+                                            assetEntry.name.endsWith(".jpeg") ||
+                                            assetEntry.name.endsWith(".png")
                                         ) {
-                                            let a =
-                                                n.name.endsWith(".jpg") || n.name.endsWith(".jpeg")
+                                            const mimeType =
+                                                assetEntry.name.endsWith(".jpg") || assetEntry.name.endsWith(".jpeg")
                                                     ? "image/jpeg"
                                                     : "image/png";
-                                            createTexture(new Blob([s], { type: a }), n).then(t => {
-                                                ((this.assets[n.name] = t), ++i === assets.length && e());
+                                            createTexture(new Blob([bytes], { type: mimeType }), assetEntry).then(tex => {
+                                                ((this.assets[assetEntry.name] = tex),
+                                                    ++loadedCount === assets.length && resolve());
                                             });
-                                        } else if (n.name.endsWith(".vs") || n.name.endsWith(".fs"))
-                                            ((this.assets[n.name] = new TextDecoder().decode(s)),
-                                                ++i === assets.length && e());
-                                        else if (n.name.endsWith(".glb"))
-                                            new THREE.GLTFLoader().parse(s, "", t => {
-                                                ((this.assets[n.name] = t), ++i === assets.length && e());
+                                        } else if (assetEntry.name.endsWith(".vs") || assetEntry.name.endsWith(".fs"))
+                                            ((this.assets[assetEntry.name] = new TextDecoder().decode(bytes)),
+                                                ++loadedCount === assets.length && resolve());
+                                        else if (assetEntry.name.endsWith(".glb"))
+                                            new THREE.GLTFLoader().parse(bytes, "", parsed => {
+                                                ((this.assets[assetEntry.name] = parsed),
+                                                    ++loadedCount === assets.length && resolve());
                                             });
-                                        else throw Error("Unsupported asset type: " + n.name);
+                                        else throw Error("Unsupported asset type: " + assetEntry.name);
                                     }
                                 })
-                                .catch(e => {
-                                    (console.error("Failed to load assets:", e), t(e));
+                                .catch(err => {
+                                    (console.error("Failed to load assets:", err), reject(err));
                                 });
                         })));
                 }
                 waitUntilReady() {
                     return this.ready;
                 }
-                load(e, t) {
-                    let i = this.assets[e];
-                    if (!i) throw Error("Asset not found: " + e);
-                    return (t && t(i), i);
+                load(assetName, onLoaded) {
+                    const asset = this.assets[assetName];
+                    if (!asset) throw Error("Asset not found: " + assetName);
+                    return (onLoaded && onLoaded(asset), asset);
                 }
             }
             let renderer,
@@ -655,32 +670,34 @@
                     .then(() => {
                         (console.log("Assets loaded, initializing application..."), initScene());
                     })
-                    .catch(e => {
-                        (console.error("Failed to load assets:", e),
+                    .catch(err => {
+                        (console.error("Failed to load assets:", err),
                             (document.body.innerHTML = `
 			<div style="color: white; font-family: Arial, sans-serif; text-align: center; margin-top: 100px; padding: 20px;"><h2>Error Loading Assets</h2><p>Failed to load required game assets. Please refresh the page to try again.</p><p>If the problem persists, please check your internet connection.</p></div>
 		`));
                     }));
             const canvasWrapper = document.getElementById("canvas-wrapper");
             function showWelcome() {
-                let e = document.getElementById("section1");
-                e && ((e.style.opacity = 1), (e.style.transition = "opacity 2s ease-in-out"));
+                const section1 = document.getElementById("section1");
+                section1 &&
+                    ((section1.style.opacity = 1), (section1.style.transition = "opacity 2s ease-in-out"));
             }
             function initRenderer() {
-                let e = document.getElementById("webgl"),
-                    t = e.getContext("webgl2");
-                if (!(isWebGL2 = !!t) && !(t = e.getContext("webgl") || e.getContext("experimental-webgl"))) {
+                const canvas = document.getElementById("webgl"),
+                    gl2 = canvas.getContext("webgl2");
+                let glContext = gl2;
+                if (!(isWebGL2 = !!glContext) && !(glContext = canvas.getContext("webgl") || canvas.getContext("experimental-webgl"))) {
                     showWelcome();
                     return;
                 }
                 (window.devicePixelRatio,
-                    (e.style.width = "100%"),
-                    (e.style.height = "100%"),
+                    (canvas.style.width = "100%"),
+                    (canvas.style.height = "100%"),
                     (renderer = new THREE.WebGLRenderer(
                         isWebGL2
                             ? {
-                                  canvas: e,
-                                  context: t,
+                                  canvas,
+                                  context: glContext,
                                   antialias: !1,
                                   powerPreference: "low-power",
                                   alpha: !1,
@@ -688,7 +705,7 @@
                                   depth: !0
                               }
                             : {
-                                  canvas: e,
+                                  canvas,
                                   antialias: !1,
                                   powerPreference: "low-power",
                                   alpha: !1,
@@ -702,30 +719,32 @@
             function initScene() {
                 (((scene = new THREE.Scene()).fog = new THREE.Fog(0, FOG_NEAR, FOG_FAR)),
                     (camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, FAR)));
-                let e = new THREE.AmbientLight(4210752);
-                scene.add(e);
-                let t = new THREE.DirectionalLight(16777215, 1);
-                (t.position.set(-1, 3, 1),
-                    scene.add(t),
+                const ambientLight = new THREE.AmbientLight(4210752);
+                scene.add(ambientLight);
+                const sunLight = new THREE.DirectionalLight(16777215, 1);
+                (sunLight.position.set(-1, 3, 1),
+                    scene.add(sunLight),
                     scenes.push(new UniverseScene()),
                     scenes.push(new SkyScene()),
-                    assetManager.load("adventure.glb", e => {
-                        let t, i, n;
-                        (e.scene.traverse(e => {
-                            "ship" === e.name
-                                ? (t = e)
-                                : "ocean" === e.name
-                                  ? e.traverse(e => {
-                                        e.isMesh && (i = e);
+                    assetManager.load("adventure.glb", gltf => {
+                        let shipObject,
+                            oceanMesh,
+                            cloudMesh;
+                        (gltf.scene.traverse(obj => {
+                            "ship" === obj.name
+                                ? (shipObject = obj)
+                                : "ocean" === obj.name
+                                  ? obj.traverse(child => {
+                                        child.isMesh && (oceanMesh = child);
                                     })
-                                  : "cloud1" === e.name &&
-                                    e.traverse(e => {
-                                        e.isMesh && (n = e);
+                                  : "cloud1" === obj.name &&
+                                    obj.traverse(child => {
+                                        child.isMesh && (cloudMesh = child);
                                     });
                         }),
                             scenes.push(new OceanScene()),
-                            scenes[scenes.length - 1].init(i, n),
-                            hideDroneOnThisPage ? (ship = null) : (ship = new Ship()).init(t),
+                            scenes[scenes.length - 1].init(oceanMesh, cloudMesh),
+                            hideDroneOnThisPage ? (ship = null) : (ship = new Ship()).init(shipObject),
                             updateSize(),
                             onScrolled(),
                             (visibleScene = nextScene),
@@ -737,20 +756,20 @@
                     animate());
             }
             function animate() {
-                let e = clock.getDelta(),
-                    t = clock.getElapsedTime();
+                const delta = clock.getDelta(),
+                    elapsed = clock.getElapsedTime();
                 if (
                     (requestAnimationFrame(animate),
                     visibleScene &&
-                        (currentClearColor.lerp(visibleScene.clearColor, 2 * e),
+                        (currentClearColor.lerp(visibleScene.clearColor, 2 * delta),
                         renderer.setClearColor(currentClearColor),
                         scene.fog.color.set(currentClearColor),
-                        visibleScene.animate(e, t)),
+                        visibleScene.animate(delta, elapsed)),
                     ship)
                 ) {
-                    ship.animate(e, t);
-                    let i = ship.positionY;
-                    ((camera.position.y = i),
+                    ship.animate(delta, elapsed);
+                    const shipY = ship.positionY;
+                    ((camera.position.y = shipY),
                         visibleScene != nextScene &&
                             nextScene.containsShip() &&
                             (visibleScene.disable(), (visibleScene = nextScene).enable()));
@@ -761,49 +780,55 @@
                 }
                 renderer.render(scene, camera);
             }
-            function toggleMobileMenu(e) {
-                e.classList.toggle("open");
+            function toggleMobileMenu(navElement) {
+                navElement.classList.toggle("open");
             }
             function updateSize() {
-                let e = renderer.domElement,
-                    t = e.clientWidth,
-                    i = e.clientHeight,
-                    n = window.devicePixelRatio || 1;
-                (e.width !== t * n || e.height !== i * n) &&
-                    ((e.width = t * n),
-                    (e.height = i * n),
-                    renderer.setSize(t, i, !1),
-                    camera && ((camera.aspect = t / i), camera.updateProjectionMatrix()));
+                const canvas = renderer.domElement,
+                    width = canvas.clientWidth,
+                    height = canvas.clientHeight,
+                    pixelRatio = window.devicePixelRatio || 1;
+                (canvas.width !== width * pixelRatio || canvas.height !== height * pixelRatio) &&
+                    ((canvas.width = width * pixelRatio),
+                    (canvas.height = height * pixelRatio),
+                    renderer.setSize(width, height, !1),
+                    camera && ((camera.aspect = width / height), camera.updateProjectionMatrix()));
             }
             function onScrolled() {
-                let e = ["section1", "section2", "section3"],
-                    t = renderer.domElement.clientHeight,
-                    i = 2,
-                    n = !1;
-                for (let s = 0; s < e.length; s++) {
-                    let a = document.getElementById(e[s]);
-                    if (!a) continue;
-                    n = !0;
-                    let r = a.getBoundingClientRect(),
-                        o = r.top,
-                        l = r.height;
-                    if (o < t && o + l > t) {
-                        i = s;
+                const sectionIds = ["section1", "section2", "section3"],
+                    viewHeight = renderer.domElement.clientHeight;
+                let activeSceneIndex = 2,
+                    anySectionInDom = !1;
+                for (let idx = 0; idx < sectionIds.length; idx++) {
+                    const sectionEl = document.getElementById(sectionIds[idx]);
+                    if (!sectionEl) continue;
+                    anySectionInDom = !0;
+                    const rect = sectionEl.getBoundingClientRect(),
+                        top = rect.top,
+                        height = rect.height;
+                    if (top < viewHeight && top + height > viewHeight) {
+                        activeSceneIndex = idx;
                         break;
                     }
                 }
-                n || (i = 0);
-                if (i < 0 || i >= scenes.length || !scenes[i] || ((nextScene = scenes[i]), !ship)) return;
-                if (!n) return void ship.setTargetY(nextScene.group.position.y);
-                let u = document.getElementById(e[i]);
-                if (!u) return void ship.setTargetY(nextScene.group.position.y);
-                let h = u.getBoundingClientRect(),
-                    d = h.top + h.height - t,
-                    c = nextScene.group.position.y + (20 * d) / t - 2;
-                ship.setTargetY(c);
+                anySectionInDom || (activeSceneIndex = 0);
+                if (
+                    activeSceneIndex < 0 ||
+                    activeSceneIndex >= scenes.length ||
+                    !scenes[activeSceneIndex] ||
+                    ((nextScene = scenes[activeSceneIndex]), !ship)
+                )
+                    return;
+                if (!anySectionInDom) return void ship.setTargetY(nextScene.group.position.y);
+                const activeSection = document.getElementById(sectionIds[activeSceneIndex]);
+                if (!activeSection) return void ship.setTargetY(nextScene.group.position.y);
+                const activeRect = activeSection.getBoundingClientRect(),
+                    scrollBlend = activeRect.top + activeRect.height - viewHeight,
+                    shipTargetY = nextScene.group.position.y + (20 * scrollBlend) / viewHeight - 2;
+                ship.setTargetY(shipTargetY);
             }
             (window.addEventListener("resize", updateSize),
                 window.addEventListener("scroll", onScrolled),
-                window.addEventListener("wheel", e => {
+                window.addEventListener("wheel", () => {
                     requestAnimationFrame(onScrolled);
                 }));
