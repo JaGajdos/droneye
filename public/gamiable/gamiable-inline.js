@@ -647,6 +647,8 @@
             let currentClearColor = new THREE.Color(0);
             const { randFloat: rnd, randFloatSpread: rndFS, clamp: clamp } = THREE.MathUtils;
             let assetManager = new AssetManager();
+            const hideDroneOnThisPage =
+                document.body && document.body.classList.contains("homepage-index3");
             (initRenderer(),
                 assetManager
                     .waitUntilReady()
@@ -723,13 +725,13 @@
                         }),
                             scenes.push(new OceanScene()),
                             scenes[scenes.length - 1].init(i, n),
-                            (ship = new Ship()).init(t),
+                            hideDroneOnThisPage ? (ship = null) : (ship = new Ship()).init(t),
                             updateSize(),
                             onScrolled(),
                             (visibleScene = nextScene),
                             currentClearColor.copy(visibleScene.clearColor),
                             visibleScene.enable(),
-                            (ship.positionY = visibleScene.group.position.y));
+                            ship && (ship.positionY = visibleScene.group.position.y));
                     }),
                     showWelcome(),
                     animate());
@@ -751,6 +753,10 @@
                     ((camera.position.y = i),
                         visibleScene != nextScene &&
                             nextScene.containsShip() &&
+                            (visibleScene.disable(), (visibleScene = nextScene).enable()));
+                } else if (hideDroneOnThisPage && camera && visibleScene && visibleScene.group) {
+                    ((camera.position.y = visibleScene.group.position.y),
+                        visibleScene != nextScene &&
                             (visibleScene.disable(), (visibleScene = nextScene).enable()));
                 }
                 renderer.render(scene, camera);
