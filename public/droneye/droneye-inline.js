@@ -404,6 +404,46 @@
             function clampShipX(x) {
                 return Math.max(-6, Math.min(6, x));
             }
+            const ROTOR_SPIN_SPEED = 18,
+                EXTERNAL_SHIP_BASE_PITCH = -50;
+            function collectRotorsForSpin(droneRoot) {
+                const rotorNameRegex = /(prop|rotor|fan|blade)/i,
+                    parts = [],
+                    seen = new Set();
+                droneRoot.traverse(o => {
+                    if (!o.isMesh || !rotorNameRegex.test(o.name || "")) return;
+                    const rotorObj =
+                        o.parent && o.parent !== droneRoot && rotorNameRegex.test(o.parent.name || "") ? o.parent : o;
+                    if (seen.has(rotorObj)) return;
+                    seen.add(rotorObj);
+                    if (rotorObj.geometry) {
+                        rotorObj.geometry.computeBoundingBox();
+                        const box = rotorObj.geometry.boundingBox,
+                            center = new THREE.Vector3();
+                        box.getCenter(center);
+                        rotorObj.geometry.translate(-center.x, -center.y, -center.z);
+                        rotorObj.position.add(center);
+                    }
+                    parts.push({ rotor: rotorObj, basePos: rotorObj.position.clone() });
+                });
+                if (parts.length === 0) {
+                    ["Rotor_FL", "Rotor_FR", "Rotor_BL", "Rotor_BR"].forEach(name => {
+                        const obj = droneRoot.getObjectByName(name);
+                        if (!obj || seen.has(obj)) return;
+                        seen.add(obj);
+                        if (obj.geometry) {
+                            obj.geometry.computeBoundingBox();
+                            const box = obj.geometry.boundingBox,
+                                center = new THREE.Vector3();
+                            box.getCenter(center);
+                            obj.geometry.translate(-center.x, -center.y, -center.z);
+                            obj.position.add(center);
+                        }
+                        parts.push({ rotor: obj, basePos: obj.position.clone() });
+                    });
+                }
+                return parts;
+            }
             class Ship {
                 constructor() {
                     ((this.positionX = 2e3),
@@ -413,9 +453,30 @@
                         (this.targetY = -3),
                         (this.targetZ = -20),
                         (this.material = null),
-                        (this.nitros = []));
+                        (this.nitros = []),
+                        (this.rotorSpinParts = []),
+                        (this.basePitchOffset = 0));
                 }
-                init(shipRoot) {
+                init(shipRoot, options) {
+                    if (options && options.useGltfMaterials) {
+                        const box = new THREE.Box3().setFromObject(shipRoot),
+                            size = box.getSize(new THREE.Vector3()),
+                            maxDim = Math.max(size.x, size.y, size.z, 1e-6);
+                        shipRoot.scale.setScalar(9.6 / maxDim);
+                        shipRoot.position.set(this.positionX, this.positionY, this.positionZ);
+                        shipRoot.updateMatrixWorld(!0);
+                        (shipRoot.renderOrder = 1);
+                        scene.add(shipRoot);
+                        ((this.material = null),
+                            (this.model = shipRoot),
+                            (this.basePitchOffset = EXTERNAL_SHIP_BASE_PITCH),
+                            (this.rotorSpinParts = collectRotorsForSpin(shipRoot)));
+                        for (let slot = 0; slot < 2; slot++)
+                            (this.nitros.push(new NitroEffect()), this.nitros[slot].attachToShip(this));
+                        (this.nitros[0].setPosition(-2.5, 0, 0.8), this.nitros[1].setPosition(2.5, 0, 0.8));
+                        return;
+                    }
+                    this.rotorSpinParts = [];
                     const vs = assetManager.load("ship.vs"),
                         fs = assetManager.load("ship.fs"),
                         hullMaterial = new THREE.RawShaderMaterial({
@@ -464,9 +525,18 @@
                         (this.model.position.x = this.positionX + 0.3 * Math.cos(2 * elapsed)),
                         (this.model.position.y = this.positionY + 0.2 * Math.sin(elapsed)),
                         (this.model.position.z = this.positionZ),
-                        (this.model.rotation.x = 0.1 * Math.sin(elapsed) - 0.05 * velX),
+                        (this.model.rotation.x = this.basePitchOffset + 0.1 * Math.sin(elapsed) - 0.05 * velX),
                         (this.model.rotation.z = 0.1 * Math.cos(0.8 * elapsed) - 0.3 * velY),
                         updateNitro(elapsed));
+                    if (this.rotorSpinParts && this.rotorSpinParts.length) {
+                        const spin = ROTOR_SPIN_SPEED * delta;
+                        for (let k = 0; k < this.rotorSpinParts.length; k++) {
+                            const part = this.rotorSpinParts[k];
+                            if (!part || !part.rotor) continue;
+                            part.rotor.rotation.y += spin;
+                            part.basePos && part.rotor.position.copy(part.basePos);
+                        }
+                    }
                 }
                 setTargetY(y) {
                     this.targetY = Math.max(-2, y);
@@ -664,6 +734,9 @@
             let assetManager = new AssetManager();
             const hideDroneOnThisPage =
                 document.body && document.body.classList.contains("homepage-index3");
+            /** Prepínač modelu lode: false = adventure.glb „ship“ + shader; true = súbor z public/ (materiály z GLB). */
+            const USE_EXTERNAL_DRONE_GLB_AS_SHIP = true,
+                EXTERNAL_SHIP_GLB_FILENAME = "Drone.glb";
             (initRenderer(),
                 assetManager
                     .waitUntilReady()
@@ -727,12 +800,12 @@
                     scenes.push(new UniverseScene()),
                     scenes.push(new SkyScene()),
                     assetManager.load("adventure.glb", gltf => {
-                        let shipObject,
+                        let bundleShip,
                             oceanMesh,
                             cloudMesh;
                         (gltf.scene.traverse(obj => {
                             "ship" === obj.name
-                                ? (shipObject = obj)
+                                ? (bundleShip = obj)
                                 : "ocean" === obj.name
                                   ? obj.traverse(child => {
                                         child.isMesh && (oceanMesh = child);
@@ -743,14 +816,32 @@
                                     });
                         }),
                             scenes.push(new OceanScene()),
-                            scenes[scenes.length - 1].init(oceanMesh, cloudMesh),
-                            hideDroneOnThisPage ? (ship = null) : (ship = new Ship()).init(shipObject),
-                            updateSize(),
-                            onScrolled(),
-                            (visibleScene = nextScene),
-                            currentClearColor.copy(visibleScene.clearColor),
-                            visibleScene.enable(),
-                            ship && (ship.positionY = visibleScene.group.position.y));
+                            scenes[scenes.length - 1].init(oceanMesh, cloudMesh));
+                        const finishAfterShip = () => {
+                            (updateSize(),
+                                onScrolled(),
+                                (visibleScene = nextScene),
+                                currentClearColor.copy(visibleScene.clearColor),
+                                visibleScene.enable(),
+                                ship && (ship.positionY = visibleScene.group.position.y));
+                        };
+                        if (hideDroneOnThisPage) ((ship = null), finishAfterShip());
+                        else if (USE_EXTERNAL_DRONE_GLB_AS_SHIP) {
+                            const droneUrl = new URL(EXTERNAL_SHIP_GLB_FILENAME, document.baseURI).href;
+                            new THREE.GLTFLoader().load(
+                                droneUrl,
+                                droneGltf => {
+                                    ((ship = new Ship()).init(droneGltf.scene, { useGltfMaterials: !0 }), finishAfterShip());
+                                },
+                                void 0,
+                                err => {
+                                    (console.warn("External ship GLB failed, using bundled ship:", err),
+                                        bundleShip
+                                            ? ((ship = new Ship()).init(bundleShip, { useGltfMaterials: !1 }), finishAfterShip())
+                                            : ((ship = null), finishAfterShip()));
+                                }
+                            );
+                        } else ((ship = new Ship()).init(bundleShip, { useGltfMaterials: !1 }), finishAfterShip());
                     }),
                     showWelcome(),
                     animate());
