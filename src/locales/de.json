@@ -216,6 +216,7 @@
             }
         },
         "equipment": {
+            "specializationTitle": "Worauf wir uns spezialisieren",
             "title": "Womit wir fliegen",
             "subtitle": "Wir verwenden professionelle Drohnen und Ausrüstung für die besten Ergebnisse",
             "flightTime": "Flugzeit:",

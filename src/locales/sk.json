@@ -216,6 +216,7 @@
             }
         },
         "equipment": {
+            "specializationTitle": "Na čo sa špecializujeme",
             "title": "S čím lietame",
             "subtitle": "Používame profesionálne drony a vybavenie pre najlepšie výsledky",
             "flightTime": "Čas letu:",
