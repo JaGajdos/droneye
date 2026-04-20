@@ -215,6 +215,17 @@
                 "description": "Práve postprodukcia je to, čo z obyčajného videa urobí obsah, ktorý zaujme a zostane v pamäti. Pošlite nám vaše materiály a my im vdýchneme život. Postaráme sa o precízny strih, vyvážené farby, správnu hudbu aj jemné efekty, ktoré podčiarknu atmosféru a príbeh vášho videa."
             }
         },
+        "specialization": {
+            "title": "Naša špecializácia",
+            "realestate": "Nehnuteľnosti",
+            "events": "Eventy",
+            "hospitality": "Hotelierstvo",
+            "cultural": "Kultúrne podujatia",
+            "commercialVideo": "Reklamné videá",
+            "travelVideo": "Cestovateľské videá",
+            "realEstateOffices": "Realitné kancelárie",
+            "agriculture": "Poľnohospodárstvo"
+        },
         "equipment": {
             "title": "S čím lietame",
             "subtitle": "Používame profesionálne drony a vybavenie pre najlepšie výsledky",
