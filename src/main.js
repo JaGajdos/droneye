@@ -315,7 +315,7 @@ document.getElementById("start-animation-btn")?.addEventListener("click", functi
     const isDroneyeSceneHome =
         document.body.classList.contains("homepage-index3");
     if (isDroneyeSceneHome) {
-        window.location.href = new URL("intro.html", window.location.href).href;
+        window.location.href = new URL("intro", window.location.href).href;
         return;
     }
 
