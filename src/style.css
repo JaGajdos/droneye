@@ -752,6 +752,47 @@ body.homepage.homepage-index3 .main-content {
     z-index: 1;
 }
 
+/*
+ * Readability panel on photo backgrounds — wrap .section-title and/or .section-subtitle
+ * inside .content-section-bg-image only; other sections keep plain headings.
+ */
+.content-section-bg-image .section-on-image-panel {
+    background: rgba(255, 255, 255, 0.92);
+    color: var(--text-color);
+    padding: 0.5rem 0.75rem;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.14);
+    border: 1px solid rgba(0, 35, 102, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2rem;
+    text-align: center;
+    box-sizing: border-box;
+    opacity: 0.8;
+}
+
+.content-section-bg-image .section-on-image-panel .section-title {
+    margin-bottom: 0.35rem;
+}
+
+.content-section-bg-image .section-on-image-panel .section-title:last-child {
+    margin-bottom: 0;
+}
+
+.content-section-bg-image .section-on-image-panel .section-subtitle {
+    margin-bottom: 0;
+    opacity: 1;
+    color: var(--text-color);
+}
+
+[data-theme="dark"] .content-section-bg-image .section-on-image-panel {
+    background: rgba(32, 32, 32, 0.88);
+    color: var(--text-color);
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 6px 32px rgba(0, 0, 0, 0.5);
+}
+
 /* Content Section with Background Color/Gradient */
 .content-section-bg-color {
     padding: 3rem 0;
