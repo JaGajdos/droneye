@@ -690,17 +690,73 @@ body.homepage .main-content {
 }
 
 /* Main index (3D scene, body.homepage-index3): allow document scroll for wheel scene logic */
+html:has(body.homepage.homepage-index3) {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* legacy Edge */
+}
+
+html:has(body.homepage.homepage-index3)::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Edge */
+}
+
 body.homepage.homepage-index3 {
     overflow-x: hidden;
     overflow-y: auto;
     height: auto;
     min-height: 100vh;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+body.homepage.homepage-index3::-webkit-scrollbar {
+    display: none;
 }
 
 body.homepage.homepage-index3 .main-content {
     height: auto;
     min-height: 100vh;
     overflow: visible;
+}
+
+/* Landing (pred „Preskúmať“): žiadny scroll, len hero — potom načítanie dronu + intro príbeh na tej istej stránke */
+body.homepage.homepage-index3.homepage-landing-pending {
+    overflow: hidden !important;
+    height: 100vh;
+    max-height: 100vh;
+}
+
+body.homepage.homepage-index3.homepage-landing-pending .main-content {
+    height: 100vh;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+/* Hero až po ukončení animácie (trieda .hidden nastaví JS) */
+body.homepage-intro-flow #landing-hero.hero.hidden {
+    display: none !important;
+}
+
+/* Preskúmať: blok „uletí“ do stredu (mizne do bodu) */
+#landing-hero {
+    transform-origin: center center;
+    transition:
+        opacity 0.7s cubic-bezier(0.45, 0, 0.55, 1),
+        transform 0.7s cubic-bezier(0.55, 0.06, 0.75, 0.35);
+}
+
+#landing-hero.landing-hero--fly-away {
+    opacity: 0;
+    transform: scale(0.08);
+    pointer-events: none;
+}
+
+/* Bez animácie: .hero.hidden bez vertikálneho posunu na landing hero */
+#landing-hero.hero.hidden {
+    transform: none;
+}
+
+.intro-scroll-stage[hidden] {
+    display: none !important;
 }
 
 /* White background only for subpages (not homepage) */

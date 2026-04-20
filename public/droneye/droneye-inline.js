@@ -732,7 +732,7 @@
             let currentClearColor = new THREE.Color(0);
             const { randFloat: rnd, randFloatSpread: rndFS, clamp: clamp } = THREE.MathUtils;
             let assetManager = new AssetManager();
-            const hideDroneOnThisPage =
+            const deferDroneUntilLandingCTA =
                 document.body && document.body.classList.contains("homepage-index3");
             /** Prepínač modelu lode: false = adventure.glb „ship“ + shader; true = súbor z public/ (materiály z GLB). */
             const USE_EXTERNAL_DRONE_GLB_AS_SHIP = true,
@@ -825,23 +825,37 @@
                                 visibleScene.enable(),
                                 ship && (ship.positionY = visibleScene.group.position.y));
                         };
-                        if (hideDroneOnThisPage) ((ship = null), finishAfterShip());
-                        else if (USE_EXTERNAL_DRONE_GLB_AS_SHIP) {
-                            const droneUrl = new URL(EXTERNAL_SHIP_GLB_FILENAME, document.baseURI).href;
-                            new THREE.GLTFLoader().load(
-                                droneUrl,
-                                droneGltf => {
-                                    ((ship = new Ship()).init(droneGltf.scene, { useGltfMaterials: !0 }), finishAfterShip());
-                                },
-                                void 0,
-                                err => {
-                                    (console.warn("External ship GLB failed, using bundled ship:", err),
-                                        bundleShip
-                                            ? ((ship = new Ship()).init(bundleShip, { useGltfMaterials: !1 }), finishAfterShip())
-                                            : ((ship = null), finishAfterShip()));
-                                }
-                            );
-                        } else ((ship = new Ship()).init(bundleShip, { useGltfMaterials: !1 }), finishAfterShip());
+                        function loadDroneShipThen(afterShip) {
+                            if (USE_EXTERNAL_DRONE_GLB_AS_SHIP) {
+                                const droneUrl = new URL(EXTERNAL_SHIP_GLB_FILENAME, document.baseURI).href;
+                                new THREE.GLTFLoader().load(
+                                    droneUrl,
+                                    droneGltf => {
+                                        ((ship = new Ship()).init(droneGltf.scene, { useGltfMaterials: !0 }), afterShip());
+                                    },
+                                    void 0,
+                                    err => {
+                                        (console.warn("External ship GLB failed, using bundled ship:", err),
+                                            bundleShip
+                                                ? ((ship = new Ship()).init(bundleShip, { useGltfMaterials: !1 }), afterShip())
+                                                : ((ship = null), afterShip()));
+                                    }
+                                );
+                            } else ((ship = new Ship()).init(bundleShip, { useGltfMaterials: !1 }), afterShip());
+                        }
+                        if (deferDroneUntilLandingCTA) {
+                            ((ship = null),
+                                finishAfterShip(),
+                                (window.beginLandingIntroFlow = function (onDroneReady) {
+                                    if (ship) return void (onDroneReady && onDroneReady());
+                                    loadDroneShipThen(() => {
+                                        (updateSize(),
+                                            onScrolled(),
+                                            ship && (ship.positionY = visibleScene.group.position.y),
+                                            onDroneReady && onDroneReady());
+                                    });
+                                }));
+                        } else loadDroneShipThen(finishAfterShip);
                     }),
                     showWelcome(),
                     animate());
@@ -864,7 +878,7 @@
                         visibleScene != nextScene &&
                             nextScene.containsShip() &&
                             (visibleScene.disable(), (visibleScene = nextScene).enable()));
-                } else if (hideDroneOnThisPage && camera && visibleScene && visibleScene.group) {
+                } else if (deferDroneUntilLandingCTA && camera && visibleScene && visibleScene.group) {
                     ((camera.position.y = visibleScene.group.position.y),
                         visibleScene != nextScene &&
                             (visibleScene.disable(), (visibleScene = nextScene).enable()));
@@ -888,7 +902,7 @@
             function onScrolled() {
                 const sectionIds = ["section1", "section2", "section3"],
                     viewHeight = renderer.domElement.clientHeight;
-                let activeSceneIndex = 2,
+                let activeSceneIndex = 0,
                     anySectionInDom = !1;
                 for (let idx = 0; idx < sectionIds.length; idx++) {
                     const sectionEl = document.getElementById(sectionIds[idx]);

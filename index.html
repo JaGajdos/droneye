@@ -159,7 +159,7 @@
             })();
         </script>
     </head>
-    <body class="homepage homepage-index3">
+    <body class="homepage homepage-index3 homepage-landing-pending">
         <!-- Navigation -->
         <nav class="navbar">
             <div class="nav-container">
@@ -219,16 +219,60 @@
         <script src="droneye/three.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
 
-        <!-- Hero Section -->
+        <!-- Hero → po „Preskúmať“ pokračuje intro príbeh na tej istej stránke -->
         <main class="main-content">
-            <section class="hero">
+            <section class="hero" id="landing-hero">
                 <h1 class="hero-title" data-i18n="hero.title">Vitajte v Droneye</h1>
                 <p class="hero-subtitle" data-i18n="hero.subtitle">We see what you want to see</p>
                 <div class="hero-buttons">
-                    <button id="start-animation-btn" class="hero-button-primary" data-i18n="hero.cta">Explore</button>
+                    <button id="start-animation-btn" type="button" class="hero-button-primary" data-i18n="hero.cta">
+                        Explore
+                    </button>
                     <a href="/projekty" class="hero-button-secondary" data-i18n="nav.projects">Naše projekty</a>
                 </div>
             </section>
+
+            <div id="intro-scroll-stage" class="intro-scroll-stage" hidden>
+                <div class="section" id="section1" style="text-align: center">
+                    <div class="sub-section">
+                        <h3 style="padding-top: 5vh">
+                            <span class="intro-step-number" aria-hidden="true">1/4</span>
+                            <span data-i18n="animation.text1.title"></span>
+                        </h3>
+                        <p data-i18n="animation.text1.subtitle"></p>
+                    </div>
+                    <div class="sub-section">
+                        <h3 style="padding-top: 10vh">
+                            <span class="intro-step-number" aria-hidden="true">2/4</span>
+                            <span data-i18n="animation.text2.title"></span>
+                        </h3>
+                        <p data-i18n="animation.text2.subtitle"></p>
+                    </div>
+                </div>
+                <div class="section" id="section2">
+                    <div class="sub-section">
+                        <h3 style="padding-top: 10vh">
+                            <span class="intro-step-number" aria-hidden="true">3/4</span>
+                            <span data-i18n="animation.text3.title"></span>
+                        </h3>
+                        <p data-i18n="animation.text3.subtitle"></p>
+                    </div>
+                    <div class="sub-section">
+                        <h3 style="padding-top: 10vh">
+                            <span class="intro-step-number" aria-hidden="true">4/4</span>
+                            <span data-i18n="animation.text4.title"></span>
+                        </h3>
+                        <p data-i18n="animation.text4.subtitle"></p>
+                    </div>
+                </div>
+                <div class="section" id="section3">
+                    <div class="sub-section">
+                        <h3 style="padding-top: 10vh"><span data-i18n="animation.cta.title"></span></h3>
+                        <p data-i18n="animation.cta.subtitle"></p>
+                        <a href="/projekty" class="cta-button" data-i18n="animation.cta.button"></a>
+                    </div>
+                </div>
+            </div>
         </main>
         <script src="droneye/droneye-inline.js"></script>
 

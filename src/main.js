@@ -22,10 +22,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     // Only show loading screen on homepage (CSS handles hiding on subpages)
     const path = window.location.pathname;
-    const isHomepage =
-        path === "/" ||
-        path.endsWith("index.html") ||
-        path.endsWith("/");
+    const isHomepage = path === "/" || path.endsWith("index.html") || path.endsWith("/");
     if (isHomepage) {
         hideLoadingScreen();
     }
@@ -309,51 +306,122 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// CTA Button handler - only on homepage
+// CTA Button handler — homepage 3D: Preskúmať → načíta dron, skryje landing hero, odomkne scroll (intro na index.html)
 document.getElementById("start-animation-btn")?.addEventListener("click", function () {
     const path = window.location.pathname;
-    const isDroneyeSceneHome =
-        document.body.classList.contains("homepage-index3");
+    const isDroneyeSceneHome = document.body.classList.contains("homepage-index3");
+
     if (isDroneyeSceneHome) {
-        window.location.href = new URL("intro", window.location.href).href;
+        if (this.disabled || document.body.classList.contains("homepage-intro-flow")) {
+            return;
+        }
+
+        const hero = document.querySelector("#landing-hero") || document.querySelector(".hero");
+        const introStage = document.getElementById("intro-scroll-stage");
+
+        const unlockScrollAfterDrone = () => {
+            document.body.classList.remove("homepage-landing-pending");
+            document.documentElement.classList.remove("homepage-landing-pending");
+            document.body.style.overflow = "";
+            document.documentElement.style.overflow = "";
+            if (!animationStarted) {
+                animationStarted = true;
+            }
+        };
+        const onDroneReady = () => {
+            unlockScrollAfterDrone();
+        };
+
+        const startIntroUi = () => {
+            document.body.classList.add("homepage-intro-flow", "page-intro", "navbar-always-visible");
+            if (introStage) {
+                introStage.hidden = false;
+            }
+            if (hero) {
+                let heroFlyDone = false;
+                const finalizeHero = () => {
+                    if (heroFlyDone) {
+                        return;
+                    }
+                    heroFlyDone = true;
+                    /* Nemaž landing-hero--fly-away: odstránenie by spustilo spätnú transition (blesk „návratu“). */
+                    hero.classList.add("hidden");
+                    hero.setAttribute("aria-hidden", "true");
+                };
+                const fadeMsRaw = getComputedStyle(hero).transitionDuration;
+                const fadeMs =
+                    Math.max(
+                        ...fadeMsRaw.split(",").map((t) => Number.parseFloat(t) * 1000 || 0)
+                    ) || 500;
+                requestAnimationFrame(() => {
+                    hero.classList.add("landing-hero--fly-away");
+                });
+                const fallbackTimer = window.setTimeout(finalizeHero, fadeMs + 120);
+                hero.addEventListener(
+                    "transitionend",
+                    (ev) => {
+                        if (
+                            ev.target === hero &&
+                            (ev.propertyName === "opacity" || ev.propertyName === "transform")
+                        ) {
+                            window.clearTimeout(fallbackTimer);
+                            finalizeHero();
+                        }
+                    },
+                    { once: true }
+                );
+            }
+        };
+
+        startIntroUi();
+
+        if (typeof window.beginLandingIntroFlow === "function") {
+            window.beginLandingIntroFlow(onDroneReady);
+        } else {
+            let waited = 0;
+            const poll = setInterval(() => {
+                waited += 1;
+                if (typeof window.beginLandingIntroFlow === "function") {
+                    clearInterval(poll);
+                    window.beginLandingIntroFlow(onDroneReady);
+                } else if (waited > 200) {
+                    clearInterval(poll);
+                    unlockScrollAfterDrone();
+                }
+            }, 50);
+        }
+
+        this.disabled = true;
         return;
     }
 
-    const isHomepage =
-        path === "/" || path.endsWith("index.html") || path.endsWith("/");
+    const isHomepage = path === "/" || path.endsWith("index.html") || path.endsWith("/");
 
     if (!isHomepage) {
-        return; // Don't work on subpages
+        return;
     }
 
-    // Hide hero section immediately
     const hero = document.querySelector(".hero");
     if (hero) {
         hero.classList.add("hidden");
     }
 
-    // Show text container (canvas is already visible from start)
     const textContainer = document.getElementById("text-container");
     if (textContainer) {
         textContainer.classList.add("show");
     }
 
-    // Enable scroll on body
     document.body.style.overflow = "";
     document.documentElement.style.overflow = "";
 
-    // Start animation and enable scroll
     if (!animationStarted) {
         animationStarted = true;
-        console.log("Animation started and scroll enabled!");
     }
 
-    // Start drone entrance animation
     if (window.startDroneEntrance) {
         window.startDroneEntrance();
     }
 
-    // Keep button text as "Explore" and disable it
     this.disabled = true;
 });
 
