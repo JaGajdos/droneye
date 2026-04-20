@@ -96,7 +96,7 @@ export default defineConfig({
         rollupOptions: {
             input: {
                 main: "index.html",
-                index2: "index2.html",
+                intro: "intro.html",
                 sluzby: "sluzby.html",
                 projekty: "projekty.html",
                 tim: "tim.html",

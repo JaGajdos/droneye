@@ -6,8 +6,8 @@ import { initProjects } from "./projects.js";
 // Animation state
 let animationStarted = false;
 
-function isIndex2DemoPage() {
-    return document.body.classList.contains("page-index2");
+function isIntroDemoPage() {
+    return document.body.classList.contains("page-intro");
 }
 
 // Initialize the application
@@ -121,8 +121,8 @@ function initNavigation() {
         // CSS handles showing/hiding close button and hamburger via :has() selector
         // No need to manually set display here
 
-        // Update navbar background when menu opens/closes (not on index2 demo)
-        if (!isIndex2DemoPage()) {
+        // Update navbar background when menu opens/closes (not on intro demo)
+        if (!isIntroDemoPage()) {
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             if (!isActive) {
                 // Menu opening - set background like when scrolled
@@ -198,7 +198,7 @@ function initNavigation() {
             hamburger.setAttribute("aria-expanded", "false");
 
             // CSS handles hiding close button via :has() selector when menu is closed
-            if (!isIndex2DemoPage()) {
+            if (!isIntroDemoPage()) {
                 const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
                 if (scrollTop > 50) {
                     const currentTheme = document.documentElement.getAttribute("data-theme");
@@ -315,7 +315,7 @@ document.getElementById("start-animation-btn")?.addEventListener("click", functi
     const isDroneyeSceneHome =
         document.body.classList.contains("homepage-index3");
     if (isDroneyeSceneHome) {
-        window.location.href = new URL("index2.html", window.location.href).href;
+        window.location.href = new URL("intro.html", window.location.href).href;
         return;
     }
 
@@ -409,8 +409,8 @@ function setTheme(themeName) {
         btn.classList.toggle("active", btnTheme === validTheme);
     });
 
-    // Update navbar background if scrolled (not on index2 demo)
-    if (navbar && !isIndex2DemoPage()) {
+    // Update navbar background if scrolled (not on intro demo)
+    if (navbar && !isIntroDemoPage()) {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         if (scrollTop > 50) {
             navbar.style.background = "var(--footer-bg)";
@@ -833,7 +833,7 @@ function initNavbarScroll() {
             const navMenu = document.querySelector(".nav-menu");
             const isMenuOpen = navMenu && navMenu.classList.contains("active");
 
-            if (!isIndex2DemoPage()) {
+            if (!isIntroDemoPage()) {
                 if (scrollTop > 50 || isMenuOpen) {
                     const currentTheme = document.documentElement.getAttribute("data-theme");
                     if (currentTheme === "dark") {

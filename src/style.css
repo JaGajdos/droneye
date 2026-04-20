@@ -245,25 +245,25 @@ button {
     pointer-events: none; /* Allow clicks to pass through canvas to navbar */
 }
 
-/* index2 3D demo: nav must stay visible over scroll */
+/* intro 3D demo: nav must stay visible over scroll */
 body.navbar-always-visible .navbar {
     transform: translateY(0) !important;
 }
 
-body.page-index2 main {
+body.page-intro main {
     padding-top: 70px;
 }
 
-body.page-index2 main .sub-section h3,
-body.page-index2 main .sub-section p {
+body.page-intro main .sub-section h3,
+body.page-intro main .sub-section p {
     color: #fff;
 }
 
-body.page-index2 main .cta-button {
+body.page-intro main .cta-button {
     margin: 10px;
 }
 
-body.page-index2 .navbar {
+body.page-intro .navbar {
     background: transparent !important;
 }
 
