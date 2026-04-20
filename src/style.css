@@ -704,7 +704,7 @@ body.homepage.homepage-index3 .main-content {
 /* Content Sections with different backgrounds */
 /* Base Content Section - No Background */
 .content-section {
-    padding: 3rem 0;
+    padding: 3rem 0 5rem 0;
     position: relative;
     overflow: hidden;
 }
@@ -726,7 +726,7 @@ body.homepage.homepage-index3 .main-content {
 
 /* Content Section with Background Image */
 .content-section-bg-image {
-    padding: 3rem 0;
+    padding: 3rem 0 5rem 0;
     position: relative;
     overflow: hidden;
     background-attachment: fixed;
@@ -769,7 +769,7 @@ body.homepage.homepage-index3 .main-content {
     margin-bottom: 2rem;
     text-align: center;
     box-sizing: border-box;
-    opacity: 0.8;
+    opacity: 0.9;
 }
 
 .content-section-bg-image .section-on-image-panel .section-title {
@@ -791,6 +791,72 @@ body.homepage.homepage-index3 .main-content {
     color: var(--text-color);
     border-color: rgba(255, 255, 255, 0.12);
     box-shadow: 0 6px 32px rgba(0, 0, 0, 0.5);
+}
+
+/* „Naša špecializácia“ — dlaždice (ikony sa doplnia do .specialization-tile-icon) */
+.specialization-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem 1.25rem;
+    max-width: 920px;
+    margin: 0 auto;
+    list-style: none;
+    padding: 0;
+}
+
+.specialization-tile {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    min-height: 3.75rem;
+    padding: 0.85rem 1.1rem;
+    background: var(--card-background);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    box-shadow: 0 4px 15px var(--shadow-color);
+    color: var(--text-color);
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.specialization-tile:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 22px var(--shadow-hover);
+}
+
+.specialization-tile-icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: var(--primary-color);
+    box-sizing: border-box;
+}
+
+.specialization-tile-icon img {
+    display: block;
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+}
+
+.specialization-tile-label {
+    font-size: var(--font-size-body);
+    font-weight: 600;
+    line-height: 1.35;
+    text-align: left;
+}
+
+@media (max-width: 600px) {
+    .specialization-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* Content Section with Background Color/Gradient */

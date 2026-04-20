@@ -215,8 +215,18 @@
                 "description": "Post-production is what turns ordinary video into content that engages and stays in memory. Send us your materials and we'll bring them to life. We'll take care of precise editing, balanced colors, the right music and subtle effects that underline the atmosphere and story of your video."
             }
         },
+        "specialization": {
+            "title": "Our specialization",
+            "realestate": "Real estate",
+            "events": "Events",
+            "hospitality": "Hospitality",
+            "cultural": "Cultural events",
+            "commercialVideo": "Advertising videos",
+            "travelVideo": "Travel videos",
+            "realEstateOffices": "Real estate agencies",
+            "agriculture": "Agriculture"
+        },
         "equipment": {
-            "specializationTitle": "What we specialize in",
             "title": "What We Fly With",
             "subtitle": "We use professional drones and equipment for the best results",
             "flightTime": "Flight Time:",

@@ -215,8 +215,18 @@
                 "description": "Postproduktion ist es, was aus gewöhnlichem Video Inhalte macht, die fesseln und im Gedächtnis bleiben. Senden Sie uns Ihre Materialien und wir hauchen ihnen Leben ein. Wir kümmern uns um präzisen Schnitt, ausgewogene Farben, die richtige Musik und subtile Effekte, die die Atmosphäre und Geschichte Ihres Videos unterstreichen."
             }
         },
+        "specialization": {
+            "title": "Unsere Spezialisierung",
+            "realestate": "Immobilien",
+            "events": "Events",
+            "hospitality": "Hotellerie",
+            "cultural": "Kulturveranstaltungen",
+            "commercialVideo": "Werbefilme",
+            "travelVideo": "Reisevideos",
+            "realEstateOffices": "Immobilienbüros",
+            "agriculture": "Landwirtschaft"
+        },
         "equipment": {
-            "specializationTitle": "Worauf wir uns spezialisieren",
             "title": "Womit wir fliegen",
             "subtitle": "Wir verwenden professionelle Drohnen und Ausrüstung für die besten Ergebnisse",
             "flightTime": "Flugzeit:",
