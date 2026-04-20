@@ -337,6 +337,7 @@ document.getElementById("start-animation-btn")?.addEventListener("click", functi
             if (introStage) {
                 introStage.hidden = false;
             }
+            const enableTransition = false;
             if (hero) {
                 let heroFlyDone = false;
                 const finalizeHero = () => {
@@ -348,28 +349,30 @@ document.getElementById("start-animation-btn")?.addEventListener("click", functi
                     hero.classList.add("hidden");
                     hero.setAttribute("aria-hidden", "true");
                 };
-                const fadeMsRaw = getComputedStyle(hero).transitionDuration;
-                const fadeMs =
-                    Math.max(
-                        ...fadeMsRaw.split(",").map((t) => Number.parseFloat(t) * 1000 || 0)
-                    ) || 500;
-                requestAnimationFrame(() => {
-                    hero.classList.add("landing-hero--fly-away");
-                });
-                const fallbackTimer = window.setTimeout(finalizeHero, fadeMs + 120);
-                hero.addEventListener(
-                    "transitionend",
-                    (ev) => {
-                        if (
-                            ev.target === hero &&
-                            (ev.propertyName === "opacity" || ev.propertyName === "transform")
-                        ) {
-                            window.clearTimeout(fallbackTimer);
-                            finalizeHero();
-                        }
-                    },
-                    { once: true }
-                );
+
+                if (enableTransition) {
+                    const fadeMsRaw = getComputedStyle(hero).transitionDuration;
+                    const fadeMs = Math.max(...fadeMsRaw.split(",").map(t => Number.parseFloat(t) * 1000 || 0)) || 500;
+                    requestAnimationFrame(() => {
+                        hero.classList.add("landing-hero--fly-away");
+                    });
+                    const fallbackTimer = window.setTimeout(finalizeHero, fadeMs + 120);
+                    hero.addEventListener(
+                        "transitionend",
+                        ev => {
+                            if (
+                                ev.target === hero &&
+                                (ev.propertyName === "opacity" || ev.propertyName === "transform")
+                            ) {
+                                window.clearTimeout(fallbackTimer);
+                                finalizeHero();
+                            }
+                        },
+                        { once: true }
+                    );
+                } else {
+                    finalizeHero();
+                }
             }
         };
 
