@@ -106,6 +106,10 @@ body {
         color 0.3s ease;
 }
 
+h3 {
+    font-size: 1.5em;
+}
+
 /* Ensure buttons inherit the font family */
 button {
     font-family: "Montserrat", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -250,7 +254,7 @@ body.page-index2 main {
     padding-top: 70px;
 }
 
-body.page-index2 main .sub-section h2,
+body.page-index2 main .sub-section h3,
 body.page-index2 main .sub-section p {
     color: #fff;
 }
