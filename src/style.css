@@ -250,7 +250,8 @@ body.page-index2 main {
     padding-top: 70px;
 }
 
-body.page-index2 main .sub-section h2 {
+body.page-index2 main .sub-section h2,
+body.page-index2 main .sub-section p {
     color: #fff;
 }
 
