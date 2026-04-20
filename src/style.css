@@ -1964,6 +1964,10 @@ h2 {
     margin-bottom: 2rem;
 }
 
+.services-carousel-cta--mobile {
+    display: none;
+}
+
 .services-carousel-cta .cta-button {
     display: inline-block;
 }
@@ -3211,6 +3215,20 @@ body:not(.homepage) #loading-screen {
 
     .services-carousel-text {
         text-align: center;
+    }
+
+    .services-carousel-cta--desktop {
+        display: none !important;
+    }
+
+    .services-carousel-cta--mobile {
+        display: block;
+        margin: 1.25rem auto 0;
+        text-align: center;
+    }
+
+    .services-carousel-cta--mobile .cta-button {
+        display: inline-block;
     }
 
     /* Services carousel title and subtitle inherit from section-title and section-subtitle */
