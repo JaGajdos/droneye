@@ -259,6 +259,31 @@ body.page-intro main .sub-section p {
     color: #fff;
 }
 
+body.page-intro main .sub-section p {
+    font-size: var(--font-size-body);
+}
+
+body.page-intro main .sub-section h3:has(.intro-step-number) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    text-align: center;
+}
+
+body.page-intro main .sub-section h3 .intro-step-number {
+    font-size: var(--font-size-body);
+    font-weight: 400;
+    line-height: 1.25;
+    color: #fff;
+}
+
+body.page-intro main .sub-section h3:has(.intro-step-number) > span[data-i18n] {
+    max-width: min(100%, 36rem);
+    text-align: center;
+}
+
 body.page-intro main .cta-button {
     margin: 10px;
 }
