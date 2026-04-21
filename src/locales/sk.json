@@ -364,7 +364,8 @@
             "title": "Začnime spolu",
             "subtitle": "Kontaktujte nás a vytvorme niečo výnimočné.",
             "button": "Naše projekty"
-        }
+        },
+        "scrollHint": "Posuňte stránku dolu"
     },
     "legislation": {
         "title": "Legislatíva",

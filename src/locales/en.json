@@ -364,7 +364,8 @@
             "title": "Let's start together",
             "subtitle": "Contact us and let's create something extraordinary.",
             "button": "Our Projects"
-        }
+        },
+        "scrollHint": "Scroll down"
     },
     "legislation": {
         "title": "Legislation",

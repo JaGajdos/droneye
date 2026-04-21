@@ -755,6 +755,62 @@ body.homepage-intro-flow #landing-hero.hero.hidden {
     display: none !important;
 }
 
+/* Nápoveda scrollu po „Preskúmať“ (3D intro) */
+.intro-scroll-hint {
+    position: fixed;
+    left: 50%;
+    bottom: max(1rem, env(safe-area-inset-bottom, 0px));
+    z-index: 1005;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.35rem 0.7rem;
+    pointer-events: none;
+    color: rgba(255, 255, 255, 0.92);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
+    font-size: var(--font-size-small);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    transform: translateX(-50%) translateY(140%);
+    opacity: 0;
+    transition:
+        opacity 0.4s ease,
+        transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.intro-scroll-hint--visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.intro-scroll-hint__chevron {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    animation: intro-scroll-hint-bounce 1.15s ease-in-out infinite;
+}
+
+@keyframes intro-scroll-hint-bounce {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(10px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .intro-scroll-hint {
+        transition: opacity 0.25s ease;
+    }
+
+    .intro-scroll-hint__chevron {
+        animation: none;
+    }
+}
+
 /* White background only for subpages (not homepage) */
 .page {
     display: none;

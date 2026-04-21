@@ -10,6 +10,45 @@ function isIntroDemoPage() {
     return document.body.classList.contains("page-intro");
 }
 
+/** Krátka nápoveda „scroll dolu“ po odomknutí scrollu na homepage 3D. */
+function showIntroScrollHintOnce() {
+    const hint = document.getElementById("intro-scroll-hint");
+    if (!hint || hint.dataset.active === "1") {
+        return;
+    }
+    hint.dataset.active = "1";
+    hint.hidden = false;
+    hint.setAttribute("aria-hidden", "false");
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+            hint.classList.add("intro-scroll-hint--visible");
+        });
+    });
+    let dismissed = false;
+    const dismiss = () => {
+        if (dismissed) {
+            return;
+        }
+        dismissed = true;
+        hint.classList.remove("intro-scroll-hint--visible");
+        window.removeEventListener("scroll", onScrollDismiss);
+        window.removeEventListener("wheel", dismiss);
+        clearTimeout(autoHide);
+        window.setTimeout(() => {
+            hint.hidden = true;
+            hint.setAttribute("aria-hidden", "true");
+        }, 320);
+    };
+    function onScrollDismiss() {
+        if (window.scrollY > 28) {
+            dismiss();
+        }
+    }
+    window.addEventListener("scroll", onScrollDismiss, { passive: true });
+    window.addEventListener("wheel", dismiss, { passive: true });
+    const autoHide = window.setTimeout(dismiss, 5200);
+}
+
 // Initialize the application
 document.addEventListener("DOMContentLoaded", async function () {
     await initInternationalization();
@@ -330,6 +369,7 @@ document.getElementById("start-animation-btn")?.addEventListener("click", functi
         };
         const onDroneReady = () => {
             unlockScrollAfterDrone();
+            showIntroScrollHintOnce();
         };
 
         const startIntroUi = () => {
@@ -392,6 +432,7 @@ document.getElementById("start-animation-btn")?.addEventListener("click", functi
                 } else if (waited > 200) {
                     clearInterval(poll);
                     unlockScrollAfterDrone();
+                    showIntroScrollHintOnce();
                 }
             }, 50);
         }

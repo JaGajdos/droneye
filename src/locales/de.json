@@ -364,7 +364,8 @@
             "title": "Lassen Sie uns gemeinsam beginnen",
             "subtitle": "Kontaktieren Sie uns und lassen Sie uns etwas Außergewöhnliches schaffen.",
             "button": "Unsere Projekte"
-        }
+        },
+        "scrollHint": "Nach unten scrollen"
     },
     "legislation": {
         "title": "Gesetzgebung",
