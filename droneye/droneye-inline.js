@@ -940,7 +940,8 @@
                 const sectionIds = ["section1", "section2", "section3"],
                     viewHeight = renderer.domElement.clientHeight;
                 let activeSceneIndex = 0,
-                    anySectionInDom = !1;
+                    anySectionInDom = !1,
+                    foundStraddle = !1;
                 for (let idx = 0; idx < sectionIds.length; idx++) {
                     const sectionEl = document.getElementById(sectionIds[idx]);
                     if (!sectionEl) continue;
@@ -950,7 +951,31 @@
                         height = rect.height;
                     if (top < viewHeight && top + height > viewHeight) {
                         activeSceneIndex = idx;
+                        foundStraddle = !0;
                         break;
+                    }
+                }
+                if (anySectionInDom && !foundStraddle) {
+                    const scrollEl = document.documentElement,
+                        scrollY = window.scrollY || scrollEl.scrollTop,
+                        maxScroll = Math.max(0, scrollEl.scrollHeight - window.innerHeight),
+                        atBottom = maxScroll <= 1 || scrollY >= maxScroll - 16;
+                    if (atBottom) {
+                        activeSceneIndex = sectionIds.length - 1;
+                    } else {
+                        let bestIdx = 0,
+                            bestOverlap = -1;
+                        for (let idx = 0; idx < sectionIds.length; idx++) {
+                            const el = document.getElementById(sectionIds[idx]);
+                            if (!el) continue;
+                            const r = el.getBoundingClientRect(),
+                                overlap = Math.min(r.bottom, viewHeight) - Math.max(r.top, 0);
+                            if (overlap > bestOverlap) {
+                                bestOverlap = overlap;
+                                bestIdx = idx;
+                            }
+                        }
+                        activeSceneIndex = bestIdx;
                     }
                 }
                 anySectionInDom || (activeSceneIndex = 0);
