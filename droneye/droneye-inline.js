@@ -406,6 +406,16 @@
             }
             const ROTOR_SPIN_SPEED = 18,
                 EXTERNAL_SHIP_BASE_PITCH = -50;
+            /* Jednoduchý prepínač: true = custom look, false = pôvodné GLB materiály. */
+            const ENABLE_EXTERNAL_SHIP_CUSTOM_LOOK = false;
+            /* Look pre externý Drone.glb (jednoduché doladenie farby/svetlosti). */
+            const EXTERNAL_SHIP_BRIGHTNESS = 1.2,
+                EXTERNAL_SHIP_TINT_HEX = 0x9ec9ff,
+                EXTERNAL_SHIP_TINT_STRENGTH = 0.8,
+                EXTERNAL_SHIP_EMISSIVE_STRENGTH = 0.1,
+                EXTERNAL_SHIP_EMISSIVE_INTENSITY = 0.35,
+                EXTERNAL_SHIP_METALNESS_MULT = 0.95,
+                EXTERNAL_SHIP_ROUGHNESS_MULT = 0.9;
             function collectRotorsForSpin(droneRoot) {
                 const rotorNameRegex = /(prop|rotor|fan|blade)/i,
                     parts = [],
@@ -444,6 +454,32 @@
                 }
                 return parts;
             }
+            function applyExternalDroneLook(droneRoot) {
+                const tintColor = new THREE.Color(EXTERNAL_SHIP_TINT_HEX);
+                droneRoot.traverse(obj => {
+                    if (!obj.isMesh || !obj.material) return;
+                    const materials = Array.isArray(obj.material) ? obj.material : [obj.material];
+                    materials.forEach(mat => {
+                        if (!mat) return;
+                        if (mat.color) {
+                            mat.color.multiplyScalar(EXTERNAL_SHIP_BRIGHTNESS);
+                            mat.color.lerp(tintColor, EXTERNAL_SHIP_TINT_STRENGTH);
+                        }
+                        if (mat.emissive) {
+                            mat.emissive.lerp(tintColor, EXTERNAL_SHIP_EMISSIVE_STRENGTH);
+                            mat.emissiveIntensity = Math.max(
+                                mat.emissiveIntensity || 0,
+                                EXTERNAL_SHIP_EMISSIVE_INTENSITY
+                            );
+                        }
+                        if (typeof mat.metalness === "number")
+                            mat.metalness = Math.min(1, mat.metalness * EXTERNAL_SHIP_METALNESS_MULT);
+                        if (typeof mat.roughness === "number")
+                            mat.roughness = Math.max(0, mat.roughness * EXTERNAL_SHIP_ROUGHNESS_MULT);
+                        mat.needsUpdate = !0;
+                    });
+                });
+            }
             class Ship {
                 constructor() {
                     ((this.positionX = 2e3),
@@ -459,6 +495,7 @@
                 }
                 init(shipRoot, options) {
                     if (options && options.useGltfMaterials) {
+                        ENABLE_EXTERNAL_SHIP_CUSTOM_LOOK && applyExternalDroneLook(shipRoot);
                         const box = new THREE.Box3().setFromObject(shipRoot),
                             size = box.getSize(new THREE.Vector3()),
                             maxDim = Math.max(size.x, size.y, size.z, 1e-6);
@@ -903,7 +940,8 @@
                 const sectionIds = ["section1", "section2", "section3"],
                     viewHeight = renderer.domElement.clientHeight;
                 let activeSceneIndex = 0,
-                    anySectionInDom = !1;
+                    anySectionInDom = !1,
+                    foundStraddle = !1;
                 for (let idx = 0; idx < sectionIds.length; idx++) {
                     const sectionEl = document.getElementById(sectionIds[idx]);
                     if (!sectionEl) continue;
@@ -913,7 +951,33 @@
                         height = rect.height;
                     if (top < viewHeight && top + height > viewHeight) {
                         activeSceneIndex = idx;
+                        foundStraddle = !0;
                         break;
+                    }
+                }
+                if (anySectionInDom && !foundStraddle) {
+                    const scrollEl = document.documentElement,
+                        scrollY = window.scrollY || scrollEl.scrollTop,
+                        maxScroll = Math.max(0, scrollEl.scrollHeight - window.innerHeight),
+                        /* Bez maxScroll > min: na úvode (žiadny scroll / overflow) je maxScroll 0 a stará logika
+                           maxScroll<=1 brala „spodok stránky“ → omylom oceán. Spodok len keď stránka reálne scrolluje. */
+                        atBottom = maxScroll > 32 && scrollY >= maxScroll - 16;
+                    if (atBottom) {
+                        activeSceneIndex = sectionIds.length - 1;
+                    } else {
+                        let bestIdx = 0,
+                            bestOverlap = -1;
+                        for (let idx = 0; idx < sectionIds.length; idx++) {
+                            const el = document.getElementById(sectionIds[idx]);
+                            if (!el) continue;
+                            const r = el.getBoundingClientRect(),
+                                overlap = Math.min(r.bottom, viewHeight) - Math.max(r.top, 0);
+                            if (overlap > bestOverlap) {
+                                bestOverlap = overlap;
+                                bestIdx = idx;
+                            }
+                        }
+                        activeSceneIndex = bestIdx;
                     }
                 }
                 anySectionInDom || (activeSceneIndex = 0);
