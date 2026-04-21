@@ -334,10 +334,7 @@ document.getElementById("start-animation-btn")?.addEventListener("click", functi
 
         const startIntroUi = () => {
             document.body.classList.add("homepage-intro-flow", "page-intro", "navbar-always-visible");
-            if (introStage) {
-                introStage.hidden = false;
-            }
-            const enableTransition = false;
+            const enableTransition = true;
             if (hero) {
                 let heroFlyDone = false;
                 const finalizeHero = () => {
@@ -348,6 +345,9 @@ document.getElementById("start-animation-btn")?.addEventListener("click", functi
                     /* Nemaž landing-hero--fly-away: odstránenie by spustilo spätnú transition (blesk „návratu“). */
                     hero.classList.add("hidden");
                     hero.setAttribute("aria-hidden", "true");
+                    if (introStage) {
+                        introStage.hidden = false;
+                    }
                 };
 
                 if (enableTransition) {
@@ -373,6 +373,8 @@ document.getElementById("start-animation-btn")?.addEventListener("click", functi
                 } else {
                     finalizeHero();
                 }
+            } else if (introStage) {
+                introStage.hidden = false;
             }
         };
 

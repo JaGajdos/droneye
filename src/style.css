@@ -718,6 +718,11 @@ body.homepage.homepage-index3 .main-content {
     overflow: visible;
 }
 
+/* Pri prechode landing -> intro na indexe nenechaj page-intro posunúť main o 70px. */
+body.homepage.homepage-index3.page-intro main {
+    padding-top: 0;
+}
+
 /* Landing (pred „Preskúmať“): žiadny scroll, len hero — potom načítanie dronu + intro príbeh na tej istej stránke */
 body.homepage.homepage-index3.homepage-landing-pending {
     overflow: hidden !important;
