@@ -959,7 +959,9 @@
                     const scrollEl = document.documentElement,
                         scrollY = window.scrollY || scrollEl.scrollTop,
                         maxScroll = Math.max(0, scrollEl.scrollHeight - window.innerHeight),
-                        atBottom = maxScroll <= 1 || scrollY >= maxScroll - 16;
+                        /* Bez maxScroll > min: na úvode (žiadny scroll / overflow) je maxScroll 0 a stará logika
+                           maxScroll<=1 brala „spodok stránky“ → omylom oceán. Spodok len keď stránka reálne scrolluje. */
+                        atBottom = maxScroll > 32 && scrollY >= maxScroll - 16;
                     if (atBottom) {
                         activeSceneIndex = sectionIds.length - 1;
                     } else {
