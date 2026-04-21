@@ -304,10 +304,6 @@ body.navbar-always-visible .navbar {
     transform: translateY(0) !important;
 }
 
-body.page-intro main {
-    padding-top: 70px;
-}
-
 body.page-intro main .sub-section h3,
 body.page-intro main .sub-section p {
     color: #fff;
@@ -716,11 +712,6 @@ body.homepage.homepage-index3 .main-content {
     height: auto;
     min-height: 100vh;
     overflow: visible;
-}
-
-/* Pri prechode landing -> intro na indexe nenechaj page-intro posunúť main o 70px. */
-body.homepage.homepage-index3.page-intro main {
-    padding-top: 0;
 }
 
 /* Landing (pred „Preskúmať“): žiadny scroll, len hero — potom načítanie dronu + intro príbeh na tej istej stránke */
