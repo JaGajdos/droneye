@@ -87,17 +87,24 @@ function htmlPartialsPlugin() {
         name: "html-partials",
         transformIndexHtml(html, ctx) {
             const filename = (ctx && ctx.filename) || "";
-            if (filename.endsWith("index.html")) {
-                return html;
-            }
-
             const footerPartialPath = join(process.cwd(), "src", "partials", "footer.html");
-            if (!existsSync(footerPartialPath)) {
-                return html;
-            }
+            const cookiePartialPath = join(process.cwd(), "src", "partials", "cookie-banner.html");
+            const isMainIndex = filename.endsWith("index.html");
+            let nextHtml = html;
 
-            const footerHtml = readFileSync(footerPartialPath, "utf8");
-            return html.replace("<!-- @include footer -->", footerHtml);
+            if (!isMainIndex) {
+                if (!existsSync(footerPartialPath)) {
+                    nextHtml = nextHtml.replace("<!-- @include footer -->", "");
+                } else {
+                    const footerHtml = readFileSync(footerPartialPath, "utf8");
+                    nextHtml = nextHtml.replace("<!-- @include footer -->", footerHtml);
+                }
+            }
+            if (!existsSync(cookiePartialPath)) {
+                return nextHtml.replace("<!-- @include cookie-banner -->", "");
+            }
+            const cookieHtml = readFileSync(cookiePartialPath, "utf8");
+            return nextHtml.replace("<!-- @include cookie-banner -->", cookieHtml);
         }
     };
 }
