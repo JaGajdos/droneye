@@ -1,5 +1,5 @@
 import { defineConfig } from "vite";
-import { copyFileSync, mkdirSync, existsSync, readdirSync, statSync } from "fs";
+import { copyFileSync, mkdirSync, existsSync, readdirSync, readFileSync, statSync } from "fs";
 import { join } from "path";
 
 // Plugin to copy localization files to dist
@@ -81,6 +81,27 @@ function copyBasegraphImagesPlugin() {
     };
 }
 
+// Plugin to inject shared HTML partials into subpages
+function htmlPartialsPlugin() {
+    return {
+        name: "html-partials",
+        transformIndexHtml(html, ctx) {
+            const filename = (ctx && ctx.filename) || "";
+            if (filename.endsWith("index.html")) {
+                return html;
+            }
+
+            const footerPartialPath = join(process.cwd(), "src", "partials", "footer.html");
+            if (!existsSync(footerPartialPath)) {
+                return html;
+            }
+
+            const footerHtml = readFileSync(footerPartialPath, "utf8");
+            return html.replace("<!-- @include footer -->", footerHtml);
+        }
+    };
+}
+
 export default defineConfig({
     base: "/droneye/",
     server: {
@@ -88,7 +109,7 @@ export default defineConfig({
         open: true,
         historyApiFallback: true
     },
-    plugins: [copyLocalesPlugin(), copyHtaccessPlugin(), copyBasegraphImagesPlugin()],
+    plugins: [htmlPartialsPlugin(), copyLocalesPlugin(), copyHtaccessPlugin(), copyBasegraphImagesPlugin()],
     build: {
         outDir: "dist",
         assetsDir: "assets",
