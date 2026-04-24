@@ -227,7 +227,7 @@
             "agriculture": "Agriculture"
         },
         "equipment": {
-            "title": "What We Fly With",
+            "title": "Technology We Fly With",
             "subtitle": "We use professional drones and equipment for the best results",
             "flightTime": "Flight Time:",
             "range": "Range:",
@@ -235,7 +235,6 @@
             "format": "Format:",
             "item1": {
                 "title": "DJI Avata 2 FPV (2x)",
-                "feature": "Ultra-wide 155° FOV",
                 "flightTime": "23 minutes",
                 "range": "13 km",
                 "resolution": "4K/60fps",
@@ -243,11 +242,17 @@
             },
             "item2": {
                 "title": "DJI Mavic 4 Pro Combo",
-                "feature": "100 MP Hasselblad Camera",
                 "flightTime": "51 minutes",
                 "range": "30 km",
                 "resolution": "6K/60fps HDR",
                 "format": "ProRes 4444XQ / H.265 / H.264"
+            },
+            "item3": {
+                "title": "DJI Mini 5 Pro",
+                "flightTime": "36 minutes",
+                "range": "20 km",
+                "resolution": "4K/120fps",
+                "format": "H.265 / H.264 (10-bit D-Log M, HLG)"
             }
         },
         "process": {

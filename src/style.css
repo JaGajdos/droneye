@@ -1071,9 +1071,9 @@ body.homepage-intro-flow #landing-hero.hero.hidden {
 
 .equipment-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: var(--space-6);
-    max-width: 1000px;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
@@ -1145,21 +1145,8 @@ body.homepage-intro-flow #landing-hero.hero.hidden {
     line-height: 1.8;
     margin-bottom: 0.5rem;
     padding-left: 1.5rem;
-    position: relative;
     display: flex;
     align-items: center;
-}
-
-.equipment-specs li::before {
-    content: "•";
-    color: var(--primary-color);
-    font-size: var(--font-size-section-subtitle);
-    font-weight: bold;
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    line-height: 1;
 }
 
 .equipment-specs li strong {

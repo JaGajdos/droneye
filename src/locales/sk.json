@@ -227,7 +227,7 @@
             "agriculture": "Poľnohospodárstvo"
         },
         "equipment": {
-            "title": "S čím lietame",
+            "title": "Technika, ktorou lietame",
             "subtitle": "Používame profesionálne drony a vybavenie pre najlepšie výsledky",
             "flightTime": "Čas letu:",
             "range": "Dolet:",
@@ -235,7 +235,6 @@
             "format": "Formát:",
             "item1": {
                 "title": "DJI Avata 2 FPV (2x)",
-                "feature": "Ultraširoký 155° FOV",
                 "flightTime": "23 minút",
                 "range": "13 km",
                 "resolution": "4K/60fps",
@@ -243,11 +242,17 @@
             },
             "item2": {
                 "title": "DJI Mavic 4 Pro Combo",
-                "feature": "100 MP Hasselblad kamera",
                 "flightTime": "51 minút",
                 "range": "30 km",
                 "resolution": "6K/60fps HDR",
                 "format": "ProRes 4444XQ / H.265 / H.264"
+            },
+            "item3": {
+                "title": "DJI Mini 5 Pro",
+                "flightTime": "36 minút",
+                "range": "20 km",
+                "resolution": "4K/120fps",
+                "format": "H.265 / H.264 (10-bit D-Log M, HLG)"
             }
         },
         "process": {
