@@ -2574,6 +2574,13 @@ h2 {
     filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.15));
 }
 
+.process-step-icon img {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+    filter: brightness(0) invert(1) drop-shadow(0 1px 2px rgba(0, 0, 0, 0.15));
+}
+
 .process-step-number {
     position: absolute;
     top: -6px;
