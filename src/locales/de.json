@@ -338,7 +338,7 @@
         "services": "Unsere Dienstleistungen - DroneEye",
         "team": "Unser Team - DroneEye",
         "pricing": "Preise - DroneEye",
-        "animation": "Drohnen 3D Modell - DroneEye",
+        "animation": "Drohnen-3D-Modell - DroneEye",
         "legislation": "Gesetzgebung - DroneEye",
         "gdpr": "DSGVO - Datenschutz - DroneEye"
     },
@@ -495,7 +495,7 @@
         },
         "section12": {
             "title": "12. Empfängerkreis",
-            "description1": "Wir machen Ihre personenbezogenen Daten nicht unnötig für irgendwelche Entitäten verfügbar. Es ist jedoch notwendig, dass einige personenbezogene Daten einem vorher bestimmten Kreis von Empfängern personenbezogener Daten zur Verfügung gestellt werden. Im Falle des Versands von Waren (z.B. gedrucktes Drohnenfoto) an Sie als Endkunden stellen wir Ihre personenbezogenen Daten Postzustellern oder Kurierfirmen zur Verfügung. Im Falle der Verwaltung und Wartung unserer Website werden Ihre personenbezogenen Daten dem Website-Administrator zur Verfügung gestellt. Nicht zuletzt sind dies Personen wie ein Buchhalter und Steuerberater.",
+            "description1": "Wir machen Ihre personenbezogenen Daten nicht unnötig für irgendwelche Entitäten verfügbar. Es ist jedoch notwendig, dass einige personenbezogene Daten einem vorher bestimmten Kreis von Empfängern personenbezogener Daten zur Verfügung gestellt werden. Im Falle des Versands von Waren (z.B. gedrucktes Drohnenfoto) an Sie als Endkunden stellen wir Ihre personenbezogenen Daten den Postzustellern oder Kurierfirmen zur Verfügung. Im Falle der Verwaltung und Wartung unserer Website werden Ihre personenbezogenen Daten dem Website-Administrator zur Verfügung gestellt. Nicht zuletzt sind dies Personen wie ein Buchhalter und Steuerberater.",
             "description2": "Empfängerkreis:",
             "item1": "Postzusteller im Sinne des Gesetzes 324/2011 über Postdienste",
             "item2": "Kurierfirma",
