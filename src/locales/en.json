@@ -107,7 +107,7 @@
             "title": "How to get a price quote?",
             "description": "We'll be happy to contact you with a proposal that will match exactly your ideas.",
             "item1": "Where and when you want to film",
-            "item2": "What purpose the material will serve",
+            "item2": "For what purpose the material will serve",
             "item3": "Approximate scope and your expectations",
             "cta": "Contact Us"
         },
@@ -223,11 +223,11 @@
             "cultural": "Cultural events",
             "commercialVideo": "Advertising videos",
             "travelVideo": "Travel videos",
-            "realEstateOffices": "Real estate agencies",
+            "industry": "Industry",
             "agriculture": "Agriculture"
         },
         "equipment": {
-            "title": "What We Fly With",
+            "title": "Technology We Fly With",
             "subtitle": "We use professional drones and equipment for the best results",
             "flightTime": "Flight Time:",
             "range": "Range:",
@@ -235,7 +235,6 @@
             "format": "Format:",
             "item1": {
                 "title": "DJI Avata 2 FPV (2x)",
-                "feature": "Ultra-wide 155° FOV",
                 "flightTime": "23 minutes",
                 "range": "13 km",
                 "resolution": "4K/60fps",
@@ -243,11 +242,17 @@
             },
             "item2": {
                 "title": "DJI Mavic 4 Pro Combo",
-                "feature": "100 MP Hasselblad Camera",
                 "flightTime": "51 minutes",
                 "range": "30 km",
                 "resolution": "6K/60fps HDR",
                 "format": "ProRes 4444XQ / H.265 / H.264"
+            },
+            "item3": {
+                "title": "DJI Mini 5 Pro",
+                "flightTime": "36 minutes",
+                "range": "20 km",
+                "resolution": "4K/120fps",
+                "format": "H.265 / H.264 (10-bit D-Log M, HLG)"
             }
         },
         "process": {
@@ -380,7 +385,7 @@
             "description": "We have successfully completed theoretical and practical exams for categories A1/A3, A2 and STS at the Transport Authority of the Slovak Republic in the civil aviation division. We are holders of an operating permit in the 'SPECIFIC' category for flying drones capable of flying without a pilot, in accordance with Regulation (EU) 2019/947.",
             "item1": "When flying, we do not endanger the safety of other aircraft, persons or property on the ground.",
             "item2": "During each flight, in accordance with applicable legislation, we maintain constant visual contact with the drone.",
-            "item3": "For flying in CTR zone, we request permission from the airport tower.",
+            "item3": "For flying in the CTR zone, we request permission from the airport tower.",
             "item4": "We can secure special permission for takeoff in close proximity to airports and military areas."
         },
         "authorization": {

@@ -189,7 +189,7 @@
     },
     "services": {
         "title": "Naše služby",
-        "subtitle": "Profesionálne drone služby pre vaše potreby",
+        "subtitle": "Profesionálne dronové služby pre vaše potreby",
         "carousel": {
             "title": "Naše služby",
             "subtitle": "Ponúkame široký rozsah profesionálnych dronových služieb pre vaše potreby",
@@ -223,11 +223,11 @@
             "cultural": "Kultúrne podujatia",
             "commercialVideo": "Reklamné videá",
             "travelVideo": "Cestovateľské videá",
-            "realEstateOffices": "Realitné kancelárie",
+            "industry": "Priemysel",
             "agriculture": "Poľnohospodárstvo"
         },
         "equipment": {
-            "title": "S čím lietame",
+            "title": "Technika, ktorou lietame",
             "subtitle": "Používame profesionálne drony a vybavenie pre najlepšie výsledky",
             "flightTime": "Čas letu:",
             "range": "Dolet:",
@@ -235,7 +235,6 @@
             "format": "Formát:",
             "item1": {
                 "title": "DJI Avata 2 FPV (2x)",
-                "feature": "Ultraširoký 155° FOV",
                 "flightTime": "23 minút",
                 "range": "13 km",
                 "resolution": "4K/60fps",
@@ -243,19 +242,25 @@
             },
             "item2": {
                 "title": "DJI Mavic 4 Pro Combo",
-                "feature": "100 MP Hasselblad kamera",
                 "flightTime": "51 minút",
                 "range": "30 km",
                 "resolution": "6K/60fps HDR",
                 "format": "ProRes 4444XQ / H.265 / H.264"
+            },
+            "item3": {
+                "title": "DJI Mini 5 Pro",
+                "flightTime": "36 minút",
+                "range": "20 km",
+                "resolution": "4K/120fps",
+                "format": "H.265 / H.264 (10-bit D-Log M, HLG)"
             }
         },
         "process": {
-            "title": "Ako To celé prebieha?",
+            "title": "Ako to celé prebieha?",
             "cta": "Kontaktujte nás",
             "step1": {
                 "title": "Napíšte nám",
-                "description": "Pošlite nám e-mail na <a href=\"mailto:info@droneye.sk\">info@droneye.sk</a> s Vašou predstavou, nápadom o ktorý máte záujem, miestom a termínom predpokladaného lietania."
+                "description": "Pošlite nám e-mail na <a href=\"mailto:info@droneye.sk\">info@droneye.sk</a> s vašou predstavou, nápadom, o ktorý máte záujem, miestom a termínom predpokladaného lietania."
             },
             "step2": {
                 "title": "Konzultácia, poradenstvo",
@@ -345,7 +350,7 @@
     "loading": "Načítavam...",
     "animation": {
         "text1": {
-            "title": "Sme vášniví piloti dronov, fotografovia a kameramani",
+            "title": "Sme vášniví piloti dronov, fotografi a kameramani",
             "subtitle": "Vytvárame nezabudnuteľné momenty pre vás všade."
         },
         "text2": {
@@ -417,13 +422,13 @@
     },
     "gdpr": {
         "title": "GDPR",
-        "subtitle": "Memorandum na Ochranu osobných údajov",
+        "subtitle": "Memorandum na ochranu osobných údajov",
         "intro": "Ochrana súkromia našich zákazníkov pri spracúvaní osobných údajov je pre nás veľmi dôležitá. Pri spracúvaní vašich osobných údajov postupujeme v súlade s platnými právnymi predpismi a zabezpečujeme ich ochranu v maximálnej možnej miere. Všetci návštevníci našej stránky, ktorí sú s nami v kontakte ako zákazníci, nám poskytli v tejto súvislosti svoje osobné údaje. Na tejto web stránke nájdete všetky potrebné informácie týkajúce sa spracúvania osobných údajov.",
         "intro2": "Toto Memorandum na Ochranu osobných údajov (ďalej len ako \"Memorandum\"), vám poskytne informácie o tom, ako nakladáme s vašimi osobnými údajmi, ako nás môžete kontaktovať v prípade uplatňovania si práv alebo, ak máte otázky ohľadom spracúvania vašich osobných údajov. Memorandum je súčasťou Všeobecných obchodných podmienok spoločnosti DroneEye.",
         "intro3": "Odporúčame vám, aby ste si informácie obsiahnuté v tomto Memorande dôkladne prečítali. Zmeny týkajúce sa podmienok ochrany osobných údajov sú zverejnené na našej internetovej stránke www.droneye.sk, formou aktualizácie. Týmto spôsobom zabezpečíme, aby ste vždy mali k dispozícii aktuálne informácie o tom, za akých podmienok spracúvame vaše osobné údaje.",
         "section1": {
             "title": "1. O nás",
-            "description1": "Prostredníctvom našej webstránky www.droneye.sk, vám umožňujeme ako našim zákazníkom objednať letecké práce. V súvislosti s objednaním naších služieb sme povinní spracúvať vaše osobné údaje.",
+            "description1": "Prostredníctvom našej webstránky www.droneye.sk, vám umožňujeme ako našim zákazníkom objednať letecké práce. V súvislosti s objednaním našich služieb sme povinní spracúvať vaše osobné údaje.",
             "description2": "Pri spracúvaní vašich osobných údajov sa riadime právnymi predpismi Slovenskej republiky, Nariadením Európskeho parlamentu a Rady (EÚ) č. 2016/679 o ochrane fyzických osôb pri spracúvaní osobných údajov a o voľnom pohybe takýchto údajov (všeobecné nariadenie o ochrane údajov alebo GDPR), zákonom č. 18/2018 Z. z o ochrane osobných údajov a ako aj ďalšími právnymi predpismi.",
             "description3": "Prevádzkovateľom informačných systémov, v ktorých sú spracúvané vaše osobné údaje je spoločnosť DroneEye, so sídlom Bratislava, Slovensko."
         },
@@ -485,11 +490,11 @@
         },
         "section11": {
             "title": "11. Spracúvanie údajov prostredníctvom cookies",
-            "description1": "O návštevníkoch a používateľoch našej Internetovej stránke sme oprávnení zhromažďovať a iným spôsobom spracúvať údaje prostredníctvom nástrojov slúžiacich na automatizované zhromažďovanie údajov, najmä súborov cookies, protokolov a iných bežne používaných nástrojov na získavanie informácií prostredníctvom internetovej stránky.",
+            "description1": "O návštevníkoch a používateľoch našej Internetovej stránky sme oprávnení zhromažďovať a iným spôsobom spracúvať údaje prostredníctvom nástrojov slúžiacich na automatizované zhromažďovanie údajov, najmä súborov cookies, protokolov a iných bežne používaných nástrojov na získavanie informácií prostredníctvom internetovej stránky.",
             "description2": "Pod pojmom cookie je možné predstaviť si malé množstvo údajov, ktoré sú ako súbor odoslané do vášho počítača (tabletu, smartfónu) z internetovej stránky, ktorú práve navštevujete. V počítači sa súbor údajov uloží a pri každej ďalšej návšteve rovnakej webovej stránky odošle počítač informáciu nášmu serveru.",
             "description3": "Väčšina internetových stránok, vrátane tej našej, využíva cookies. Zmyslom cookies je uľahčiť a spríjemniť vám používanie našich Internetových stránok. Súbor cookie totiž umožní webovej stránke rozpoznať, či ste ju už v minulosti navštívili a o ktorú sekciu ste mali záujem. Zároveň sú to práve cookies, vďaka ktorým si môžete uložiť svoje užívateľské nastavenia ako rozpoznanie jazyka či zapamätanie vášho prihlasovacieho mena. Pomocou cookies uchovávame údaje, ktoré nespájame s vašou osobou a prostredníctvom získaných údajov nerealizujeme identifikáciu zákazníka.",
             "description4": "Použitie súborov cookies nie je pre vás nebezpečné, cookies nemôžu prenášať vírusy ani čítať údaje z harddisku zariadenia.",
-            "description5": "Návštevou našej internetovej stránke automaticky vyjadrujete svoj súhlas s použitím tejto technológie. Tento postup vyplýva z § 55 ods. 5 zákona č. 355/2011 Z. z. o elektronických komunikáciách, podľa ktorého sa za súhlas na tento účel považuje aj použitie príslušného nastavenia webového prehliadača alebo iného počítačového programu.",
+            "description5": "Návštevou našej internetovej stránky automaticky vyjadrujete svoj súhlas s použitím tejto technológie. Tento postup vyplýva z § 55 ods. 5 zákona č. 355/2011 Z. z. o elektronických komunikáciách, podľa ktorého sa za súhlas na tento účel považuje aj použitie príslušného nastavenia webového prehliadača alebo iného počítačového programu.",
             "description6": "Používanie cookies a ich povolenie vo webovom prehliadači je na slobodnej vôli každého používateľa webovej stránky. Súbory cookies môžete slobodne vymazať alebo vopred nastaviť váš internetový prehliadač tak, aby prijímanie súborov cookies buď odmietal, alebo vás upozorňoval, keď sa server snaží zaslať vám cookie. Potom sa však môže stať, že webové stránky, ktoré sú na podpore cookies závislé, nebudú fungovať tak, ako by ste si predstavovali, alebo že časti stránok pre vás nebudú dostupné.",
             "description7": "Využívame trvalé súbory cookies, ktoré nám pomáhajú identifikovať vaše zariadenie pri opätovnej návšteve Internetových stránok a umožňujú tak poskytovať služby v súlade s vašimi očakávaniami. Súbory Cookies uchovávame po dobu 1 roka."
         },
@@ -497,8 +502,8 @@
             "title": "12. Okruh príjemcov",
             "description1": "Vaše osobné údaje nesprístupňujeme bezdôvodne žiadnym subjektom. Je však potrebné, aby niektoré osobné údaje boli sprístupnené vopred určenému okruhu príjemcov osobných údajov. V prípade zasielania tovaru (napr. vytlačená dronová fotografia) Vám ako konečnému zákazníkovi, poskytujeme Vaše osobné údaje poštovým doručovateľom alebo kuriérskym firmám. V prípade správy a údržby našej webovej stránky dochádza k sprístupneniu Vašich osobných údajov správcovi webovej stránky. V neposlednom rade sú to osoby ako účtovník a daňový poradca.",
             "description2": "Okruh príjemcov:",
-            "item1": "Poštový doručovatelia v zmysle zákona 324/2011 Z. z. o poštových službách",
-            "item2": "Kurierska spoločnosť",
+            "item1": "Poštoví doručovatelia v zmysle zákona 324/2011 Z. z. o poštových službách",
+            "item2": "Kuriérska spoločnosť",
             "item3": "Správca servera",
             "item4": "Správca webovej stránky",
             "item5": "Emailový poskytovateľ",

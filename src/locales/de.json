@@ -223,11 +223,11 @@
             "cultural": "Kulturveranstaltungen",
             "commercialVideo": "Werbefilme",
             "travelVideo": "Reisevideos",
-            "realEstateOffices": "Immobilienbüros",
+            "industry": "Industrie",
             "agriculture": "Landwirtschaft"
         },
         "equipment": {
-            "title": "Womit wir fliegen",
+            "title": "Technik, mit der wir fliegen",
             "subtitle": "Wir verwenden professionelle Drohnen und Ausrüstung für die besten Ergebnisse",
             "flightTime": "Flugzeit:",
             "range": "Reichweite:",
@@ -235,7 +235,6 @@
             "format": "Format:",
             "item1": {
                 "title": "DJI Avata 2 FPV (2x)",
-                "feature": "Ultrabreites 155° Sichtfeld",
                 "flightTime": "23 Minuten",
                 "range": "13 km",
                 "resolution": "4K/60fps",
@@ -243,11 +242,17 @@
             },
             "item2": {
                 "title": "DJI Mavic 4 Pro Combo",
-                "feature": "100 MP Hasselblad Kamera",
                 "flightTime": "51 Minuten",
                 "range": "30 km",
                 "resolution": "6K/60fps HDR",
                 "format": "ProRes 4444XQ / H.265 / H.264"
+            },
+            "item3": {
+                "title": "DJI Mini 5 Pro",
+                "flightTime": "36 Minuten",
+                "range": "20 km",
+                "resolution": "4K/120fps",
+                "format": "H.265 / H.264 (10-Bit D-Log M, HLG)"
             }
         },
         "process": {
@@ -338,7 +343,7 @@
         "services": "Unsere Dienstleistungen - DroneEye",
         "team": "Unser Team - DroneEye",
         "pricing": "Preise - DroneEye",
-        "animation": "Drohnen 3D Modell - DroneEye",
+        "animation": "Drohnen-3D-Modell - DroneEye",
         "legislation": "Gesetzgebung - DroneEye",
         "gdpr": "DSGVO - Datenschutz - DroneEye"
     },
@@ -495,7 +500,7 @@
         },
         "section12": {
             "title": "12. Empfängerkreis",
-            "description1": "Wir machen Ihre personenbezogenen Daten nicht unnötig für irgendwelche Entitäten verfügbar. Es ist jedoch notwendig, dass einige personenbezogene Daten einem vorher bestimmten Kreis von Empfängern personenbezogener Daten zur Verfügung gestellt werden. Im Falle des Versands von Waren (z.B. gedrucktes Drohnenfoto) an Sie als Endkunden stellen wir Ihre personenbezogenen Daten Postzustellern oder Kurierfirmen zur Verfügung. Im Falle der Verwaltung und Wartung unserer Website werden Ihre personenbezogenen Daten dem Website-Administrator zur Verfügung gestellt. Nicht zuletzt sind dies Personen wie ein Buchhalter und Steuerberater.",
+            "description1": "Wir machen Ihre personenbezogenen Daten nicht unnötig für irgendwelche Entitäten verfügbar. Es ist jedoch notwendig, dass einige personenbezogene Daten einem vorher bestimmten Kreis von Empfängern personenbezogener Daten zur Verfügung gestellt werden. Im Falle des Versands von Waren (z.B. gedrucktes Drohnenfoto) an Sie als Endkunden stellen wir Ihre personenbezogenen Daten den Postzustellern oder Kurierfirmen zur Verfügung. Im Falle der Verwaltung und Wartung unserer Website werden Ihre personenbezogenen Daten dem Website-Administrator zur Verfügung gestellt. Nicht zuletzt sind dies Personen wie ein Buchhalter und Steuerberater.",
             "description2": "Empfängerkreis:",
             "item1": "Postzusteller im Sinne des Gesetzes 324/2011 über Postdienste",
             "item2": "Kurierfirma",
