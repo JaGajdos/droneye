@@ -1137,26 +1137,37 @@ body.homepage-intro-flow #landing-hero.hero.hidden {
     list-style: none;
     text-align: left;
     margin: 0;
+    display: grid;
+    gap: 0.55rem;
 }
 
 .equipment-specs li {
     font-size: var(--font-size-form-input);
     color: var(--text-color);
-    line-height: 1.8;
-    margin-bottom: 0.5rem;
-    padding-left: 1.5rem;
+    line-height: 1.35;
+    margin-bottom: 0;
+    padding: 0.6rem 0.8rem;
+    background: var(--background-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.15rem;
 }
 
 .equipment-specs li strong {
-    color: var(--primary-color);
+    color: var(--secondary-color);
     font-weight: 600;
-    margin-right: 0.5rem;
+    margin-right: 0;
+    font-size: var(--font-size-footer-link);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
 }
 
 .equipment-specs li span {
     color: var(--text-color);
+    font-weight: 600;
 }
 
 /* Only subpages get white background, not homepage */
@@ -3637,7 +3648,7 @@ body:not(.homepage) #loading-screen {
 
     .equipment-specs li {
         font-size: var(--font-size-small-mobile);
-        padding-left: 1rem;
+        padding: 0.55rem 0.7rem;
     }
 
     .services-carousel-wrapper {
@@ -3728,7 +3739,7 @@ body:not(.homepage) #loading-screen {
 
     .equipment-specs li {
         font-size: var(--font-size-small);
-        padding-left: 1.25rem;
+        padding: 0.5rem 0.65rem;
     }
 
     .services-carousel-wrapper {
@@ -3796,7 +3807,7 @@ body:not(.homepage) #loading-screen {
 
     .equipment-specs li {
         font-size: var(--font-size-small);
-        padding-left: 1.25rem;
+        padding: 0.5rem 0.65rem;
     }
 }
 
