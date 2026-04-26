@@ -1,4 +1,4 @@
-{
+﻿{
     "nav": {
         "home": "Domov",
         "services": "Naše služby",
@@ -81,6 +81,11 @@
             "position": "Fotograf a post-produkčný špecialista",
             "description": "Peter je expert na fotografiu a post-produkciu. S dokonalým zmyslom pre detail a kompozíciu vytvára snímky, ktoré zachytávajú jedinečnú perspektívu z neba. Jeho práca bola ocenená na viacerých medzinárodných súťažiach."
         }
+    },
+    "courses": {
+        "title": "Naše kurzy",
+        "subtitle": "Lietaj legálne",
+        "intro": "Veľa ľudí má dnes dron. Majú k tomu aj potrebné povolenia? Neznalosť zákona neospravedlňuje, preto môžeš svoju situáciu konzultovať s nami."
     },
     "pricing": {
         "title": "Cenová ponuka",
@@ -342,6 +347,7 @@
         "projects": "Naše projekty - DroneEye",
         "services": "Naše služby - DroneEye",
         "team": "Náš tím - DroneEye",
+        "courses": "Naše kurzy - DroneEye",
         "pricing": "Cenová ponuka - DroneEye",
         "animation": "Drone 3D Model - DroneEye",
         "legislation": "Legislatíva - DroneEye",

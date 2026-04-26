@@ -126,6 +126,7 @@ export default defineConfig({
                 main: "index.html",
                 sluzby: "sluzby.html",
                 projekty: "projekty.html",
+                kurzy: "kurzy.html",
                 tim: "tim.html",
                 "cenova-ponuka": "cenova-ponuka.html",
                 kontakt: "kontakt.html",

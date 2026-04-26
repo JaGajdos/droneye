@@ -3,6 +3,7 @@ RewriteEngine On
 # Slovak URL mappings
 RewriteRule ^sluzby/?$ sluzby.html [L]
 RewriteRule ^projekty/?$ projekty.html [L]
+RewriteRule ^kurzy/?$ kurzy.html [L]
 RewriteRule ^tim/?$ tim.html [L]
 RewriteRule ^cenova-ponuka/?$ cenova-ponuka.html [L]
 RewriteRule ^kontakt/?$ kontakt.html [L]

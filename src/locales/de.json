@@ -1,4 +1,4 @@
-{
+﻿{
     "nav": {
         "home": "Startseite",
         "services": "Unsere Dienstleistungen",
@@ -81,6 +81,11 @@
             "position": "Fotograf und Postproduktionsspezialist",
             "description": "Peter ist Experte für Fotografie und Postproduktion. Mit einem perfekten Gespür für Details und Komposition erstellt er Bilder, die die einzigartige Perspektive vom Himmel einfangen. Seine Arbeit wurde bei mehreren internationalen Wettbewerben ausgezeichnet."
         }
+    },
+    "courses": {
+        "title": "Unsere Kurse",
+        "subtitle": "Fliege legal",
+        "intro": "Viele Menschen besitzen heute eine Drohne. Haben sie auch die erforderlichen Genehmigungen? Unwissenheit schützt vor Strafe nicht, daher kannst du deine Situation mit uns besprechen."
     },
     "pricing": {
         "title": "Preise",
@@ -342,6 +347,7 @@
         "projects": "Unsere Projekte - DroneEye",
         "services": "Unsere Dienstleistungen - DroneEye",
         "team": "Unser Team - DroneEye",
+        "courses": "Unsere Kurse - DroneEye",
         "pricing": "Preise - DroneEye",
         "animation": "Drohnen-3D-Modell - DroneEye",
         "legislation": "Gesetzgebung - DroneEye",

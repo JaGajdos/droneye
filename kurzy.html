@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="sk" data-theme="light">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title data-i18n-title="pageTitle.courses">Naše kurzy - DroneEye</title>
+        <meta
+            name="description"
+            content="Veľa ľudí má dnes dron. Majú k tomu aj potrebné povolenia? Neznalosť zákona neospravedlňuje, preto môžeš svoju situáciu konzultovať s nami."
+        />
+        <meta
+            name="keywords"
+            content="kurzy dronov, povolenia na dron, legislatíva dron, konzultácia dron, školenie dron"
+        />
+        <meta name="author" content="DroneEye" />
+        <meta name="robots" content="index, follow" />
+        <meta name="language" content="sk" />
+        <meta name="revisit-after" content="7 days" />
+
+        <!-- Favicon -->
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" href="/favicon.png" />
+        <link rel="apple-touch-icon" href="/favicon.png" />
+
+        <!-- Canonical URL -->
+        <link rel="canonical" href="https://www.droneye.sk/kurzy" />
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.droneye.sk/kurzy" />
+        <meta property="og:title" content="Naše kurzy - DroneEye" />
+        <meta
+            property="og:description"
+            content="Veľa ľudí má dnes dron. Majú k tomu aj potrebné povolenia? Neznalosť zákona neospravedlňuje, preto môžeš svoju situáciu konzultovať s nami."
+        />
+        <meta property="og:image" content="https://www.droneye.sk/assets/team-og.jpg" />
+        <meta property="og:site_name" content="DroneEye" />
+        <meta property="og:locale" content="sk_SK" />
+
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://www.droneye.sk/kurzy" />
+        <meta property="twitter:title" content="Naše kurzy - DroneEye" />
+        <meta
+            property="twitter:description"
+            content="Veľa ľudí má dnes dron. Majú k tomu aj potrebné povolenia? Neznalosť zákona neospravedlňuje, preto môžeš svoju situáciu konzultovať s nami."
+        />
+        <meta property="twitter:image" content="https://www.droneye.sk/assets/team-twitter.jpg" />
+
+        <!-- Additional SEO -->
+        <meta name="geo.region" content="SK" />
+        <meta name="geo.placename" content="Bratislava" />
+        <meta name="geo.position" content="48.1486;17.1077" />
+        <meta name="ICBM" content="48.1486, 17.1077" />
+
+        <!-- Hreflang Tags -->
+        <link rel="alternate" hreflang="sk" href="https://www.droneye.sk/kurzy" />
+        <link rel="alternate" hreflang="en" href="https://www.droneye.sk/kurzy?lang=en" />
+        <link rel="alternate" hreflang="de" href="https://www.droneye.sk/kurzy?lang=de" />
+        <link rel="alternate" hreflang="x-default" href="https://www.droneye.sk/kurzy" />
+
+        <!-- Structured Data - AboutPage -->
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "AboutPage",
+                "name": "Naše kurzy",
+                "description": "Veľa ľudí má dnes dron. Majú k tomu aj potrebné povolenia? Neznalosť zákona neospravedlňuje, preto môžeš svoju situáciu konzultovať s nami.",
+                "url": "https://www.droneye.sk/kurzy"
+            }
+        </script>
+
+        <!-- Structured Data - BreadcrumbList -->
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "Domov",
+                        "item": "https://www.droneye.sk/"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "Naše kurzy",
+                        "item": "https://www.droneye.sk/kurzy"
+                    }
+                ]
+            }
+        </script>
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="/assets/fontawesome/css/all.min.css" />
+
+        <link rel="stylesheet" href="/src/style.css" />
+        <script>
+            // Hide content until translations are loaded to prevent flash of wrong language
+            (function () {
+                const savedLang = localStorage.getItem("language") || "sk";
+                document.documentElement.setAttribute("lang", savedLang);
+                document.documentElement.style.visibility = "hidden";
+            })();
+        </script>
+    </head>
+    <body>
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="/" class="logo-link">
+                        <img src="assets/logo.svg" alt="DroneEye Logo" class="logo-img" />
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="/" class="nav-link" data-i18n="nav.home">Domov</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/sluzby" class="nav-link" data-i18n="nav.services">Naše služby</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/projekty" class="nav-link" data-i18n="nav.projects">Naše projekty</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/kurzy" class="nav-link active" data-i18n="nav.team">Naše kurzy</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/cenova-ponuka" class="nav-link" data-i18n="nav.pricing">Cenová ponuka</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/kontakt" class="nav-link" data-i18n="nav.contact">Kontakt</a>
+                    </li>
+                    <li class="nav-item mobile-language-switcher">
+                        <div class="mobile-language-buttons">
+                            <button class="language-option active" data-lang="sk">SK</button>
+                            <button class="language-option" data-lang="en">EN</button>
+                            <button class="language-option" data-lang="de">DE</button>
+                        </div>
+                    </li>
+                </ul>
+                <div class="language-switcher">
+                    <div class="language-buttons">
+                        <button class="language-option active" data-lang="sk">SK</button>
+                        <button class="language-option" data-lang="en">EN</button>
+                        <button class="language-option" data-lang="de">DE</button>
+                    </div>
+                </div>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+                <button class="mobile-menu-close" aria-label="Close menu" style="display: none">
+                    <i class="fas fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <section class="page active">
+                <div class="subpage-hero">
+                    <div class="subpage-hero-content">
+                        <h1 data-i18n="courses.title">Naše kurzy</h1>
+                        <p data-i18n="courses.subtitle">Lietaj legálne</p>
+                    </div>
+                </div>
+
+                <div class="subpage-content">
+                    <div class="content-section-text">
+                        <div class="container">
+                            <p class="section-subtitle" data-i18n="courses.intro">
+                                Veľa ľudí má dnes dron. Majú k tomu aj potrebné povolenia? Neznalosť zákona
+                                neospravedlňuje, preto môžeš svoju situáciu konzultovať s nami.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Loading Screen -->
+        <div id="loading-screen">
+            <div class="loader">
+                <div class="loader-circle"></div>
+                <p data-i18n="loading">Načítavam...</p>
+            </div>
+        </div>
+
+        <!-- @include footer -->
+
+        <!-- @include cookie-banner -->
+
+        <script type="module" src="/src/main.js"></script>
+        <script type="module" src="/src/cookies.js"></script>
+    </body>
+</html>
