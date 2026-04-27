@@ -1,5 +1,5 @@
 import { defineConfig } from "vite";
-import { copyFileSync, mkdirSync, existsSync, readdirSync, readFileSync, statSync } from "fs";
+import { copyFileSync, mkdirSync, existsSync, readdirSync, readFileSync } from "fs";
 import { join } from "path";
 
 // Plugin to copy localization files to dist
@@ -67,7 +67,10 @@ function copyBasegraphImagesPlugin() {
                 "basegraph-de-desktop2.webp"
             ];
 
-            basegraphFiles.forEach(file => {
+            // Footer social icons (referenced from inlined partial, not picked up by Rollup)
+            const footerSocialImages = ["instagram.png", "fb.png", "yt.png", "linkedin.png"];
+
+            [...basegraphFiles, ...footerSocialImages].forEach(file => {
                 const srcFile = join(assetsDir, file);
                 const distFile = join(distAssetsDir, file);
                 if (existsSync(srcFile)) {

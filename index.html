@@ -80,74 +80,6 @@
         <link rel="stylesheet" href="/assets/fontawesome/css/all.min.css" />
 
         <link rel="stylesheet" href="/src/style.css" />
-        <style>
-            @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
-            * {
-                padding: 0;
-                margin: 0;
-                box-sizing: border-box;
-                -webkit-user-select: none;
-                -moz-user-select: none;
-                -ms-user-select: none;
-                user-select: none;
-            }
-            input,
-            textarea {
-                -webkit-user-select: text;
-                -moz-user-select: text;
-                -ms-user-select: text;
-                user-select: text;
-            }
-            #canvas-wrapper {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100vw;
-                height: 100vh;
-                z-index: -2;
-            }
-            #webgl {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100vw;
-                height: 100vh;
-                z-index: -2;
-                display: block;
-                touch-action: pan-y !important;
-                user-select: none;
-                -webkit-user-select: none;
-                -webkit-touch-callout: none;
-                -webkit-user-drag: none;
-                -webkit-user-modify: none;
-            }
-            html {
-                height: -webkit-fill-available;
-            }
-            body {
-                padding: 0;
-                margin: 0;
-                overflow-x: hidden;
-                scrollbar-width: thin;
-                background-color: black;
-                color: white;
-                font-family: "Poppins", sans-serif;
-                min-height: 100vh;
-                min-height: -webkit-fill-available;
-            }
-            .section {
-                text-align: center;
-                padding: 40px;
-                max-width: 800px;
-            }
-
-            main {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                text-shadow: 1px 1px 2px #00000080;
-            }
-        </style>
         <script>
             // Hide content until translations are loaded to prevent flash of wrong language
             (function () {
@@ -252,7 +184,7 @@
                         </h3>
                         <p data-i18n="animation.text2.subtitle"></p>
                     </div>
-                    <div class="sub-section" style="padding-top: 10vh"></div>
+                    <div class="sub-section" style="padding-top: 5vh"></div>
                 </div>
                 <div class="section" id="section2">
                     <div class="sub-section">

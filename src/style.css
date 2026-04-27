@@ -181,6 +181,32 @@ button {
     display: block; /* Visible from start */
 }
 
+/* index.html — WebGL podklad (predtým inline v <head>; font len z @font-face vyššie) */
+#canvas-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -2;
+}
+
+#webgl {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -2;
+    display: block;
+    touch-action: pan-y !important;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-user-drag: none;
+    -webkit-user-modify: none;
+}
+
 /* Text container */
 #text-container {
     position: fixed;
@@ -689,6 +715,7 @@ body.homepage .main-content {
 html:has(body.homepage.homepage-index3) {
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none; /* legacy Edge */
+    height: -webkit-fill-available;
 }
 
 html:has(body.homepage.homepage-index3)::-webkit-scrollbar {
@@ -700,8 +727,24 @@ body.homepage.homepage-index3 {
     overflow-y: auto;
     height: auto;
     min-height: 100vh;
+    min-height: -webkit-fill-available;
     scrollbar-width: none;
     -ms-overflow-style: none;
+}
+
+body.homepage.homepage-index3 * {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+body.homepage.homepage-index3 input,
+body.homepage.homepage-index3 textarea {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
 }
 
 body.homepage.homepage-index3::-webkit-scrollbar {
@@ -709,9 +752,19 @@ body.homepage.homepage-index3::-webkit-scrollbar {
 }
 
 body.homepage.homepage-index3 .main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     height: auto;
     min-height: 100vh;
     overflow: visible;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+body.homepage.homepage-index3 .section {
+    text-align: center;
+    padding: 40px;
+    max-width: 800px;
 }
 
 /* Landing (pred „Preskúmať“): žiadny scroll, len hero — potom načítanie dronu + intro príbeh na tej istej stránke */
