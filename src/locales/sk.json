@@ -130,8 +130,8 @@
         },
         "custom": {
             "label": "Individuálne",
-            "description": "Každý projekt je jedinečný a vyžaduje individuálny prístup. Kontaktujte nás a pripravíme vám cenovú ponuku presne podľa vašich potrieb.",
-            "cta": "Kontakt"
+            "description": "Budeme radi, ak nám priblížite, kde a kedy chcete natáčať, na aký účel bude materiál slúžiť a aké sú vaše očakávania.",
+            "cta": "Tešíme sa na spoluprácu"
         },
         "included": {
             "title": "Aké služby sú zahrnuté v cene?",
@@ -239,7 +239,7 @@
             "resolution": "Rozlíšenie videa:",
             "format": "Formát:",
             "item1": {
-                "title": "DJI Avata 2 FPV (2x)",
+                "title": "DJI Avata 2 FPV",
                 "flightTime": "23 minút",
                 "range": "13 km",
                 "resolution": "4K/60fps",

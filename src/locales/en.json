@@ -130,8 +130,8 @@
         },
         "custom": {
             "label": "Individual",
-            "description": "Every project is unique and requires an individual approach. Contact us and we'll prepare a price quote exactly according to your needs.",
-            "cta": "Contact"
+            "description": "We would be glad if you could give us an idea of where and when you want to film, what purpose the material will serve, and what your expectations are.",
+            "cta": "We look forward to working with you"
         },
         "included": {
             "title": "What services are included in the price?",
@@ -239,7 +239,7 @@
             "resolution": "Video Resolution:",
             "format": "Format:",
             "item1": {
-                "title": "DJI Avata 2 FPV (2x)",
+                "title": "DJI Avata 2 FPV",
                 "flightTime": "23 minutes",
                 "range": "13 km",
                 "resolution": "4K/60fps",

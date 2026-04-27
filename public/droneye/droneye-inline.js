@@ -773,7 +773,7 @@
                 document.body && document.body.classList.contains("homepage-index3");
             /** Prepínač modelu lode: false = adventure.glb „ship“ + shader; true = súbor z public/ (materiály z GLB). */
             const USE_EXTERNAL_DRONE_GLB_AS_SHIP = true,
-                EXTERNAL_SHIP_GLB_FILENAME = "Drone.glb";
+                EXTERNAL_SHIP_GLB_FILENAME = "quadcopter_drone.glb";
             (initRenderer(),
                 assetManager
                     .waitUntilReady()
