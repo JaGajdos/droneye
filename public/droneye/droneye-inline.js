@@ -404,18 +404,6 @@
             function clampShipX(x) {
                 return Math.max(-6, Math.min(6, x));
             }
-            const ROTOR_SPIN_SPEED = 18,
-                EXTERNAL_SHIP_BASE_PITCH = -50;
-            /* Jednoduchý prepínač: true = custom look, false = pôvodné GLB materiály. */
-            const ENABLE_EXTERNAL_SHIP_CUSTOM_LOOK = false;
-            /* Look pre externý Drone.glb (jednoduché doladenie farby/svetlosti). */
-            const EXTERNAL_SHIP_BRIGHTNESS = 1.2,
-                EXTERNAL_SHIP_TINT_HEX = 0x9ec9ff,
-                EXTERNAL_SHIP_TINT_STRENGTH = 0.8,
-                EXTERNAL_SHIP_EMISSIVE_STRENGTH = 0.1,
-                EXTERNAL_SHIP_EMISSIVE_INTENSITY = 0.35,
-                EXTERNAL_SHIP_METALNESS_MULT = 0.95,
-                EXTERNAL_SHIP_ROUGHNESS_MULT = 0.9;
             function collectRotorsForSpin(droneRoot) {
                 const rotorNameRegex = /(prop|rotor|fan|blade)/i,
                     parts = [],
@@ -454,28 +442,35 @@
                 }
                 return parts;
             }
-            function applyExternalDroneLook(droneRoot) {
-                const tintColor = new THREE.Color(EXTERNAL_SHIP_TINT_HEX);
+            function applyExternalDroneLook(droneRoot, adapter) {
+                const brightness = adapter.EXTERNAL_SHIP_BRIGHTNESS ?? 1.2,
+                    tintHex = adapter.EXTERNAL_SHIP_TINT_HEX ?? 0x9ec9ff,
+                    tintStrength = adapter.EXTERNAL_SHIP_TINT_STRENGTH ?? 0.8,
+                    emissiveStrength = adapter.EXTERNAL_SHIP_EMISSIVE_STRENGTH ?? 0.1,
+                    emissiveIntensity = adapter.EXTERNAL_SHIP_EMISSIVE_INTENSITY ?? 0.35,
+                    metalnessMult = adapter.EXTERNAL_SHIP_METALNESS_MULT ?? 0.95,
+                    roughnessMult = adapter.EXTERNAL_SHIP_ROUGHNESS_MULT ?? 0.9;
+                const tintColor = new THREE.Color(tintHex);
                 droneRoot.traverse(obj => {
                     if (!obj.isMesh || !obj.material) return;
                     const materials = Array.isArray(obj.material) ? obj.material : [obj.material];
                     materials.forEach(mat => {
                         if (!mat) return;
                         if (mat.color) {
-                            mat.color.multiplyScalar(EXTERNAL_SHIP_BRIGHTNESS);
-                            mat.color.lerp(tintColor, EXTERNAL_SHIP_TINT_STRENGTH);
+                            mat.color.multiplyScalar(brightness);
+                            mat.color.lerp(tintColor, tintStrength);
                         }
                         if (mat.emissive) {
-                            mat.emissive.lerp(tintColor, EXTERNAL_SHIP_EMISSIVE_STRENGTH);
+                            mat.emissive.lerp(tintColor, emissiveStrength);
                             mat.emissiveIntensity = Math.max(
                                 mat.emissiveIntensity || 0,
-                                EXTERNAL_SHIP_EMISSIVE_INTENSITY
+                                emissiveIntensity
                             );
                         }
                         if (typeof mat.metalness === "number")
-                            mat.metalness = Math.min(1, mat.metalness * EXTERNAL_SHIP_METALNESS_MULT);
+                            mat.metalness = Math.min(1, mat.metalness * metalnessMult);
                         if (typeof mat.roughness === "number")
-                            mat.roughness = Math.max(0, mat.roughness * EXTERNAL_SHIP_ROUGHNESS_MULT);
+                            mat.roughness = Math.max(0, mat.roughness * roughnessMult);
                         mat.needsUpdate = !0;
                     });
                 });
@@ -491,11 +486,20 @@
                         (this.material = null),
                         (this.nitros = []),
                         (this.rotorSpinParts = []),
-                        (this.basePitchOffset = 0));
+                        (this.basePitchOffset = 0),
+                        (this.modelAdapter = {}));
                 }
                 init(shipRoot, options) {
                     if (options && options.useGltfMaterials) {
-                        ENABLE_EXTERNAL_SHIP_CUSTOM_LOOK && applyExternalDroneLook(shipRoot);
+                        this.modelAdapter = resolveModelAdapter(EXTERNAL_SHIP_GLB_FILENAME);
+                        this.modelAdapter.EXTERNAL_SHIP_ENABLE_CUSTOM_LOOK &&
+                            applyExternalDroneLook(shipRoot, this.modelAdapter);
+                        this.modelAdapter.onInit &&
+                            this.modelAdapter.onInit(shipRoot, {
+                                THREE,
+                                scene,
+                                ship: this
+                            });
                         const box = new THREE.Box3().setFromObject(shipRoot),
                             size = box.getSize(new THREE.Vector3()),
                             maxDim = Math.max(size.x, size.y, size.z, 1e-6);
@@ -506,8 +510,16 @@
                         scene.add(shipRoot);
                         ((this.material = null),
                             (this.model = shipRoot),
-                            (this.basePitchOffset = EXTERNAL_SHIP_BASE_PITCH),
-                            (this.rotorSpinParts = collectRotorsForSpin(shipRoot)));
+                            (this.basePitchOffset =
+                                void 0 !== this.modelAdapter.EXTERNAL_SHIP_BASE_PITCH
+                                    ? this.modelAdapter.EXTERNAL_SHIP_BASE_PITCH
+                                    : -50),
+                            (this.rotorSpinParts = this.modelAdapter.collectRotorsForSpin
+                                ? this.modelAdapter.collectRotorsForSpin(shipRoot, {
+                                      THREE,
+                                      collectDefault: collectRotorsForSpin
+                                  })
+                                : collectRotorsForSpin(shipRoot)));
                         for (let slot = 0; slot < 2; slot++)
                             (this.nitros.push(new NitroEffect()), this.nitros[slot].attachToShip(this));
                         (this.nitros[0].setPosition(-2.5, 0, 0.8), this.nitros[1].setPosition(2.5, 0, 0.8));
@@ -565,15 +577,20 @@
                         (this.model.rotation.x = this.basePitchOffset + 0.1 * Math.sin(elapsed) - 0.05 * velX),
                         (this.model.rotation.z = 0.1 * Math.cos(0.8 * elapsed) - 0.3 * velY),
                         updateNitro(elapsed));
-                    if (this.rotorSpinParts && this.rotorSpinParts.length) {
-                        const spin = ROTOR_SPIN_SPEED * delta;
-                        for (let k = 0; k < this.rotorSpinParts.length; k++) {
-                            const part = this.rotorSpinParts[k];
-                            if (!part || !part.rotor) continue;
-                            part.rotor.rotation.y += spin;
-                            part.basePos && part.rotor.position.copy(part.basePos);
-                        }
-                    }
+                    this.modelAdapter &&
+                        this.modelAdapter.animate &&
+                        this.modelAdapter.animate(
+                            {
+                                ship: this,
+                                model: this.model,
+                                rotorSpinParts: this.rotorSpinParts
+                            },
+                            {
+                                delta,
+                                elapsed,
+                                THREE
+                            }
+                        );
                 }
                 setTargetY(y) {
                     this.targetY = Math.max(-2, y);
@@ -773,7 +790,11 @@
                 document.body && document.body.classList.contains("homepage-index3");
             /** Prepínač modelu lode: false = adventure.glb „ship“ + shader; true = súbor z public/ (materiály z GLB). */
             const USE_EXTERNAL_DRONE_GLB_AS_SHIP = true,
-                EXTERNAL_SHIP_GLB_FILENAME = "quadcopter_drone.glb";
+                EXTERNAL_SHIP_GLB_FILENAME = "DroneModel.glb";
+            function resolveModelAdapter(fileName) {
+                if (!window.DroneModelRegistry || typeof window.DroneModelRegistry.resolve != "function") return {};
+                return window.DroneModelRegistry.resolve(fileName) || {};
+            }
             (initRenderer(),
                 assetManager
                     .waitUntilReady()
