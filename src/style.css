@@ -978,14 +978,36 @@ body.homepage-intro-flow #landing-hero.hero.hidden {
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-md);
     color: var(--text-color);
+    position: relative;
+    overflow: hidden;
     transition:
         transform 0.25s ease,
-        box-shadow 0.25s ease;
+        box-shadow 0.25s ease,
+        border-color 0.3s ease;
+}
+
+.specialization-tile::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--primary-color));
+    background-size: 200% 100%;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s ease;
 }
 
 .specialization-tile:hover {
     transform: translateY(-3px);
     box-shadow: var(--shadow-lg);
+    border-color: rgba(0, 35, 102, 0.18);
+}
+
+.specialization-tile:hover::before {
+    transform: scaleX(1);
 }
 
 .specialization-tile-icon {
