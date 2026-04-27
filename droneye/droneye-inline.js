@@ -346,56 +346,6 @@
                     return shipY >= layerY - 100 && shipY < layerY + 300;
                 }
             }
-            let nitroMaterial = null;
-            function updateNitro(time) {
-                nitroMaterial.uniforms.uTime.value = time;
-            }
-            class NitroEffect {
-                constructor(particleCount = 20) {
-                    ((this.particleCount = particleCount), (this.geometry = new THREE.BufferGeometry()));
-                    const positions = new Float32Array(3 * particleCount),
-                        sizes = new Float32Array(particleCount),
-                        speeds = new Float32Array(particleCount),
-                        ranges = new Float32Array(particleCount),
-                        colors = new Float32Array(3 * particleCount);
-                    for (let particleIndex = 0; particleIndex < particleCount; particleIndex++) {
-                        const base = 3 * particleIndex;
-                        ((positions[base] = rndFS(0.2)),
-                            (positions[base + 1] = rndFS(0.2)),
-                            (positions[base + 2] = 0),
-                            (sizes[particleIndex] = rnd(50, 70)),
-                            (speeds[particleIndex] = rnd(1, 1.2)),
-                            (ranges[particleIndex] = rnd(2, 2.4)),
-                            (colors[base] = rnd(-0.5, 0.5)),
-                            (colors[base + 1] = rnd(-0.5, 0.5)),
-                            (colors[base + 2] = rnd(-0.5, 0.5)));
-                    }
-                    (this.geometry.setAttribute("position", new THREE.Float32BufferAttribute(positions, 3)),
-                        this.geometry.setAttribute("aSize", new THREE.Float32BufferAttribute(sizes, 1)),
-                        this.geometry.setAttribute("aSpeed", new THREE.Float32BufferAttribute(speeds, 1)),
-                        this.geometry.setAttribute("aRange", new THREE.Float32BufferAttribute(ranges, 1)),
-                        this.geometry.setAttribute("color", new THREE.Float32BufferAttribute(colors, 3)));
-                    const vs = assetManager.load("nitro.vs"),
-                        fs = assetManager.load("nitro.fs");
-                    (nitroMaterial ||
-                        (nitroMaterial = new THREE.RawShaderMaterial({
-                            vertexShader: vs,
-                            fragmentShader: fs,
-                            uniforms: { uTime: { value: 0 } },
-                            blending: THREE.AdditiveBlending,
-                            transparent: !0,
-                            depthWrite: !1
-                        })),
-                        (this.points = new THREE.Points(this.geometry, nitroMaterial)),
-                        (this.points.renderOrder = 1e4));
-                }
-                attachToShip(shipInstance) {
-                    shipInstance.model.add(this.points);
-                }
-                setPosition(x, y, z) {
-                    this.points.position.set(x, y, z);
-                }
-            }
             const SHIP_STRAFE_RANGE = 6,
                 SHIP_STRAFE_SPEED_X = 5,
                 SHIP_STRAFE_SPEED_Y = 5,
@@ -404,18 +354,6 @@
             function clampShipX(x) {
                 return Math.max(-6, Math.min(6, x));
             }
-            const ROTOR_SPIN_SPEED = 18,
-                EXTERNAL_SHIP_BASE_PITCH = -50;
-            /* Jednoduchý prepínač: true = custom look, false = pôvodné GLB materiály. */
-            const ENABLE_EXTERNAL_SHIP_CUSTOM_LOOK = false;
-            /* Look pre externý Drone.glb (jednoduché doladenie farby/svetlosti). */
-            const EXTERNAL_SHIP_BRIGHTNESS = 1.2,
-                EXTERNAL_SHIP_TINT_HEX = 0x9ec9ff,
-                EXTERNAL_SHIP_TINT_STRENGTH = 0.8,
-                EXTERNAL_SHIP_EMISSIVE_STRENGTH = 0.1,
-                EXTERNAL_SHIP_EMISSIVE_INTENSITY = 0.35,
-                EXTERNAL_SHIP_METALNESS_MULT = 0.95,
-                EXTERNAL_SHIP_ROUGHNESS_MULT = 0.9;
             function collectRotorsForSpin(droneRoot) {
                 const rotorNameRegex = /(prop|rotor|fan|blade)/i,
                     parts = [],
@@ -454,28 +392,35 @@
                 }
                 return parts;
             }
-            function applyExternalDroneLook(droneRoot) {
-                const tintColor = new THREE.Color(EXTERNAL_SHIP_TINT_HEX);
+            function applyExternalDroneLook(droneRoot, adapter) {
+                const brightness = adapter.EXTERNAL_SHIP_BRIGHTNESS ?? 1.2,
+                    tintHex = adapter.EXTERNAL_SHIP_TINT_HEX ?? 0x9ec9ff,
+                    tintStrength = adapter.EXTERNAL_SHIP_TINT_STRENGTH ?? 0.8,
+                    emissiveStrength = adapter.EXTERNAL_SHIP_EMISSIVE_STRENGTH ?? 0.1,
+                    emissiveIntensity = adapter.EXTERNAL_SHIP_EMISSIVE_INTENSITY ?? 0.35,
+                    metalnessMult = adapter.EXTERNAL_SHIP_METALNESS_MULT ?? 0.95,
+                    roughnessMult = adapter.EXTERNAL_SHIP_ROUGHNESS_MULT ?? 0.9;
+                const tintColor = new THREE.Color(tintHex);
                 droneRoot.traverse(obj => {
                     if (!obj.isMesh || !obj.material) return;
                     const materials = Array.isArray(obj.material) ? obj.material : [obj.material];
                     materials.forEach(mat => {
                         if (!mat) return;
                         if (mat.color) {
-                            mat.color.multiplyScalar(EXTERNAL_SHIP_BRIGHTNESS);
-                            mat.color.lerp(tintColor, EXTERNAL_SHIP_TINT_STRENGTH);
+                            mat.color.multiplyScalar(brightness);
+                            mat.color.lerp(tintColor, tintStrength);
                         }
                         if (mat.emissive) {
-                            mat.emissive.lerp(tintColor, EXTERNAL_SHIP_EMISSIVE_STRENGTH);
+                            mat.emissive.lerp(tintColor, emissiveStrength);
                             mat.emissiveIntensity = Math.max(
                                 mat.emissiveIntensity || 0,
-                                EXTERNAL_SHIP_EMISSIVE_INTENSITY
+                                emissiveIntensity
                             );
                         }
                         if (typeof mat.metalness === "number")
-                            mat.metalness = Math.min(1, mat.metalness * EXTERNAL_SHIP_METALNESS_MULT);
+                            mat.metalness = Math.min(1, mat.metalness * metalnessMult);
                         if (typeof mat.roughness === "number")
-                            mat.roughness = Math.max(0, mat.roughness * EXTERNAL_SHIP_ROUGHNESS_MULT);
+                            mat.roughness = Math.max(0, mat.roughness * roughnessMult);
                         mat.needsUpdate = !0;
                     });
                 });
@@ -489,13 +434,21 @@
                         (this.targetY = -3),
                         (this.targetZ = -20),
                         (this.material = null),
-                        (this.nitros = []),
                         (this.rotorSpinParts = []),
-                        (this.basePitchOffset = 0));
+                        (this.basePitchOffset = 0),
+                        (this.modelAdapter = {}));
                 }
                 init(shipRoot, options) {
                     if (options && options.useGltfMaterials) {
-                        ENABLE_EXTERNAL_SHIP_CUSTOM_LOOK && applyExternalDroneLook(shipRoot);
+                        this.modelAdapter = resolveModelAdapter(EXTERNAL_SHIP_GLB_FILENAME);
+                        this.modelAdapter.EXTERNAL_SHIP_ENABLE_CUSTOM_LOOK &&
+                            applyExternalDroneLook(shipRoot, this.modelAdapter);
+                        this.modelAdapter.onInit &&
+                            this.modelAdapter.onInit(shipRoot, {
+                                THREE,
+                                scene,
+                                ship: this
+                            });
                         const box = new THREE.Box3().setFromObject(shipRoot),
                             size = box.getSize(new THREE.Vector3()),
                             maxDim = Math.max(size.x, size.y, size.z, 1e-6);
@@ -506,11 +459,16 @@
                         scene.add(shipRoot);
                         ((this.material = null),
                             (this.model = shipRoot),
-                            (this.basePitchOffset = EXTERNAL_SHIP_BASE_PITCH),
-                            (this.rotorSpinParts = collectRotorsForSpin(shipRoot)));
-                        for (let slot = 0; slot < 2; slot++)
-                            (this.nitros.push(new NitroEffect()), this.nitros[slot].attachToShip(this));
-                        (this.nitros[0].setPosition(-2.5, 0, 0.8), this.nitros[1].setPosition(2.5, 0, 0.8));
+                            (this.basePitchOffset =
+                                void 0 !== this.modelAdapter.EXTERNAL_SHIP_BASE_PITCH
+                                    ? this.modelAdapter.EXTERNAL_SHIP_BASE_PITCH
+                                    : -50),
+                            (this.rotorSpinParts = this.modelAdapter.collectRotorsForSpin
+                                ? this.modelAdapter.collectRotorsForSpin(shipRoot, {
+                                      THREE,
+                                      collectDefault: collectRotorsForSpin
+                                  })
+                                : collectRotorsForSpin(shipRoot)));
                         return;
                     }
                     this.rotorSpinParts = [];
@@ -545,9 +503,6 @@
                         scene.add(shipRoot),
                         (this.material = hullMaterial),
                         (this.model = shipRoot));
-                    for (let slot = 0; slot < 2; slot++)
-                        (this.nitros.push(new NitroEffect()), this.nitros[slot].attachToShip(this));
-                    (this.nitros[0].setPosition(-2.5, 0, 0.8), this.nitros[1].setPosition(2.5, 0, 0.8));
                 }
                 animate(delta, elapsed) {
                     if (!this.model) return;
@@ -563,17 +518,21 @@
                         (this.model.position.y = this.positionY + 0.2 * Math.sin(elapsed)),
                         (this.model.position.z = this.positionZ),
                         (this.model.rotation.x = this.basePitchOffset + 0.1 * Math.sin(elapsed) - 0.05 * velX),
-                        (this.model.rotation.z = 0.1 * Math.cos(0.8 * elapsed) - 0.3 * velY),
-                        updateNitro(elapsed));
-                    if (this.rotorSpinParts && this.rotorSpinParts.length) {
-                        const spin = ROTOR_SPIN_SPEED * delta;
-                        for (let k = 0; k < this.rotorSpinParts.length; k++) {
-                            const part = this.rotorSpinParts[k];
-                            if (!part || !part.rotor) continue;
-                            part.rotor.rotation.y += spin;
-                            part.basePos && part.rotor.position.copy(part.basePos);
-                        }
-                    }
+                        (this.model.rotation.z = 0.1 * Math.cos(0.8 * elapsed) - 0.3 * velY));
+                    this.modelAdapter &&
+                        this.modelAdapter.animate &&
+                        this.modelAdapter.animate(
+                            {
+                                ship: this,
+                                model: this.model,
+                                rotorSpinParts: this.rotorSpinParts
+                            },
+                            {
+                                delta,
+                                elapsed,
+                                THREE
+                            }
+                        );
                 }
                 setTargetY(y) {
                     this.targetY = Math.max(-2, y);
@@ -639,8 +598,6 @@
                 { name: "star.png", offset: 301309, size: 2181, width: 64, height: 64 },
                 { name: "ship.vs", offset: 303490, size: 578 },
                 { name: "ship.fs", offset: 304068, size: 1681 },
-                { name: "nitro.vs", offset: 305749, size: 1054 },
-                { name: "nitro.fs", offset: 306803, size: 500 },
                 { name: "ocean.vs", offset: 307303, size: 617 },
                 { name: "ocean.fs", offset: 307920, size: 2121 },
                 { name: "ocean_cloud.vs", offset: 310041, size: 464 },
@@ -773,7 +730,11 @@
                 document.body && document.body.classList.contains("homepage-index3");
             /** Prepínač modelu lode: false = adventure.glb „ship“ + shader; true = súbor z public/ (materiály z GLB). */
             const USE_EXTERNAL_DRONE_GLB_AS_SHIP = true,
-                EXTERNAL_SHIP_GLB_FILENAME = "Drone.glb";
+                EXTERNAL_SHIP_GLB_FILENAME = "DroneModel.glb";
+            function resolveModelAdapter(fileName) {
+                if (!window.DroneModelRegistry || typeof window.DroneModelRegistry.resolve != "function") return {};
+                return window.DroneModelRegistry.resolve(fileName) || {};
+            }
             (initRenderer(),
                 assetManager
                     .waitUntilReady()
@@ -872,13 +833,12 @@
                                     },
                                     void 0,
                                     err => {
-                                        (console.warn("External ship GLB failed, using bundled ship:", err),
-                                            bundleShip
-                                                ? ((ship = new Ship()).init(bundleShip, { useGltfMaterials: !1 }), afterShip())
-                                                : ((ship = null), afterShip()));
+                                        (console.warn("External drone GLB failed, ship model disabled:", err),
+                                            (ship = null),
+                                            afterShip());
                                     }
                                 );
-                            } else ((ship = new Ship()).init(bundleShip, { useGltfMaterials: !1 }), afterShip());
+                            } else ((ship = null), afterShip());
                         }
                         if (deferDroneUntilLandingCTA) {
                             ((ship = null),
