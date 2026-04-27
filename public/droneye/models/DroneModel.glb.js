@@ -5,58 +5,38 @@
         const parts = [];
         const seen = new Set();
 
-        function detectSpinAxis(size) {
-            // Rotor plane normal is usually the thinnest dimension.
-            if (size.x <= size.y && size.x <= size.z) return "x";
-            if (size.y <= size.x && size.y <= size.z) return "y";
-            return "z";
+        function getSpinDirectionByName(name) {
+            // Real quad pattern: diagonals share direction, neighboring rotors are opposite.
+            // Based on this model's naming/placement: (1,4) one way, (2,3) opposite way.
+            if ("Propeller1" === name || "Propeller4" === name) return 1;
+            if ("Propeller2" === name || "Propeller3" === name) return -1;
+            return 1;
         }
 
-        function getSpinDirectionByPosition(pos) {
-            // Real quadcopter pattern: diagonals spin same way, neighboring rotors opposite.
-            // Use X/Z quadrant so this works even if propeller naming changes.
-            return pos.x * pos.z >= 0 ? 1 : -1;
-        }
-
-        const addPart = (rotor, rotorName) => {
+        const addPart = rotor => {
             if (!rotor || seen.has(rotor)) return;
             seen.add(rotor);
 
-            let spinTarget = rotor;
-            rotor.traverse(child => {
-                if (!spinTarget.isMesh && child.isMesh) spinTarget = child;
-            });
-
-            if (spinTarget.isMesh && spinTarget.geometry) {
-                spinTarget.geometry.computeBoundingBox();
-                const box = spinTarget.geometry.boundingBox;
-                const ThreeCtor = helpers && helpers.THREE ? helpers.THREE : window.THREE;
-                const center = new ThreeCtor.Vector3();
-                const size = new ThreeCtor.Vector3();
-                box.getCenter(center);
-                box.getSize(size);
-                spinTarget.geometry.translate(-center.x, -center.y, -center.z);
-                spinTarget.position.add(center);
-                parts.push({
-                    rotor: spinTarget,
-                    basePos: spinTarget.position.clone(),
-                    axis: detectSpinAxis(size),
-                    dir: getSpinDirectionByPosition(spinTarget.position)
-                });
-                return;
-            }
-
             parts.push({
-                rotor: spinTarget,
-                basePos: spinTarget.position.clone(),
-                axis: "y",
-                dir: getSpinDirectionByPosition(spinTarget.position)
+                rotor,
+                axis: "z",
+                dir: getSpinDirectionByName(rotor.name)
             });
         };
 
         ["Propeller1", "Propeller2", "Propeller3", "Propeller4"].forEach(name => {
-            addPart(droneRoot.getObjectByName(name), name);
+            addPart(droneRoot.getObjectByName(name));
         });
+        if (!parts.length) {
+            [
+                "Propeller1_Material_0",
+                "Propeller2_Material_0",
+                "Propeller3_Material_0",
+                "Propeller4_Material_0"
+            ].forEach(name => {
+                addPart(droneRoot.getObjectByName(name));
+            });
+        }
 
         if (!parts.length && helpers && typeof helpers.collectDefault == "function") {
             return helpers.collectDefault(droneRoot);
@@ -76,11 +56,53 @@
             if ("x" === axis) part.rotor.rotation.x += signedSpin;
             else if ("z" === axis) part.rotor.rotation.z += signedSpin;
             else part.rotor.rotation.y += signedSpin;
-            part.basePos && part.rotor.position.copy(part.basePos);
         }
     }
 
-    window.DroneModelRegistry.register("DroneModel.glb", {
+    function applyDroneModelColors(droneRoot, runtime) {
+        const THREE = runtime.THREE;
+        const bodyColor = new THREE.Color(0x003d99);
+        const whiteColor = new THREE.Color(0xffffff);
+
+        const bodyTargets = new Set(["Quadrocopter_Material_0", "Legs_Material_0"]);
+        const whiteTargets = new Set([
+            "Propeller1_Material_0",
+            "Propeller2_Material_0",
+            "Propeller3_Material_0",
+            "Propeller4_Material_0",
+            "Rotors_Material_0",
+            "BottomCam.001_Material_0",
+            "BottomCam_Material_0",
+            "TopCam_Material_0",
+            "CamBackground_Material_0",
+            "Lens_Material_0",
+            "TopLens_Material_0",
+            "BottomLens_Material_0",
+            "Glass_Glass_0",
+            "SidePart_Material_0"
+        ]);
+
+        droneRoot.traverse(obj => {
+            if (!obj.isMesh || !obj.material) return;
+            const materials = Array.isArray(obj.material) ? obj.material : [obj.material];
+            const hasBodyMaterialName = materials.some(mat => mat && bodyTargets.has(mat.name));
+            const hasWhiteMaterialName = materials.some(mat => mat && whiteTargets.has(mat.name));
+            const isBody = bodyTargets.has(obj.name) || hasBodyMaterialName;
+            const isWhite = whiteTargets.has(obj.name) || hasWhiteMaterialName;
+            if (!isBody && !isWhite) return;
+            const targetColor = isBody ? bodyColor : whiteColor;
+
+            for (let i = 0; i < materials.length; i++) {
+                const mat = materials[i];
+                if (!mat) continue;
+                if (mat.color) mat.color.copy(targetColor);
+                if (mat.emissive) mat.emissive.set(0x000000);
+                mat.needsUpdate = true;
+            }
+        });
+    }
+
+    const droneModelAdapter = {
         EXTERNAL_SHIP_BASE_PITCH: -50,
         EXTERNAL_SHIP_ENABLE_CUSTOM_LOOK: false,
         EXTERNAL_SHIP_BRIGHTNESS: 1.2,
@@ -90,7 +112,10 @@
         EXTERNAL_SHIP_EMISSIVE_INTENSITY: 0.35,
         EXTERNAL_SHIP_METALNESS_MULT: 0.95,
         EXTERNAL_SHIP_ROUGHNESS_MULT: 0.9,
+        onInit: applyDroneModelColors,
         collectRotorsForSpin,
         animate: spinRotors
-    });
+    };
+
+    window.DroneModelRegistry.register("DroneModel.glb", droneModelAdapter);
 })();
