@@ -61,7 +61,8 @@
 
     function applyDroneModelColors(droneRoot, runtime) {
         const THREE = runtime.THREE;
-        const bodyColor = new THREE.Color(0x003d99);
+        //const bodyColor = new THREE.Color(0x003d99);
+        const bodyColor = new THREE.Color(0xffffff);
         const whiteColor = new THREE.Color(0xffffff);
 
         const bodyTargets = new Set(["Quadrocopter_Material_0", "Legs_Material_0"]);
