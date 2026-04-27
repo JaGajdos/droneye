@@ -313,6 +313,22 @@
                 "consent": "Musíte súhlasiť so spracovaním osobných údajov.",
                 "submit": "Nastala chyba pri odosielaní formulára. Skúste to prosím znova."
             }
+        },
+        "faq": {
+            "title": "Často kladené otázky",
+            "subtitle": "Najčastejšie odpovede pre rýchle vybavenie vašej požiadavky.",
+            "item1": {
+                "question": "Ako rýchlo mi viete odpovedať na dopyt?",
+                "answer": "Na väčšinu správ reagujeme do 24 hodín počas pracovných dní."
+            },
+            "item2": {
+                "question": "Viete lietať aj mimo Bratislavy?",
+                "answer": "Áno, realizujeme projekty po celom Slovensku, podľa typu zákazky aj v zahraničí."
+            },
+            "item3": {
+                "question": "Čo si mám pripraviť pred prvou konzultáciou?",
+                "answer": "Stačí stručný popis lokality, termínu a cieľa natáčania. O zvyšok sa postaráme spolu."
+            }
         }
     },
     "footer": {
