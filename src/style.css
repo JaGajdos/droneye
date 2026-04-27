@@ -2876,6 +2876,82 @@ h2 {
     border: 1px solid #f5c6cb;
 }
 
+.contact-faq {
+    margin-top: 3rem;
+    padding: var(--space-6);
+    border-radius: var(--radius-md);
+    background: var(--card-background);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-md);
+}
+
+.contact-faq .section-title {
+    margin-bottom: 0.75rem;
+    text-align: left;
+}
+
+.contact-faq .section-subtitle {
+    text-align: left;
+    margin-bottom: 1.5rem;
+}
+
+.contact-faq-item {
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    background: #fff;
+    margin-bottom: 0.9rem;
+    overflow: hidden;
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.contact-faq-item:last-child {
+    margin-bottom: 0;
+}
+
+.contact-faq-item[open] {
+    border-color: rgba(0, 35, 102, 0.25);
+    box-shadow: var(--shadow-sm);
+}
+
+.contact-faq-item summary {
+    list-style: none;
+    cursor: pointer;
+    position: relative;
+    padding: 1rem 3rem 1rem 1.1rem;
+    color: var(--primary-color);
+    font-size: var(--font-size-body);
+    font-weight: 600;
+}
+
+.contact-faq-item summary::-webkit-details-marker {
+    display: none;
+}
+
+.contact-faq-item summary::after {
+    content: "+";
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.25rem;
+    line-height: 1;
+    color: var(--primary-color);
+    transition: transform 0.2s ease;
+}
+
+.contact-faq-item[open] summary::after {
+    content: "\2212";
+}
+
+.contact-faq-item p {
+    margin: 0;
+    padding: 0 1.1rem 1rem;
+    color: var(--text-color);
+    line-height: 1.65;
+}
+
 /* Footer */
 footer {
     background: var(--footer-bg);
@@ -3518,7 +3594,8 @@ body:not(.homepage) #loading-screen {
     .team-card,
     .pricing-card,
     .contact-info,
-    .contact-form {
+    .contact-form,
+    .contact-faq {
         padding: var(--space-5);
     }
 

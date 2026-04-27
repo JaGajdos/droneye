@@ -313,6 +313,22 @@
                 "consent": "Sie müssen der Verarbeitung personenbezogener Daten zustimmen.",
                 "submit": "Beim Senden des Formulars ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."
             }
+        },
+        "faq": {
+            "title": "Häufig gestellte Fragen",
+            "subtitle": "Schnelle Antworten, damit Ihre Anfrage zügig weitergeht.",
+            "item1": {
+                "question": "Wie schnell können Sie auf meine Anfrage antworten?",
+                "answer": "Auf die meisten Anfragen antworten wir werktags innerhalb von 24 Stunden."
+            },
+            "item2": {
+                "question": "Können Sie auch außerhalb von Bratislava fliegen?",
+                "answer": "Ja, wir realisieren Projekte in der ganzen Slowakei und je nach Umfang auch im Ausland."
+            },
+            "item3": {
+                "question": "Was sollte ich für die erste Beratung vorbereiten?",
+                "answer": "Eine kurze Beschreibung von Ort, Termin und Ziel reicht aus. Beim Rest unterstützen wir Sie."
+            }
         }
     },
     "footer": {

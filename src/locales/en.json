@@ -313,6 +313,22 @@
                 "consent": "You must agree to the processing of personal data.",
                 "submit": "An error occurred while sending the form. Please try again."
             }
+        },
+        "faq": {
+            "title": "Frequently Asked Questions",
+            "subtitle": "Quick answers to help you move forward faster.",
+            "item1": {
+                "question": "How quickly can you reply to my request?",
+                "answer": "We respond to most inquiries within 24 hours on business days."
+            },
+            "item2": {
+                "question": "Can you operate outside Bratislava?",
+                "answer": "Yes, we deliver projects across Slovakia and, depending on scope, abroad as well."
+            },
+            "item3": {
+                "question": "What should I prepare before the first consultation?",
+                "answer": "A short brief with location, timing and your goal is enough. We will guide you through the rest."
+            }
         }
     },
     "footer": {
