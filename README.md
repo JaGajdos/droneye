@@ -1,187 +1,109 @@
-# DroneEye - Web Aplikácia
+# DroneEye — webová prezentácia
 
-Moderná webová aplikácia s Three.js animovaným dronom a responzívnym dizajnom, postavená na Vite. Profesionálne drone služby s interaktívnou 3D animáciou.
+Marketingový web firmy DroneEye (drone služby, projekty, kurzy, tím). Multi-page statický web na **Vite**, s WebGL intro na homepage, i18n (SK/EN/DE), Contentful sync pre projekty, EmailJS formulármi a cookie bannerom.
 
-## Funkcie
+Produkčný base path: `/droneye/` (GitHub Pages). Doména: [droneye.sk](https://www.droneye.sk/).
 
-- 🎨 **Three.js Animácie** - Interaktívny 3D dron s tromi scénami (Vesmír, Oblaky, Voda)
-- 🌍 **Viacjazyčnosť** - Podpora pre SK, EN, DE (i18n)
-- 📱 **Responzívny dizajn** - Optimalizované pre všetky zariadenia
-- 🧭 **Smooth navigácia** - Plynulé prepínanie medzi stránkami
-- ✨ **Moderný UI/UX** - Glassmorphism dizajn s animáciami
-- 📧 **Kontaktný formulár** - Funkčný formulár s EmailJS validáciou
-- 🍪 **Cookies** - GDPR súhlas s cookies
-- ⚡ **Vite Build Tool** - Rýchly development a optimalizovaný build
-- 🔍 **SEO Optimalizácia** - Sitemap, structured data, hreflang tagy
+## Stránky
 
-## Štruktúra projektu
+| URL | Súbor | Popis |
+|-----|--------|--------|
+| `/` | `index.html` | Homepage + 3D scroll intro |
+| `/sluzby` | `sluzby.html` | Služby |
+| `/projekty` | `projekty.html` | Galéria (YouTube + fotky z Contentful) |
+| `/kurzy` | `kurzy.html` | Kurzy / legislatívne konzultácie |
+| `/tim` | `tim.html` | Tím |
+| `/cenova-ponuka` | `cenova-ponuka.html` | Cenová ponuka |
+| `/kontakt` | `kontakt.html` | Kontaktný formulár |
+| `/legislativa` | `legislativa.html` | Legislatíva |
+| `/gdpr` | `gdpr.html` | GDPR |
+
+## Štruktúra
 
 ```
 droneye/
-├── index.html              # Hlavná HTML stránka s 3D animáciou
-├── sluzby.html             # Stránka služieb
-├── projekty.html           # Galéria projektov
-├── tim.html                # Stránka tímu
-├── cenova-ponuka.html      # Cenová ponuka
-├── kontakt.html            # Kontaktný formulár
-├── legislativa.html        # Legislatíva
-├── gdpr.html               # GDPR politika
+├── index.html, sluzby.html, projekty.html, kurzy.html, tim.html, …
 ├── src/
-│   ├── animation.js        # Three.js animácia dronu (3 scény)
-│   ├── main.js             # Hlavná JavaScript funkcionalita
-│   ├── i18n.js             # Internacionalizácia (SK/EN/DE)
-│   ├── contact-form.js     # Kontaktný formulár
-│   ├── cookies.js          # Cookies súhlas
-│   ├── style.css           # CSS štýly
-│   └── locales/            # Preklady
-│       ├── sk.json
-│       ├── en.json
-│       └── de.json
-├── public/                 # Statické súbory
-│   ├── Drone.glb           # 3D model dronu
-│   ├── cloud1.png          # Textúra oblakov
-│   ├── cloud2.png          # Textúra oblakov
-│   └── favicon.ico
-├── assets/                 # Obrázky a zdroje
-├── sitemap.xml             # SEO sitemap
-├── robots.txt              # SEO robots
-├── package.json            # NPM dependencies
-├── vite.config.js          # Vite konfigurácia
-└── README.md               # Dokumentácia
+│   ├── main.js              # Navigácia, UI, init stránok
+│   ├── i18n.js              # SK / EN / DE
+│   ├── contact-form.js      # EmailJS formuláre
+│   ├── cookies.js           # Cookie consent + YouTube po súhlase
+│   ├── projects.js          # Načítanie Contentful JSON
+│   ├── style.css
+│   ├── locales/             # sk.json, en.json, de.json
+│   └── partials/            # footer.html, cookie-banner.html
+├── public/
+│   ├── droneye/
+│   │   ├── three.min.js     # Three.js r128 (legacy global)
+│   │   ├── droneye-inline.js# 3D intro scéna (homepage)
+│   │   └── models/          # GLB model adapters
+│   ├── DroneModel.glb, Drone2.glb, cloud*.png, favicon.*
+├── assets/                  # Logo, ikony, Contentful JSON/obrázky, Font Awesome
+├── sync-contentful.php      # Sync z Contentful CMS
+├── vite.config.js
+└── package.json
 ```
 
 ## Technológie
 
-- **Vite** - Moderný build tool a dev server
-- **HTML5** - Sémantická štruktúra
-- **CSS3** - Moderné štýly s flexbox/grid, CSS premenné
-- **JavaScript ES6+** - ES modules s Three.js
-- **Three.js** - 3D grafika, animácie, GLTF loader, Water shader
-- **i18n** - Vlastná internacionalizácia (SK/EN/DE)
-- **EmailJS** - Kontaktný formulár
-- **Web APIs** - Intersection Observer, RequestAnimationFrame, WebGL
+- **Vite** — build + dev server
+- **Three.js (legacy)** — homepage WebGL cez `public/droneye/three.min.js` + CDN `GLTFLoader` (r128). **Nie** cez npm `three` / ES modules.
+- **EmailJS** — kontaktné formuláre
+- **Contentful** — videá a fotky → `assets/contentful/*.json` (PHP sync / GitHub Actions)
+- **i18n** — vlastné JSON locale súbory
+- **Font Awesome** — lokálne v `assets/fontawesome/` (nie npm balík)
 
 ## Spustenie
 
-### Development
-
 ```bash
-npm run dev
-```
-
-Aplikácia sa spustí na `http://localhost:5173` s hot reload.
-
-### Production Build
-
-```bash
-npm run build
-```
-
-Vytvorí optimalizovaný build v `dist/` priečinku.
-
-### Preview Production Build
-
-```bash
+npm install
+npm run dev      # http://localhost:5173 (base /droneye/)
+npm run build    # výstup do dist/
 npm run preview
+npm run deploy   # build + gh-pages
 ```
 
-Spustí preview production buildu.
+### Contentful sync
 
-## Funkcionality
-
-### Navigácia
-
-- Hlavné menu s 6 sekciami (Domov, Služby, Projekty, Kurzy, Cenová ponuka, Kontakt)
-- Mobilné hamburger menu
-- Prepínanie jazykov (SK/EN/DE)
-- Smooth scrolling medzi sekciami
-
-### Three.js Animácie (animation.js)
-
-- **3D Dron Model** - GLTF model s animovanými vrtuľami
-- **Tri scény**:
-    - **SpaceScene** - Vesmír s hviezdami a aurorou
-    - **SkyScene** - Obloha s oblakmi (Sprite clouds)
-    - **WaterScene** - Voda s vlnami a oblakmi
-- **Interaktívne scrollovanie** - Plynulé prepínanie medzi scénami
-- **Vstupná animácia** - Dron doletí zľava pri kliknutí na "Explore"
-- **Responzívne prispôsobenie** - Optimalizované pre mobilné zariadenia
-- **Výkon** - Optimalizované cloud count pre mobilné zariadenia
-
-### Internacionalizácia (i18n)
-
-- Podpora pre 3 jazyky: SK, EN, DE
-- Dynamické prepínanie jazykov
-- Ukladanie preferencie do localStorage
-- Preklady pre všetky stránky a komponenty
-
-### UI Komponenty
-
-- Glassmorphism karty s blur efektom
-- Hover animácie a transitions
-- Loading screen s animáciou
-- Responzívny grid layout
-- Photo gallery lightbox
-- Cookie consent banner
-
-## Prispôsobenie
-
-### Zmena farieb dronu
-
-Upravte farby v `src/animation.js`:
-
-```javascript
-const droneColors = {
-    body: 0x002366, // Royal blue
-    rotors: 0xff6600, // Orange
-    details: 0xffffff // White
-};
+```bash
+composer install          # ak treba PHP závislosti
+php sync-contentful.php   # alebo: composer sync
 ```
 
-### Pridanie nových stránok
+Automaticky: GitHub Action `.github/workflows/sync-contentful.yml` (denne + manuálne). Detaily: `CONTENTFUL_SYNC.md`.
 
-1. Vytvorte nový HTML súbor (napr. `nova-stranka.html`)
-2. Pridajte do `vite.config.js` v `rollupOptions.input`
-3. Aktualizujte navigáciu v `index.html` a ostatných stránkach
-4. Pridajte preklady do `src/locales/*.json`
-5. Aktualizujte `sitemap.xml`
+## Homepage 3D intro
 
-### Three.js úpravy
+1. Hero s CTA **Preskúmať** (`#start-animation-btn`)
+2. Po kliknutí sa odomkne scroll stage (`#intro-scroll-stage`)
+3. Animáciu riadi `public/droneye/droneye-inline.js` (canvas `#webgl`)
+4. Texty krokov sú v `src/locales/*.json` pod kľúčom `animation.*`
+5. Aplikácia (nav, i18n, cookies) beží samostatne cez `src/main.js`
 
-Upravte parametre v `src/animation.js`:
+**Pozor:** nemeniť verziu Three / GLTFLoader bez otestovania intro — skripty sú viazané na r128 global `THREE`.
 
-- **Scény**: `SpaceScene`, `SkyScene`, `WaterScene` triedy
-- **Dron**: `loadDroneModel()`, `droneColors`, `rotorSpinSpeed`
-- **Animácie**: `animate()` funkcia, `entranceAnimationDuration`
-- **Clouds**: `CLOUD_COUNT`, cloud positioning, opacity
-- **Aurora**: Farba a intenzita v `SpaceScene.createAuroraTunnel()`
+## Navigácia a i18n
 
-### Pridanie nového jazyka
+Menu: Domov → Služby → Projekty → **Kurzy** (`nav.courses`) → **Tím** (`nav.team`) → Cenová ponuka → Kontakt.
 
-1. Vytvorte `src/locales/novy-jazyk.json`
-2. Skopírujte štruktúru z `sk.json` a preložte
-3. Pridajte jazyk do `src/i18n.js`
-4. Pridajte prepínač jazyka do HTML súborov
-5. Aktualizujte hreflang tagy v HTML a sitemap.xml
+Preklady: `src/locales/{sk,en,de}.json`. Preferencia jazyka v `localStorage`.
+
+## SEO
+
+- `sitemap.xml` — všetky stránky vrátane `/kurzy` a `/tim`
+- `robots.txt`
+- Open Graph / Twitter: `assets/og-image.webp`, `assets/twitter-image.webp`
+- Hreflang + structured data na stránkach
+- Clean URL rewrite: `.htaccess`
+
+## Pridanie novej stránky
+
+1. Nový `*.html` + entry v `vite.config.js` → `build.rollupOptions.input`
+2. Rewrite v `.htaccess`
+3. Položka v navigácii na všetkých stránkach
+4. Preklady v `src/locales/*.json`
+5. Záznam v `sitemap.xml`
 
 ## Browser podpora
 
-- Chrome 60+
-- Firefox 55+
-- Safari 12+
-- Edge 79+
-
-## Optimalizácia
-
-- **Lazy loading** pre obrázky (`loading="lazy"`)
-- **RequestAnimationFrame** pre smooth animácie
-- **CSS transforms** namiesto position changes
-- **Minimalizované DOM manipulácie**
-- **Redukovaný počet oblakov** na mobilných zariadeniach (150 namiesto 300)
-- **Sprite clouds** namiesto 3D meshov pre lepší výkon
-- **Distance-based opacity** pre oblaky (fade in z diaľky)
-- **Vite build** s optimalizáciou a minifikáciou
-
-## Licencia
-
-MIT License - voľné použitie pre komerčné aj nekomerčné účely.
+Chrome 60+, Firefox 55+, Safari 12+, Edge 79+ (WebGL pre homepage intro).

@@ -12,9 +12,7 @@
         "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,css,html,md}\" --ignore-unknown"
     },
     "dependencies": {
-        "@emailjs/browser": "^4.4.1",
-        "@fortawesome/fontawesome-free": "^7.1.0",
-        "three": "^0.169.0"
+        "@emailjs/browser": "^4.4.1"
     },
     "devDependencies": {
         "gh-pages": "^6.3.0",

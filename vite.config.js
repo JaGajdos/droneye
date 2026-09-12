@@ -70,7 +70,10 @@ function copyBasegraphImagesPlugin() {
             // Footer social icons (referenced from inlined partial, not picked up by Rollup)
             const footerSocialImages = ["instagram.png", "fb.png", "yt.png", "linkedin.png"];
 
-            [...basegraphFiles, ...footerSocialImages].forEach(file => {
+            // Open Graph / Twitter share images (absolute URLs in meta tags)
+            const socialShareImages = ["og-image.webp", "twitter-image.webp", "Logo.webp"];
+
+            [...basegraphFiles, ...footerSocialImages, ...socialShareImages].forEach(file => {
                 const srcFile = join(assetsDir, file);
                 const distFile = join(distAssetsDir, file);
                 if (existsSync(srcFile)) {
@@ -135,15 +138,7 @@ export default defineConfig({
                 kontakt: "kontakt.html",
                 legislativa: "legislativa.html",
                 gdpr: "gdpr.html"
-            },
-            output: {
-                manualChunks: {
-                    three: ["three"]
-                }
             }
         }
-    },
-    optimizeDeps: {
-        include: ["three"]
     }
 });
